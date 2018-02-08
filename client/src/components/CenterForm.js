@@ -110,11 +110,6 @@ class CenterForm extends Component {
                 <Field name="location" type="text" component={RenderField} label="Location" required />
                 <Field name="price" type="number" component={RenderField} label="Price" required />
                 <Field name="facilities" component={renderFacilities} label="Facilities" />
-                {/* <div className="form-group">
-                  <label className="control-label">Facilities</label>
-                  <Field name="facilities" component="textarea" row="5" className="form-control" />
-                  <small>Note: list should be seperated by a comma</small>
-                </div> */}
                 <Field name="type" component={renderCenterType} label="Center Type" />
                 <div className="form-group">
                   <Dropzone
