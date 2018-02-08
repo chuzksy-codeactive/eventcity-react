@@ -1,0 +1,18 @@
+.searchbar {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background-color: #cfcfd1;
+}
+
+.searchbar * {
+    margin-right: 10px;
+}
+
+#search-input {
+    width: 350px;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+}

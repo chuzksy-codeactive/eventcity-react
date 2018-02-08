@@ -1,0 +1,35 @@
+.center-cards {
+    margin: 10px 5px;
+    width: 20rem;
+    height: auto;
+}
+
+.center-cards {
+    margin: 10px 5px;
+}
+
+.center-feature {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+}
+
+.card img {
+    height: 150px;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-text {
+    color: #555;
+}

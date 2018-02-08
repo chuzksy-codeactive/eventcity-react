@@ -1,0 +1,18 @@
+.forms {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+
+.signin {
+  background: #cfcfd1;
+  border-radius: 5px;
+  padding: 30px 10px;
+}
+
+.submitting {
+  display: flex;
+  justify-content: center;
+  color: green;
+  margin-bottom: 20px;
+}

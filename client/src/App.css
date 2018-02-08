@@ -1,0 +1,205 @@
+#search-form {
+  margin-left: 60px; }
+
+video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 1; }
+
+.video-content {
+  z-index: 2;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
+.content {
+  padding-top: 120px; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif; }
+
+.header-section {
+  font-size: 180%;
+  font-weight: 300;
+  word-spacing: 2px;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase; }
+
+.header-section::after {
+  display: block;
+  height: 2px;
+  background-color: #e67e22;
+  content: ' ';
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 30px; }
+
+.row-width {
+  width: 85%;
+  margin: 20px auto; }
+
+.para-section {
+  color: #555;
+  line-height: 145%;
+  width: 70%;
+  padding: 0 60px;
+  text-align: center; }
+
+.icon-small {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  color: #e67e22;
+  font-size: 120%;
+  line-height: 120%;
+  vertical-align: middle; }
+
+.form-container {
+  margin-top: 20px; }
+
+.form-title {
+  background-color: #0275d8;
+  padding: 10px; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #cfcfd1; }
+
+.info h1,
+h3,
+p {
+  color: whitesmoke;
+  line-height: 200%; }
+
+.info {
+  margin-right: 20px; }
+
+.carousel-item {
+  height: 50vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+.c-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro1.jpg"); }
+
+.c-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro2.jpg"); }
+
+.c-3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro3.jpg"); }
+
+.c-4 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro4.jpg"); }
+
+.searchbar {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: #cfcfd1; }
+
+.searchbar * {
+  margin-right: 10px; }
+
+#search-input {
+  width: 350px; }
+
+#search {
+  display: flex;
+  justify-content: center; }
+
+.center-cards {
+  margin: 10px 5px;
+  width: 20rem;
+  height: auto; }
+
+.center-cards {
+  margin: 10px 5px; }
+
+.center-feature {
+  display: flex;
+  margin-bottom: 5px; }
+
+.cards {
+  display: flex;
+  justify-content: center; }
+
+.card img {
+  height: 150px; }
+
+.card-block {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem; }
+
+.card-text {
+  color: #555; }
+
+.footer {
+  background-color: #222;
+  padding: 10px;
+  margin-top: 40px; }
+
+.center-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; }
+
+.center-flex form {
+  background-color: #cfcfd1;
+  border-radius: 5px;
+  padding: 30px 10px; }
+
+.adjust-top {
+  position: absolute;
+  top: 15%;
+  left: 10%; }
+
+.center-list {
+  display: flex;
+  width: 600px; }
+
+.center-list button {
+  margin-left: 10px; }
+
+.btn-list-1 {
+  margin-right: auto; }
+
+.forms {
+  position: absolute;
+  top: 20%;
+  left: 10%; }
+
+.signin {
+  background: #cfcfd1;
+  border-radius: 5px;
+  padding: 30px 10px; }
+
+.submitting {
+  display: flex;
+  justify-content: center;
+  color: green;
+  margin-bottom: 20px; }
