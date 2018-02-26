@@ -4,7 +4,7 @@ import CoverPage from '../components/CoverPage';
 import ViewCenter from '../components/ViewCenter';
 import SignInForm from '../containers/SignInFormContainer';
 import Header from '../components/Header';
-import CenterForm from '../components/CenterForm';
+import CenterForm from '../containers/CenterFormContainer';
 import requireAuth from '../components/requireAuth';
 
 const AppRouter = props => (
