@@ -6,6 +6,7 @@ import SignInForm from '../containers/SignInFormContainer';
 import Header from '../components/Header';
 import CenterForm from '../containers/CenterFormContainer';
 import requireAuth from '../components/requireAuth';
+import EditCenter from '../components/EditCenter';
 
 const AppRouter = props => (
   <div className="router">
@@ -17,6 +18,7 @@ const AppRouter = props => (
           <Route path="/login" component={SignInForm} />
           <Route exact path="/centers" component={requireAuth(ViewCenter)} />
           <Route path="/centers/create" component={CenterForm} />
+          <Route path="/centers/list" component={requireAuth(EditCenter)} />
         </Switch>
       </div>
     </Router>

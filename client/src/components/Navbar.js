@@ -43,9 +43,9 @@ const Navbar = () => {
                   Add New Center
                 </a>
                 <div className="dropdown-divider" />
-                <a className="dropdown-item" href="/">
+                <Link to="/centers" className="dropdown-item">
                   Modify/Delete Center
-                </a>
+                </Link>
               </div>
             </li>
             <li className="nav-item dropdown">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 </a>
                 <div className="dropdown-divider" />
                 <a className="dropdown-item" href="/">
-                  Modify/Delete Center
+                  Modify/Delete Event
                 </a>
               </div>
             </li>

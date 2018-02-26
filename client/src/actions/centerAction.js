@@ -4,6 +4,37 @@ import * as types from './actionTypes';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('user');
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 
+export const fetchingCenter = () => ({
+  type: types.FETCHING_CENTER
+});
+
+export const fetchingCenterError = payload => ({
+  type: types.FETCHING_CENTER_ERROR,
+  payload
+});
+
+export const fectchingSuccess = payload => ({
+  type: types.FETCHING_CENTER_SUCCESS,
+  payload
+});
+
+export const fetchCenter = () => {
+  return dispatch => {
+    dispatch(fetchingCenter());
+    axios({
+      url: '/api/v1/centers',
+      method: 'get'
+    })
+      .then(res => {
+        dispatch(fectchingSuccess(res));
+        console.log(res);
+      })
+      .catch(() => {
+        dispatch(fetchingCenterError('Error'));
+      });
+  };
+};
+
 export const creatingCenter = () => ({
   type: types.CREATING_CENTER
 });

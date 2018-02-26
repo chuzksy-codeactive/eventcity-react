@@ -23,9 +23,9 @@ class Header extends Component {
               Add New Center
             </Link>
             <div className="dropdown-divider" />
-            <a className="dropdown-item" href="/">
+            <Link to="/centers/list" className="dropdown-item">
               Modify/Delete Center
-            </a>
+            </Link>
           </div>
         </li>
       );
