@@ -26,8 +26,7 @@ export const fetchCenter = () => {
       method: 'get'
     })
       .then(res => {
-        dispatch(fectchingSuccess(res));
-        console.log(res);
+        dispatch(fectchingSuccess(res.data.data));
       })
       .catch(() => {
         dispatch(fetchingCenterError('Error'));
