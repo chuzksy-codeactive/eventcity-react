@@ -90,21 +90,25 @@ class CenterForm extends Component {
   componentDidMount() {
     this.props.load(this.initValues);
   }
-  componentDidUpdate() {
-    if (this.props.match.params.id === undefined) {
-      this.props.destroy();
-    }
-  }
+
   render() {
     const { handleSubmit, submitting, reset, pristine } = this.props;
+
     return (
       <div className="container center-flex adjust-top">
         <div className="row">
-          <div className="col">
+          <div className="col-md-5 offset-md-3">
             <section className="section-features">
-              <div id="monkey">
-                <h1 className="header-section row-width">Register a new Center</h1>
-              </div>
+              {!this.props.match.params.id && (
+                <div>
+                  <h1 className="header-section row-width">Register a new Center</h1>
+                </div>
+              )}
+              {this.props.match.params.id && (
+                <div>
+                  <h1 className="header-section">Edit Center Info</h1>
+                </div>
+              )}
               <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data">
                 <Field name="name" type="text" component={RenderField} label="Center Name" required />
                 <Field name="capacity" type="number" component={RenderField} label="Capacity" required />
