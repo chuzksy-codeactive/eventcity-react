@@ -200,14 +200,46 @@ p {
     transform: rotate(360deg); } }
 
 .center-list {
-  display: flex;
-  width: 600px; }
+  background: #d0cbcd;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px; }
 
 .center-list button {
   margin-left: 10px; }
 
 .btn-list-1 {
   margin-right: auto; }
+
+.list-item {
+  display: flex;
+  background: #c4c4c4;
+  padding: 10px 10px;
+  margin: 10px;
+  border-bottom: solid 1px #a19e9e; }
+
+.btn-list {
+  cursor: pointer;
+  border: none;
+  color: white;
+  padding: 2px 6px;
+  font-size: 16px; }
+
+.btn-list:first-child {
+  margin-left: auto;
+  background: #528854;
+  margin-right: 5px; }
+
+.btn-list:last-child {
+  background: #ae4c5c; }
+
+.btn-list:first-child:hover {
+  background: #1a672f;
+  color: white; }
+
+.btn-list:last-child:hover {
+  background: #983030;
+  color: white; }
 
 .forms {
   position: absolute;

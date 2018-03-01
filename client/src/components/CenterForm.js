@@ -37,7 +37,7 @@ const validate = values => {
     errors.name = 'center name is required';
     hasErrors = true;
   }
-  if (!values.capacity || values.capacity.trim() === '') {
+  if (!values.capacity) {
     errors.capacity = 'Capacity is required';
     hasErrors = true;
   }
@@ -45,7 +45,7 @@ const validate = values => {
     errors.location = 'Center location is required';
     hasErrors = true;
   }
-  if (!values.price || values.price.trim() === '') {
+  if (!values.price) {
     errors.price = 'Center amount is required';
     hasErrors = true;
   }
@@ -61,6 +61,14 @@ const validate = values => {
 };
 
 class CenterForm extends Component {
+  initValues = {
+    name: this.props.center ? this.props.center.name : '',
+    capacity: this.props.center ? this.props.center.capacity : '',
+    location: this.props.center ? this.props.center.location : '',
+    price: this.props.center ? this.props.center.price : '',
+    facilities: this.props.center ? this.props.center.facilities : '',
+    type: this.props.center ? this.props.center.type : ''
+  };
   state = {
     files: [],
     file: null,
@@ -78,8 +86,17 @@ class CenterForm extends Component {
     const centers = { ...values, file: this.state.file };
     this.props.createCenter(centers, this.props.history);
   };
+
+  componentDidMount() {
+    this.props.load(this.initValues);
+  }
+  componentDidUpdate() {
+    if (this.props.match.params.id === undefined) {
+      this.props.destroy();
+    }
+  }
   render() {
-    const { handleSubmit, submitting, reset } = this.props;
+    const { handleSubmit, submitting, reset, pristine } = this.props;
     return (
       <div className="container center-flex adjust-top">
         <div className="row">
@@ -110,14 +127,27 @@ class CenterForm extends Component {
                     </ul>
                   </aside>
                 </div>
-                <div className="spinner">{this.props.center.message && <small>{this.props.center.message}</small>}</div>
-                <button type="submit" className="btn btn-primary" disabled={submitting} style={{ marginRight: 10 }}>
-                  <span className={this.props.center.loading ? 'loader' : ''} />Create New Center
-                </button>
-
-                <button type="button" className="btn btn-danger" onClick={reset}>
-                  Cancel
-                </button>
+                <div className="spinner">{this.props.centers.message && <small>{this.props.centers.message}</small>}</div>
+                {!this.props.match.params.id && (
+                  <button type="submit" className="btn btn-primary" disabled={submitting} style={{ marginRight: 10 }}>
+                    <span className={this.props.centers.loading ? 'loader' : ''} />Create New Center
+                  </button>
+                )}
+                {!this.props.match.params.id && (
+                  <button type="button" className="btn btn-danger" onClick={reset}>
+                    Cancel
+                  </button>
+                )}
+                {this.props.match.params.id && (
+                  <button type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
+                    <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
+                  </button>
+                )}
+                {this.props.match.params.id && (
+                  <button type="button" className="btn btn-danger" onClick={reset} disabled={submitting || pristine}>
+                    Undo Changes
+                  </button>
+                )}
               </form>
             </section>
           </div>

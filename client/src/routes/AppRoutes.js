@@ -19,6 +19,7 @@ const AppRouter = props => (
           <Route exact path="/centers" component={requireAuth(ViewCenter)} />
           <Route path="/centers/create" component={CenterForm} />
           <Route path="/centers/list" component={requireAuth(EditCenter)} />
+          <Route path="/centers/:id" component={CenterForm} />
         </Switch>
       </div>
     </Router>

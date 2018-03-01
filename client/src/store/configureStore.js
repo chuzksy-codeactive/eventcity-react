@@ -8,7 +8,8 @@ import rootReducer from '../reducer/rootReducer';
 
 const persistConfig = {
   key: 'root',
-  storage: storage
+  storage: storage,
+  blacklist: ['centerReducer', 'centerListReducer']
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default () => {

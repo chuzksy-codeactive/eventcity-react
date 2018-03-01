@@ -8,12 +8,11 @@ export const fetchingCenter = () => ({
   type: types.FETCHING_CENTER
 });
 
-export const fetchingCenterError = payload => ({
-  type: types.FETCHING_CENTER_ERROR,
-  payload
+export const fetchingCenterError = () => ({
+  type: types.FETCHING_CENTER_ERROR
 });
 
-export const fectchingSuccess = payload => ({
+export const fectchCenterSuccess = payload => ({
   type: types.FETCHING_CENTER_SUCCESS,
   payload
 });
@@ -26,10 +25,10 @@ export const fetchCenter = () => {
       method: 'get'
     })
       .then(res => {
-        dispatch(fectchingSuccess(res.data.data));
+        dispatch(fectchCenterSuccess(res.data.data));
       })
       .catch(() => {
-        dispatch(fetchingCenterError('Error'));
+        dispatch(fetchingCenterError());
       });
   };
 };
