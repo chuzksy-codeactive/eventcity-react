@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createCenter } from '../actions/centerAction';
+import { createCenter, updateCenter } from '../actions/centerAction';
 import CenterForm from '../components/CenterForm';
 import { load as loadCenter } from '../reducer/loadCenter';
 
@@ -17,6 +17,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
   createCenter: (data, history) => dispatch(createCenter(data, history)),
+  updateCenter: data => dispatch(updateCenter(data)),
   load: loadCenter
 });
 

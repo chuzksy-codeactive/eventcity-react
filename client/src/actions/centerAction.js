@@ -73,3 +73,44 @@ export const createCenter = (values, history) => {
       });
   };
 };
+
+export const updatingCenter = () => ({
+  type: types.UPDATING_CENTER
+});
+
+export const updatingCenterSuccess = payload => ({
+  type: types.UPDATING_CENTER_SUCCESS,
+  payload
+});
+
+export const updatingCenterFailure = () => ({
+  type: types.UPDATING_CENTER_FAILURE
+});
+
+export const updateCenter = (values, history) => {
+  let data = new FormData();
+  data.append('name', values.name);
+  data.append('capacity', values.capacity);
+  data.append('location', values.location);
+  data.append('price', values.price);
+  data.append('facilities', values.facilities);
+  data.append('type', values.type);
+  data.append('file', values.file);
+  return dispatch => {
+    dispatch(updatingCenter());
+    axios({
+      url: `/api/v1/centers/${values.id}`,
+      method: 'put',
+      data
+    })
+      .then(res => {
+        dispatch(updatingCenterSuccess(res.data));
+        console.log(res.data);
+        history.push('/centers/list');
+      })
+      .catch(err => {
+        // dispatch(updatingCenterFailure());
+        console.log(err);
+      });
+  };
+};

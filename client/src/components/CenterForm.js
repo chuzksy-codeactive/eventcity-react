@@ -62,6 +62,7 @@ const validate = values => {
 
 class CenterForm extends Component {
   initValues = {
+    id: this.props.center ? this.props.center.id : '',
     name: this.props.center ? this.props.center.name : '',
     capacity: this.props.center ? this.props.center.capacity : '',
     location: this.props.center ? this.props.center.location : '',
@@ -84,7 +85,12 @@ class CenterForm extends Component {
 
   onSubmitForm = values => {
     const centers = { ...values, file: this.state.file };
-    this.props.createCenter(centers, this.props.history);
+    if (!this.props.match.params.id) {
+      this.props.createCenter(centers, this.props.history);
+    }
+    if (this.props.match.params.id) {
+      this.props.updateCenter(centers, this.props.history);
+    }
   };
 
   componentDidMount() {
@@ -93,7 +99,6 @@ class CenterForm extends Component {
 
   render() {
     const { handleSubmit, submitting, reset, pristine } = this.props;
-
     return (
       <div className="container center-flex adjust-top">
         <div className="row">
