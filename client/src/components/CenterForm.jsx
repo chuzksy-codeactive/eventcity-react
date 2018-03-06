@@ -103,7 +103,9 @@ class CenterForm extends Component {
   };
 
   componentDidMount() {
-    this.props.load(this.initValues);
+    if (this.props.match.params.id) {
+      this.props.load(this.initValues);
+    }
   }
 
   render() {

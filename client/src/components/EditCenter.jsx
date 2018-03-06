@@ -10,10 +10,12 @@ class EditCenterForm extends Component {
 
   render() {
     return (
-      <div className="container adjust-top">
-        <div className="row">
-          <div className="col-md-5 offset-md-3 center-list">
-            <EditCenterList centerList={this.props.centers} />
+      <div>
+        <div className="container adjust-top">
+          <div className="row">
+            <div className="col-md-5 offset-md-3 center-list">
+              <EditCenterList centerList={this.props.centers} />
+            </div>
           </div>
         </div>
       </div>

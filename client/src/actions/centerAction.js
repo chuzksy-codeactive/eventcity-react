@@ -15,6 +15,10 @@ export const fetchingCenterError = () => ({
   type: types.FETCHING_CENTER_ERROR
 });
 
+export const centerReset = () => ({
+  type: types.CENTER_RESET
+});
+
 export const fectchCenterSuccess = payload => ({
   type: types.FETCHING_CENTER_SUCCESS,
   payload

@@ -1,6 +1,6 @@
 import * as types from '../actions/actionTypes';
 export const alertAction = {
-  sucess,
+  success,
   error,
   clear
 };

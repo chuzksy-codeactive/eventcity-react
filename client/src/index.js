@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 let { store, persistor } = configureStore();
 // const store = configureStore();
 
-const App = () => {
+const App = props => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

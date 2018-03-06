@@ -9,10 +9,10 @@ const CenterList = () => {
             <li className="list-group-item">
               <div className="center-list">
                 <h5 className="btn-list-1">Center Name</h5>
-                <button className="btn btn-primary" data-toggle="tooltip" title="edit center">
+                <button className="btn btn-primary" title="edit center">
                   <i className="ion-edit" />
                 </button>
-                <button className="btn btn-danger" data-toggle="tooltip" title="delete center">
+                <button className="btn btn-danger" title="delete center">
                   <i className="ion-trash-a" />
                 </button>
               </div>
