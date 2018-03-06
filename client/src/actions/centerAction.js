@@ -1,5 +1,8 @@
 import axios from 'axios';
 import * as types from './actionTypes';
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory();
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('user');
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
@@ -87,7 +90,7 @@ export const updatingCenterFailure = () => ({
   type: types.UPDATING_CENTER_FAILURE
 });
 
-export const updateCenter = (values, history) => {
+export const updateCenter = values => {
   let data = new FormData();
   data.append('name', values.name);
   data.append('capacity', values.capacity);
@@ -105,8 +108,9 @@ export const updateCenter = (values, history) => {
     })
       .then(res => {
         dispatch(updatingCenterSuccess(res.data));
-        console.log(res.data);
-        history.push('/centers/list');
+        setTimeout(() => {
+          history.goBack();
+        }, 2000);
       })
       .catch(err => {
         // dispatch(updatingCenterFailure());

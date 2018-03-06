@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import CenterForm from '../containers/CenterFormContainer';
 import requireAuth from '../components/requireAuth';
 import EditCenter from '../components/EditCenter';
+import Footer from '../components/Footer';
 
 const AppRouter = props => (
   <div className="router">
@@ -21,6 +22,7 @@ const AppRouter = props => (
           <Route path="/centers/list" component={requireAuth(EditCenter)} />
           <Route path="/centers/:id" component={CenterForm} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   </div>

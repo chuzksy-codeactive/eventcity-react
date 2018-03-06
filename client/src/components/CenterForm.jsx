@@ -73,7 +73,8 @@ class CenterForm extends Component {
   state = {
     files: [],
     file: null,
-    imageUrl: null
+    imageUrl: null,
+    display: 'none'
   };
   onDrop = files => {
     const file = files[0];
@@ -81,6 +82,14 @@ class CenterForm extends Component {
       file,
       files
     });
+  };
+  isOpen = () => {
+    this.setState({
+      display: 'block'
+    });
+  };
+  isClose = () => {
+    this.setState({ display: 'none' });
   };
 
   onSubmitForm = values => {
@@ -100,65 +109,67 @@ class CenterForm extends Component {
   render() {
     const { handleSubmit, submitting, reset, pristine } = this.props;
     return (
-      <div className="container center-flex adjust-top">
-        <div className="row">
-          <div className="col-md-5 offset-md-3">
-            <section className="section-features">
-              {!this.props.match.params.id && (
-                <div>
-                  <h1 className="header-section row-width">Register a new Center</h1>
-                </div>
-              )}
-              {this.props.match.params.id && (
-                <div>
-                  <h1 className="header-section">Edit Center Info</h1>
-                </div>
-              )}
-              <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data">
-                <Field name="name" type="text" component={RenderField} label="Center Name" required />
-                <Field name="capacity" type="number" component={RenderField} label="Capacity" required />
-                <Field name="location" type="text" component={RenderField} label="Location" required />
-                <Field name="price" type="number" component={RenderField} label="Price" required />
-                <Field name="facilities" component={renderFacilities} label="Facilities" />
-                <Field name="type" component={renderCenterType} label="Center Type" />
+      <div>
+        <div className="container center-flex adjust-top">
+          <div className="row">
+            <div className="col-md-5 offset-md-3">
+              <section className="section-features">
+                {!this.props.match.params.id && (
+                  <div>
+                    <h1 className="header-section row-width">Register a new Center</h1>
+                  </div>
+                )}
+                {this.props.match.params.id && (
+                  <div>
+                    <h1 className="header-section">Edit Center Info</h1>
+                  </div>
+                )}
+                <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data">
+                  <Field name="name" type="text" component={RenderField} label="Center Name" required />
+                  <Field name="capacity" type="number" component={RenderField} label="Capacity" required />
+                  <Field name="location" type="text" component={RenderField} label="Location" required />
+                  <Field name="price" type="number" component={RenderField} label="Price" required />
+                  <Field name="facilities" component={renderFacilities} label="Facilities" />
+                  <Field name="type" component={renderCenterType} label="Center Type" />
 
-                <div className="form-group">
-                  <Dropzone onDrop={this.onDrop} multiple={false}>
-                    <p>Try dropping some files here, or click to select files to upload.</p>
-                  </Dropzone>
-                  <aside>
-                    <ul>
-                      {this.state.files.map(f => (
-                        <li key={f.name}>
-                          {f.name} - {f.size} bytes
-                        </li>
-                      ))}
-                    </ul>
-                  </aside>
-                </div>
-                <div className="spinner">{this.props.centers.message && <small>{this.props.centers.message}</small>}</div>
-                {!this.props.match.params.id && (
-                  <button type="submit" className="btn btn-primary" disabled={submitting} style={{ marginRight: 10 }}>
-                    <span className={this.props.centers.loading ? 'loader' : ''} />Create New Center
-                  </button>
-                )}
-                {!this.props.match.params.id && (
-                  <button type="button" className="btn btn-danger" onClick={reset}>
-                    Cancel
-                  </button>
-                )}
-                {this.props.match.params.id && (
-                  <button type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
-                    <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
-                  </button>
-                )}
-                {this.props.match.params.id && (
-                  <button type="button" className="btn btn-danger" onClick={reset} disabled={submitting || pristine}>
-                    Undo Changes
-                  </button>
-                )}
-              </form>
-            </section>
+                  <div className="form-group">
+                    <Dropzone onDrop={this.onDrop} multiple={false}>
+                      <p>Try dropping some files here, or click to select files to upload.</p>
+                    </Dropzone>
+                    <aside>
+                      <ul>
+                        {this.state.files.map(f => (
+                          <li key={f.name}>
+                            {f.name} - {f.size} bytes
+                          </li>
+                        ))}
+                      </ul>
+                    </aside>
+                  </div>
+                  <div className="spinner">{this.props.centers.message && <small>{this.props.centers.message}</small>}</div>
+                  {!this.props.match.params.id && (
+                    <button type="submit" className="btn btn-primary" disabled={submitting} style={{ marginRight: 10 }}>
+                      <span className={this.props.centers.loading ? 'loader' : ''} />Create New Center
+                    </button>
+                  )}
+                  {!this.props.match.params.id && (
+                    <button type="button" className="btn btn-danger" onClick={reset}>
+                      Cancel
+                    </button>
+                  )}
+                  {this.props.match.params.id && (
+                    <button type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
+                      <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
+                    </button>
+                  )}
+                  {this.props.match.params.id && (
+                    <button type="button" className="btn btn-danger" onClick={reset} disabled={submitting || pristine}>
+                      Undo Changes
+                    </button>
+                  )}
+                </form>
+              </section>
+            </div>
           </div>
         </div>
       </div>
