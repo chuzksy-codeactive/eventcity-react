@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { deleteCenter } from '../actions/centerAction';
+import { connect } from 'react-redux';
 
 class EditCenterList extends Component {
-  onClose = () => {
-    this.modal.style.display = 'none';
+  state = {
+    id: null
   };
-  onOpen = () => {
-    this.modal.style.display = 'block';
+  onDeleteCenter = id => {
+    this.setState({
+      id
+    });
   };
+  onCenterItemClick = e => {
+    console.log(this);
+  };
+  onCloseModal = () => {
+    this.modal.classList.toggle('opened');
+    this.modal_overlay.classList.toggle('opened');
+  };
+  onOpenModal = () => {
+    this.modal.classList.toggle('opened');
+    this.modal_overlay.classList.toggle('opened');
+  };
+
   render() {
     let centerLists = null;
     if (Array.isArray(this.props.centerList.centers)) {
@@ -16,11 +32,11 @@ class EditCenterList extends Component {
         return (
           <div key={value.id} className="list-item">
             {`${i + 1}. ${value.name}`}{' '}
-            <Link to={`/centers/${value.id}`} className="btn-list">
+            <Link to={`/centers/${value.id}`} className="btn-list" onClick={this.onOpenModal}>
               <i className="ion-edit" />
             </Link>
             <div className="btn-list">
-              <i className="ion-trash-a" onClick={this.onOpen} />
+              <i className="ion-trash-a" onClick={this.onOpenModal} />
             </div>{' '}
           </div>
         );
@@ -34,22 +50,47 @@ class EditCenterList extends Component {
           {centerLists}
         </div>
         <div
-          className="myModal"
+          className="modal-overlay"
+          id="modal-overlay"
+          ref={el => {
+            this.modal_overlay = el;
+          }}
+        />
+        <div
+          className="modal"
           id="modal"
           ref={el => {
             this.modal = el;
           }}
-          onClick={this.onClose}
-          style={{ display: 'none' }}
         >
-          <div className="modal-content">
-            <span className="close">&times;</span>
-            <p>Some text in the Modal</p>
+          <div className="modal-guts">
+            <div className="modal-header">
+              <h5>Confirm Delete</h5>
+              <span className="close" onClick={this.onCloseModal}>
+                &times;
+              </span>
+            </div>
+            <p>Do you want to delete this center?</p>
+            <div className="modal-footer">
+              <button className="close-button btn btn-danger btn-sm" id="close-button" onClick={this.onCenterItemClick}>
+                delete
+              </button>
+              <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+                cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  deleteCenter: id => dispatch(deleteCenter(id))
+});
 
-export default EditCenterList;
+const mapStateToProps = state => ({
+  center: state.centerReducer
+});
+
+export default connect(mapStateToProps)(EditCenterList);

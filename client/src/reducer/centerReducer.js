@@ -23,6 +23,12 @@ const centerReducer = (state = initialState, action) => {
       return { ...state, center: action.payload, error: null, loading: false, message: 'Center updated successfully' };
     case types.UPDATING_CENTER_FAILURE:
       return { ...state, center: {}, error: action.payload, loading: false, message: null };
+    case types.DELETING_CENTER:
+      return { ...state, center: {}, error: null, loading: true, message: null };
+    case types.DELETE_CENTER:
+      return { ...state, center: action.payload, error: null, loading: false, message: null };
+    case types.DELETE_FAILURE:
+      return { ...state, center: {}, error: null, loading: false, message: action.payload };
     default:
       return state;
   }

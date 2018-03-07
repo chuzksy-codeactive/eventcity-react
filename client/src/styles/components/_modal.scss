@@ -1,45 +1,100 @@
-.myModal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+.modal {
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  display: none;
+  width: 400px;
+  max-width: 100%;
+  height: 180px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   animation-name: animatetop;
   animation-duration: 0.4s;
-  position: relative;
 }
-
+.modal-gut {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 20px 50px;
+}
+.modal-guts p {
+  text-align: center;
+  color: #333;
+}
+.modal-overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+}
 @keyframes animatetop {
   from {
-    top: -300px;
+    top: -100px;
     opacity: 0;
   }
   to {
-    top: 0;
+    top: 50%;
     opacity: 1;
   }
 }
+.modal-footer {
+  padding: 10px 16px;
+  color: #333;
+  font-size: 16px;
+}
+.modal-header {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+  margin-bottom: 20px;
+}
+.modal-header span {
+  margin-left: auto;
+}
+.closed {
+  display: none;
+}
+.opened {
+  display: block;
+}
+
+// .close {
+//   float: right;
+//   font-size: 28px;
+//   font-weight: bold;
+// }
+
+// .close:hover,
+// .close:focus {
+//   color: black;
+//   text-decoration: none;
+//   cursor: pointer;
+// }
+// .modal-content {
+//   background-color: #fefefe;
+//   margin: 15% auto;
+//   padding: 20px;
+//   border: 1px solid #888;
+//   width: 80%;
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   animation-name: animatetop;
+//   animation-duration: 0.4s;
+//   position: relative;
+// }
+// .modal-content p {
+//   color: #333;
+//   text-align: center;
+// }

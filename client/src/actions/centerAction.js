@@ -122,3 +122,31 @@ export const updateCenter = values => {
       });
   };
 };
+
+export const deletedCenter = payload => ({
+  type: types.DELETE_CENTER,
+  payload
+});
+
+export const deleteFailure = payload => ({
+  type: types.DELETE_FAILURE,
+  payload
+});
+export const deletingCenter = () => ({
+  type: types.DELETING_CENTER
+});
+
+export const deleteCenter = id => {
+  return dispatch => {
+    axios({
+      url: `/api/v1/centers/${id}`,
+      method: 'delete'
+    })
+      .then(res => {
+        dispatch(deletedCenter(res.data));
+      })
+      .catch(() => {
+        dispatch(deleteFailure('Can not delete center'));
+      });
+  };
+};
