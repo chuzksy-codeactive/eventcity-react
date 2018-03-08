@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  centers: []
+  centers: [],
 };
 
 const centerListReducer = (state = initialState, action) => {
@@ -12,6 +12,14 @@ const centerListReducer = (state = initialState, action) => {
       return { ...state, centers: action.payload };
     case types.FETCHING_CENTER_ERROR:
       return { ...state, centers: [] };
+    case types.CENTER_DELETING:
+      return { ...state, loading: true };
+    case types.CENTER_DELETED:
+      return {
+        ...state,
+        centers: state.centers.filter(center => center.id !== action.id),
+        loading: false,
+      };
     default:
       return state;
   }

@@ -20,7 +20,6 @@ class AppRouter extends Component {
 
     const { dispatch } = this.props;
     history.listen((location, action) => {
-      console.log(location.pathname);
       dispatch(centerReset());
     });
   }

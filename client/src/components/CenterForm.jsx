@@ -23,7 +23,11 @@ const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) =
     <label htmlFor="type" className="control-label">
       {label}
     </label>
-    <textarea {...input} className={error && touched ? 'form-control is-invalid' : 'form-control'} row="5" />
+    <textarea
+      {...input}
+      className={error && touched ? 'form-control is-invalid' : 'form-control'}
+      row="5"
+    />
     <div className="invalid-feedback">{error}</div>
     <small>Note: list should be seperated by a comma</small>
   </div>
@@ -68,24 +72,24 @@ class CenterForm extends Component {
     location: this.props.center ? this.props.center.location : '',
     price: this.props.center ? this.props.center.price : '',
     facilities: this.props.center ? this.props.center.facilities : '',
-    type: this.props.center ? this.props.center.type : ''
+    type: this.props.center ? this.props.center.type : '',
   };
   state = {
     files: [],
     file: null,
     imageUrl: null,
-    display: 'none'
+    display: 'none',
   };
   onDrop = files => {
     const file = files[0];
     this.setState({
       file,
-      files
+      files,
     });
   };
   isOpen = () => {
     this.setState({
-      display: 'block'
+      display: 'block',
     });
   };
   isClose = () => {
@@ -98,7 +102,7 @@ class CenterForm extends Component {
       this.props.createCenter(centers, this.props.history);
     }
     if (this.props.match.params.id) {
-      this.props.updateCenter(centers, this.props.history);
+      this.props.updateCenter(centers);
     }
   };
 
@@ -126,11 +130,39 @@ class CenterForm extends Component {
                     <h1 className="header-section">Edit Center Info</h1>
                   </div>
                 )}
-                <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data">
-                  <Field name="name" type="text" component={RenderField} label="Center Name" required />
-                  <Field name="capacity" type="number" component={RenderField} label="Capacity" required />
-                  <Field name="location" type="text" component={RenderField} label="Location" required />
-                  <Field name="price" type="number" component={RenderField} label="Price" required />
+                <form
+                  onSubmit={handleSubmit(this.onSubmitForm)}
+                  className="control-forms"
+                  encType="multipart/form-data"
+                >
+                  <Field
+                    name="name"
+                    type="text"
+                    component={RenderField}
+                    label="Center Name"
+                    required
+                  />
+                  <Field
+                    name="capacity"
+                    type="number"
+                    component={RenderField}
+                    label="Capacity"
+                    required
+                  />
+                  <Field
+                    name="location"
+                    type="text"
+                    component={RenderField}
+                    label="Location"
+                    required
+                  />
+                  <Field
+                    name="price"
+                    type="number"
+                    component={RenderField}
+                    label="Price"
+                    required
+                  />
                   <Field name="facilities" component={renderFacilities} label="Facilities" />
                   <Field name="type" component={renderCenterType} label="Center Type" />
 
@@ -148,10 +180,18 @@ class CenterForm extends Component {
                       </ul>
                     </aside>
                   </div>
-                  <div className="spinner">{this.props.centers.message && <small>{this.props.centers.message}</small>}</div>
+                  <div className="spinner">
+                    {this.props.centers.message && <small>{this.props.centers.message}</small>}
+                  </div>
                   {!this.props.match.params.id && (
-                    <button type="submit" className="btn btn-primary" disabled={submitting} style={{ marginRight: 10 }}>
-                      <span className={this.props.centers.loading ? 'loader' : ''} />Create New Center
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={submitting}
+                      style={{ marginRight: 10 }}
+                    >
+                      <span className={this.props.centers.loading ? 'loader' : ''} />Create New
+                      Center
                     </button>
                   )}
                   {!this.props.match.params.id && (
@@ -160,12 +200,22 @@ class CenterForm extends Component {
                     </button>
                   )}
                   {this.props.match.params.id && (
-                    <button type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={submitting || pristine}
+                      style={{ marginRight: 10 }}
+                    >
                       <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
                     </button>
                   )}
                   {this.props.match.params.id && (
-                    <button type="button" className="btn btn-danger" onClick={reset} disabled={submitting || pristine}>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={reset}
+                      disabled={submitting || pristine}
+                    >
                       Undo Changes
                     </button>
                   )}
@@ -181,5 +231,5 @@ class CenterForm extends Component {
 
 export default reduxForm({
   form: 'centerForm',
-  validate
+  validate,
 })(CenterForm);
