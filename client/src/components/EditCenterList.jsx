@@ -32,10 +32,22 @@ class EditCenterList extends Component {
         return (
           <div key={value.id} className="list-item">
             {`${i + 1}. ${value.name}`}{' '}
-            <Link to={`/centers/${value.id}`} className="btn-list">
-              <i className="ion-edit" />
-            </Link>
-            <div className="btn-list">
+            <div
+              className="btn-list btn btn-success"
+              data-toggle="tooltip"
+              data-placement="left"
+              title="edit"
+            >
+              <Link to={`/centers/${value.id}`}>
+                <i className="ion-edit ion-icon" />
+              </Link>
+            </div>
+            <div
+              className="btn-list btn btn-danger"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="delete"
+            >
               <i className="ion-trash-a" onClick={this.onOpenModal.bind(this, value.id)} />
             </div>{' '}
           </div>

@@ -82,6 +82,7 @@ class CenterForm extends Component {
   };
   onDrop = files => {
     const file = files[0];
+    console.log(file);
     this.setState({
       file,
       files,
@@ -165,6 +166,9 @@ class CenterForm extends Component {
                   />
                   <Field name="facilities" component={renderFacilities} label="Facilities" />
                   <Field name="type" component={renderCenterType} label="Center Type" />
+                  <div className="form-group">
+                    <input type="file" name="image" onChange={this.onChangeFile} />
+                  </div>
 
                   <div className="form-group">
                     <Dropzone onDrop={this.onDrop} multiple={false}>
