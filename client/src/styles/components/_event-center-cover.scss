@@ -1,0 +1,31 @@
+.cover-page {
+    min-height: 30vh;
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
+    background-size: contain;
+    color: #fff;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-page h2 {
+    font-weight: 300;
+}
+
+.cover-page ul {
+    margin-top: 10px;
+    display: flex;
+}
+
+.cover-page li {
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.cover-page li::before {
+    content: "♥  ";
+    padding-left: 4px;
+}
