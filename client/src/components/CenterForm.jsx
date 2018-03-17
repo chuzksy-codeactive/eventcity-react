@@ -9,10 +9,11 @@ const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) =
       {label}
     </label>
     <select {...input} className={error && touched ? 'form-control is-invalid' : 'form-control'}>
-      <option value="">Select a color...</option>
-      <option value="ff0000">Red</option>
-      <option value="00ff00">Green</option>
-      <option value="0000ff">Blue</option>
+      <option value="">Select a type...</option>
+      <option value="Theatre">Theatre</option>
+      <option value="Classroom">Classroom</option>
+      <option value="Banquest">Banquest</option>
+      <option value="Hall">Hall</option>
     </select>
     <div className="invalid-feedback">{error}</div>
   </div>
@@ -82,7 +83,6 @@ class CenterForm extends Component {
   };
   onDrop = files => {
     const file = files[0];
-    console.log(file);
     this.setState({
       file,
       files,
@@ -166,10 +166,6 @@ class CenterForm extends Component {
                   />
                   <Field name="facilities" component={renderFacilities} label="Facilities" />
                   <Field name="type" component={renderCenterType} label="Center Type" />
-                  <div className="form-group">
-                    <input type="file" name="image" onChange={this.onChangeFile} />
-                  </div>
-
                   <div className="form-group">
                     <Dropzone onDrop={this.onDrop} multiple={false}>
                       <p>Try dropping some files here, or click to select files to upload.</p>
