@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CenterCard = props => (
   <div className="card center-cards">
@@ -18,9 +19,9 @@ const CenterCard = props => (
         <i className="ion-cash icon-small" />
         <span>{props.center.price}</span>
       </div>
-      <a href="./viewCenter.html" className="btn btn-primary">
+      <Link to={`/centers/event/${props.center.id}`} className="btn btn-primary">
         More details
-      </a>
+      </Link>
     </div>
   </div>
 );

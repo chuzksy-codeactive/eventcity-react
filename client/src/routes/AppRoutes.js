@@ -9,6 +9,7 @@ import CenterForm from '../containers/CenterFormContainer';
 import EditCenterForm from '../containers/EditCenterFormContainer';
 import requireAuth from '../components/requireAuth';
 import EditCenter from '../components/EditCenter';
+import EventCenterContainer from '../containers/EventCenterContainer';
 import createHistory from 'history/createBrowserHistory';
 import { centerReset } from '../actions/centerAction';
 
@@ -36,7 +37,8 @@ class AppRouter extends Component {
               <Route exact path="/centers" component={requireAuth(ViewCenter)} />
               <Route path="/centers/create" component={CenterForm} />
               <Route path="/centers/list" component={requireAuth(EditCenter)} />
-              <Route path="/centers/:id" component={EditCenterForm} />
+              <Route exact path="/centers/:id" component={EditCenterForm} />
+              <Route path="/centers/event/:id" component={requireAuth(EventCenterContainer)} />
             </Switch>
           </div>
         </Router>

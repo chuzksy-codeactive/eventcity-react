@@ -69,7 +69,7 @@ class EditCenterList extends Component {
           }}
         />
         <div
-          className="modal"
+          className="modal delete"
           id="modal"
           ref={el => {
             this.modal = el;

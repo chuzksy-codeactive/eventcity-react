@@ -1,31 +1,61 @@
 .cover-page {
-    min-height: 30vh;
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
-    background-size: contain;
-    color: #fff;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  min-height: 30vh;
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/caro2.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/caro2.jpg');
+  background-size: contain;
+  color: #fff;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .cover-page h2 {
-    font-weight: 300;
+  font-weight: 300;
 }
 
 .cover-page ul {
-    margin-top: 10px;
-    display: flex;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
 }
 
 .cover-page li {
-    padding-right: 10px;
-    font-size: 20px;
+  padding-right: 10px;
+  font-size: 20px;
 }
 
 .cover-page li::before {
-    content: "♥  ";
-    padding-left: 4px;
+  content: '♥  ';
+  padding-left: 4px;
+}
+
+.display-events {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.display-events > div {
+  margin: 10px;
+}
+.loader-big {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

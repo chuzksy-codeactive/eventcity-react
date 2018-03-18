@@ -256,22 +256,31 @@ p {
   margin-bottom: 20px; }
 
 .modal {
-  padding: 20px;
   border-radius: 5px;
   display: none;
-  width: 400px;
-  max-width: 100%;
-  height: 180px;
-  max-height: 100%;
   position: fixed;
   z-index: 100;
-  left: 50%;
-  top: 50%;
   transform: translate(-50%, -50%);
   background: white;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   animation-name: animatetop;
   animation-duration: 0.4s; }
+
+.delete {
+  width: 400px;
+  max-width: 100%;
+  height: 180px;
+  max-height: 100%;
+  left: 50%;
+  top: 50%; }
+
+.event-center {
+  width: 400px;
+  max-width: 100%;
+  height: 500px;
+  max-height: 100%;
+  left: 50%;
+  top: 55%; }
 
 .modal-gut {
   position: absolute;
@@ -305,15 +314,15 @@ p {
     opacity: 1; } }
 
 .modal-footer {
-  padding: 10px 16px;
+  padding: 10px 20px;
   color: #333;
   font-size: 16px; }
 
 .modal-header {
   display: flex;
   margin: 0;
-  padding: 0;
-  border-bottom: none;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eeedeb;
   margin-bottom: 20px; }
 
 .modal-header span {
@@ -333,27 +342,84 @@ p {
 
 .cover-page {
   min-height: 30vh;
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("../images/caro2.jpg");
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("/images/caro2.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("/images/caro2.jpg");
   background-size: contain;
   color: #fff;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  margin-top: 40px; }
 
 .cover-page h2 {
   font-weight: 300; }
 
 .cover-page ul {
   margin-top: 10px;
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none; }
 
 .cover-page li {
   padding-right: 10px;
   font-size: 20px; }
 
 .cover-page li::before {
-  content: "♥  ";
+  content: '♥  ';
   padding-left: 4px; }
+
+.display-events {
+  display: flex;
+  flex-wrap: wrap; }
+
+.display-events > div {
+  margin: 10px; }
+
+.loader-big {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.center-event-info {
+  background: linear-gradient(to bottom right, #6d6027, #a39141);
+  padding: 10px;
+  margin: 10px 0;
+  color: white;
+  display: flex;
+  border-radius: 5px; }
+
+.center-event-info strong {
+  flex: 1; }
+
+.center-event-info div {
+  flex: 3; }
+
+.menucontent h4 {
+  margin-top: 50px;
+  color: #555; }
+
+.menucontent {
+  margin-bottom: 50px; }
+
+.event-date {
+  list-style-type: none;
+  margin-top: 20px;
+  margin-bottom: 50px; }
+
+.event-date li {
+  background: #eeedeb;
+  padding: 10px;
+  margin-top: 5px;
+  font-weight: bold; }
