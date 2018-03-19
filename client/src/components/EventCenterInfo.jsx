@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+require('react-datepicker/dist/react-datepicker.css');
+
 const moment = require('moment');
 
 const LoadEventCenter = props => {
@@ -59,7 +63,12 @@ const renderPurposeField = ({ input, label, type, meta: { touched, error, invali
       <label htmlFor="type" className="control-label">
         {label}
       </label>
-      <input {...input} type={type} placeholder="e.g weddding, AGM, birthday, meetup" className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} />
+      <input
+        {...input}
+        type={type}
+        placeholder="e.g weddding, AGM, birthday, meetup"
+        className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`}
+      />
       <small className="invalid-feedback">{error}</small>
     </div>
   </div>
@@ -78,6 +87,14 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid, warn
 );
 
 class EventCenterInfo extends Component {
+  state = {
+    startDate: moment()
+  };
+  onDateChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
@@ -86,14 +103,8 @@ class EventCenterInfo extends Component {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
   };
-  state = {
-    userId: this.props.userId,
-    centerId: this.props.centerId,
-    name: 'StarField Palace'
-  };
 
   render() {
-    console.log(this.props.centerId)
     const { loading } = this.props.eventCenter;
     return (
       <section className="section-features">
@@ -120,39 +131,52 @@ class EventCenterInfo extends Component {
         />
         {/* Show the center events modal */}
         <div
-        className="modal event-center"
-        id="modal"
-        ref={el => {
-          this.modal = el;
-        }}
-      >
-        <div className="modal-guts">
-          <div className="modal-header">
-            <h5>Book an event for this center</h5>
-            <span className="close" onClick={this.onCloseModal}>
-              &times;
-            </span>
-          </div>
-          <div style={{textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555'}}>{this.state.name}</div>
-          <form style={{padding: '0 20px'}}>
-            <Field name="name" type="text" component={renderField} label="Event Name" required />
-            <Field name="purpose" type="text" component={renderPurposeField} label="Event Purpose" required placeholder="e.g wedding, AGM, birthday, meetup"/>
-            <Field name="note" component={renderFacilities} label="Short note" />
-          </form>
+          className="modal event-center"
+          id="modal"
+          ref={el => {
+            this.modal = el;
+          }}
+        >
+          <div className="modal-guts">
+            <div className="modal-header">
+              <h5>Book an event for this center</h5>
+              <span className="close" onClick={this.onCloseModal}>
+                &times;
+              </span>
+            </div>
+            <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
+            <form style={{ padding: '0 20px' }} id="event-center">
+              <Field name="name" type="text" component={renderField} label="Event Name" required />
+              <Field
+                name="purpose"
+                type="text"
+                component={renderPurposeField}
+                label="Event Purpose"
+                required
+                placeholder="e.g wedding, AGM, birthday, meetup"
+              />
+              <Field name="note" component={renderFacilities} label="Short note" />
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.onDateChange}
+                minDate={moment()}
+                maxDate={moment().add(5, 'days')}
+                placeholderText="Select a date between today and 5 days in the future"
+              />
+            </form>
 
-
-          <div className="modal-footer">
-            <button className="close-button btn btn-danger btn-sm" id="close-button">
-              delete
-            </button>
-            <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
-              cancel
-            </button>
+            <div className="modal-footer">
+              <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
+                submit
+              </button>
+              <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+                cancel
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </section>
     );
   }
 }
-export default reduxForm({form: 'eventCenter'})(EventCenterInfo);
+export default reduxForm({ form: 'eventCenter' })(EventCenterInfo);
