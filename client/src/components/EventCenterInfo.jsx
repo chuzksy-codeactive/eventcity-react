@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
-require('react-datepicker/dist/react-datepicker.css');
+
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 const moment = require('moment');
 
@@ -40,7 +40,7 @@ const LoadEventCenter = props => {
       </div>
       <div>
         <button type="button" className="btn btn-primary" onClick={props.onOpenModal}>
-          Book Center Now!{' '}
+          Book Center Now!
         </button>
       </div>
     </div>
@@ -86,14 +86,30 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid, warn
   </div>
 );
 
+const validate = values => {
+  const errors = {};
+  if (!values.name) {
+    errors.name = 'Event name is required';
+  }
+  if (!values.purpose) {
+    errors.purpose = 'Event purpose is required';
+  }
+  if (!values.note) {
+    errors.note = 'Please provide a short note';
+  }
+  return errors;
+};
+
 class EventCenterInfo extends Component {
   state = {
-    startDate: moment()
+    selectedDay: undefined
   };
-  onDateChange = date => {
-    this.setState({
-      startDate: date
-    });
+  handleDayClick = (day, { selected }) => {
+    if (selected) {
+      this.setState({ selectedDay: undefined });
+      return;
+    }
+    this.setState({ selectedDay: day });
   };
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
@@ -102,10 +118,13 @@ class EventCenterInfo extends Component {
   onOpenModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
+    this.props.reset();
   };
 
   render() {
     const { loading } = this.props.eventCenter;
+    const { selectedDay } = this.state;
+    const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <section className="section-features">
         <div>
@@ -117,7 +136,7 @@ class EventCenterInfo extends Component {
               {loading ? (
                 <div className="loader-big" />
               ) : (
-                <LoadEventCenter eventCenter={this.props.eventCenter.eventCenter.data} onOpenModal={this.onOpenModal} />
+                <LoadEventCenter eventCenter={this.props.eventCenter.eventCenter.data} onOpenModal={this.onOpenModal} reset={reset} />
               )}>
             </div>
           </div>
@@ -144,34 +163,39 @@ class EventCenterInfo extends Component {
                 &times;
               </span>
             </div>
-            <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
-            <form style={{ padding: '0 20px' }} id="event-center">
-              <Field name="name" type="text" component={renderField} label="Event Name" required />
-              <Field
-                name="purpose"
-                type="text"
-                component={renderPurposeField}
-                label="Event Purpose"
-                required
-                placeholder="e.g wedding, AGM, birthday, meetup"
-              />
-              <Field name="note" component={renderFacilities} label="Short note" />
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.onDateChange}
-                minDate={moment()}
-                maxDate={moment().add(5, 'days')}
-                placeholderText="Select a date between today and 5 days in the future"
-              />
-            </form>
-
-            <div className="modal-footer">
-              <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
-                submit
-              </button>
-              <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
-                cancel
-              </button>
+            <div className="row">
+              <div className="col-6">
+                <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
+                <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit}>
+                  <Field name="name" type="text" component={renderField} label="Event Name" required />
+                  <Field
+                    name="purpose"
+                    type="text"
+                    component={renderPurposeField}
+                    label="Event Purpose"
+                    required
+                    placeholder="e.g wedding, AGM, birthday, meetup"
+                  />
+                  <Field name="note" component={renderFacilities} label="Short note" />
+                  <div className="modal-footer">
+                    <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit" disabled={pristine || submitting}>
+                      submit
+                    </button>
+                    <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+                      cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div className="col-6">
+                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>Select a day</div>
+                <DayPicker onDayClick={this.handleDayClick} selectedDays={this.state.selectedDay} disabledDays={{ before: new Date() }} />
+                {selectedDay ? (
+                  <div style={{ marginBottom: '10px', textAlign: 'center', color: '#78B0F6' }}>Date selected: {selectedDay.toLocaleDateString()}</div>
+                ) : (
+                  <div />
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -179,4 +203,4 @@ class EventCenterInfo extends Component {
     );
   }
 }
-export default reduxForm({ form: 'eventCenter' })(EventCenterInfo);
+export default reduxForm({ form: 'eventCenter', validate })(EventCenterInfo);
