@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { resetEvent } from '../actions/eventActions';
 
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -102,29 +103,48 @@ const validate = values => {
 
 class EventCenterInfo extends Component {
   state = {
-    selectedDay: undefined
+    selectedDay: undefined,
+    message: null
   };
-  handleDayClick = (day, { selected }) => {
+  handleDayClick = (day, { selected, disabled }) => {
+    if (disabled) {
+      return;
+    }
     if (selected) {
       this.setState({ selectedDay: undefined });
       return;
     }
-    this.setState({ selectedDay: day });
+    this.setState({ selectedDay: day, message: null });
   };
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
+    this.setState({
+      selectedDay: undefined,
+      message: null
+    });
+    this.props.dispatch(resetEvent());
   };
   onOpenModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
     this.props.reset();
   };
+  onSubmitForm = values => {
+    if (this.state.selectedDay) {
+      const data = { ...values, userId: this.props.userId, centerId: this.props.centerId, eventDate: this.state.selectedDay.toLocaleDateString() };
+      this.props.createEvent(data);
+    } else {
+      this.setState({
+        message: 'Please select a date'
+      });
+    }
+  };
 
   render() {
     const { loading } = this.props.eventCenter;
     const { selectedDay } = this.state;
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, submitting, reset, pristine } = this.props;
     return (
       <section className="section-features">
         <div>
@@ -166,7 +186,7 @@ class EventCenterInfo extends Component {
             <div className="row">
               <div className="col-6">
                 <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
-                <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit}>
+                <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
                   <Field name="name" type="text" component={renderField} label="Event Name" required />
                   <Field
                     name="purpose"
@@ -177,8 +197,13 @@ class EventCenterInfo extends Component {
                     placeholder="e.g wedding, AGM, birthday, meetup"
                   />
                   <Field name="note" component={renderFacilities} label="Short note" />
+                  {this.props.eventCenter.message && (
+                    <div style={{ textAlign: 'center', margin: '10px 0', color: 'red' }}>{this.props.eventCenter.message}</div>
+                  )}
+                  {this.state.message && <div style={{ textAlign: 'center', margin: '10px 0', color: 'red' }}>{this.state.message}</div>}
                   <div className="modal-footer">
                     <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit" disabled={pristine || submitting}>
+                      <span className={loading ? 'loader' : ''} />
                       submit
                     </button>
                     <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>

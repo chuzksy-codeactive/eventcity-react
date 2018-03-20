@@ -7,7 +7,7 @@ class EventCenterPage extends Component {
     name: ''
   };
   componentWillMount() {
-    this.props.fectchEventCenter(this.props.match.params.id);
+    this.props.fetchEventCenter(this.props.match.params.id);
   }
   componentDidMount() {
     this.setState({
@@ -16,11 +16,17 @@ class EventCenterPage extends Component {
   }
 
   render() {
-    const { eventCenter, userId } = this.props;
+    const { eventCenter, userId, createEvent } = this.props;
     return (
       <div>
         <EventCenterCover />
-        <EventCenterInfo eventCenter={eventCenter} centerId={this.props.match.params.id} userId={userId} name={this.state.name} />
+        <EventCenterInfo
+          eventCenter={eventCenter}
+          centerId={this.props.match.params.id}
+          userId={userId}
+          name={this.state.name}
+          createEvent={createEvent}
+        />
       </div>
     );
   }

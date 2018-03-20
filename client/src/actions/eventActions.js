@@ -28,3 +28,41 @@ export const fetchEventCenter = id => dispatch => {
       dispatch(fetchEventCenterFailure('Can not load data'));
     });
 };
+
+export const creatingEvent = () => ({
+  type: types.CREATING_EVENT
+});
+
+export const createEventFailure = payload => ({
+  type: types.CREATE_EVENT_FAILURE,
+  payload
+});
+
+export const createEventSuccess = payload => ({
+  type: types.CREATE_EVENT_SUCCESS,
+  payload
+});
+
+export const resetEvent = () => ({
+  type: types.RESET_EVENT
+});
+
+export const createEvent = data => dispatch => {
+  dispatch(creatingEvent());
+  axios({
+    method: 'post',
+    url: '/api/v1/events',
+    data
+  })
+    .then(res => {
+      if (res.data.code === 200) {
+        dispatch(createEventFailure(res.data.message));
+      } else if (res.data.code === 201) {
+        dispatch(createEventSuccess(res.data.message));
+        dispatch(fetchEventCenter(data.centerId));
+      }
+    })
+    .catch(() => {
+      dispatch(createEventFailure('Unable to book event'));
+    });
+};

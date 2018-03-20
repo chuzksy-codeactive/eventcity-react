@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchEventCenter } from '../actions/eventActions';
+import { fetchEventCenter, createEvent } from '../actions/eventActions';
 import EventCenterPage from '../components/EventCenterPage';
 
 const mapStateToProps = state => ({
@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fectchEventCenter: id => dispatch(fetchEventCenter(id))
+  fetchEventCenter: id => dispatch(fetchEventCenter(id)),
+  createEvent: data => dispatch(createEvent(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCenterPage);
