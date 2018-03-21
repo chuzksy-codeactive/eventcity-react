@@ -5,6 +5,7 @@ import authReducer from './authReducer';
 import centerReducer from './centerReducer';
 import centerListReducer from './centerListReducer';
 import eventCenterReducer from './eventCenterReducer';
+import eventReducer from './eventReducer';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   centerReducer,
   centerListReducer,
   eventCenterReducer,
+  eventReducer,
   form: formReducer
 });
 
