@@ -10,9 +10,9 @@ import EditCenterForm from '../containers/EditCenterFormContainer';
 import requireAuth from '../components/requireAuth';
 import EditCenter from '../components/EditCenter';
 import EventCenterContainer from '../containers/EventCenterContainer';
-import ViewEvents from '../components/ViewEvents'
 import createHistory from 'history/createBrowserHistory';
 import { centerReset } from '../actions/centerAction';
+import ViewEventsContainer from '../containers/ViewEventsContainer';
 
 const history = createHistory();
 
@@ -40,7 +40,7 @@ class AppRouter extends Component {
               <Route path="/centers/list" component={requireAuth(EditCenter)} />
               <Route exact path="/centers/:id" component={EditCenterForm} />
               <Route path="/centers/event/:id" component={requireAuth(EventCenterContainer)} />
-              <Route exact path="/events" component={requireAuth(ViewEvents)}/>
+              <Route exact path="/events" component={requireAuth(ViewEventsContainer)} />
             </Switch>
           </div>
         </Router>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EventCenterCover from './EventCenterCover';
-import EventCards from './eventCards';
+import EventCards from './EventCards';
 
 class ViewEvents extends Component {
   render() {

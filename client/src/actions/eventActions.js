@@ -89,7 +89,8 @@ export const fetchEvent = () => dispatch => {
   })
     .then(res => {
       if (res.data.code === 200) {
-        dispatch(fetchEventSuccess(res.data));
+        console.log(res.data);
+        dispatch(fetchEventSuccess(res.data.data));
       } else if (res.data.message) {
         dispatch(fetchEventFailure(res.data.message));
       }
