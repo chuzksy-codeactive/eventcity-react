@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 class EventCards extends Component {
   render() {
     return (
-      <div className="event-cards">
+      <div className="event-card">
         <h4>Events Name here</h4>
-        <div className="container">
-          <ul>
-            <li>Purpose</li>
-            <li>Location</li>
-            <li>Date</li>
-          </ul>
+        <div>
+          <div>Purpose</div>
+          <div>Location</div>
+          <div>Date</div>
           <p>MORE DETAILS</p>
         </div>
       </div>
