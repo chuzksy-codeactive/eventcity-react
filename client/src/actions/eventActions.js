@@ -66,3 +66,35 @@ export const createEvent = data => dispatch => {
       dispatch(createEventFailure('Unable to book event'));
     });
 };
+
+export const fetchingEvent = () => ({
+  type: types.FETCHING_EVENT
+});
+
+export const fetchEventSuccess = payload => ({
+  type: types.FETCH_EVENT_SUCCESS,
+  payload
+});
+
+export const fetchEventFailure = payload => ({
+  type: types.FETCH_EVENT_FAILURE,
+  payload
+});
+
+export const fetchEvent = () => dispatch => {
+  dispatch(fetchingEvent());
+  axios({
+    method: 'get',
+    url: '/api/v1/events'
+  })
+    .then(res => {
+      if (res.data.code === 200) {
+        dispatch(fetchEventSuccess(res.data));
+      } else if (res.data.message) {
+        dispatch(fetchEventFailure(res.data.message));
+      }
+    })
+    .catch(() => {
+      dispatch(fetchEventFailure('Error loading data'));
+    });
+};
