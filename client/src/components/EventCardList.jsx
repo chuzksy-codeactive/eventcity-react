@@ -11,7 +11,7 @@ class EventCardList extends Component {
     const { loading, message, events } = this.props.events;
     return (
       <div className="container">
-        <h1 class="header-section row-width">Up Coming events</h1>
+        <h1 className="header-section row-width">Up Coming events</h1>
         <div style={{ margin: '30px 0' }}>
           {loading ? <div className="loader-big" /> : message ? <div>{message}</div> : <Events events={events} />}
         </div>

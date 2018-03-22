@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventCenterCover from './EventCenterCover';
 import EventCardList from './EventCardList';
+import Testimonials from './Testimonials';
 
 class ViewEvents extends Component {
   componentDidMount() {
@@ -11,6 +12,7 @@ class ViewEvents extends Component {
       <div>
         <EventCenterCover />
         <EventCardList events={this.props.events} />
+        <Testimonials />
       </div>
     );
   }

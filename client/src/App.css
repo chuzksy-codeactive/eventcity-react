@@ -439,3 +439,66 @@ p {
 .event-card p {
   color: #555;
   margin-top: 10px; }
+
+.section-testimonials {
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");
+  background-size: cover;
+  color: #fff;
+  background-attachment: fixed;
+  padding-top: 40px;
+  padding-bottom: 50px; }
+
+.header-section {
+  font-size: 180%;
+  font-weight: 300;
+  word-spacing: 2px;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase; }
+
+.testimony {
+  flex: 1; }
+
+.testimonials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+
+.testimonials div {
+  padding: 0 10px; }
+
+.section-testimonials h2 {
+  font-size: 180%;
+  word-spacing: 2px;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px; }
+
+blockquote {
+  padding: 2%;
+  font-style: italic;
+  line-height: 145%;
+  position: relative;
+  margin-top: 40px; }
+
+blockquote:before {
+  content: '\201C';
+  font-size: 500%;
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px; }
+
+cite {
+  font-size: 90%;
+  margin-top: 25px;
+  display: block; }
+
+cite img {
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle; }
