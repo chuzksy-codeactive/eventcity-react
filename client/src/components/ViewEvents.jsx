@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import EventCenterCover from './EventCenterCover';
-import EventCards from './EventCards';
+import EventCardList from './EventCardList';
 
 class ViewEvents extends Component {
+  componentDidMount() {
+    this.props.fetchEvent();
+  }
   render() {
     return (
       <div>
         <EventCenterCover />
-        <EventCards />
+        <EventCardList events={this.props.events} />
       </div>
     );
   }

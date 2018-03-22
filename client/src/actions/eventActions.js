@@ -84,12 +84,11 @@ export const fetchEventFailure = payload => ({
 export const fetchEvent = () => dispatch => {
   dispatch(fetchingEvent());
   axios({
-    method: 'get',
-    url: '/api/v1/events'
+    url: '/api/v1/events',
+    method: 'get'
   })
     .then(res => {
       if (res.data.code === 200) {
-        console.log(res.data);
         dispatch(fetchEventSuccess(res.data.data));
       } else if (res.data.message) {
         dispatch(fetchEventFailure(res.data.message));
