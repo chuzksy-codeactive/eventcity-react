@@ -13,6 +13,7 @@ import EventCenterContainer from '../containers/EventCenterContainer';
 import createHistory from 'history/createBrowserHistory';
 import { centerReset } from '../actions/centerAction';
 import ViewEventsContainer from '../containers/ViewEventsContainer';
+import EditEvent from '../components/EditEvent';
 
 const history = createHistory();
 
@@ -41,7 +42,7 @@ class AppRouter extends Component {
               <Route exact path="/centers/:id" component={EditCenterForm} />
               <Route path="/centers/event/:id" component={requireAuth(EventCenterContainer)} />
               <Route exact path="/events" component={requireAuth(ViewEventsContainer)} />
-              {/* <Route path="/events/:userId" component={requireAut()} /> */}
+              <Route path="/events/:userId" component={requireAuth(EditEvent)} />
             </Switch>
           </div>
         </Router>

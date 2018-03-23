@@ -113,7 +113,7 @@ export const fetchEventByIdFailure = payload => ({
   payload
 });
 
-export const fetcEventById = id => dispatch => {
+export const fetchEventById = id => dispatch => {
   dispatch(fetchingEventById());
   axios({
     url: `/api/v1/events/${id}`,

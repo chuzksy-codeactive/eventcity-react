@@ -50,9 +50,9 @@ class Header extends Component {
               View Events
             </Link>
             <div className="dropdown-divider" />
-            <a className="dropdown-item" href="/">
-              Modify/Delete Center
-            </a>
+            <Link className="dropdown-item" to={`/events/${this.props.user.user.data.id}`}>
+              Modify/Delete Event
+            </Link>
           </div>
         </li>
       );
