@@ -98,3 +98,35 @@ export const fetchEvent = () => dispatch => {
       dispatch(fetchEventFailure('Error loading data'));
     });
 };
+
+export const fetchingEventById = () => ({
+  type: types.FETCHING_EVENT_BY_ID
+});
+
+export const fetchEventByIdSuccess = payload => ({
+  type: types.FETCH_EVENT_BY_ID,
+  payload
+});
+
+export const fetchEventByIdFailure = payload => ({
+  type: types.FETCH_EVENT_BY_ID_FAILURE,
+  payload
+});
+
+export const fetcEventById = id => dispatch => {
+  dispatch(fetchingEventById());
+  axios({
+    url: `/api/v1/events/${id}`,
+    method: 'get'
+  })
+    .then(res => {
+      if (res.data.code === 200) {
+        dispatch(fetchEventByIdSuccess(res.data.data));
+      } else if (res.data.message) {
+        dispatch(fetchEventByIdFailure(res.data.message));
+      }
+    })
+    .catch(() => {
+      dispatch(fetchEventByIdFailure('Error loading data from server'));
+    });
+};
