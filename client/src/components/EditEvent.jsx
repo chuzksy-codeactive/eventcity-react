@@ -12,9 +12,9 @@ class EditEvent extends Component {
     const { loading, message, events } = this.props.eventsByUserId;
     return (
       <div className="container adjust-top">
-        <h1 className="header-section">List of events you have scheduled</h1>
         <div style={{ margin: '30px 0' }} className="row">
-          <div className="col-md-5 offset-md-3">
+          <div className="col-md-7 offset-md-2 center-list">
+            <h1 className="header-section">List of events you have scheduled</h1>
             {loading ? <div className="loader-big" /> : message ? <div>{message}</div> : <EditEventList events={events} />}
           </div>
         </div>

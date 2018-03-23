@@ -4,6 +4,17 @@ import { connect } from 'react-redux';
 import { signInReset, unAuthenticated } from '../actions/userLoginAction';
 
 class Header extends Component {
+  state = {
+    userId: null
+  };
+  componentDidMount() {
+    if (this.props.user.user) {
+      this.setState({
+        userId: this.props.user.user.data.id
+      });
+    }
+  }
+
   renderAdminLinks = isAdmin => {
     if (isAdmin) {
       return (
@@ -50,7 +61,7 @@ class Header extends Component {
               View Events
             </Link>
             <div className="dropdown-divider" />
-            <Link className="dropdown-item" to={`/events/${this.props.user.user.data.id}`}>
+            <Link className="dropdown-item" to={`/events/${this.state.userId}`}>
               Modify/Delete Event
             </Link>
           </div>
