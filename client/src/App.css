@@ -440,6 +440,9 @@ p {
   color: #555;
   margin-top: 10px; }
 
+.more-details:hover {
+  text-decoration: none; }
+
 .section-testimonials {
   background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");

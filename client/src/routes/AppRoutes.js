@@ -41,6 +41,7 @@ class AppRouter extends Component {
               <Route exact path="/centers/:id" component={EditCenterForm} />
               <Route path="/centers/event/:id" component={requireAuth(EventCenterContainer)} />
               <Route exact path="/events" component={requireAuth(ViewEventsContainer)} />
+              {/* <Route path="/events/:userId" component={requireAut()} /> */}
             </Switch>
           </div>
         </Router>
