@@ -48,8 +48,7 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid } }) 
 
 class EditEventModal extends Component {
   state = {
-    selectedDay: undefined,
-    message: null
+    selectedDay: undefined
   };
   handleDayClick = (day, { selected, disabled }) => {
     if (disabled) {
@@ -59,7 +58,7 @@ class EditEventModal extends Component {
       this.setState({ selectedDay: undefined });
       return;
     }
-    this.setState({ selectedDay: day, message: null });
+    this.setState({ selectedDay: day});
   };
   componentDidUpdate() {
     if (this.props.event) {
