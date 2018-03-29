@@ -1,8 +1,43 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import EditEventModal from '../components/EditEventModal';
 
 class EditEventList extends Component {
+  state = {
+    event: null
+  };
+  onEdit(event) {
+    this.setState(
+      {
+        event
+      },
+      () => {
+        this.modal.classList.toggle('opened');
+        this.modal_overlay.classList.toggle('opened');
+      }
+    );
+  }
+  // componentWillReceiveProps() {
+  //   this.setState({ event: { ...this.state.event } });
+  // }
+  onCloseModal = () => {
+    this.modal.classList.toggle('opened');
+    this.modal_overlay.classList.toggle('opened');
+  };
+
   render() {
+    let eventModal = null;
+    if (this.state.event !== null) {
+      eventModal = (
+        <EditEventModal
+          event={this.state.event}
+          onOpenModal={this.onOpenModal}
+          onCloseModal={this.onCloseModal}
+          modal_overlay={el => (this.modal_overlay = el)}
+          modal={el => (this.modal = el)}
+        />
+      );
+    }
     let eventList = null;
     if (Array.isArray(this.props.events)) {
       eventList = this.props.events.map((event, i) => {
@@ -12,7 +47,7 @@ class EditEventList extends Component {
             {'. '}
             {moment(event.eventDate).format('MMMM, Do YYYY')}
             <div className="btn-list btn btn-success" data-toggle="tooltip" data-placement="left" title="edit">
-              <i className="ion-edit ion-icon" />
+              <i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />
             </div>
             <div className="btn-list btn btn-danger" data-toggle="tooltip" data-placement="right" title="delete">
               <i className="ion-trash-a" />
@@ -21,7 +56,12 @@ class EditEventList extends Component {
         );
       });
     }
-    return <div>{eventList}</div>;
+    return (
+      <div>
+        {eventList}
+        {eventModal}
+      </div>
+    );
   }
 }
 

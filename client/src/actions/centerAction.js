@@ -136,7 +136,7 @@ export const deleteCenter = id => dispatch => {
   return axios({
     url: `/api/v1/centers/${id}`,
     method: 'delete'
-  }).then(res => {
+  }).then(() => {
     dispatch(centerDeleted(id));
   });
 };
