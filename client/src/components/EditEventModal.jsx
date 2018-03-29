@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { load } from '../reducer/loadCenter';
+import { updateEventById } from '../actions/eventActions';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
@@ -58,7 +59,7 @@ class EditEventModal extends Component {
       this.setState({ selectedDay: undefined });
       return;
     }
-    this.setState({ selectedDay: day});
+    this.setState({ selectedDay: day });
   };
   componentDidUpdate() {
     if (this.props.event) {
@@ -72,6 +73,9 @@ class EditEventModal extends Component {
       this.props.load({ name, purpose, note });
     }
   }
+  onSubmitForm = () => {
+    console.log(this.state.selectedDay);
+  };
 
   render() {
     const { handleSubmit } = this.props;
@@ -90,7 +94,7 @@ class EditEventModal extends Component {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit}>
+                  <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
                     <Field name="name" type="text" component={renderField} label="Event Name" required />
                     <Field
                       name="purpose"
@@ -140,11 +144,16 @@ const mapStateToProps = (state, props) => {
   return { initialValues: props.event };
 };
 
+const mapDispatchToProps = dispatch => ({
+  load,
+  updateEventById: data => dispatch(updateEventById(data))
+});
+
 EditEventModal = reduxForm({
   form: 'editEvent',
   enableReinitialize: true
 })(EditEventModal);
 
-EditEventModal = connect(mapStateToProps, { load })(EditEventModal);
+EditEventModal = connect(mapStateToProps, mapDispatchToProps)(EditEventModal);
 
 export default EditEventModal;

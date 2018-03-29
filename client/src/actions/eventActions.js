@@ -130,3 +130,38 @@ export const fetchEventById = id => dispatch => {
       dispatch(fetchEventByIdFailure('Error loading data from server'));
     });
 };
+
+export const updatingEvent = () => ({
+  type: types.UPDATING_EVENT_BY_ID
+});
+
+export const updateEventFailure = payload => ({
+  type: types.UPDATE_EVENT_BY_ID_FAILURE,
+  payload
+});
+
+export const updateEventSuccess = payload => ({
+  type: types.UPDATE_EVENT_BY_ID_SUCCESS,
+  payload
+});
+
+export const updateEventById = data => dispatch => {
+  dispatch(updatingEvent());
+  axios({
+    method: 'put',
+    url: `api/v1/events/${data.id}`,
+    data
+  })
+    .then(res => {
+      if (res.data.code === 200) {
+        dispatch(updateEventSuccess(res.data.message));
+      } else if (res.data.code === -1) {
+        dispatch(updateEventSuccess(res.data.message));
+      } else if (res.data.code === 404) {
+        dispatch(updateEventSuccess(res.data.message));
+      }
+    })
+    .then(() => {
+      dispatch(updateEventFailure('Server error'));
+    });
+};

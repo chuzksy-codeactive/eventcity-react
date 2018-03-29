@@ -19,6 +19,12 @@ const eventReducer = (state = initialState, action) => {
       return { ...state, loading: false, message: action.payload };
     case types.FETCH_EVENT_BY_ID:
       return { ...state, loading: false, message: null, events: action.payload };
+    case types.UPDATING_EVENT_BY_ID:
+      return { ...state, loading: true, message: null };
+    case types.UPDATE_EVENT_BY_ID_FAILURE:
+      return { ...state, loading: false, message: action.payload };
+    case types.UPDATE_EVENT_BY_ID_SUCCESS:
+      return { ...state, loading: false, message: action.payload };
     default:
       return state;
   }

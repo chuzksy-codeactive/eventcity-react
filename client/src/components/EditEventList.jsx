@@ -17,9 +17,6 @@ class EditEventList extends Component {
       }
     );
   }
-  // componentWillReceiveProps() {
-  //   this.setState({ event: { ...this.state.event } });
-  // }
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
