@@ -148,11 +148,19 @@ export const updateEventSuccess = payload => ({
 export const updateEventById = data => dispatch => {
   dispatch(updatingEvent());
   axios({
+    url: `/api/v1/events/${data.id}`,
     method: 'put',
-    url: `api/v1/events/${data.id}`,
-    data
+    data: {
+      name: data.name,
+      purpose: data.purpose,
+      note: data.note,
+      eventDate: data.eventDate,
+      userId: data.userId,
+      centerId: data.centerId
+    }
   })
     .then(res => {
+      console.log(res.data);
       if (res.data.code === 200) {
         dispatch(updateEventSuccess(res.data.message));
       } else if (res.data.code === -1) {
@@ -162,6 +170,7 @@ export const updateEventById = data => dispatch => {
       }
     })
     .then(() => {
+      console.log('server error');
       dispatch(updateEventFailure('Server error'));
     });
 };

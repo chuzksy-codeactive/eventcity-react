@@ -49,7 +49,8 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid } }) 
 
 class EditEventModal extends Component {
   state = {
-    selectedDay: undefined
+    selectedDay: undefined,
+    message: null
   };
   handleDayClick = (day, { selected, disabled }) => {
     if (disabled) {
@@ -74,11 +75,20 @@ class EditEventModal extends Component {
     }
   }
   onSubmitForm = () => {
-    console.log(this.state.selectedDay);
+    if (this.state.selectedDay) {
+      const data = {};
+      const { id, name, purpose, note, userId, centerId } = this.props.event;
+      Object.assign(data, { id, name, purpose, note, userId, centerId, eventDate: this.state.selectedDay.toLocaleDateString() });
+      this.props.updateEventById(data);
+    } else {
+      this.setState({
+        message: 'Please select another date'
+      });
+    }
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
     const { selectedDay } = this.state;
     const { eventDate } = this.props.event;
     return (
@@ -109,7 +119,7 @@ class EditEventModal extends Component {
                       <div style={{ margin: '10px 0', color: '#343A40' }}>{`Event date: ${moment(eventDate).format('MMMM Do YYYY')}`}</div>
                     )}
                     <div className="modal-footer">
-                      <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
+                      <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit" disabled={submitting}>
                         submit
                       </button>
                       <button type="button" className="btn btn-default btn-sm" onClick={this.props.onCloseModal}>
@@ -141,7 +151,10 @@ class EditEventModal extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return { initialValues: props.event };
+  return {
+    initialValues: props.event,
+    updateEvent: state.updateEventReducer
+  };
 };
 
 const mapDispatchToProps = dispatch => ({

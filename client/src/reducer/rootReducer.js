@@ -6,6 +6,7 @@ import centerReducer from './centerReducer';
 import centerListReducer from './centerListReducer';
 import eventCenterReducer from './eventCenterReducer';
 import loadCenter from './loadCenter';
+import updateEventReducer from './updateEventReducer';
 import eventReducer from './eventReducer';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   eventCenterReducer,
   eventReducer,
   loadCenter,
+  updateEventReducer,
   form: formReducer
 });
 
