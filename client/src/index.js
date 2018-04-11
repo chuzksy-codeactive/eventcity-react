@@ -8,11 +8,9 @@ import 'normalize.css/normalize.css';
 import './App.css';
 import registerServiceWorker from './registerServiceWorker';
 
-let { store, persistor } = configureStore();
+const { store, persistor } = configureStore();
 // const store = configureStore();
-
-const App = props => {
-  return (
+const App = props => (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div>
@@ -20,8 +18,7 @@ const App = props => {
         </div>
       </PersistGate>
     </Provider>
-  );
-};
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

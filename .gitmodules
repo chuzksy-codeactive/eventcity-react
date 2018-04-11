@@ -1,0 +1,3 @@
+[submodule "eventcity-react"]
+	path = eventcity-react
+	url = https://github.com/chuzksy-codeactive/eventcity-react.git

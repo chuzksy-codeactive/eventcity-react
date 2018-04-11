@@ -7,7 +7,7 @@ class EditCenterList extends Component {
   state = {
     id: null,
   };
-  onDeleteCenter = id => {
+  onDeleteCenter = (id) => {
     this.props.deleteCenter(id);
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
@@ -16,7 +16,7 @@ class EditCenterList extends Component {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
   };
-  onOpenModal = id => {
+  onOpenModal = (id) => {
     this.setState({
       id,
     });
@@ -28,8 +28,7 @@ class EditCenterList extends Component {
     let centerLists = null;
     if (Array.isArray(this.props.centerList.centers)) {
       const centers = this.props.centerList.centers;
-      centerLists = centers.map((value, i) => {
-        return (
+      centerLists = centers.map((value, i) => (
           <div key={value.id} className="list-item">
             {`${i + 1}. ${value.name}`}{' '}
             <div
@@ -51,8 +50,7 @@ class EditCenterList extends Component {
               <i className="ion-trash-a" onClick={this.onOpenModal.bind(this, value.id)} />
             </div>{' '}
           </div>
-        );
-      });
+      ));
     }
 
     return (
@@ -64,14 +62,14 @@ class EditCenterList extends Component {
         <div
           className="modal-overlay"
           id="modal-overlay"
-          ref={el => {
+          ref={(el) => {
             this.modal_overlay = el;
           }}
         />
         <div
           className="modal delete"
           id="modal"
-          ref={el => {
+          ref={(el) => {
             this.modal = el;
           }}
         >

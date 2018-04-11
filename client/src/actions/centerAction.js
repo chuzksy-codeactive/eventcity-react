@@ -24,13 +24,13 @@ export const fectchCenterSuccess = payload => ({
   payload
 });
 
-export const fetchCenter = () => dispatch => {
+export const fetchCenter = () => (dispatch) => {
   dispatch(fetchingCenter());
   axios({
     url: '/api/v1/centers',
     method: 'get'
   })
-    .then(res => {
+    .then((res) => {
       dispatch(fectchCenterSuccess(res.data.data));
     })
     .catch(() => {
@@ -61,20 +61,20 @@ export const createCenter = (values, route) => {
   data.append('facilities', values.facilities);
   data.append('type', values.type);
   data.append('file', values.file);
-  return dispatch => {
+  return (dispatch) => {
     dispatch(creatingCenter());
     axios({
       url: '/api/v1/centers',
       method: 'post',
       data
     })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200 && res.data) {
           dispatch(createCenterSuccess(res.data));
           route.push('/centers/list');
         }
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(createCenterFailure(err));
       });
   };
@@ -93,7 +93,7 @@ export const updatingCenterFailure = () => ({
   type: types.UPDATING_CENTER_FAILURE
 });
 
-export const updateCenter = values => {
+export const updateCenter = (values) => {
   const data = new FormData();
   data.append('name', values.name);
   data.append('capacity', values.capacity);
@@ -102,20 +102,20 @@ export const updateCenter = values => {
   data.append('facilities', values.facilities);
   data.append('type', values.type);
   data.append('file', values.file);
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updatingCenter());
     axios({
       url: `/api/v1/centers/${values.id}`,
       method: 'put',
       data
     })
-      .then(res => {
+      .then((res) => {
         dispatch(updatingCenterSuccess(res.data));
         setTimeout(() => {
           history.goBack();
         }, 2000);
       })
-      .catch(err => {
+      .catch((err) => {
         // dispatch(updatingCenterFailure());
         console.log(err);
       });
@@ -131,7 +131,7 @@ export const centerDeleted = id => ({
   id
 });
 
-export const deleteCenter = id => dispatch => {
+export const deleteCenter = id => (dispatch) => {
   dispatch(centerDeleting());
   return axios({
     url: `/api/v1/centers/${id}`,
