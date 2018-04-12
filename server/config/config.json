@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "lillyr055y",
+    "database": "eventCity",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "lillyr055y",
+    "database": "eventCity_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable":
+      "postgres://irssyfsdqfbjgw:e1acafe0e3e50ac17971c83ff5ea577c1eefe5d1af774ccd7fbe61bf804beb19@ec2-54-243-213-188.compute-1.amazonaws.com:5432/d1p1kcricocso4"
+  }
+}

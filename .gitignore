@@ -1,5 +1,8 @@
-/node_modules
-/.idea
-/npm-debug.log
-/dist
-config.js
+node_modules/
+.idea
+npm-debug.log
+server/dist
+server/config.js
+.nyc_output
+.DS_Store
+server/uploads
