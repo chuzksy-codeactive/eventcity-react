@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RenderField from '../components/RenderField';
 import Dropzone from 'react-dropzone';
+
+import RenderField from '../components/RenderField.jsx';
 
 const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) => (
   <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
@@ -34,9 +35,9 @@ const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const validate = values => {
-  var errors = {};
-  var hasErrors = false;
+const validate = (values) => {
+  const errors = {};
+  let hasErrors = false;
 
   if (!values.name || values.name.trim() === '') {
     errors.name = 'center name is required';
@@ -81,7 +82,7 @@ class CenterForm extends Component {
     imageUrl: null,
     display: 'none',
   };
-  onDrop = files => {
+  onDrop = (files) => {
     const file = files[0];
     this.setState({
       file,
@@ -97,7 +98,7 @@ class CenterForm extends Component {
     this.setState({ display: 'none' });
   };
 
-  onSubmitForm = values => {
+  onSubmitForm = (values) => {
     const centers = { ...values, file: this.state.file };
     if (!this.props.match.params.id) {
       this.props.createCenter(centers, this.props.history);
@@ -114,7 +115,12 @@ class CenterForm extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, reset, pristine } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      reset,
+      pristine,
+    } = this.props;
     return (
       <div>
         <div className="container center-flex adjust-top">

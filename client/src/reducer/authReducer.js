@@ -9,11 +9,26 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.AUTHENTICATED:
-      return { ...state, authenticated: true, isAdmin: action.payload, error: '' };
+      return {
+        ...state,
+        authenticated: true,
+        isAdmin: action.payload,
+        error: ''
+      };
     case types.UNAUTHENTICATED:
-      return { ...state, authenticated: false, isAdmin: false, error: '' };
+      return {
+        ...state,
+        authenticated: false,
+        isAdmin: false,
+        error: ''
+      };
     case types.AUTHENTICATED_ERROR:
-      return { ...state, authenticated: false, isAdmin: false, error: 'You are not authorized' };
+      return {
+        ...state,
+        authenticated: false,
+        isAdmin: false,
+        error: 'You are not authorized'
+      };
     default:
       return state;
   }
