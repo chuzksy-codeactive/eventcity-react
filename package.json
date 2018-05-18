@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "nyc mocha dist/test --recursive || true",
+    "test": "nyc mocha ./server/dist/test --recursive || true",
     "start": "node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
     "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
