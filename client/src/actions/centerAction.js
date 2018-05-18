@@ -1,6 +1,6 @@
+import createHistory from 'history/createBrowserHistory';
 import axios from 'axios';
 import * as types from './actionTypes';
-import createHistory from 'history/createBrowserHistory';
 
 const history = createHistory();
 
@@ -69,7 +69,7 @@ export const createCenter = (values, route) => {
       data
     })
       .then((res) => {
-        if (res.status === 200 && res.data) {
+        if (res.status === 201 && res.data) {
           dispatch(createCenterSuccess(res.data));
           route.push('/centers/list');
         }
@@ -115,9 +115,8 @@ export const updateCenter = (values) => {
           history.goBack();
         }, 2000);
       })
-      .catch((err) => {
+      .catch(() => {
         // dispatch(updatingCenterFailure());
-        console.log(err);
       });
   };
 };

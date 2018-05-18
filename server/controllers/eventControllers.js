@@ -4,9 +4,9 @@ import models from '../models';
  * create event controller.
  *
  * @param {object} req - The request body
- * @param {object} res - The response body of a HTTP call
- * @const {object} event - An event object for collecting event properties
- * @returns {json} res.status().json()
+ * @param {object} res - The response body
+ *
+ * @returns {object} (data, message)
  */
 const createEvent = (req, res) => {
   req.checkBody('name', 'event name is required').notEmpty();
@@ -29,9 +29,8 @@ const createEvent = (req, res) => {
   req.getValidationResult().then((result) => {
     if (!result.isEmpty()) {
       errors = result.array().map(e => e.msg);
-      res.status(200).json({
-        errorMsg: errors,
-        code: 200
+      res.status(400).json({
+        message: errors
       });
     } else {
       models.Event.findOne({
@@ -41,16 +40,14 @@ const createEvent = (req, res) => {
         }
       }).then((e) => {
         if (e) {
-          return res.status(200).json({
-            message: 'An event has been booked for this date.',
-            code: 200
+          return res.status(409).json({
+            message: 'An event has been booked for this date.'
           });
         }
         models.Event.create(event).then((newEvent) => {
           if (newEvent) {
-            return res.status(200).json({
+            return res.status(201).json({
               message: 'Event is scheduled successfuly. Thanks',
-              code: 201,
               data: event
             });
           }
@@ -65,7 +62,8 @@ const createEvent = (req, res) => {
  *
  * @param {object} req - The request body
  * @param {object} res - The reponse body
- * @returns {json} res.status().json()
+ *
+ * @returns {object} (message)
  */
 const getEventsById = (req, res) => {
   models.Event.findAll({ where: { userId: req.params.id } }).then((event) => {
@@ -86,14 +84,14 @@ const getEventsById = (req, res) => {
  *
  * @param {object} req - The request object
  * @param {object} res - The response object
- * @returns {json} res.status().json()
+ *
+ * @returns {object} (data)
  */
 const getAllEvents = (req, res) => {
   models.Event.findAll().then((event) => {
     if (event) {
       return res.status(200).json({
-        data: event,
-        code: 200
+        data: event
       });
     }
     return res.status(200).json({
@@ -107,7 +105,8 @@ const getAllEvents = (req, res) => {
  *
  * @param {object} req - The request object
  * @param {object} res - The response object
- * @returns {json} res.status().json()
+ *
+ * @returns {object} (message)
  */
 const updateEventById = (req, res) => {
   req.checkBody('name', 'event name is required').notEmpty();
@@ -131,9 +130,8 @@ const updateEventById = (req, res) => {
   req.getValidationResult().then((result) => {
     if (!result.isEmpty()) {
       errors = result.array().map(e => e.msg);
-      return res.status(200).json({
-        errorMsg: errors,
-        code: 200
+      return res.status(400).json({
+        message: errors
       });
     }
     models.Event.findById(req.params.id).then((fEvent) => {
@@ -145,9 +143,8 @@ const updateEventById = (req, res) => {
           }
         }).then((e) => {
           if (e) {
-            return res.status(200).json({
-              message: 'Event not available for this date, please choose another date',
-              code: -1
+            return res.status(204).json({
+              message: 'Event not available for this date, please choose another date'
             });
           }
           models.Event.update(event, {
@@ -155,16 +152,12 @@ const updateEventById = (req, res) => {
               id: req.params.id
             }
           }).then((upEvent) => {
-            res.status(200).json({
-              message: `Event with ID ${req.params.id} successfully updated`,
-              code: 200
-            });
+            res.status(200).json({ message: `Event with ID ${req.params.id} successfully updated` });
           });
         });
       } else {
         return res.status(404).json({
-          message: `Event with ID ${req.params.id} not found`,
-          code: 404
+          message: `Event with ID ${req.params.id} not found`
         });
       }
     });
@@ -176,14 +169,14 @@ const updateEventById = (req, res) => {
  *
  * @param {object} req - The request object
  * @param {object} res - The response object
- * @returns {json} res.status().json()
+ *
+ * @returns {object} (message)
  */
 const deleteEventById = (req, res) => {
   const eventId = req.params.id;
   if (eventId === null) {
-    return res.status(200).json({
-      message: 'Please supply the event ID',
-      code: 200
+    return res.status(400).json({
+      message: 'Please supply the event ID'
     });
   }
   models.Event.destroy({
@@ -191,9 +184,8 @@ const deleteEventById = (req, res) => {
       id: req.params.id
     }
   }).then(event =>
-    res.status(200).json({
-      message: 'Center is successfully deleted',
-      code: 204
+    res.status(204).json({
+      message: 'Center is successfully deleted'
     }));
 };
 
