@@ -8,13 +8,13 @@ import rootReducer from '../reducer/rootReducer';
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
-  blacklist: ['centerReducer', 'centerListReducer', 'updateEventReducer']
+  storage,
+  blacklist: ['centerReducer', 'centerListReducer', 'updateEventReducer', 'userReducer']
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default () => {
-  let store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-  let persistor = persistStore(store);
+  const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  const persistor = persistStore(store);
   return { store, persistor };
 };
 

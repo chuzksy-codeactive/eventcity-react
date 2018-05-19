@@ -1,11 +1,14 @@
 import models from '../models';
 
+require('dotenv').config();
+
+
 const cloudinary = require('cloudinary');
 
 cloudinary.config({
-  cloud_name: 'dcgwltbei',
-  api_key: '944773238156875',
-  api_secret: 'HFk6VkbAIgT12fMATap1n2_tF9U'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 const vear = 'wear';
