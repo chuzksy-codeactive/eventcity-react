@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, values } from 'redux-form';
+import axios from 'axios';
 
-const validate = values => {
-  var errors = {};
-  var hasErrors = false;
+const validate = (values) => {
+  const errors = {};
+  let hasErrors = false;
 
   if (!values.username || values.username.trim() === '') {
     errors.username = 'Enter username';
@@ -46,7 +47,11 @@ const validate = values => {
   return hasErrors && errors;
 };
 
-const renderField = ({ input, label, type, meta: { touched, error, invalid, warning } }) => (
+const renderField = ({
+  input, label, type, meta: {
+    touched, error, invalid, warning
+  }
+}) => (
   <div>
     <div className="form-group">
       <input {...input} type={type} placeholder={label} className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} />
@@ -56,9 +61,15 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid, warn
 );
 
 class Signup extends Component {
-  onSubmitForm = values => {
+  state = {
+    file: '',
+    imageUrl: ''
+  }
+
+  onSubmitForm = (values) => {
     this.props.userSignUp(values, this.props.history);
   };
+
   render() {
     const { handleSubmit, submitting } = this.props;
     return (

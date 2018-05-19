@@ -1,9 +1,9 @@
 import users from './routes/users';
-
 import centers from './routes/centers';
-
 import index from './routes/index';
 import events from './routes/events';
+
+require('dotenv').config();
 
 const express = require('express');
 const path = require('path');

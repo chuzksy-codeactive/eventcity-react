@@ -6,3 +6,5 @@ server/config.js
 .nyc_output
 .DS_Store
 server/uploads
+.env
+ 
