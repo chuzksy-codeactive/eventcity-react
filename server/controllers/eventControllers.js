@@ -1,5 +1,13 @@
 import models from '../models';
 
+/**
+ * create event controller.
+ *
+ * @param {object} req - The request body
+ * @param {object} res - The response body of a HTTP call
+ * @const {object} event - An event object for collecting event properties
+ * @returns {json} res.status().json()
+ */
 const createEvent = (req, res) => {
   req.checkBody('name', 'event name is required').notEmpty();
   req.checkBody('purpose', 'purpose is required').notEmpty();
@@ -52,6 +60,13 @@ const createEvent = (req, res) => {
   });
 };
 
+/**
+ * Controller to get event by Id
+ *
+ * @param {object} req - The request body
+ * @param {object} res - The reponse body
+ * @returns {json} res.status().json()
+ */
 const getEventsById = (req, res) => {
   models.Event.findAll({ where: { userId: req.params.id } }).then((event) => {
     if (event.length > 0) {
@@ -66,6 +81,13 @@ const getEventsById = (req, res) => {
   });
 };
 
+/**
+ * Controller to get all event
+ *
+ * @param {object} req - The request object
+ * @param {object} res - The response object
+ * @returns {json} res.status().json()
+ */
 const getAllEvents = (req, res) => {
   models.Event.findAll().then((event) => {
     if (event) {
@@ -80,6 +102,13 @@ const getAllEvents = (req, res) => {
   });
 };
 
+/**
+ * Controller to update event by Id
+ *
+ * @param {object} req - The request object
+ * @param {object} res - The response object
+ * @returns {json} res.status().json()
+ */
 const updateEventById = (req, res) => {
   req.checkBody('name', 'event name is required').notEmpty();
   req.checkBody('purpose', 'purpose is required').notEmpty();
@@ -142,6 +171,13 @@ const updateEventById = (req, res) => {
   });
 };
 
+/**
+ * Controller to delete event by Id
+ *
+ * @param {object} req - The request object
+ * @param {object} res - The response object
+ * @returns {json} res.status().json()
+ */
 const deleteEventById = (req, res) => {
   const eventId = req.params.id;
   if (eventId === null) {
