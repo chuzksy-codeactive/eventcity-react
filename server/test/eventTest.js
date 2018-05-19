@@ -58,15 +58,3 @@ describe('PUT /centers/centerId', () => {
   });
 });
 
-// describe('DELETE /centers/centerId', () => {
-//   it('should return a 200 response', (done) => {
-//     api
-//       .delete('/11')
-//       .set('Accept', 'application/x-www-form-urlencoded')
-//       .set('Authorization', `Bearer ${token}`)
-//       .expect(200)
-//       .end(() => {
-//         done();
-//       });
-//   });
-// });

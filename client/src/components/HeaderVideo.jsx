@@ -2,8 +2,7 @@ import React from 'react';
 import Signup from '../containers/SignUpFormContainer';
 import CoverInfo from './CoverInfo';
 
-const HeaderVideo = props => {
-  return (
+const HeaderVideo = props => (
     <div className="video-container">
       <video preload="true" autoPlay loop volume="0" postoer="/images/1.jpg">
         <source src="images/vine.mp4" type="video/mp4" />
@@ -22,7 +21,6 @@ const HeaderVideo = props => {
         </div>
       </div>
     </div>
-  );
-};
+);
 
 export default HeaderVideo;

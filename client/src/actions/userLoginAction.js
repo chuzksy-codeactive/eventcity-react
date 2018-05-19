@@ -22,12 +22,10 @@ export const signInReset = () => ({
   type: types.SIGN_IN_RESET
 });
 
-export const authenticated = payload => {
-  return {
-    type: types.AUTHENTICATED,
-    payload
-  };
-};
+export const authenticated = payload => ({
+  type: types.AUTHENTICATED,
+  payload
+});
 
 export const unAuthenticated = () => {
   localStorage.removeItem('user');
@@ -36,17 +34,16 @@ export const unAuthenticated = () => {
   };
 };
 
-export const authenticated_error = () => ({
+export const authenticatedError = () => ({
   type: types.AUTHENTICATED_ERROR
 });
 
-export const userSignIn = (data, history) => {
-  // const url = 'https://eventcity.herokuapp.com/api/v1/users/login';
-  return dispatch => {
+export const userSignIn = (data, history) =>
+  (dispatch) => {
     dispatch(signingInUser());
     axios
       .post('/api/v1/users/login', data)
-      .then(response => {
+      .then((response) => {
         let isAdmin = false;
         const user = response.data;
         if (user.data) {
@@ -57,43 +54,51 @@ export const userSignIn = (data, history) => {
           localStorage.setItem('user', user.token);
           dispatch(signInUserSuccess(user));
           history.push('/centers');
-        } else {
-          dispatch(signInError(user.username || user.password));
+        }
+      })
+      .catch((error) => {
+        const { status } = error.response;
+        const { message } = error.response.data;
+        if (status === 401 || status === 404) {
+          dispatch(signInError(message));
           dispatch(unAuthenticated());
+        } else {
+          dispatch(signInUserFailure());
+          dispatch(authenticatedError());
         }
-      })
-      .catch(error => {
-        dispatch(signInUserFailure());
-        dispatch(authenticated_error());
       });
   };
-};
 
-export const userSignUp = (data, history) => {
-  return dispatch => {
-    dispatch(signingInUser());
-    axios
-      .post('/api/v1/users', data)
-      .then(response => {
-        let isAdmin = false;
-        if (response.status === 200 && response.data) {
-          if (response.data.data) {
-            if (response.data.data.id === 1 || response.data.data.id === 2) {
-              isAdmin = true;
-            }
-            dispatch(authenticated(isAdmin));
-            dispatch(signInUserSuccess(response.data));
-            localStorage.setItem('user', response.data.token);
-            history.push('/centers');
-          } else if (response.data.error) {
-            dispatch(signInError(response.data.error.username || response.data.error.email));
-            dispatch(unAuthenticated());
+
+export const userSignUp = (data, history) => (dispatch) => {
+  dispatch(signingInUser());
+  
+
+  axios
+    .post('/api/v1/users', data)
+    .then((response) => {
+      let isAdmin = false;
+      if (response.status === 201 && response.data) {
+        if (response.data.data) {
+          if (response.data.data.id === 1 || response.data.data.id === 2) {
+            isAdmin = true;
           }
+          dispatch(authenticated(isAdmin));
+          dispatch(signInUserSuccess(response.data));
+          localStorage.setItem('user', response.data.token);
+          history.push('/centers');
         }
-      })
-      .catch(error => {
+      }
+    })
+    .catch((error) => {
+      const { status } = error.response;
+      const { message } = error.response.data;
+      if (status === 409 || status === 400) {
+        dispatch(signInError(message));
+        dispatch(unAuthenticated());
+      } else {
         dispatch(signInUserFailure());
-        dispatch(authenticated_error());
-      });
-  };
+        dispatch(authenticatedError());
+      }
+    });
 };
