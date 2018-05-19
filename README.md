@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/test_coverage)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/andela-eventcity/badge.svg?branch=jsdoc)](https://coveralls.io/github/chuzksy-codeactive/andela-eventcity?branch=jsdoc)
+
 You can view the hosted website on https://chuzksy-codeactive.github.io/andela-eventcity/template/index.html#
 
 
