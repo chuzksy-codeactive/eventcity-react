@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+[![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/andela-eventcity/badge.svg?branch=jsdoc)](https://coveralls.io/github/chuzksy-codeactive/andela-eventcity?branch=jsdoc) [![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/test_coverage)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/test_coverage) [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=jsdoc)](https://travis-ci.org/chuzksy-codeactive/eventcity-react)
+
 You can view the hosted website on https://chuzksy-codeactive.github.io/andela-eventcity/template/index.html#
 
 
@@ -61,6 +62,4 @@ It is not a complete working web application. Each branch contains a week's chal
 
 # reset.css
 reset.css |=> set of CSS rules that resets the styling of all HTML elements to a consistent baseline.
-=======
 # eventcity-server
->>>>>>> b19721f55dd599b6e969e4909ecbd11333491dbe

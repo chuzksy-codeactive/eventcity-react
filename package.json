@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "nyc mocha ./server/dist/test --recursive || true",
-    "start": "node server/dist/bin/www",
+    "start": "npm run build && node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
     "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls"
