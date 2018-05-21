@@ -11,19 +11,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const vear = 'wear';
-
-
 /**
  * createCenters - crates a new center
  *
  * @param {object} req
  * @param {object} res
- * @param {next} next
  *
  * @return {object} (message, center)
  */
-const createCenters = (req, res, next) => {
+const createCenters = (req, res) => {
   req.checkBody('name', 'name is required').notEmpty();
   req.checkBody('capacity', 'capacity is required').notEmpty();
   req.checkBody('location', 'location is required').notEmpty();

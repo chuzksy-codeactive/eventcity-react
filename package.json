@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "nyc mocha ./server/dist/test --recursive || true",
-    "start": "node server/dist/bin/www",
+    "start": "npm run build && node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
     "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls"
@@ -17,6 +17,7 @@
     "cloudinary": "^1.10.0",
     "cookie-parser": "^1.4.3",
     "cool-ascii-faces": "^1.3.4",
+    "cors": "^2.8.4",
     "debug": "^2.6.9",
     "dotenv": "^5.0.1",
     "express": "^4.15.2",
@@ -36,7 +37,8 @@
     "sequelize": "^4.23.2",
     "sequelize-cli": "^3.1.0",
     "serve-favicon": "^2.4.5",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "swagger-ui-express": "^3.0.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
