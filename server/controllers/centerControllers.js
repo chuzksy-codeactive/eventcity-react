@@ -78,19 +78,54 @@ const createCenters = (req, res, next) => {
  * @param {object} req
  * @param {object} res
  *
- * @return {object} (message)
+ * @return {object} (centers)
  */
 const getAllCenters = (req, res) => {
-  models.Center.findAll().then((center) => {
-    if (center) {
+  models.Center.findAll().then((centers) => {
+    if (centers) {
       return res.status(200).json({
-        data: center
+        data: centers
       });
     }
     return res.status(404).json({
       message: 'No center found in the database, Create a new center',
     });
   });
+};
+
+/**
+ * getCenterPerPage - implementation of pagination
+ *
+ * @param {object} req
+ * @param {object} res
+ *
+ * @return {object} (centers)
+ */
+
+const getCenterPerPage = (req, res) => {
+  const limit = 5;
+  let offset = 0;
+  models.Center.findAndCountAll().then((data) => {
+    let { page } = req.params;
+    const isNum = isNaN(req.params.page); //eslint-disable-line
+    page = parseInt(page, 10);
+    const pages = Math.ceil(data.count / limit);
+    if (page <= 0 || !Number.isInteger(page) || isNum) {
+      return res.status(400).json({
+        message: 'Invalid page number, should start with 1'
+      });
+    }
+    offset = limit * (page - 1);
+    models.Center.findAll({
+      limit, offset, order: [['id', 'ASC']]
+    }).then((centers) => {
+      res.status(200).json({
+        data: centers,
+        count: data.count,
+        pages
+      });
+    });
+  }).catch(err => res.status(500).send('Interval server error'));
 };
 
 const deleteCenter = (req, res) => {
@@ -234,7 +269,8 @@ const centersControllers = {
   deleteCenter,
   updateCenter,
   getCenterById,
-  getCentersEvents
+  getCentersEvents,
+  getCenterPerPage
 };
 
 export default centersControllers;

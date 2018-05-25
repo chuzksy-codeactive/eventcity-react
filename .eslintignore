@@ -1,0 +1,7 @@
+/node_modules/
+client/
+server/bin/ 
+server/dist
+/node_modules/
+/test/
+/public/js/services/game.js

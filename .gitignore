@@ -1,3 +1,4 @@
+
 node_modules/
 .idea
 npm-debug.log
@@ -7,4 +8,6 @@ server/config.js
 .DS_Store
 server/uploads
 .env
+uploads
+server/test/model
  
