@@ -1,11 +1,11 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID=$CODECLIMATE_REPO_TOKEN
-    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+    - CC_TEST_REPORTER_ID=3e81e4c0324c841cd83e5854836f3415a5a56b026a3085086e442600259ec210
 language: node_js
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - bundle exec rspec
   # Preferably you will run test-reporter on branch update events. But
@@ -30,5 +30,6 @@ before_script:
 script:
   - npm run test:coverage
 after_success:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - codeclimate-test-reporter < coverage/lcov.info
   - coveralls < coverage/lcov.info

@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 
-const expect = require('chai').expect;
+const { expect } = require('chai');
 
 const app = express();
 const api = request('http://localhost:3000/api/v1/centers');
