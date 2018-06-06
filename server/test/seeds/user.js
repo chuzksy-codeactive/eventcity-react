@@ -7,6 +7,14 @@ const user = {
   confirmPassword: 'password'
 };
 
+const userToUpdate = {
+  username: 'chuzksy',
+  firstname: 'Onuchukwu',
+  lastname: 'ifeanyi',
+  email: 'iffy2gen2@gmail.com',
+  password: 'password'
+};
+
 const userWithSameEmail = {
   username: 'eberes',
   firstname: 'ibiam',
@@ -107,7 +115,8 @@ const userSeeds = {
   noLastname,
   noEmail,
   noPassword,
-  passwordMissMatch
+  passwordMissMatch,
+  userToUpdate
 };
 
 module.exports = userSeeds;
