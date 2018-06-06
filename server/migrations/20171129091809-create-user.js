@@ -9,44 +9,23 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [1, 25]
-        }
+        allowNull: false
       },
       firstname: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [1, 25]
-        }
+        allowNull: false
       },
       lastname: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [1, 25]
-        }
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [1, 25]
-        }
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [1, 25],
-          isEmail: true
-        }
+        allowNull: false
       },
       role: {
         type: Sequelize.ENUM('admin', 'user'),
