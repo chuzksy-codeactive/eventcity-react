@@ -29,10 +29,10 @@ const createCenters = (req, res, next) => {
   req.sanitize('facilities').trim();
 
   let errors = [];
-  const imagePath = req.file ? req.file.path : 'sample.jpg';
+  const imagePath = req.file ? req.file.path : 'server/sample.jpg';
   cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
-    const imageUrl = image.secure_url || req.body.imageUrl;
+    const imageUrl = image.secure_url;
     if (imageUrl) {
       const center = {
         name: req.body.name,
@@ -246,28 +246,26 @@ const getCenterById = (req, res) => {
  *
  * @return {object} (message, error, center)
  */
-const getCentersEvents = (req, res) => {
-  return models.Center.findById(req.params.id, {
-    include: [
-      {
-        model: models.Event
-      }
-    ]
-  }).then((centersEvents) => {
-    if (centersEvents) {
-      return res.status(200).json({
-        message: 'Successfully found a center',
-        error: false,
-        data: centersEvents
-      });
+const getCentersEvents = (req, res) => models.Center.findById(req.params.id, {
+  include: [
+    {
+      model: models.Event
     }
-    return res.status(404).json({
-      message: 'No center found',
-      error: true,
-      data: null
+  ]
+}).then((centersEvents) => {
+  if (centersEvents) {
+    return res.status(200).json({
+      message: 'Successfully found a center',
+      error: false,
+      data: centersEvents
     });
+  }
+  return res.status(404).json({
+    message: 'No center found',
+    error: true,
+    data: null
   });
-};
+});
 
 const centersControllers = {
   createCenters,
