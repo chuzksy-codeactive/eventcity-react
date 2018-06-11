@@ -1723,8 +1723,8 @@
         "data"
       ]
     },
-    "Datum": {
-      "title": "Datum",
+    "Users model": {
+      "title": "Users model",
       "example": {
         "id": 1,
         "username": "chuzksy",
@@ -1811,8 +1811,8 @@
         "updatedAt"
       ]
     },
-    "Users2": {
-      "title": "users2",
+    "Username already taken": {
+      "title": "Username already taken",
       "example": {
         "message": "Username is already taken"
       },
@@ -1828,8 +1828,8 @@
         "message"
       ]
     },
-    "Users3": {
-      "title": "users3",
+    "Required fields": {
+      "title": "Email required",
       "example": {
         "message": [
           "Email field is required",
@@ -1854,8 +1854,8 @@
         "message"
       ]
     },
-    "Users4": {
-      "title": "users4",
+    "User successfully login": {
+      "title": "Login successfully",
       "example": {
         "message": "New user has been created successfully",
         "data": {
@@ -1895,8 +1895,8 @@
         "token"
       ]
     },
-    "Data": {
-      "title": "Data",
+    "User login details": {
+      "title": "login details",
       "example": {
         "role": "user",
         "id": 1,
@@ -2024,8 +2024,8 @@
         "data"
       ]
     },
-    "UserLogin8": {
-      "title": "user login8",
+    "No login details found": {
+      "title": "user not found",
       "example": {
         "message": "You have no login details with us. Kindly sign up with us"
       },
@@ -2115,8 +2115,8 @@
         "data"
       ]
     },
-    "Data10": {
-      "title": "Data10",
+    "Center": {
+      "title": "center",
       "example": {
         "id": 1,
         "name": "St Kizitos Place",
@@ -2279,8 +2279,8 @@
         "data"
       ]
     },
-    "Centers": {
-      "title": "centers",
+    "Create Centers": {
+      "title": "create centers",
       "example": {
         "message": "New center has been created succefully",
         "data": {
@@ -2313,7 +2313,7 @@
         "data"
       ]
     },
-    "GetCenterById": {
+    "Get Centers by Id": {
       "title": "get center by Id",
       "example": {
         "message": "Center found",
@@ -2347,8 +2347,8 @@
         "data"
       ]
     },
-    "Centers/event/:id": {
-      "title": "centers/event/:id",
+    "Get Booked Events": {
+      "title": "booked events",
       "example": {
         "message": "Successfully found a center",
         "error": false,
@@ -2401,8 +2401,8 @@
         "data"
       ]
     },
-    "Data18": {
-      "title": "Data18",
+    "Get All Booked Events": {
+      "title": "get all booked events",
       "example": {
         "id": 1,
         "name": "St Kizitos Place",
@@ -2601,8 +2601,8 @@
         "userId"
       ]
     },
-    "Centers/:id": {
-      "title": "centers/:id",
+    "Deletes Center by ID": {
+      "title": "deletes center by Id",
       "example": {
         "message": "Center is successfully deleted"
       },
@@ -2618,8 +2618,8 @@
         "message"
       ]
     },
-    "Centers/:id21": {
-      "title": "centers/:id21",
+    "Updates Centers By Id": {
+      "title": "updates centers by Id",
       "example": {
         "message": "Center with ID 1 is sucessfully updated",
         "data": [
@@ -2694,7 +2694,7 @@
         "data"
       ]
     },
-    "Data23": {
+    "Creates a new Event": {
       "title": "Data23",
       "example": {
         "id": 1,
@@ -2770,7 +2770,7 @@
         "userId"
       ]
     },
-    "CreatesEvents": {
+    "Creates Events": {
       "title": "creates events",
       "example": {
         "message": "Event is scheduled successfuly. Thanks",
@@ -2851,8 +2851,8 @@
         "centerId"
       ]
     },
-    "Events/:id": {
-      "title": "events/:id",
+    "Gets Event By Id": {
+      "title": "get event by id",
       "example": {
         "data": [
           {
@@ -2903,7 +2903,7 @@
         "code"
       ]
     },
-    "Events/:id28": {
+    "Update an Event": {
       "title": "events/:id28",
       "example": {
         "message": "Event with ID 1 successfully updated"

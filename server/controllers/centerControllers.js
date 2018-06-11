@@ -1,8 +1,7 @@
+
 import models from '../models';
 
 require('dotenv').config();
-
-
 const cloudinary = require('cloudinary');
 
 cloudinary.config({
@@ -25,15 +24,16 @@ const createCenters = (req, res) => {
   req.checkBody('location', 'location is required').notEmpty();
   req.checkBody('facilities', 'facilities is required').notEmpty();
   req.checkBody('type', 'center type is required').notEmpty();
+  req.checkBody('price', 'price type is required').notEmpty();
   req.sanitize('name').trim();
   req.sanitize('facilities').trim();
 
   let errors = [];
-  const imagePath = req.file ? req.file.path : 'sample.jpg';
+  const imagePath = req.file ? req.file.path : 'server/sample.jpg';
   cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
     const imageUrl = image.secure_url;
-    if (image.secure_url) {
+    if (imageUrl) {
       const center = {
         name: req.body.name,
         capacity: req.body.capacity,
@@ -47,11 +47,21 @@ const createCenters = (req, res) => {
       req.getValidationResult().then((result) => {
         if (!result.isEmpty()) {
           errors = result.array().map(e => e.msg);
-          res.status(400).json({
+          return res.status(400).json({
             message: errors
           });
-        } else {
-          models.Center.create(center).then((c) => {
+        }
+        return models.Center.findOne({
+          where: {
+            name: req.body.name
+          }
+        }).then((data) => {
+          if (data) {
+            return res.status(409).json({
+              message: 'Center name already exist'
+            });
+          }
+          return models.Center.create(center).then((c) => {
             if (c) {
               return res.status(201).json({
                 message: 'New center has been created succefully',
@@ -62,7 +72,7 @@ const createCenters = (req, res) => {
               message: 'An internal server error'
             });
           });
-        }
+        });
       });
     }
   });
@@ -134,14 +144,22 @@ const deleteCenter = (req, res) => {
         message: errors,
       });
     } else {
-      models.Center.destroy({
+      return models.Center.destroy({
         where: {
           id: parseInt(req.params.id, 10)
         }
       }).then((center) => {
-        if (center) {
-          return res.status(204).json({
-            message: 'Center is successfully deleted'
+        if (center >= 1) {
+          return models.Event.destroy({
+            where: {
+              centerId: parseInt(req.params.id, 10)
+            }
+          }).then((event) => {
+            if (event >= 0) {
+              return res.status(200).json({
+                message: 'Center is successfully deleted'
+              });
+            }
           });
         }
         return res.status(404).json({
@@ -164,13 +182,13 @@ const updateCenter = (req, res) => {
   if (req.params.id === undefined) {
     return res.json({ message: 'Please provide a center Id' });
   }
-  const imagePath = req.file ? req.file.path : 'sample.jpg';
+  const imagePath = req.file ? req.file.path : 'server/sample.jpg';
   cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
-    const imageUrl = image.secure_url;
-    if (image.secure_url) {
+    const imageUrl = image.secure_url || req.body.imageUrl;
+    if (imageUrl) {
       const center = {
-        id: req.params.id,
+        id: parseInt(req.params.id, 10),
         name: req.body.name,
         capacity: req.body.capacity,
         location: req.body.location,
@@ -180,16 +198,17 @@ const updateCenter = (req, res) => {
         imageName,
         imageUrl
       };
-      models.Center.update(center, { where: { id: center.id } }).then((c) => {
-        if (c) {
-          return res.status(200).json({
+      return models.Center.update(center, { where: { id: center.id } }).then((c) => {
+        if (c[0] === 1) {
+          console.log(JSON.stringify(c));
+          return res.status(201).json({
             message: `Center with ID ${req.params.id} is sucessfully updated`,
             data: c
           });
         }
         return res
           .status(404)
-          .json({ message: `Center with Id: ${req.params.id} is not found`, code: 200 });
+          .json({ message: `Center with Id: ${req.params.id} is not found` });
       });
     }
   });
@@ -213,7 +232,7 @@ const getCenterById = (req, res) => {
         message: errors
       });
     }
-    models.Center.findById(req.params.id).then((center) => {
+    return models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
       if (center) {
         return res.status(200).json({
           message: 'Center found',
@@ -235,29 +254,26 @@ const getCenterById = (req, res) => {
  *
  * @return {object} (message, error, center)
  */
-const getCentersEvents = (req, res) => {
-  models.Center.findById(req.params.id, {
-    include: [
-      {
-        model: models.Event,
-        as: 'events'
-      }
-    ]
-  }).then((centersEvents) => {
-    if (centersEvents) {
-      return res.status(200).json({
-        message: 'Successfully found a center',
-        error: false,
-        data: centersEvents
-      });
+const getCentersEvents = (req, res) => models.Center.findById(req.params.id, {
+  include: [
+    {
+      model: models.Event
     }
-    return res.status(404).json({
-      message: 'No center found',
-      error: true,
-      data: null
+  ]
+}).then((centersEvents) => {
+  if (centersEvents) {
+    return res.status(200).json({
+      message: 'Successfully found a center',
+      error: false,
+      data: centersEvents
     });
+  }
+  return res.status(404).json({
+    message: 'No center found',
+    error: true,
+    data: null
   });
-};
+});
 
 const centersControllers = {
   createCenters,
