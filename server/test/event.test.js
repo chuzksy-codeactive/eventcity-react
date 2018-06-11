@@ -245,13 +245,5 @@ describe('Test for Events', () => {
           done();
         });
     });
-    after(() => {
-      models.User.destroy({
-        where: {}
-      });
-      models.Center.destroy({
-        where: {}
-      });
-    });
   });
 });
