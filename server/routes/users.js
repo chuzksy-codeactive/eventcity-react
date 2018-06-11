@@ -10,6 +10,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', userControllers.getAllUsers);
+router.get('/:page', userControllers.getUsersPerPage);
 router.post('/', upload.single('image'), userControllers.createUser);
 router.post('/login', userControllers.userLogin);
 

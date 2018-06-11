@@ -101,6 +101,41 @@ const getAllEvents = (req, res) => {
 };
 
 /**
+ * Controller to get all event
+ *
+ * @param {object} req - The request object
+ * @param {object} res - The response object
+ *
+ * @returns {object} (data)
+ */
+
+const getEventPerPage = (req, res) => {
+  const limit = 5;
+  let offset = 0;
+  models.Event.findAndCountAll().then((data) => {
+    let { page } = req.params;
+    const isNum = isNaN(req.params.page); //eslint-disable-line
+    page = parseInt(page, 10);
+    const pages = Math.ceil(data.count / limit);
+    if (page <= 0 || !Number.isInteger(page) || isNum) {
+      return res.status(400).json({
+        message: 'Invalid page number, should start with 1'
+      });
+    }
+    offset = limit * (page - 1);
+    models.Event.findAll({
+      limit, offset, order: [['id', 'ASC']]
+    }).then((events) => {
+      res.status(200).json({
+        data: events,
+        count: data.count,
+        pages
+      });
+    }).catch(err => res.status(500).send('Internal server error'));
+  });
+};
+
+/**
  * Controller to update event by Id
  *
  * @param {object} req - The request object
@@ -194,7 +229,8 @@ const eventControllers = {
   getAllEvents,
   getEventsById,
   updateEventById,
-  deleteEventById
+  deleteEventById,
+  getEventPerPage
 };
 
 export default eventControllers;

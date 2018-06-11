@@ -53,6 +53,41 @@ const getAllUsers = (req, res) => {
 };
 
 /**
+ * getUsersPerPage - get users using pagination
+ *
+ * @param {object} req
+ * @param {object} res
+ *
+ * @return {object} users
+ */
+
+const getUsersPerPage = (req, res) => {
+  const limit = 5;
+  let offset = 0;
+  models.User.findAndCountAll().then((data) => {
+    let { page } = req.params;
+    const isNum = isNaN(req.params.page); //eslint-disable-line 
+    page = parseInt(page, 10);
+    const pages = Math.ceil(data.count / limit);
+    if (page <= 0 || !Number.isInteger(page) || isNum) {
+      return res.status(400).json({
+        message: 'Invalid page number, should start with 1'
+      });
+    }
+    offset = limit * (page - 1);
+    models.User.findAll({
+      limit, offset, order: [['id', 'ASC']]
+    }).then((users) => {
+      res.status(200).json({
+        data: users,
+        count: data.count,
+        pages
+      });
+    });
+  }).catch(err => res.stauts(500).send('Internal server error'));
+};
+
+/**
    * createUser - create a user in the app
    *
    * @param {object} req
@@ -204,7 +239,8 @@ const userLogin = (req, res) => {
 const userControllers = {
   getAllUsers,
   createUser,
-  userLogin
+  userLogin,
+  getUsersPerPage
 };
 
 module.exports = userControllers;
