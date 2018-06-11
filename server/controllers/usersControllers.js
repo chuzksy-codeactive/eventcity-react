@@ -3,6 +3,7 @@
  * handles every user related task and authentication
  */
 
+import { isArray } from 'util';
 import models from '../models';
 
 require('dotenv').config();
@@ -31,10 +32,14 @@ const tokenFromUser = (user) => {
  * @return {object} user
  */
 const getAllUsers = (req, res) => {
-  models.User.findAll().then((users) => {
-    if (!users) {
+  models.User.findAll({
+    order: [[
+      'id', 'DESC'
+    ]]
+  }).then((users) => {
+    if (users.length === 0) {
       return res
-        .status(204)
+        .status(404)
         .json({
           message: 'No user found in the database',
         });

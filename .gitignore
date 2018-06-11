@@ -8,6 +8,4 @@ server/config.js
 .DS_Store
 server/uploads
 .env
-uploads
-server/test/model
- 
+ /uploads

@@ -1,7 +1,11 @@
+import swagger from 'swagger-ui-express';
+import cors from 'cors';
 import users from './routes/users';
 import centers from './routes/centers';
 import index from './routes/index';
 import events from './routes/events';
+import swaggerDocument from './swagger.json';
+
 
 require('dotenv').config();
 
@@ -17,7 +21,7 @@ const jwt = require('jsonwebtoken');
 const expressValidator = require('express-validator');
 
 const app = express();
-
+app.use(cors());
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(passport.initialize());
@@ -28,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerDocument));
 app.use('/api/v1/users', users);
 app.use('/api/v1/centers', centers);
 app.use('/api/v1/events', events);
