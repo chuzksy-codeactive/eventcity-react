@@ -32,6 +32,8 @@ describe('Test for Center', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCenterName)
         .end((err, res) => {
+          console.log('======================', err);
+          console.log('======================', res.body);
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message').to.be.an('array');
           done();
