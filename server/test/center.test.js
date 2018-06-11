@@ -16,6 +16,17 @@ let userId;
 
 describe('Test for Center', () => {
   describe('====== Create centers test ======', () => {
+    before(() => {
+      models.User.destroy({
+        where: {}
+      });
+      models.Center.destroy({
+        where: {}
+      });
+      models.Event.destroy({
+        where: {}
+      });
+    });
     before((done) => {
       chai.request(server)
         .post('/api/v1/users')
@@ -32,6 +43,8 @@ describe('Test for Center', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCenterName)
         .end((err, res) => {
+          console.log('====================== Error goes here', err);
+          console.log('======================', res.body);
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message').to.be.an('array');
           done();
