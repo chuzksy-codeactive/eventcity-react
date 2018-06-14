@@ -1,4 +1,3 @@
-
 import models from '../models';
 
 require('dotenv').config();
@@ -30,51 +29,44 @@ const createCenters = (req, res) => {
 
   let errors = [];
   const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  cloudinary.uploader.upload(imagePath, (image) => {
-    const imageName = image.original_filename;
-    const imageUrl = image.secure_url;
-    if (imageUrl) {
-      const center = {
-        name: req.body.name,
-        capacity: req.body.capacity,
-        location: req.body.location,
-        facilities: req.body.facilities,
-        type: req.body.type,
-        price: req.body.price,
-        imageName,
-        imageUrl
-      };
-      req.getValidationResult().then((result) => {
-        if (!result.isEmpty()) {
-          errors = result.array().map(e => e.msg);
-          return res.status(400).json({
-            message: errors
-          });
-        }
-        return models.Center.findOne({
-          where: {
-            name: req.body.name
-          }
-        }).then((data) => {
-          if (data) {
-            return res.status(409).json({
-              message: 'Center name already exist'
-            });
-          }
-          return models.Center.create(center).then((c) => {
-            if (c) {
-              return res.status(201).json({
-                message: 'New center has been created succefully',
-                data: c,
-              });
-            }
-            return res.status(500).json({
-              message: 'An internal server error'
-            });
-          });
-        });
+  let imageName;
+  let imageUrl;
+  const center = {
+    name: req.body.name,
+    capacity: req.body.capacity,
+    location: req.body.location,
+    facilities: req.body.facilities,
+    type: req.body.type,
+    price: req.body.price,
+    imageName: req.body.imageName,
+    imageUrl: req.body.imageurl
+  };
+  req.getValidationResult().then((result) => {
+    if (!result.isEmpty()) {
+      errors = result.array().map(e => e.msg);
+      return res.status(400).json({
+        message: errors
       });
     }
+    return models.Center.findOne({
+      where: {
+        name: req.body.name
+      }
+    }).then((data) => {
+      if (data) {
+        return res.status(409).json({
+          message: 'Center name already exist'
+        });
+      }
+      return models.Center.create(center).then((c) => {
+        if (c) {
+          return res.status(201).json({
+            message: 'New center has been created succefully',
+            data: c,
+          });
+        }
+      });
+    });
   });
 };
 
@@ -112,7 +104,9 @@ const getCenterPerPage = (req, res) => {
   const limit = 5;
   let offset = 0;
   models.Center.findAndCountAll().then((data) => {
-    let { page } = req.params;
+    let {
+      page
+    } = req.params;
     const isNum = isNaN(req.params.page); //eslint-disable-line
     page = parseInt(page, 10);
     const pages = Math.ceil(data.count / limit);
@@ -123,7 +117,11 @@ const getCenterPerPage = (req, res) => {
     }
     offset = limit * (page - 1);
     models.Center.findAll({
-      limit, offset, order: [['id', 'ASC']]
+      limit,
+      offset,
+      order: [
+        ['id', 'ASC']
+      ]
     }).then((centers) => {
       res.status(200).json({
         data: centers,
@@ -180,37 +178,40 @@ const deleteCenter = (req, res) => {
  */
 const updateCenter = (req, res) => {
   if (req.params.id === undefined) {
-    return res.json({ message: 'Please provide a center Id' });
+    return res.json({
+      message: 'Please provide a center Id'
+    });
   }
   const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  cloudinary.uploader.upload(imagePath, (image) => {
-    const imageName = image.original_filename;
-    const imageUrl = image.secure_url || req.body.imageUrl;
-    if (imageUrl) {
-      const center = {
-        id: parseInt(req.params.id, 10),
-        name: req.body.name,
-        capacity: req.body.capacity,
-        location: req.body.location,
-        facilities: req.body.facilities,
-        type: req.body.type,
-        price: req.body.price,
-        imageName,
-        imageUrl
-      };
-      return models.Center.update(center, { where: { id: center.id } }).then((c) => {
-        if (c[0] === 1) {
-          console.log(JSON.stringify(c));
-          return res.status(201).json({
-            message: `Center with ID ${req.params.id} is sucessfully updated`,
-            data: c
-          });
-        }
-        return res
-          .status(404)
-          .json({ message: `Center with Id: ${req.params.id} is not found` });
+  const center = {
+    id: parseInt(req.params.id, 10),
+    name: req.body.name,
+    capacity: req.body.capacity,
+    location: req.body.location,
+    facilities: req.body.facilities,
+    type: req.body.type,
+    price: req.body.price,
+    imageName: req.body.imageName,
+    imageUrl: req.body.imageUrl
+  };
+
+  return models.Center.update(center, {
+    where: {
+      id: center.id
+    }
+  }).then((c) => {
+    if (c[0] === 1) {
+      console.log(JSON.stringify(c));
+      return res.status(201).json({
+        message: `Center with ID ${req.params.id} is sucessfully updated`,
+        data: c
       });
     }
+    return res
+      .status(404)
+      .json({
+        message: `Center with Id: ${req.params.id} is not found`
+      });
   });
 };
 
@@ -255,11 +256,9 @@ const getCenterById = (req, res) => {
  * @return {object} (message, error, center)
  */
 const getCentersEvents = (req, res) => models.Center.findById(req.params.id, {
-  include: [
-    {
-      model: models.Event
-    }
-  ]
+  include: [{
+    model: models.Event
+  }]
 }).then((centersEvents) => {
   if (centersEvents) {
     return res.status(200).json({

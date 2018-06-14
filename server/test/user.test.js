@@ -107,8 +107,8 @@ describe('Test for Users', () => {
       chai.request(server)
         .post('/api/v1/users/login')
         .send({
-          username: 'chuzksy',
-          password: 'password'
+          username: userSeeds.user.username,
+          password: userSeeds.user.password
         })
         .end((err, res) => {
           expect(res.status).to.equal(202);
@@ -143,11 +143,6 @@ describe('Test for Users', () => {
           expect(res.body).to.haveOwnProperty('message').to.equal('You have no login details with us. Kindly sign up with us');
           done();
         });
-    });
-  });
-  after(() => {
-    models.User.destroy({
-      where: {}
     });
   });
 });

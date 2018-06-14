@@ -8,6 +8,16 @@ const center = {
   imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
 };
 
+const center2 = {
+  name: 'Grailland Halls',
+  capacity: '20000',
+  location: 'Ikeja',
+  facilities: 'Chairs, Air Conditions, Canopies',
+  type: 'Hall',
+  price: '300000',
+  imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
+};
+
 const noCenterName = {
   name: '',
   capacity: '20000',
@@ -80,6 +90,7 @@ const centerWithSameName = {
 
 const centerSeeds = {
   center,
+  center2,
   noCenterName,
   noCapacity,
   noLocation,
