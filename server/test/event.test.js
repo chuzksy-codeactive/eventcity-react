@@ -9,32 +9,51 @@ const models = require('../models');
 process.env.NODE_ENV = 'test';
 const server = require('../app');
 
-const { expect } = chai;
+const {
+  expect
+} = chai;
 chai.use(chaiHttp);
 
 let userToken;
 let userId;
 let centerId;
+let eventId;
+let createdEvent;
 
 describe('Test for Events', () => {
   describe('====== Create events test ======', () => {
-    before((done) => {
+    it('should return 202 when the user logs in', (done) => {
       chai.request(server)
-        .post('/api/v1/users')
-        .send(userSeeds.user)
+        .post('/api/v1/users/login')
+        .send({
+          username: 'chuzksy',
+          password: 'password'
+        })
         .end((err, res) => {
           userId = res.body.data.id;
           userToken = res.body.token;
+          expect(res.status).to.equal(202);
+          expect(res.body).to.haveOwnProperty('token').not.to.be.a('null');
+          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
+          expect(res.body).to.haveOwnProperty('message').to.equal('Logged in successfully');
           done();
         });
     });
-    before((done) => {
+    it('should get center by Id', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .get('/api/v1/centers/1')
         .set('Authorization', `Bearer ${userToken}`)
-        .send(centerSeeds.center)
         .end((err, res) => {
           centerId = res.body.data.id;
+          done();
+        });
+    });
+    it('should get event by Id', (done) => {
+      chai.request(server)
+        .get('/api/v1/events/1')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          eventId = res.body.data.id;
           done();
         });
     });
@@ -104,26 +123,31 @@ describe('Test for Events', () => {
           done();
         });
     });
+    it('should return 409 for an already booked event', (done) => {
+      chai.request(server)
+        .post('/api/v1/events')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({
+          ...eventSeeds.eventWithSameDate,
+          userId,
+          centerId
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
     it('should return 201 if event is created', (done) => {
       chai.request(server)
         .post('/api/v1/events')
         .set('Authorization', `Bearer ${userToken}`)
         .send(eventSeeds.event)
         .end((err, res) => {
+          createdEvent = res.body.data.id;
           expect(res.status).to.equal(201);
           expect(res.body).to.haveOwnProperty('message');
           expect(res.body).to.haveOwnProperty('data').to.be.an('object');
-          done();
-        });
-    });
-    it('should return 409 for an already booked event', (done) => {
-      chai.request(server)
-        .post('/api/v1/events')
-        .set('Authorization', `Bearer ${userToken}`)
-        .send(eventSeeds.eventWithSameDate)
-        .end((err, res) => {
-          expect(res.status).to.equal(409);
-          expect(res.body).to.haveOwnProperty('message');
           done();
         });
     });
@@ -131,7 +155,7 @@ describe('Test for Events', () => {
   describe('====== Get events test ======', () => {
     it('should get all booked event and return 200', (done) => {
       chai.request(server)
-        .get('/api/v1/events/')
+        .get('/api/v1/events')
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -139,7 +163,7 @@ describe('Test for Events', () => {
           done();
         });
     });
-    it('should return 404 for event for found', (done) => {
+    it('should return 404 for event not found', (done) => {
       chai.request(server)
         .get('/api/v1/events/22')
         .set('Authorization', `Bearer ${userToken}`)
@@ -183,7 +207,7 @@ describe('Test for Events', () => {
   describe('====== Update event test ======', () => {
     it('should return 404 for unavailable events', (done) => {
       chai.request(server)
-        .put('/api/v1/events/12')
+        .put('/api/v1/events/120')
         .set('Authorization', `Bearer ${userToken}`)
         .send(eventSeeds.event)
         .end((err, res) => {
@@ -194,7 +218,7 @@ describe('Test for Events', () => {
     });
     it('should return 400 for booked event with same dates', (done) => {
       chai.request(server)
-        .put('/api/v1/events/1')
+        .put(`/api/v1/events/${createdEvent}`)
         .set('Authorization', `Bearer ${userToken}`)
         .send(eventSeeds.event)
         .end((err, res) => {
@@ -203,11 +227,15 @@ describe('Test for Events', () => {
           done();
         });
     });
-    it('should return 200 for booked event with same dates', (done) => {
+    it('should return 200 for booked event with different dates', (done) => {
       chai.request(server)
-        .put('/api/v1/events/1')
+        .put(`/api/v1/events/${eventId}`)
         .set('Authorization', `Bearer ${userToken}`)
-        .send(eventSeeds.eventToUpdate)
+        .send({
+          ...eventSeeds.eventToUpdate,
+          userId,
+          centerId
+        })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.haveOwnProperty('message');
@@ -216,7 +244,7 @@ describe('Test for Events', () => {
     });
     it('should return 401 when token is not passed', (done) => {
       chai.request(server)
-        .put('/api/v1/events/1')
+        .put(`/api/v1/events/${eventId}`)
         .send(eventSeeds.event)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -227,7 +255,7 @@ describe('Test for Events', () => {
   describe('====== Delete event test ======', () => {
     it('should return 200 on event delete', (done) => {
       chai.request(server)
-        .delete('/api/v1/events/1')
+        .delete(`/api/v1/events/${eventId}`)
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -244,14 +272,6 @@ describe('Test for Events', () => {
           expect(res.body).to.haveOwnProperty('message');
           done();
         });
-    });
-    after(() => {
-      models.User.destroy({
-        where: {}
-      });
-      models.Center.destroy({
-        where: {}
-      });
     });
   });
 });
