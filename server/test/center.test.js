@@ -16,6 +16,7 @@ chai.use(chaiHttp);
 let userId;
 let userToken;
 let centerId;
+let createdCenter;
 
 describe('Test for Center', () => {
   describe('====== Create centers test ======', () => {
@@ -38,7 +39,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center name is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCenterName)
         .end((err, res) => {
@@ -49,7 +50,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center capacity is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCapacity)
         .end((err, res) => {
@@ -60,7 +61,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center location is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noLocation)
         .end((err, res) => {
@@ -71,7 +72,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center facilities is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noLocation)
         .end((err, res) => {
@@ -82,7 +83,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center type is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCenterType)
         .end((err, res) => {
@@ -93,7 +94,7 @@ describe('Test for Center', () => {
     });
     it('should return 400 if center price is not supplied', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noPrice)
         .end((err, res) => {
@@ -104,12 +105,27 @@ describe('Test for Center', () => {
     });
     it('should return 409 if a center already exist', (done) => {
       chai.request(server)
-        .post('/api/v1/centers')
+        .post('/api/v1/centers/test')
         .set('Authorization', `Bearer ${userToken}`)
-        .send(centerSeeds.center)
+        .send({
+          ...centerSeeds.center,
+          name: 'Grailland Hall'
+        })
         .end((err, res) => {
           expect(res.status).to.equal(409);
           expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+    it('should return 201 if a center is created', (done) => {
+      chai.request(server)
+        .post('/api/v1/centers/test')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(centerSeeds.center)
+        .end((err, res) => {
+          createdCenter = res.body.data.id;
+          expect(res.status).to.equal(201);
+          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
           done();
         });
     });
@@ -143,6 +159,16 @@ describe('Test for Center', () => {
           done();
         });
     });
+    it('should return 200 when there is no record', (done) => {
+      chai.request(server)
+        .get('/api/v1/centers')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('data').to.be.an('array');
+          done();
+        });
+    });
     it('should return 200 when an integer parameter is passed for pagination', (done) => {
       chai.request(server)
         .get('/api/v1/centers/page/1')
@@ -157,7 +183,7 @@ describe('Test for Center', () => {
     });
     it('should return 404 when updating a center that does not exist', (done) => {
       chai.request(server)
-        .put('/api/v1/centers/120')
+        .put('/api/v1/centers/test/120')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.center)
         .end((err, res) => {
@@ -167,7 +193,7 @@ describe('Test for Center', () => {
     });
     it('should return 201 when updating a center that exist', (done) => {
       chai.request(server)
-        .put('/api/v1/centers/1')
+        .put('/api/v1/centers/test/1')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.center)
         .end((err, res) => {
@@ -178,7 +204,39 @@ describe('Test for Center', () => {
     });
     it('should return 401 if token is not provided', (done) => {
       chai.request(server)
-        .put('/api/v1/centers/2')
+        .put('/api/v1/centers/test/2')
+        .send(centerSeeds.center)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+    });
+  });
+  describe('====== Delete centers test ======', () => {
+    it('should return 404 for deleting centers that does not exist', (done) => {
+      chai.request(server)
+        .delete('/api/v1/centers/400')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(centerSeeds.center)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+    it('should return 200 when a center is deleted', (done) => {
+      chai.request(server)
+        .delete(`/api/v1/centers/${createdCenter}`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(centerSeeds.center)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+    it('should return 401 when a user token is not provided', (done) => {
+      chai.request(server)
+        .delete(`/api/v1/centers/${createdCenter}`)
         .send(centerSeeds.center)
         .end((err, res) => {
           expect(res.status).to.equal(401);

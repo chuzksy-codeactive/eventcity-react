@@ -1,5 +1,5 @@
 const center = {
-  name: 'Grailland Hall',
+  name: 'Mumucious Events',
   capacity: '20000',
   location: 'Ikeja',
   facilities: 'Chairs, Air Conditions, Canopies',

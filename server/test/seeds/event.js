@@ -1,8 +1,8 @@
 const event = {
-  name: 'Andela Meetup',
+  name: 'Okorobi Monthly Meeting',
   purpose: 'Teaching teens how to code',
   note: 'This is to introduce code to teens',
-  eventDate: new Date('July 21, 2018 01:15:00'),
+  eventDate: new Date('July 30, 2018 01:15:00'),
   userId: 1,
   centerId: 1,
 };

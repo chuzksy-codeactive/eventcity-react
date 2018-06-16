@@ -18,6 +18,7 @@ let userToken;
 let userId;
 let centerId;
 let eventId;
+let createdEvent;
 
 describe('Test for Events', () => {
   describe('====== Create events test ======', () => {
@@ -137,6 +138,19 @@ describe('Test for Events', () => {
           done();
         });
     });
+    it('should return 201 if event is created', (done) => {
+      chai.request(server)
+        .post('/api/v1/events')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(eventSeeds.event)
+        .end((err, res) => {
+          createdEvent = res.body.data.id;
+          expect(res.status).to.equal(201);
+          expect(res.body).to.haveOwnProperty('message');
+          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
+          done();
+        });
+    });
   });
   describe('====== Get events test ======', () => {
     it('should get all booked event and return 200', (done) => {
@@ -202,6 +216,17 @@ describe('Test for Events', () => {
           done();
         });
     });
+    it('should return 400 for booked event with same dates', (done) => {
+      chai.request(server)
+        .put(`/api/v1/events/${createdEvent}`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(eventSeeds.event)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
     it('should return 200 for booked event with different dates', (done) => {
       chai.request(server)
         .put(`/api/v1/events/${eventId}`)
@@ -223,6 +248,28 @@ describe('Test for Events', () => {
         .send(eventSeeds.event)
         .end((err, res) => {
           expect(res.status).to.equal(401);
+          done();
+        });
+    });
+  });
+  describe('====== Delete event test ======', () => {
+    it('should return 200 on event delete', (done) => {
+      chai.request(server)
+        .delete(`/api/v1/events/${eventId}`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+    it('should return 400 on eventId is not provided', (done) => {
+      chai.request(server)
+        .delete('/api/v1/events/oop')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body).to.haveOwnProperty('message');
           done();
         });
     });
