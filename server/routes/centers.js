@@ -15,11 +15,9 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 
 router.post('/', requireAuth, upload.single('file'), centerControllers.createCenters);
 router.get('/', requireAuth, centerControllers.getAllCenters);
-router.get('/page/:page', centerControllers.getCenterPerPage);
+router.get('/:page', centerControllers.getCenterPerPage);
 router.get('/:id', centerControllers.getCenterById);
 router.delete('/:id', requireAuth, centerControllers.deleteCenter);
 router.put('/:id', requireAuth, upload.single('file'), centerControllers.updateCenter);
 router.get('/event/:id', centerControllers.getCentersEvents);
-router.post('/test', requireAuth, upload.single('file'), centerControllers.centerCreate);
-router.put('/test/:id', requireAuth, upload.single('file'), centerControllers.centerUpdate);
 export default router;

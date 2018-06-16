@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Center.associate = (models) => {
     Center.hasMany(models.Event, {
       foreignKey: 'centerId',
+      as: 'events'
     });
   };
 

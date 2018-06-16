@@ -25,7 +25,7 @@ module.exports = {
         refereces: {
           key: 'id',
           model: 'Users',
-          as: 'userId'
+          as: 'userId',
         },
       },
       centerId: {
@@ -34,7 +34,7 @@ module.exports = {
         refereces: {
           key: 'id',
           model: 'Centers',
-          as: 'centerId'
+          as: 'centerId',
         },
       },
 

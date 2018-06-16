@@ -1,7 +1,7 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/test_coverage)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/test_coverage) [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=develop)](https://travis-ci.org/chuzksy-codeactive/eventcity-react)
-[![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/eventcity-react/badge.svg?branch=develop)](https://coveralls.io/github/chuzksy-codeactive/eventcity-react?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/andela-eventcity/badge.svg?branch=jsdoc)](https://coveralls.io/github/chuzksy-codeactive/andela-eventcity?branch=jsdoc) [![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/test_coverage)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/test_coverage) [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=jsdoc)](https://travis-ci.org/chuzksy-codeactive/eventcity-react)
 
 You can view the hosted website on https://chuzksy-codeactive.github.io/andela-eventcity/template/index.html#
+
 
 # Entity Relationship Diagram for this project
 ![](https://github.com/chuzksy-codeactive/andela-eventcity/blob/master/erm.PNG)

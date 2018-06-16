@@ -4,8 +4,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local');
 const Sequelize = require('sequelize');
-
-const config = process.env.Key;
+const config = process.env.Key
 const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 

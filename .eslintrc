@@ -7,7 +7,6 @@
       "mocha": true
       },
     "rules": {
-      "linebreak-style": "off",
       "one-var": 0,
       "no-unused-vars": ["off"],
       "no-multi-assign": ["off"],

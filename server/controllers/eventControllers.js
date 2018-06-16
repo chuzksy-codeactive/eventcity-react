@@ -33,7 +33,7 @@ const createEvent = (req, res) => {
         message: errors
       });
     } else {
-      return models.Event.findOne({
+      models.Event.findOne({
         where: {
           centerId: parseInt(req.body.centerId, 10),
           eventDate: req.body.eventDate
@@ -44,11 +44,11 @@ const createEvent = (req, res) => {
             message: 'An event has been booked for this date.'
           });
         }
-        return models.Event.create(event).then((newEvent) => {
+        models.Event.create(event).then((newEvent) => {
           if (newEvent) {
             return res.status(201).json({
               message: 'Event is scheduled successfuly. Thanks',
-              data: newEvent
+              data: event
             });
           }
         });
@@ -65,17 +65,19 @@ const createEvent = (req, res) => {
  *
  * @returns {object} (message)
  */
-const getEventsById = (req, res) => models.Event.findById(parseInt(req.params.id, 10)).then((event) => {
-  if (event) {
+const getEventsById = (req, res) => {
+  models.Event.findAll({ where: { userId: req.params.id } }).then((event) => {
+    if (event.length > 0) {
+      return res.status(200).json({
+        data: event,
+        code: 200
+      });
+    }
     return res.status(200).json({
-      data: event,
-      code: 200
+      message: 'You are yet to book an event'
     });
-  }
-  return res.status(404).json({
-    message: 'You are yet to book an event'
   });
-});
+};
 
 /**
  * Controller to get all event
@@ -85,16 +87,18 @@ const getEventsById = (req, res) => models.Event.findById(parseInt(req.params.id
  *
  * @returns {object} (data)
  */
-const getAllEvents = (req, res) => models.Event.findAll().then((event) => {
-  if (event) {
+const getAllEvents = (req, res) => {
+  models.Event.findAll().then((event) => {
+    if (event) {
+      return res.status(200).json({
+        data: event
+      });
+    }
     return res.status(200).json({
-      data: event
+      message: 'No event is scheduled yet'
     });
-  }
-  return res.status(200).json({
-    message: 'No event is scheduled yet'
   });
-});
+};
 
 /**
  * Controller to get all event
@@ -108,7 +112,7 @@ const getAllEvents = (req, res) => models.Event.findAll().then((event) => {
 const getEventPerPage = (req, res) => {
   const limit = 5;
   let offset = 0;
-  return models.Event.findAndCountAll().then((data) => {
+  models.Event.findAndCountAll().then((data) => {
     let { page } = req.params;
     const isNum = isNaN(req.params.page); //eslint-disable-line
     page = parseInt(page, 10);
@@ -119,13 +123,15 @@ const getEventPerPage = (req, res) => {
       });
     }
     offset = limit * (page - 1);
-    return models.Event.findAll({
+    models.Event.findAll({
       limit, offset, order: [['id', 'ASC']]
-    }).then(events => res.status(200).json({
-      data: events,
-      count: data.count,
-      pages
-    })).catch(err => res.status(500).send('Internal server error'));
+    }).then((events) => {
+      res.status(200).json({
+        data: events,
+        count: data.count,
+        pages
+      });
+    }).catch(err => res.status(500).send('Internal server error'));
   });
 };
 
@@ -163,29 +169,32 @@ const updateEventById = (req, res) => {
         message: errors
       });
     }
-    return models.Event.findById(req.params.id).then((fEvent) => {
+    models.Event.findById(req.params.id).then((fEvent) => {
       if (fEvent) {
-        return models.Event.findOne({
+        models.Event.findOne({
           where: {
             centerId: parseInt(req.body.centerId, 10),
             eventDate: req.body.eventDate
           }
         }).then((e) => {
           if (e) {
-            return res.status(400).json({
+            return res.status(204).json({
               message: 'Event not available for this date, please choose another date'
             });
           }
-          return models.Event.update(event, {
+          models.Event.update(event, {
             where: {
               id: req.params.id
             }
-          }).then(upEvent => res.status(200).json({ message: `Event with ID ${req.params.id} successfully updated` }));
+          }).then((upEvent) => {
+            res.status(200).json({ message: `Event with ID ${req.params.id} successfully updated` });
+          });
+        });
+      } else {
+        return res.status(404).json({
+          message: `Event with ID ${req.params.id} not found`
         });
       }
-      return res.status(404).json({
-        message: `Event with ID ${req.params.id} not found`
-      });
     });
   });
 };
@@ -199,18 +208,20 @@ const updateEventById = (req, res) => {
  * @returns {object} (message)
  */
 const deleteEventById = (req, res) => {
-  if (isNaN(req.params.id)) { // eslint-disable-line
+  const eventId = req.params.id;
+  if (eventId === null) {
     return res.status(400).json({
       message: 'Please supply the event ID'
     });
   }
-  return models.Event.destroy({
+  models.Event.destroy({
     where: {
       id: req.params.id
     }
-  }).then(event => res.status(200).json({
-    message: 'event is successfully deleted'
-  }));
+  }).then(event =>
+    res.status(204).json({
+      message: 'Center is successfully deleted'
+    }));
 };
 
 const eventControllers = {
