@@ -1,8 +1,8 @@
 const user = {
-  username: 'chuzksy',
-  firstname: 'chika',
-  lastname: 'onuchukwu',
-  email: 'chuzksy@yahoo.com',
+  username: 'monkeys',
+  firstname: 'chimpanzee',
+  lastname: 'gorilla',
+  email: 'gorilla@yahoo.com',
   password: 'password',
   confirmPassword: 'password'
 };
@@ -43,6 +43,15 @@ const validUser = {
 };
 
 const validUser2 = {
+  username: 'mummyEbby',
+  firstname: 'ebere',
+  lastname: 'ibiam',
+  email: 'mummy.ebere@yahoo.com',
+  password: 'password',
+  confirmPassword: 'password'
+};
+
+const invalidUser = {
   username: 'iffy',
   firstname: 'onuchukwu',
   lastname: 'ifeanyi',
@@ -109,14 +118,15 @@ const userSeeds = {
   userWithSameEmail,
   userWithShortUsername,
   validUser,
-  validUser2,
+  invalidUser,
   noUsername,
   noFirstname,
   noLastname,
   noEmail,
   noPassword,
   passwordMissMatch,
-  userToUpdate
+  userToUpdate,
+  validUser2
 };
 
 module.exports = userSeeds;

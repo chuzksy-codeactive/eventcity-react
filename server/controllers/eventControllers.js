@@ -48,7 +48,7 @@ const createEvent = (req, res) => {
           if (newEvent) {
             return res.status(201).json({
               message: 'Event is scheduled successfuly. Thanks',
-              data: event
+              data: newEvent
             });
           }
         });
@@ -65,8 +65,8 @@ const createEvent = (req, res) => {
  *
  * @returns {object} (message)
  */
-const getEventsById = (req, res) => models.Event.findAll({ where: { userId: req.params.id } }).then((event) => {
-  if (event.length > 0) {
+const getEventsById = (req, res) => models.Event.findById(parseInt(req.params.id, 10)).then((event) => {
+  if (event) {
     return res.status(200).json({
       data: event,
       code: 200
