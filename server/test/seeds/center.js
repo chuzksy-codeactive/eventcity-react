@@ -8,6 +8,16 @@ const center = {
   imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
 };
 
+const centerToUpdate = {
+  name: 'Mumucious Events',
+  capacity: '25000',
+  location: 'Shomulu',
+  facilities: 'Chairs, Air Conditions, Canopies',
+  type: 'Hall',
+  price: '300000',
+  imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
+};
+
 const center2 = {
   name: 'Grailland Halls',
   capacity: '20000',
@@ -19,7 +29,7 @@ const center2 = {
 };
 
 const noCenterName = {
-  name: '',
+  name: null,
   capacity: '20000',
   location: 'Ikeja',
   facilities: 'Chairs, Air Conditions, Canopies',
@@ -30,7 +40,7 @@ const noCenterName = {
 
 const noCapacity = {
   name: 'Grailland Hall',
-  capacity: '',
+  capacity: null,
   location: 'Ikeja',
   facilities: 'Chairs, Air Conditions, Canopies',
   type: 'Hall',
@@ -41,7 +51,7 @@ const noCapacity = {
 const noLocation = {
   name: 'Grailland Hall',
   capacity: '20000',
-  location: '',
+  location: null,
   facilities: 'Chairs, Air Conditions, Canopies',
   type: 'Hall',
   price: '300000',
@@ -53,7 +63,7 @@ const noCenterType = {
   capacity: '20000',
   location: 'Ikeja',
   facilities: 'Chairs, Air Conditions, Canopies',
-  type: '',
+  type: null,
   price: '300000',
   imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
 };
@@ -64,7 +74,7 @@ const noPrice = {
   location: 'Ikeja',
   facilities: 'Chairs, Air Conditions, Canopies',
   type: 'Hall',
-  price: '',
+  price: null,
   imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
 };
 
@@ -72,7 +82,7 @@ const noFacilities = {
   name: 'Grailland Hall',
   capacity: '20000',
   location: 'Ikeja',
-  facilities: '',
+  facilities: null,
   type: 'Hall',
   price: '300000',
   imageUrl: 'http://www.fedracongressi.com/fedra/how-location-influences-the-success-of-your-event/'
@@ -97,7 +107,8 @@ const centerSeeds = {
   noFacilities,
   noCenterType,
   noPrice,
-  centerWithSameName
+  centerWithSameName,
+  centerToUpdate
 };
 
 module.exports = centerSeeds;

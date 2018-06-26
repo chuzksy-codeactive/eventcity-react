@@ -8,7 +8,7 @@ const event = {
 };
 
 const noName = {
-  name: '',
+  name: null,
   purpose: 'Teaching teens how to code',
   note: 'This is to introduce code to teens',
   eventDate: new Date('July 21, 2018 01:15:00'),
@@ -18,7 +18,7 @@ const noName = {
 
 const noPurpose = {
   name: 'Andela Meetup',
-  purpose: '',
+  purpose: null,
   note: 'This is to introduce code to teens',
   eventDate: new Date('July 21, 2018 01:15:00'),
   userId: 1,
@@ -28,7 +28,7 @@ const noPurpose = {
 const noNote = {
   name: 'Andela Meetup',
   purpose: 'Teaching teens how to code',
-  note: '',
+  note: null,
   eventDate: new Date('July 21, 2018 01:15:00'),
   userId: 1,
   centerId: 1,
@@ -58,7 +58,7 @@ const noEventDate = {
   note: 'This is to introduce code to teens',
   eventDate: null,
   userId: 1,
-  centerId: null,
+  centerId: 1,
 };
 
 const eventWithSameDate = {

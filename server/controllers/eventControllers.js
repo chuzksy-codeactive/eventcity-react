@@ -125,7 +125,7 @@ const getEventPerPage = (req, res) => {
       data: events,
       count: data.count,
       pages
-    })).catch(err => res.status(500).send('Internal server error'));
+    }));
   });
 };
 

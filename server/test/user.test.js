@@ -145,4 +145,35 @@ describe('Test for Users', () => {
         });
     });
   });
+  describe('====== Gets all Users =======', () => {
+    it('should return 202 when the user logs in', (done) => {
+      chai.request(server)
+        .get('/api/v1/users')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('data').not.to.be.a('object');
+          done();
+        });
+    });
+    it('should return 200 when an integer parameter is passed for pagination', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/1')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('data');
+          expect(res.body).to.haveOwnProperty('count');
+          expect(res.body).to.haveOwnProperty('pages');
+          done();
+        });
+    });
+    it('should return 400 when a wrong parameter is passed for pagination', (done) => {
+      chai.request(server)
+        .get('/api/v1/users/0ne')
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+  });
 });
