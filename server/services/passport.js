@@ -2,7 +2,6 @@ import models from '../models';
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
-const LocalStrategy = require('passport-local');
 const Sequelize = require('sequelize');
 
 const config = process.env.Key;
@@ -26,23 +25,3 @@ passport.use(new JwtStrategy(jwtOptions, (payload, done) => {
     .catch(err => done(err, false));
 }));
 
-passport.use(new LocalStrategy((username, password, done) => {
-  models.User.findOne({
-    where: {
-      [Op.or]: [{ username }, { email: username }]
-    }
-  })
-    .then((user) => {
-      if (user) {
-        if (bcrypt.compareSync(user.password, password)) {
-          return done(null, user);
-        }
-        return done(null, false);
-      }
-    })
-    .catch((err) => {
-      if (err) {
-        return done(err);
-      }
-    });
-}));

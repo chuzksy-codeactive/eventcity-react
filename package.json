@@ -9,13 +9,14 @@
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
     "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "babel-register": "^6.26.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "chai-http": "^3.0.0",
+    "chai-passport-strategy": "^1.0.1",
     "cloudinary": "^1.10.0",
     "cookie-parser": "^1.4.3",
     "cool-ascii-faces": "^1.3.4",
