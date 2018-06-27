@@ -2,6 +2,9 @@
 #search-form {
   margin-left: 60px; }
 
+.nav-link {
+  margin: 0 10px; }
+
 video {
   position: absolute;
   top: 50%;
@@ -29,7 +32,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Quicksand', sans-serif; }
 
 .header-section {
   font-size: 180%;
@@ -90,7 +93,7 @@ p {
   line-height: 200%; }
 
 .info {
-  margin-right: 20px; }
+  width: 80%; }
 
 .carousel-item {
   height: 50vh;
@@ -246,7 +249,6 @@ p {
 
 .signin {
   background: #cfcfd1;
-  border-radius: 5px;
   padding: 30px 10px; }
 
 .submitting {
