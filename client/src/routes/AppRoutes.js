@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import CoverPage from '../components/CoverPage';
-import ViewCenter from '../components/ViewCenter';
-import SignInForm from '../containers/SignInFormContainer';
-import Header from '../components/Header';
-import CenterForm from '../containers/CenterFormContainer';
-import EditCenterForm from '../containers/EditCenterFormContainer';
-import requireAuth from '../components/requireAuth';
-import EditCenter from '../components/EditCenter';
-import EventCenterContainer from '../containers/EventCenterContainer';
+import CoverPage from '../components/ui-components/CoverPage';
+import ViewCenter from '../components/center/ViewCenter';
+import SignInForm from '../components/users/SignInFormContainer';
+import Header from '../components/ui-components/Header';
+import CenterForm from '../components/center/CenterFormContainer';
+import EditCenterForm from '../components/center/EditCenterFormContainer';
+import requireAuth from '../components/auth/requireAuth';
+import EditCenter from '../components/center/EditCenter';
+import EventCenterContainer from '../components/event/EventCenterContainer';
 import createHistory from 'history/createBrowserHistory';
 import { centerReset } from '../actions/centerAction';
-import ViewEventsContainer from '../containers/ViewEventsContainer';
-import EditEvent from '../components/EditEvent';
+import ViewEventsContainer from '../components/event/ViewEventsContainer';
+import EditEvent from '../components/event/EditEvent';
 
 const history = createHistory();
 
@@ -29,7 +29,7 @@ class AppRouter extends Component {
 
   render() {
     return (
-      <div className="router">
+      <div className="router app-body">
         <Router>
           <div>
             <Header />

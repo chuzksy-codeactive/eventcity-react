@@ -55,9 +55,9 @@ export const createEvent = data => dispatch => {
     data
   })
     .then(res => {
-      if (res.data.code === 200) {
+      if (res.status === 200) {
         dispatch(createEventFailure(res.data.message));
-      } else if (res.data.code === 201) {
+      } else if (res.status === 201) {
         dispatch(createEventSuccess(res.data.message));
         dispatch(fetchEventCenter(data.centerId));
       }
@@ -88,9 +88,9 @@ export const fetchEvent = () => dispatch => {
     method: 'get'
   })
     .then(res => {
-      if (res.data.code === 200) {
+      if (res.status === 200) {
         dispatch(fetchEventSuccess(res.data.data));
-      } else if (res.data.message) {
+      } else if (res.status = 404) {
         dispatch(fetchEventFailure(res.data.message));
       }
     })
@@ -120,14 +120,16 @@ export const fetchEventById = id => dispatch => {
     method: 'get'
   })
     .then(res => {
-      if (res.data.code === 200) {
+      if (res.status === 200) {
         dispatch(fetchEventByIdSuccess(res.data.data));
-      } else if (res.data.message) {
-        dispatch(fetchEventByIdFailure(res.data.message));
-      }
+      } 
     })
-    .catch(() => {
-      dispatch(fetchEventByIdFailure('Error loading data from server'));
+    .catch((error) => {
+      if (error.response) {
+        if (error.response.status === 404){
+          dispatch(fetchEventByIdFailure("You are yet to book an event"));
+        }
+      }
     });
 };
 
@@ -160,17 +162,51 @@ export const updateEventById = data => dispatch => {
     }
   })
     .then(res => {
-      console.log(res.data);
-      if (res.data.code === 200) {
-        dispatch(updateEventSuccess(res.data.message));
-      } else if (res.data.code === -1) {
-        dispatch(updateEventSuccess(res.data.message));
-      } else if (res.data.code === 404) {
+      if (res.status === 200) {
         dispatch(updateEventSuccess(res.data.message));
       }
     })
-    .then(() => {
-      console.log('server error');
-      dispatch(updateEventFailure('Server error'));
+    .catch((error) => {
+      if(error.response){
+        if(error.response.status === 400){
+          dispatch(updateEventSuccess('Event not available for this date, please choose another date'));
+        } else if (error.response.status === 404){
+          dispatch(updateEventSuccess(`Event with ID ${data.id} not found`));
+        } else {
+          dispatch(updateEventFailure('Server error'));
+        }
+      }
     });
 };
+
+export const deletingEvent = () => ({
+  type: types.DELETING_EVENT_BY_ID
+});
+
+export const deleteEventFailure = payload => ({
+  type: types.DELETE_EVENT_BY_ID_FAILURE,
+  payload
+});
+
+export const deleteEventSuccess = payload => ({
+  type: types.DELETE_EVENT_BY_ID_SUCCESS,
+  payload
+});
+
+export const deleteEventById = id => dispatch => {
+  dispatch(deletingEvent());
+  axios({
+    url: `/api/v1/events/${id}`,
+    method: 'delete',
+  }).then(res => {
+    if (res.status === 200){
+      dispatch(deleteEventSuccess(res.data.message));
+    }
+  }).catch(error => {
+    if (error.response) {
+      if (error.response.status === 400) {
+        dispatch(deleteEventFailure('Please supply the event Id'));
+      }
+    }
+  })
+}
