@@ -43,8 +43,6 @@ describe('Test for Center', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.noCenterName)
         .end((err, res) => {
-          console.log('======================', err);
-          console.log('======================', res.body);
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message').to.be.an('array');
           done();
@@ -213,6 +211,16 @@ describe('Test for Center', () => {
           done();
         });
     });
+    it('should return return a message if params is missing', (done) => {
+      chai.request(server)
+        .put('/api/v1/centers/test/')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(centerSeeds.center)
+        .end((err, res) => {
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
   });
   describe('====== Delete centers test ======', () => {
     it('should return 404 for deleting centers that does not exist', (done) => {
@@ -242,6 +250,58 @@ describe('Test for Center', () => {
         .send(centerSeeds.center)
         .end((err, res) => {
           expect(res.status).to.equal(401);
+          done();
+        });
+    });
+  });
+  describe('====== Gets centers by Id ======', () => {
+    it('should return 200 for getting center by Id', (done) => {
+      chai.request(server)
+        .get('/api/v1/centers/1')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('should return 404 for getting non existing center', (done) => {
+      chai.request(server)
+        .get('/api/v1/centers/500')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+    it('should return 400 when param Id is not provied', (done) => {
+      chai.request(server)
+        .delete('/api/v1/centers/')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+  });
+  describe('====== Get all events for a center test ======', () => {
+    it('should return all booked events for a center', (done) => {
+      chai.request(server)
+        .get(`/api/v1/centers/event/${1}`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+    it('should return 404 on eventId is not provided', (done) => {
+      chai.request(server)
+        .get('/api/v1/centers/event/500')
+        .set('Authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body).to.haveOwnProperty('message');
           done();
         });
     });

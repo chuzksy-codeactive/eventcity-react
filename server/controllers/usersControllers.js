@@ -84,7 +84,7 @@ const getUsersPerPage = (req, res) => {
         pages
       });
     });
-  }).catch(err => res.stauts(500).send('Internal server error'));
+  });
 };
 
 /**
@@ -166,9 +166,6 @@ const createUser = (req, res) => {
               token: tokenFromUser(u)
             });
           }
-          return res.status(500).json({
-            message: 'There is an internal server error'
-          });
         });
       }
     });

@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Event = sequelize.define('Event', {
-    name: { type: DataTypes.STRING, required: true },
-    purpose: { type: DataTypes.STRING, required: true },
-    note: { type: DataTypes.TEXT, required: true },
-    eventDate: { type: DataTypes.DATEONLY, required: true },
+    name: { type: DataTypes.STRING, allowNull: false },
+    purpose: { type: DataTypes.STRING, allowNull: false },
+    note: { type: DataTypes.TEXT, allowNull: false },
+    eventDate: { type: DataTypes.DATEONLY, allowNull: false },
   });
 
   Event.associate = (models) => {

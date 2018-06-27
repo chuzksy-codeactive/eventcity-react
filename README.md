@@ -1,9 +1,17 @@
+<<<<<<< HEAD
+[![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/test_coverage)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/test_coverage) [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=develop)](https://travis-ci.org/chuzksy-codeactive/eventcity-react)
+[![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/eventcity-react/badge.svg?branch=develop)](https://coveralls.io/github/chuzksy-codeactive/eventcity-react?branch=develop)
+=======
 [![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability)  [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=develop)](https://travis-ci.org/chuzksy-codeactive/eventcity-react) [![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/eventcity-react/badge.svg?branch=develop)](https://coveralls.io/github/chuzksy-codeactive/eventcity-react?branch=develop)
+>>>>>>> 2b84d3063a263358a368976315201bcf4ff1eea8
 
 # EventCity
 
+<<<<<<< HEAD
+=======
 EventCity is a comprehensive room scheduling software that is designed to facilitate the management of meetings and events. EventManager can be used as a solution for scheduling conference meetings and classrooms, coordinating events and room setup, assigning resources and services for an event.
 
+>>>>>>> 2b84d3063a263358a368976315201bcf4ff1eea8
 # Entity Relationship Diagram for this project
 ![](https://github.com/chuzksy-codeactive/andela-eventcity/blob/master/erm.PNG)
 

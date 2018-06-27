@@ -17,67 +17,6 @@ cloudinary.config({
  *
  * @return {object} (message, center)
  */
-const createCenter = (req, res) => {
-  req.checkBody('name', 'name is required').notEmpty();
-  req.checkBody('capacity', 'capacity is required').notEmpty();
-  req.checkBody('location', 'location is required').notEmpty();
-  req.checkBody('facilities', 'facilities is required').notEmpty();
-  req.checkBody('type', 'center type is required').notEmpty();
-  req.checkBody('price', 'price type is required').notEmpty();
-  req.sanitize('name').trim();
-  req.sanitize('facilities').trim();
-
-  let errors = [];
-  const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  let imageName;
-  let imageUrl;
-  const center = {
-    name: req.body.name,
-    capacity: req.body.capacity,
-    location: req.body.location,
-    facilities: req.body.facilities,
-    type: req.body.type,
-    price: req.body.price,
-    imageName: req.body.imageName,
-    imageUrl: req.body.imageurl
-  };
-  req.getValidationResult().then((result) => {
-    if (!result.isEmpty()) {
-      errors = result.array().map(e => e.msg);
-      return res.status(400).json({
-        message: errors
-      });
-    }
-    return models.Center.findOne({
-      where: {
-        name: req.body.name
-      }
-    }).then((data) => {
-      if (data) {
-        return res.status(409).json({
-          message: 'Center name already exist'
-        });
-      }
-      return models.Center.create(center).then((c) => {
-        if (c) {
-          return res.status(201).json({
-            message: 'New center has been created succefully',
-            data: c,
-          });
-        }
-      });
-    });
-  });
-};
-
-/**
- * createCenters - crates a new center
- *
- * @param {object} req
- * @param {object} res
- *
- * @return {object} (message, center)
- */
 const createCenters = (req, res) => {
   req.checkBody('name', 'name is required').notEmpty();
   req.checkBody('capacity', 'capacity is required').notEmpty();
@@ -128,9 +67,6 @@ const createCenters = (req, res) => {
                 data: c,
               });
             }
-            return res.status(500).json({
-              message: 'An internal server error'
-            });
           });
         });
       });
@@ -256,44 +192,31 @@ const getCenterPerPage = (req, res) => {
         pages
       });
     });
-  }).catch(err => res.status(500).send('Interval server error'));
-};
-
-const deleteCenter = (req, res) => {
-  req.checkParams('id', 'Center Id is required').notEmpty();
-  let errors = [];
-  req.getValidationResult().then((result) => {
-    if (!result.isEmpty()) {
-      errors = result.array().map(e => e.msg);
-      res.status(400).json({
-        message: errors,
-      });
-    } else {
-      return models.Center.destroy({
-        where: {
-          id: parseInt(req.params.id, 10)
-        }
-      }).then((center) => {
-        if (center >= 1) {
-          return models.Event.destroy({
-            where: {
-              centerId: parseInt(req.params.id, 10)
-            }
-          }).then((event) => {
-            if (event >= 0) {
-              return res.status(200).json({
-                message: 'Center is successfully deleted'
-              });
-            }
-          });
-        }
-        return res.status(404).json({
-          message: `Center with id: ${req.params.id} is not found`
-        });
-      });
-    }
   });
 };
+
+const deleteCenter = (req, res) => models.Center.destroy({
+  where: {
+    id: parseInt(req.params.id, 10)
+  }
+}).then((center) => {
+  if (center >= 1) {
+    return models.Event.destroy({
+      where: {
+        centerId: parseInt(req.params.id, 10)
+      }
+    }).then((event) => {
+      if (event >= 0) {
+        return res.status(200).json({
+          message: 'Center is successfully deleted'
+        });
+      }
+    });
+  }
+  return res.status(404).json({
+    message: `Center with id: ${req.params.id} is not found`
+  });
+});
 
 /**
  * updateCenter - Updates a particular center by centerId
@@ -350,7 +273,7 @@ const centerUpdate = (req, res) => {
  * @return {object} (message, center)
  */
 const updateCenter = (req, res) => {
-  if (req.params.id === undefined) {
+  if (req.params.id === undefined || isNaN(req.params.id)) { // eslint-disable-line
     return res.json({
       message: 'Please provide a center Id'
     });
@@ -402,25 +325,20 @@ const updateCenter = (req, res) => {
  * @return {object} (message, center)
  */
 const getCenterById = (req, res) => {
-  req.checkParams('id', 'Id parameter is required').notEmpty();
-  let errors = [];
-  req.getValidationResult().then((result) => {
-    if (!result.isEmpty()) {
-      errors = result.array().map(e => e.msg);
-      return res.status(400).json({
-        message: errors
+  if (req.params.id === undefined || isNaN(req.params.id)) { // eslint-disable-line
+    return res.status(400).json({
+      message: 'Please provie a center Id'
+    });
+  }
+  return models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
+    if (center) {
+      return res.status(200).json({
+        message: 'Center found',
+        data: center
       });
     }
-    return models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
-      if (center) {
-        return res.status(200).json({
-          message: 'Center found',
-          data: center
-        });
-      }
-      return res.status(404).json({
-        message: 'Center not found in the database'
-      });
+    return res.status(404).json({
+      message: 'Center not found in the database'
     });
   });
 };

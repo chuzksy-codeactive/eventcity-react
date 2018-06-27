@@ -61,7 +61,7 @@ const invalidUser = {
 };
 
 const noUsername = {
-  username: '',
+  username: null,
   firstname: 'chika',
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
@@ -71,7 +71,7 @@ const noUsername = {
 
 const noFirstname = {
   username: 'chuzksy',
-  firstname: '',
+  firstname: null,
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
@@ -80,7 +80,7 @@ const noFirstname = {
 const noLastname = {
   username: 'chuzksy',
   firstname: 'chika',
-  lastname: '',
+  lastname: null,
   email: 'chuzksy@yahoo.com',
   password: 'password',
   confirmPassword: 'password'
@@ -90,7 +90,7 @@ const noEmail = {
   username: 'chuzksy',
   firstname: 'chika',
   lastname: 'onuchukwu',
-  email: '',
+  email: null,
   password: 'password',
   confirmPassword: 'password'
 };
@@ -100,7 +100,7 @@ const noPassword = {
   firstname: 'chika',
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
-  password: '',
+  password: null,
   confirmPassword: 'password'
 };
 

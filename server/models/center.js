@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Center = sequelize.define('Center', {
-    name: { type: DataTypes.STRING, required: true },
-    capacity: { type: DataTypes.INTEGER, required: true, validate: { isInt: true } },
-    location: { type: DataTypes.STRING, required: true },
-    facilities: { type: DataTypes.STRING, required: true },
-    type: { type: DataTypes.STRING, required: true },
-    price: { type: DataTypes.STRING, required: true },
+    name: { type: DataTypes.STRING, allowNull: false },
+    capacity: { type: DataTypes.INTEGER, allowNull: false, validate: { isInt: true } },
+    location: { type: DataTypes.STRING, allowNull: false },
+    facilities: { type: DataTypes.STRING, allowNull: false },
+    type: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.STRING, allowNull: false },
     imageName: { type: DataTypes.STRING },
     imageUrl: { type: DataTypes.STRING }
   });
