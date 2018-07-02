@@ -123,7 +123,11 @@ class CenterForm extends Component {
     } = this.props;
     return (
       <div>
+<<<<<<< HEAD:client/src/components/center/CenterForm.jsx
         <div className="container center-flex">
+=======
+        <div className="container center-flex adjust-top">
+>>>>>>> d3879673edfaa40b071791cd1d59444e2fa9a85a:client/src/components/center/CenterForm.jsx
           <div className="row">
             <div className="col-md-5 offset-md-3">
               <section className="section-features">
