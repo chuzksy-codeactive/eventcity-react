@@ -1,5 +1,5 @@
 import React from 'react';
-
+import customerOne from '../../images/customer1.jpg';
 const Testimonials = () => {
   return (
     <section className="section-testimonials">
@@ -14,7 +14,7 @@ const Testimonials = () => {
             They basically helped me through out my wedding even after I booked a venue with them, I was surprised when I got a gift from them for my
             wedding. Thumbs up to the guys behind EventCity, God Bless you all.
             <cite>
-              <img src="/images/customer1.jpg" alt="testimonial" />Okwarazoro Austin
+              <img src={customerOne} alt="testimonial" />Okwarazoro Austin
             </cite>
           </blockquote>
         </div>
