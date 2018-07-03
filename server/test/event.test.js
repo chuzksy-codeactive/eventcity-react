@@ -229,7 +229,7 @@ describe('Test for Events', () => {
     });
     it('should return 200 for booked event with different dates', (done) => {
       chai.request(server)
-        .put(`/api/v1/events/${eventId}`)
+        .put(`/api/v1/events/${createdEvent}`)
         .set('Authorization', `Bearer ${userToken}`)
         .send({
           ...eventSeeds.eventToUpdate,
@@ -244,7 +244,7 @@ describe('Test for Events', () => {
     });
     it('should return 401 when token is not passed', (done) => {
       chai.request(server)
-        .put(`/api/v1/events/${eventId}`)
+        .put(`/api/v1/events/${createdEvent}`)
         .send(eventSeeds.event)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -255,7 +255,7 @@ describe('Test for Events', () => {
   describe('====== Delete event test ======', () => {
     it('should return 200 on event delete', (done) => {
       chai.request(server)
-        .delete(`/api/v1/events/${eventId}`)
+        .delete(`/api/v1/events/${createdEvent}`)
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);

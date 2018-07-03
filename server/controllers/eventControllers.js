@@ -65,17 +65,24 @@ const createEvent = (req, res) => {
  *
  * @returns {object} (message)
  */
-const getEventsById = (req, res) => models.Event.findById(parseInt(req.params.id, 10)).then((event) => {
-  if (event) {
-    return res.status(200).json({
-      data: event,
-      code: 200
+const getEventsById = (req, res) => {
+  models.Event.findAll({
+    where: {
+      userId: req.params.id
+    }
+  }).then((event) => {
+    if (event.length > 0) {
+      return res.status(200).json({
+        data: event,
+        code: 200
+      });
+    }
+    return res.status(404).json({
+      message: 'You are yet to book an event'
     });
-  }
-  return res.status(404).json({
-    message: 'You are yet to book an event'
   });
-});
+};
+
 
 /**
  * Controller to get all event
@@ -91,7 +98,7 @@ const getAllEvents = (req, res) => models.Event.findAll().then((event) => {
       data: event
     });
   }
-  return res.status(200).json({
+  return res.status(404).json({
     message: 'No event is scheduled yet'
   });
 });

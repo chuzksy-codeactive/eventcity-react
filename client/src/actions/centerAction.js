@@ -102,6 +102,7 @@ export const updateCenter = (values) => {
   data.append('facilities', values.facilities);
   data.append('type', values.type);
   data.append('file', values.file);
+  console.log("=============", values.file);
   return (dispatch) => {
     dispatch(updatingCenter());
     axios({
