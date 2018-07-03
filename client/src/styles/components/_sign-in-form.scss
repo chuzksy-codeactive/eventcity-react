@@ -1,3 +1,4 @@
+// eslint-disable
 .forms {
   position: absolute;
   top: 20%;
@@ -6,8 +7,7 @@
 
 .signin {
   background: #cfcfd1;
-  border-radius: 5px;
-  padding: 30px 10px;
+  padding: 30px 30px;
 }
 
 .submitting {
@@ -15,4 +15,9 @@
   justify-content: center;
   color: green;
   margin-bottom: 20px;
+}
+
+.signup-link{
+  margin-left: 10px;
+  font-size: 12px;
 }

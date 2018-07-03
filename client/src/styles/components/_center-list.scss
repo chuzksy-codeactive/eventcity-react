@@ -1,9 +1,7 @@
+// eslint-disable
 .center-list {
-  //   display: flex;
-  //   width: 600px;
   background: #d0cbcd;
   padding: 20px;
-  border-radius: 5px;
   margin-bottom: 20px;
 }
 
@@ -47,4 +45,9 @@
 }
 .ion-icon {
   color: white;
+}
+.header-center{
+  display: flex;
+  justify-content: center;
+  padding-right:100px;
 }

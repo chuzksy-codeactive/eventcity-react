@@ -14,11 +14,13 @@ const eventReducer = (state = initialState, action) => {
     case types.FETCH_EVENT_FAILURE:
       return { ...state, loading: false, events: [], message: action.payload };
     case types.FETCHING_EVENT_BY_ID:
-      return { ...state, loading: true, message: null };
+      return { ...state, loading: true, events: [], message: null };
     case types.FETCH_EVENT_BY_ID_FAILURE:
-      return { ...state, loading: false, message: action.payload };
+      return { ...state, loading: false, events: [], message: action.payload };
     case types.FETCH_EVENT_BY_ID:
       return { ...state, loading: false, message: null, events: action.payload };
+    case types.RESET_EVENT: 
+      return { ...state, loading: false, message: null }
     default:
       return state;
   }
