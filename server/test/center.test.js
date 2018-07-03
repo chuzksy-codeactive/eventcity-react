@@ -279,7 +279,7 @@ describe('Test for Center', () => {
         .delete('/api/v1/centers/')
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
-          expect(res.body).to.haveOwnProperty('message');
+          expect(res.status).to.equal(404);
           done();
         });
     });

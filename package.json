@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
     "testdb": "NODE_ENV=test sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:undo:all --env test && sequelize db:seed:all --env test",
     "test": "npm run build && npm run testdb && NODE_ENV=test nyc mocha --exit  --timeout 40000 ./server/dist/test/index.test.js --recursive || true",
     "start": "node server/dist/bin/www",
@@ -11,7 +12,7 @@
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
     "build-css": "node-sass-chokidar ./client/src/ -o ./client/src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar ./client/src/ -o ./client/src/ --watch --recursive",
     "start:client:dev": "webpack-dev-server --config=./client/config/webpack.dev.js",
     "only": "webpack --config ./client/config/webpack.prod.js -p"
   },
