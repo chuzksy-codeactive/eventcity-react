@@ -56,8 +56,8 @@ class SignInForm extends Component {
                 <button type="button" className="btn btn-danger">
                   Cancel
                 </button>
-                <Link to="/"><a className="signup-link"><i>Not a member? Sign up here</i></a></Link>
               </Link>
+              <Link to="/" className="signup-link"><i>Not a member? Sign up here</i></Link>
             </form>
           </div>
         </div>

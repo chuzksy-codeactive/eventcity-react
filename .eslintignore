@@ -1,5 +1,4 @@
-client/
-client/src/styles/
 coverage/
 node_modules/
 .nyc_output
+client/**

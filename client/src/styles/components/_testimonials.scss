@@ -1,6 +1,7 @@
+// eslint-disable
 .section-testimonials {
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/caro2.jpg');
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/caro2.jpg');
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg');
   background-size: cover;
   color: #fff;
   background-attachment: fixed;
