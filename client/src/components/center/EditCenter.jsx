@@ -11,14 +11,10 @@ class EditCenterForm extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD:client/src/components/center/EditCenter.jsx
         <div className="container content">
         <div className="header-center">
           <h1 className="header-section row-width">Center List</h1>
         </div>
-=======
-        <div className="container adjust-top">
->>>>>>> d3879673edfaa40b071791cd1d59444e2fa9a85a:client/src/components/center/EditCenter.jsx
           <div className="row">
             <div className="col-md-5 offset-md-3 center-list">
               <EditCenterList centerList={this.props.centers} />

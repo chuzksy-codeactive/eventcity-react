@@ -1,25 +1,98 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import EditEventModal from './EditEventModal';
 
+const deleteModal = (onCloseModal, self) => {
+  return (
+    <Fragment>
+       <div
+          className="modal-overlay"
+          id="modal-overlay"
+          ref={(el) => {
+            self.modal_overlay = el;
+          }}
+        />
+        <div
+          className="modal delete"
+          id="modal"
+          ref={(el) => {
+            self.modal = el;
+          }}
+        >
+          <div className="modal-guts">
+            <div className="modal-header">
+              <h5>Confirm Delete</h5>
+              <span className="close" onClick={onCloseModal}>
+                &times;
+              </span>
+            </div>
+            {self.props.eventsByUserId.loading && (
+              <div className="center-loader">
+                <span className={self.props.eventsByUserId.loading ? 'loader' : ''} />
+              </div>
+            )}
+            <p>Do you want to delete this event? </p>
+            <div className="modal-footer">
+              <button
+                className="close-button btn btn-danger btn-sm"
+                id="close-button"
+                onClick={self.onDeleteEvent.bind(self, self.state.id)}
+              >
+                delete
+              </button>
+              <button type="button" className="btn btn-default btn-sm" onClick={self.onCloseModalDelete}>
+                cancel
+              </button>
+            </div>
+          </div>
+        </div>
+    </Fragment>
+  )
+};
+
 class EditEventList extends Component {
   state = {
-    event: null
+    event: null, id: null,
+    setModal: 'edit'
   };
   onEdit(event) {
     this.setState(
       {
-        event
+        event,
+        setModal: 'edit'
       },
       () => {
         this.modal.classList.toggle('opened');
         this.modal_overlay.classList.toggle('opened');
+        this.props.reset();
       }
     );
   }
+  onDeleteEvent = (id) => {
+    this.props.deleteEventById(id);
+    this.props.reset();
+    this.props.fetchEventById(id);
+    this.modal.classList.toggle('opened');
+    this.modal_overlay.classList.toggle('opened');
+  };
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
+    this.props.fetchEventById(this.props.userId);
+  };
+  onCloseModalDelete = () => {
+    this.props.fetchEventById(this.props.userId);
+    this.modal.classList.toggle('opened');
+    this.modal_overlay.classList.toggle('opened');
+  };
+  onOpenModalDelete = (id) => {
+    this.setState({
+      id,
+      setModal: 'delete'
+    }, () => {
+      this.modal.classList.toggle('opened');
+      this.modal_overlay.classList.toggle('opened');
+    });
   };
 
   render() {
@@ -47,17 +120,17 @@ class EditEventList extends Component {
               <i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />
             </div>
             <div className="btn-list btn btn-danger" data-toggle="tooltip" data-placement="right" title="delete">
-              <i className="ion-trash-a" />
+              <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
             </div>{' '}
           </div>
         );
       });
     }
     return (
-      <div>
+      <Fragment>
         {eventList}
-        {eventModal}
-      </div>
+        {this.state.setModal === 'edit' ? eventModal : deleteModal(this.onCloseModalDelete, this)}
+      </Fragment>
     );
   }
 }

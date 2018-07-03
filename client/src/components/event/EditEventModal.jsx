@@ -164,14 +164,15 @@ class EditEventModal extends Component {
 const mapStateToProps = (state, props) => {
   return {
     initialValues: props.event,
-    updateEvent: state.updateEventReducer
+    updateEvent: state.updateEventReducer,
+    eventsByUserId: state.eventReducer,
+    userId: state.userReducer.user.data.id
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   load,
   updateEventById: data => dispatch(updateEventById(data)),
-  reset: () => dispatch(resetEvent(null))
 });
 
 EditEventModal = reduxForm({

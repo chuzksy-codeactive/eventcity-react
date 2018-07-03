@@ -1,5 +1,8 @@
+import createHistory from 'history/createBrowserHistory';
 import * as types from './actionTypes';
 import axios from 'axios';
+
+const history = createHistory();
 
 export const fetchingEventCenter = () => ({
   type: types.FETCHING_CENTER_EVENT
@@ -43,9 +46,9 @@ export const createEventSuccess = payload => ({
   payload
 });
 
-export const resetEvent = () => ({
-  type: types.RESET_EVENT
-});
+export const resetEvent = () => {
+  return {type: types.RESET_EVENT}
+};
 
 export const createEvent = data => dispatch => {
   dispatch(creatingEvent());
@@ -169,7 +172,7 @@ export const updateEventById = data => dispatch => {
     .catch((error) => {
       if(error.response){
         if(error.response.status === 400){
-          dispatch(updateEventSuccess('Event not available for this date, please choose another date'));
+          dispatch(updateEventSuccess('Event not available for this date.'));
         } else if (error.response.status === 404){
           dispatch(updateEventSuccess(`Event with ID ${data.id} not found`));
         } else {

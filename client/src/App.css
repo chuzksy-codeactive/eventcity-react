@@ -109,16 +109,16 @@ p {
   background-size: cover; }
 
 .c-1 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro1.jpg"); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro1.jpg"); }
 
 .c-2 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro2.jpg"); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg"); }
 
 .c-3 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro3.jpg"); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro3.jpg"); }
 
 .c-4 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("/images/caro4.jpg"); }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624112/caro4.jpg"); }
 
 .searchbar {
   padding-top: 30px;
@@ -377,8 +377,8 @@ p {
 
 .cover-page {
   min-height: 30vh;
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("/images/caro2.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("/images/caro2.jpg");
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg");
   background-size: contain;
   color: #fff;
   background-attachment: fixed;
@@ -485,8 +485,8 @@ p {
   text-align: center; }
 
 .section-testimonials {
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/images/caro2.jpg");
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg");
   background-size: cover;
   color: #fff;
   background-attachment: fixed;

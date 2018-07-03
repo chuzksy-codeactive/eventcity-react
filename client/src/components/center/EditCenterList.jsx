@@ -56,10 +56,6 @@ class EditCenterList extends Component {
     return (
       <div>
         <div className="list-wrapper">
-<<<<<<< HEAD:client/src/components/center/EditCenterList.jsx
-=======
-          <div>Centers List</div>
->>>>>>> d3879673edfaa40b071791cd1d59444e2fa9a85a:client/src/components/center/EditCenterList.jsx
           {centerLists}
         </div>
         <div

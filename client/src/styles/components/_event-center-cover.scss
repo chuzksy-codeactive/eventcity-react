@@ -1,7 +1,7 @@
 .cover-page {
   min-height: 30vh;
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/caro2.jpg');
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/caro2.jpg');
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/dcgwltbei/image/upload/v1530624111/caro2.jpg');
   background-size: contain;
   color: #fff;
   background-attachment: fixed;
@@ -21,7 +21,7 @@
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
-}
+} 
 
 .cover-page li {
   padding-right: 10px;
