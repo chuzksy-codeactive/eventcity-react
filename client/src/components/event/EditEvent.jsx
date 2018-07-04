@@ -2,7 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchEventById, resetEvent, deleteEventById } from '../../actions/eventActions';
 import EditEventList from './EditEventList';
+import PropTypes from 'prop-types';
 
+
+/**
+ * This component is use to view list of events
+ *
+ * @class EditEvent
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class EditEvent extends Component {
   componentDidMount() {
     this.props.fetchEventById(this.props.userId);
@@ -23,6 +32,18 @@ class EditEvent extends Component {
       </Fragment>
     );
   }
+}
+
+EditEvent.propTypes = {
+  userId: PropTypes.number.isRequired,
+  fetchEventById: PropTypes.func.isRequired,
+  deleteEventById: PropTypes.func.isRequired,
+  reset: PropTypes.func,
+  eventsByUserId: PropTypes.shape({
+    loading: PropTypes.bool,
+    message: PropTypes.any,
+    events: PropTypes.array
+  })
 }
 
 const mapStateToProps = state => ({

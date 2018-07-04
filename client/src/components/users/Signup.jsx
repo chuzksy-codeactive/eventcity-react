@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, values } from 'redux-form';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const validate = (values) => {
   const errors = {};
@@ -60,6 +61,14 @@ const renderField = ({
   </div>
 );
 
+/**
+ * This component is used to register
+ * users
+ *
+ * @class Signup
+ * @extends {Component}
+ * @returns {object} 
+ */
 class Signup extends Component {
   state = {
     file: '',
@@ -100,6 +109,20 @@ class Signup extends Component {
       </div>
     );
   }
+}
+
+Signup.propTypes = {
+  user: PropTypes.shape({
+    error: PropTypes.any,
+    user: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
+  }),
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+    error: PropTypes.any.isRequired
+  }),
+  userSignUp: PropTypes.func.isRequired
 }
 
 export default reduxForm({

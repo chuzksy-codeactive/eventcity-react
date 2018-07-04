@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCards from './EventCards';
+import PropTypes from 'prop-types';
 
 const Events = props => {
   const { events } = props;
@@ -9,6 +10,14 @@ const Events = props => {
   return <div className="no-events-found">No Event is scheduled yet</div>
 };
 
+
+/**
+ * This component is used to generate event lists
+ *
+ * @class EventCardList
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class EventCardList extends Component {
   render() {
     const { loading, message, events } = this.props.events;
@@ -23,4 +32,11 @@ class EventCardList extends Component {
   }
 }
 
+EventCardList.propTypes = {
+  events: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    message: PropTypes.any,
+    events: PropTypes.array.isRequired
+  })
+}
 export default EventCardList;
