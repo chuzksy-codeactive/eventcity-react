@@ -1,5 +1,5 @@
 import React from 'react';
-
+import customerOne from '../../images/customer1.jpg';
 const Testimonials = () => {
   return (
     <section className="section-testimonials">

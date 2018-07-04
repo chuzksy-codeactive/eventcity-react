@@ -9,3 +9,4 @@ server/config.js
 server/uploads
 .env
  /uploads
+client/dist

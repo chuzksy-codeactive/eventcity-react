@@ -63,6 +63,14 @@ const config = {
       {
         test: /\.html$/,
         use: ['html-loader']
+      },
+      {
+        test: /\.(png|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   },
