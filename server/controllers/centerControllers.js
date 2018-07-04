@@ -31,7 +31,7 @@ const createCenters = (req, res) => {
   const imagePath = req.file ? req.file.path : 'server/sample.jpg';
   cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
-    const imageUrl = image.secure_url;
+    const imageUrl = image.secure_url || req.body.imageUrl;
     if (imageUrl) {
       const center = {
         name: req.body.name,
@@ -218,6 +218,7 @@ const deleteCenter = (req, res) => models.Center.destroy({
   });
 });
 
+
 /**
  * updateCenter - Updates a particular center by centerId
  *
@@ -314,7 +315,6 @@ const updateCenter = (req, res) => {
     }
   });
 };
-
 
 /**
  * getCenterById - Gets a center by its Id

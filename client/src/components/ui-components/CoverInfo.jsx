@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * This component is used on the landing page
+ *
+ * @function 
+ * @return {object} JSX DOM
+ */
 class CoverInfo extends Component {
   render() {
     return (

@@ -1,6 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Signup from '../users/SignUpFormContainer';
 import CoverInfo from './CoverInfo';
+
+/**
+ * This component is used to display
+ * video on the landing page
+ *
+ * @class HeaderVideo
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 
 const HeaderVideo = props => (
     <div className="video-container">
@@ -22,5 +32,9 @@ const HeaderVideo = props => (
       </div>
     </div>
 );
+
+HeaderVideo.propTypes = {
+  history: PropTypes.object.isRequired
+}
 
 export default HeaderVideo;

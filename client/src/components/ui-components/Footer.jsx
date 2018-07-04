@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * This component is used for the footer
+ * of the app
+ *
+ * @function 
+ * @return {object} JSX DOM
+ */
 const Footer = () => {
   return (
     <footer className="footer">

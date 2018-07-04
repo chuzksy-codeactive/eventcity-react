@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signInReset, unAuthenticated } from '../../actions/userLoginAction';
+import PropTypes from 'prop-types';
 
+/**
+ * This component is used for the navbar
+ * of the application
+ *
+ * @class Header
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class Header extends Component {
   renderAdminLinks = isAdmin => {
     if (isAdmin) {
@@ -65,21 +74,6 @@ class Header extends Component {
       );
     }
   };
-  renderNonAuth = auth => {
-    if (!auth) {
-      return (
-        <form className="form-inline mt-2 mt-md-0" id="search-form">
-          <input className="form-control mr-sm-2" type="text" placeholder="Search for an event" aria-label="Search" />
-          <Link to="/centers">
-            <button className="btn btn-primary my-2 my-sm-0" type="submit">
-              Submit
-            </button>
-          </Link>
-        </form>
-      );
-    }
-  };
-
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -98,7 +92,6 @@ class Header extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          {this.renderNonAuth(this.props.auth.authenticated)}
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
@@ -141,6 +134,20 @@ class Header extends Component {
       </nav>
     );
   }
+}
+
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    error: PropTypes.any,
+    user: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
+  }),
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+    error: PropTypes.any.isRequired
+  })
 }
 
 const mapStateToProps = state => ({

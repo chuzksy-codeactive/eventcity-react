@@ -1,25 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchCenter } from '../../actions/centerAction';
 import Carousel from '../ui-components/Carousel';
 import SearchBar from '../ui-components/SearchBar';
 import CenterCardList from './CenterCardList';
 import Footer from '../ui-components/Footer';
+import PropTypes from 'prop-types';
 
+
+/**
+ * This component is used to wrap different component
+ * together
+ * @class ViewCenter
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class ViewCenter extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCenter();
   }
   render() {
     return (
-      <div>
+      <Fragment>
         <Carousel />
         <SearchBar />
         <CenterCardList centers={this.props.centers} />
         <Footer />
-      </div>
+      </Fragment>
     );
   }
+}
+
+ViewCenter.propTypes = {
+  centers: PropTypes.array.isRequired,
+  fetchCenter: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({ centers: state.centerListReducer.centers });

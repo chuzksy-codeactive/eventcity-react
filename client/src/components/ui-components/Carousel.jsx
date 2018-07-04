@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * This component handles the Carousel on 
+ * some components
+ *
+ * @function 
+ * @return {object} JSX DOM
+ */
+
 const Carousel = () => {
   return (
     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">

@@ -5,6 +5,7 @@ import { load } from '../../reducer/loadCenter';
 import { updateEventById, resetEvent } from '../../actions/eventActions';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import PropTypes from 'prop-types';
 
 const moment = require('moment');
 
@@ -60,6 +61,14 @@ const validate = values => {
   }
   return errors;
 }
+
+/**
+ * This component handle the editting of events
+ *
+ * @class EditEventModal
+ * @extends {Component}
+ * @return {object} JSX DOM
+ */
 class EditEventModal extends Component {
   state = {
     selectedDay: undefined,
@@ -159,6 +168,17 @@ class EditEventModal extends Component {
       </div>
     );
   }
+}
+
+EditEventModal.propTypes = {
+  reset: PropTypes.func,
+  updateEventById: PropTypes.func,
+  updateEvent: PropTypes.object,
+  eventDate: PropTypes.string,
+  message: PropTypes.string,
+  onCloseModal: PropTypes.func,
+  userId: PropTypes.number,
+  eventsByUserId: PropTypes.object
 }
 
 const mapStateToProps = (state, props) => {

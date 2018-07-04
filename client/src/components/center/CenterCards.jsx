@@ -1,5 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * This component is used as a list item for a center
+ *
+ * @class CenterCard
+ * @param {object} props A center information
+ * @returns {object} JSX DOM
+ */
 
 const CenterCard = props => (
   <div className="card center-cards">
@@ -25,5 +34,16 @@ const CenterCard = props => (
     </div>
   </div>
 );
+
+CenterCard.propTypes = {
+  center: PropTypes.shape({
+    imageUrl: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    capacity: PropTypes.number.isRequired,
+    location: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired
+  })
+}
 
 export default CenterCard;
