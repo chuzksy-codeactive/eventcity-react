@@ -187,11 +187,11 @@ const updateEventById = (req, res) => {
             where: {
               id: req.params.id
             }
-          }).then(upEvent => res.status(200).json({ message: `Event with ID ${req.params.id} successfully updated` }));
+          }).then(upEvent => res.status(200).json({ message: 'Event successfully updated' }));
         });
       }
       return res.status(404).json({
-        message: `Event with ID ${req.params.id} not found`
+        message: 'Event not found'
       });
     });
   });
