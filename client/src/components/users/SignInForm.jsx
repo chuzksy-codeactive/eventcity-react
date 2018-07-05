@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import RenderField from '../helper/RenderField';
+import PropTypes from 'prop-types';
 
 function validate(values) {
   var errors = {};
@@ -17,6 +18,13 @@ function validate(values) {
   return hasErrors && errors;
 }
 
+/**
+ * This component is use to sign in users
+ *
+ * @class SignInForm
+ * @extends {Component}
+ * @return {object} JSX DOM
+ */
 class SignInForm extends Component {
   onSubmitForm = values => {
     const user = {
@@ -64,6 +72,20 @@ class SignInForm extends Component {
       </div>
     );
   }
+}
+
+SignInForm.propTypes = {
+  userSignIn: PropTypes.func,
+  user: PropTypes.shape({
+    error: PropTypes.any,
+    user: PropTypes.object,
+    loading: PropTypes.bool
+  }),
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool,
+    isAdmin: PropTypes.bool,
+    error: PropTypes.any
+  })
 }
 
 export default reduxForm({

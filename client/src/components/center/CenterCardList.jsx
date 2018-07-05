@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import CenterCards from './CenterCards.jsx';
+import PropTypes from 'prop-types';
+
+/**
+ * This component is used to generate center list
+ *
+ * @class CenterCardList
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 
 class CenterCardList extends Component {
   render() {
@@ -18,4 +27,9 @@ class CenterCardList extends Component {
     );
   }
 }
+
+CenterCardList.propType = {
+  centers: PropTypes.array.isRequired
+}
+
 export default CenterCardList;

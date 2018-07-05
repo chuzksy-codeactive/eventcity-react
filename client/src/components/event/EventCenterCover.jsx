@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * This component is used for front cover for eventCenter page
+ *
+ * @function EventCenterCover
+ * @returns {object} JSX DOM
+ */
+
 const EventCenterCover = () => (
   <div className="cover-page">
     <h1>Seat back while we handle your event</h1>

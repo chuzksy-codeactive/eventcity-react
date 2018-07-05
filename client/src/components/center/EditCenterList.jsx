@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteCenter } from '../../actions/centerAction';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
+/**
+ * This component is used to genarate center list items
+ * where the user can either delete or edit an existing 
+ * center
+ * 
+ * @class EditCenterList
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ * 
+ */
 class EditCenterList extends Component {
   state = {
     id: null,
@@ -110,5 +121,13 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   center: state.centerReducer,
 });
+
+EditCenterList.propTypes = {
+  deleteCenter: PropTypes.func.isRequired,
+  centerList: PropTypes.shape({
+    center: PropTypes.array.isRequired
+  }),
+  center: PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCenterList);

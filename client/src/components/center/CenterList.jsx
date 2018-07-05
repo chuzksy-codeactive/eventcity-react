@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * This component is used as a list item for a center
+ *
+ * @class CenterCard
+ * @param {object} props A center information
+ * @returns {object} JSX DOM
+ */
+
 const CenterList = () => (
   <div className="containter center-flex">
     <div className="row">

@@ -42,7 +42,7 @@ app.use('/uploads', express.static(`${__dirname}/uploads`));
 
 
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
 });
 
 // catch 404 and forward to error handler

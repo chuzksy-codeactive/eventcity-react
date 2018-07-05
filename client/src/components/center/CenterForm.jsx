@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
+import PropTypes from 'prop-types';
 
 import RenderField from '../helper/RenderField';
+
+/**
+ * This component is used to register a center
+ *
+ * @class CenterForm
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 
 const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) => (
   <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
@@ -235,6 +244,19 @@ class CenterForm extends Component {
   }
 }
 
+CenterForm.propType = {
+  centers: PropTypes.object,
+  error: PropTypes.any,
+  loading: PropTypes.bool,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  capacity: PropTypes.number,
+  location: PropTypes.string,
+  price: PropTypes.number,
+  facilities: PropTypes.string,
+  createCenter: PropTypes.func,
+  updateCenter: PropTypes.func
+}
 export default reduxForm({
   form: 'centerForm',
   validate,

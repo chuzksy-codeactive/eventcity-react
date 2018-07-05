@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * This component is used for render 
+ * search functionality in other component
+ *
+ * @function 
+ * @return {object} JSX DOM
+ */
+
 const SearchBar = () => {
   return (
     <section className="section">

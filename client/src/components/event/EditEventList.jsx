@@ -1,6 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import EditEventModal from './EditEventModal';
+import PropTypes from 'prop-types';
+
+/**
+ * This component is use to view list of events
+ *
+ * @function deleteModal
+ * @prop {onCloseModal, self} 
+ * @returns {object} JSX DOM
+ */
 
 const deleteModal = (onCloseModal, self) => {
   return (
@@ -50,6 +59,14 @@ const deleteModal = (onCloseModal, self) => {
   )
 };
 
+/**
+ * This component is used to create a modal 
+ * for edit user's events
+ *
+ * @class EditEventList
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class EditEventList extends Component {
   state = {
     event: null, id: null,
@@ -133,6 +150,14 @@ class EditEventList extends Component {
       </Fragment>
     );
   }
+}
+
+EditEventList.propTypes = {
+  loading: PropTypes.bool,
+  reset: PropTypes.func.isRequired, 
+  event: PropTypes.array,
+  fetchEventById: PropTypes.func,
+  deleteEventById: PropTypes.func
 }
 
 export default EditEventList;

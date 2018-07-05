@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditCenterList from './EditCenterList';
 import { fetchCenter } from '../../actions/centerAction';
+import PropTypes from 'prop-types';
 
+/**
+ * This component is used to wrap up editCenterList 
+ *
+ * @class EditCenterForm
+ * @extends {Component}
+ * @returns {object} JSX DOM
+ */
 class EditCenterForm extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCenter();
   }
 
@@ -32,5 +40,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchCenter: () => dispatch(fetchCenter())
 });
+
+// EditCenterForm.propTypes = {
+//   centers: PropTypes.shape({
+//     centers: PropTypes.array.isRequired
+//   }),
+//   fetchCenter: PropTypes.func.isRequired
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCenterForm);

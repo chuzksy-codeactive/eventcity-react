@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { resetEvent } from '../../actions/eventActions';
@@ -228,4 +230,20 @@ class EventCenterInfo extends Component {
     );
   }
 }
+EventCenterInfo.propTypes = {
+  eventCenter: PropTypes.object.isRequired,
+  onOpenModal: PropTypes.func,
+  userId: PropTypes.number.isRequired,
+  centerId: PropTypes.any.isRequired,
+  reset: PropTypes.func.isRequired,
+  createEvent: PropTypes.func,
+  name: PropTypes.string,
+  location: PropTypes.string,
+  capacity: PropTypes.number,
+  type: PropTypes.string,
+  Events: PropTypes.array,
+  facilities: PropTypes.string
+}
 export default reduxForm({ form: 'eventCenter', validate })(EventCenterInfo);
+
+
