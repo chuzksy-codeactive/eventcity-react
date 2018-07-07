@@ -165,6 +165,7 @@ class EditEventModal extends Component {
     const { selectedDay, from, to } = this.state;
     const { eventDate, startDate, endDate } = this.props.event;
     const { message } = this.props.updateEvent;
+
     return (
       <div>
         <div className="modal-overlay" id="modal-overlay" ref={this.props.modal_overlay}>

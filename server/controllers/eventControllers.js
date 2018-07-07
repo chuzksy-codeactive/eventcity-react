@@ -101,7 +101,6 @@ const getEventsById = (req, res) => {
       include: [{
         model: models.Center
       }]
-
     });
   }
 
