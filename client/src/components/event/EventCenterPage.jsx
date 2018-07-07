@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import _ from 'lodash';
 import EventCenterCover from './EventCenterCover';
 import EventCenterInfo from './EventCenterInfo';
 import PropTypes from 'prop-types';
@@ -10,38 +11,47 @@ import PropTypes from 'prop-types';
  * @extends {Component}
  * @return {object} JSX DoM
  */
+
+
 class EventCenterPage extends Component {
   state = {
-    name: ''
+    name: '',
+    eventCenter: {}
   };
- 
   componentDidMount() {
     this.props.fetchEventCenter(this.props.match.params.id);
-    this.setState({
-      name: this.props.eventCenter.eventCenter.data.name
-    });
+  }
+  componentWillReceiveProps(newProps) {
+    if (newProps.eventCenter.eventCenter && newProps.eventCenter.eventCenter.data){
+      this.setState({
+        name: newProps.eventCenter.eventCenter.data.name,
+        eventCenter: newProps.eventCenter,
+      })
+    }
   }
 
   render() {
-    const { eventCenter, userId, createEvent } = this.props;
-    return (
-      <div>
-        <EventCenterCover />
-        <EventCenterInfo
-          eventCenter={eventCenter}
-          centerId={this.props.match.params.id}
-          userId={userId}
-          name={this.state.name}
-          createEvent={createEvent}
-        />
-      </div>
-    );
+    const { userId, createEvent, name } = this.props;
+    if(!_.isEmpty(this.state.eventCenter)){
+      return (
+        <Fragment>
+          <EventCenterCover />
+          <EventCenterInfo
+            eventCenter={this.state.eventCenter}
+            centerId={this.props.match.params.id}
+            userId={userId}
+            name={this.state.name}
+            createEvent={createEvent}
+          />
+        </Fragment>
+      );
+    }
+    return <div className="loader-big" style={{marginTop: "100px"}}/>
   }
 }
 
 EventCenterPage.propTypes = {
   fetchEventCenter: PropTypes.func.isRequired,
-  eventCenter: PropTypes.object.isRequired,
   eventCenter: PropTypes.object.isRequired,
   userId: PropTypes.number.isRequired,
   createEvent: PropTypes.func.isRequired

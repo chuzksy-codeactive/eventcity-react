@@ -50,8 +50,8 @@ export const fetchEventCenter = id => dispatch => {
     url: `/api/v1/centers/event/${id}`,
     method: 'get'
   })
-    .then(res => {
-      dispatch(fetchEventCenterSuccess(res.data));
+  .then(res => {
+    dispatch(fetchEventCenterSuccess(res.data));
     })
     .catch(() => {
       dispatch(fetchEventCenterFailure('Can not load data'));
@@ -354,6 +354,20 @@ export const deleteEventSuccess = payload => ({
 });
 
 /**
+ * Action Creator to indicate that an event has 
+ * been deleted
+ * 
+ * @param {number} id event's Id to delete
+ * @return {object}  action [DELETE_EVENT_BY_ID]
+ */
+export const eventDeleted = id => {
+  return {
+    type: types.DELETED_EVENT_BY_ID,
+    id
+  }
+}
+
+/**
  * Action to handle the deleting of an event by making a DELETE
  * request to the backend
  * @param {number} id event's Id
@@ -366,7 +380,7 @@ export const deleteEventById = id => dispatch => {
     method: 'delete',
   }).then(res => {
     if (res.status === 200){
-      dispatch(deleteEventSuccess(res.data.message));
+      dispatch(eventDeleted(id));
     }
   }).catch(error => {
     if (error.response) {

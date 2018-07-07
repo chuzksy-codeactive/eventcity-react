@@ -25,7 +25,13 @@ class EditEvent extends Component {
         <div className="container">
           <div style={{ margin: '30px 0' }} className="row">
             <div className="col-md-7 offset-md-2 center-list">
-              {loading ? <div className="loader-big" /> : message ? <div className="set-message-center">{message}</div> : <EditEventList events={events} reset={this.props.reset} fetchEventById={this.props.fetchEventById} userId={this.props.userId} deleteEventById={this.props.deleteEventById} eventsByUserId={this.props.eventsByUserId} />}
+              {loading ? <div className="loader-big" /> : message ? <div className="set-message-center">{message}</div> : <EditEventList 
+                events={events}   
+                reset={this.props.reset} 
+                fetchEventById={this.props.fetchEventById} 
+                userId={this.props.userId} 
+                deleteEventById={this.props.deleteEventById} 
+                eventsByUserId={this.props.eventsByUserId} />}
             </div>
           </div>
         </div>

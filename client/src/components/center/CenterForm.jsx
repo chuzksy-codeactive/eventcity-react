@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
+import createHistory from 'history/createBrowserHistory';
 
 import RenderField from '../helper/RenderField';
-
+const history = createHistory();
 /**
  * This component is used to register a center
  *
@@ -21,7 +22,6 @@ const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) =
     <select {...input} className={error && touched ? 'form-control is-invalid' : 'form-control'}>
       <option value="">Select a type...</option>
       <option value="Theatre">Theatre</option>
-      <option value="Classroom">Classroom</option>
       <option value="Banquest">Banquest</option>
       <option value="Hall">Hall</option>
     </select>
@@ -118,12 +118,19 @@ class CenterForm extends Component {
   };
 
   componentDidMount() {
+    if (this.invalidRoute) this.props.history.push("/404");
+    
     if (this.props.match.params.id) {
       this.props.load(this.initValues);
     }
   }
 
   render() {
+    if (this.props.match.params.id && !this.props.center )
+    {
+      this.invalidRoute = true;
+      return null;
+    }
     const {
       handleSubmit,
       submitting,

@@ -134,6 +134,9 @@ class EventCenterInfo extends Component {
   };
   onSubmitForm = values => {
     if (this.state.selectedDay) {
+      this.setState({
+        message: null
+      })
       const data = { ...values, userId: this.props.userId, centerId: this.props.centerId, eventDate: this.state.selectedDay.toLocaleDateString() };
       this.props.createEvent(data);
     } else {
@@ -187,7 +190,7 @@ class EventCenterInfo extends Component {
             </div>
             <div className="row">
               <div className="col-6">
-                <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
+                <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: 'green' }}> Center Name:&nbsp;{this.props.name.toUpperCase()}</div>
                 <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
                   <Field name="name" type="text" component={renderField} label="Event Name" required />
                   <Field
