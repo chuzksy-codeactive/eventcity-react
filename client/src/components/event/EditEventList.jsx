@@ -86,6 +86,7 @@ class EditEventList extends Component {
     );
   }
   onDeleteEvent = (id) => {
+    console.log(id);
     this.props.deleteEventById(id);
     this.props.fetchEventById(this.props.userId);
     this.modal.classList.toggle('opened');
@@ -145,9 +146,8 @@ class EditEventList extends Component {
           <Fragment key={i}>
             {isDeleted && editable ? <div className="is-deleted">This center was deleted by the admin. Please book another event</div> : null}
             <div key={event.id} className={deletedStyle}>
-              {`${i + 1}. ${event.name}`}
-              {'. '}
-              {moment(event.eventDate).format('MMMM, Do YYYY')}
+              {`${i + 1}.`} &nbsp;&nbsp;&nbsp;{event.name.toUpperCase()}{'    '}
+              {moment(event.eventDate).format('MMMM, Do YYYY')} -- {moment(event.endDate).format('MMMM, Do YYYY')}
               
               <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit" >
                 {EditButton}
@@ -183,6 +183,7 @@ class EditEventList extends Component {
     return (
       <Fragment>
         {eventList}
+        {/* This is because two modals are conflicting */}
         {this.state.setModal === 'edit' ? eventModal : deleteModal(this.onCloseModalDelete, this)}
       </Fragment>
     );
