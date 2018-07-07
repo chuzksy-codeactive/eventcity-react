@@ -298,7 +298,9 @@ export const updateEventById = data => dispatch => {
       note: data.note,
       eventDate: data.eventDate,
       userId: data.userId,
-      centerId: data.centerId
+      centerId: data.centerId,
+      startDate: data.startDate,
+      endDate: data.endDate
     }
   })
     .then(res => {

@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     purpose: { type: DataTypes.STRING, allowNull: false },
     note: { type: DataTypes.TEXT, allowNull: false },
     eventDate: { type: DataTypes.DATEONLY, allowNull: false },
+    startDate: {type: DataTypes.DATEONLY, allowNull: false },
+    endDate: {type: DataTypes.DATEONLY, allowNull: false }
   });
 
   Event.associate = (models) => {
