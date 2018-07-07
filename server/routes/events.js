@@ -11,7 +11,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', requireAuth, eventControllers.getAllEvents);
-router.get('/page/:page', requireAuth, eventControllers.getEventPerPage);
+router.get('/page/:page', eventControllers.getEventPerPage);
 router.post('/', requireAuth, eventControllers.createEvent);
 router.get('/:id', requireAuth, eventControllers.getEventsById);
 router.put('/:id', requireAuth, eventControllers.updateEventById);

@@ -62,12 +62,11 @@ class Header extends Component {
             Event
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <Link className="dropdown-item" to="/events">
+            {/* <Link className="dropdown-item" to="/events">
               View Events
-            </Link>
-            <div className="dropdown-divider" />
+            </Link> */}
             <Link className="dropdown-item" to={`/events/${this.getUserId()}`}>
-              Modify/Delete Event
+            View Events
             </Link>
           </div>
         </li>

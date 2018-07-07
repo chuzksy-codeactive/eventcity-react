@@ -4,6 +4,7 @@ import CenterForm from './CenterForm';
 import { load as loadCenter } from '../../reducer/loadCenter';
 
 const mapStateToProps = (state, props) => {
+  
   const center = state.centerListReducer.centers.find(item => item.id === parseInt(props.match.params.id, 10));
   return {
     center,

@@ -56,14 +56,15 @@ export const fectchCenterSuccess = payload => ({
  */
 export const fetchCenter = () => (dispatch) => {
   dispatch(fetchingCenter());
+  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('user')}`;
   axios({
     url: '/api/v1/centers',
     method: 'get'
   })
-    .then((res) => {
-      dispatch(fectchCenterSuccess(res.data.data));
-    })
-    .catch(() => {
+  .then((res) => {
+    dispatch(fectchCenterSuccess(res.data.data));
+  })
+  .catch((e) => {
       dispatch(fetchingCenterError());
     });
 };

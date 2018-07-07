@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import CoverPage from '../components/ui-components/CoverPage';
@@ -14,6 +14,7 @@ import createHistory from 'history/createBrowserHistory';
 import { centerReset } from '../actions/centerAction';
 import ViewEventsContainer from '../components/event/ViewEventsContainer';
 import EditEvent from '../components/event/EditEvent';
+import NotFound from '../components/ui-components/NotFound';
 
 const history = createHistory();
 
@@ -37,12 +38,14 @@ class AppRouter extends Component {
               <Route path="/" exact component={CoverPage} />
               <Route path="/login" component={SignInForm} />
               <Route exact path="/centers" component={requireAuth(ViewCenter)} />
-              <Route path="/centers/create" component={CenterForm} />
-              <Route path="/centers/list" component={requireAuth(EditCenter)} />
-              <Route exact path="/centers/:id" component={EditCenterForm} />
-              <Route path="/centers/event/:id" component={requireAuth(EventCenterContainer)} />
-              <Route exact path="/events" component={requireAuth(ViewEventsContainer)} />
-              <Route path="/events/:userId" component={requireAuth(EditEvent)} />
+              <Route exact path="/centers/create" component={CenterForm} />
+              <Route exact path="/centers/list" component={requireAuth(EditCenter)} />
+              <Route exact path="/edit/center/:id" component={EditCenterForm} />
+              <Route path="/book/center/:id" component={requireAuth(EventCenterContainer)} />
+              {/* <Route exact path="/events" component={requireAuth(ViewEventsContainer)} /> */}
+              <Route exact path="/events/:userId" component={requireAuth(EditEvent)} />
+              <Route component={NotFound} />
+              <Redirect to="/404" />
             </Switch>
           </div>
         </Router>

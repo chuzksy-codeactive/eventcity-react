@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { createCenter } from '../../actions/centerAction';
 import CenterForm from './CenterForm';
 
+
 const mapStateToProps = (state, props) => {
   return { centers: state.centerReducer };
 };
