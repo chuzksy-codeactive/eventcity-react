@@ -19,6 +19,7 @@ class ViewCenter extends Component {
   componentDidMount() {
     this.props.fetchCenter();
   }
+
   render() {
     return (
       <Fragment>
@@ -36,7 +37,10 @@ ViewCenter.propTypes = {
   fetchCenter: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({ centers: state.centerListReducer.centers });
+const mapStateToProps = state => 
+  { 
+    return { centers: state.centerListReducer.centers }
+  };
 
 const mapDispatchToProps = dispatch => ({
   fetchCenter: () => dispatch(fetchCenter()),
