@@ -48,8 +48,30 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid } }) 
   </div>
 );
 
+const renderSelectCenter = ({change, defaultCenter, centers, label, input, meta: { touched, error, invalid } }) => {
+  console.log(defaultCenter);
+  return (
+  <div>
+    <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+      <label htmlFor="type" className="control-label">
+        {label}
+      </label>
+      <select className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} defaultValue={defaultCenter} onChange={change}>
+      {centers.map(center => {
+        return (<option key={center.id} value={center.id}>{center.name}</option>);
+      })}
+        
+      </select>
+      <small className="invalid-feedback">{error}</small>
+    </div>
+  </div>
+);}
+
 const validate = values => {
   const errors = {};
+  if(!values.centerName){
+    error.centerName = "Center name is required";
+  }
   if (!values.name) {
     errors.name = 'Event name is required';
   }
@@ -72,12 +94,18 @@ const validate = values => {
 class EditEventModal extends Component {
   state = {
     selectedDay: undefined,
-    message: null
+    message: null,
+    selectCenter: ''
   };
   componentDidMount(){
     this.state.message = null;
     this.props.reset();
   }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({selectedDay: new Date(newProps.event.eventDate)})
+  }
+
   handleDayClick = (day, { selected, disabled }) => {
     if (disabled) {
       return;
@@ -88,10 +116,17 @@ class EditEventModal extends Component {
     }
     this.setState({ selectedDay: day });
   };
+
+  onSelectCenter = (e) => {
+    this.setState({
+      selectCenter: e.target.value
+    })
+  }
   
   onSubmitForm = (values) => {
+    
     if (this.state.selectedDay) {
-      const data = { ...values, eventDate: this.state.selectedDay };
+      const data = { ...values, eventDate: this.state.selectedDay, centerId: this.state.selectCenter };
       this.props.updateEventById(data);
     } else {
       this.setState({
@@ -105,6 +140,7 @@ class EditEventModal extends Component {
     const { selectedDay } = this.state;
     const { eventDate } = this.props.event;
     const { message } = this.props.updateEvent;
+
     return (
       <div>
         <div className="modal-overlay" id="modal-overlay" ref={this.props.modal_overlay}>
@@ -122,6 +158,9 @@ class EditEventModal extends Component {
                   {message && (
                       <div style={{ margin: '10px 0', color: 'red' }}>{message}</div>
                     )}
+
+                     <Field centers={this.props.centers || []} defaultCenter={this.props.initialValues.centerId} name="centerName" type="select" component={renderSelectCenter} label="Change Center" required change={this.onSelectCenter.bind(this)} />
+
                     <Field name="name" type="text" component={renderField} label="Event Name" required />
                     <Field
                       name="purpose"
@@ -139,7 +178,7 @@ class EditEventModal extends Component {
                       <div style={{ margin: '10px 0', color: 'red' }}>{this.state.message}</div>
                     )}
                     <div className="modal-footer">
-                      <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit" disabled={submitting || pristine}>
+                      <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
                         submit
                       </button>
                       <button type="button" className="btn btn-default btn-sm" onClick={this.props.onCloseModal}>
@@ -182,7 +221,9 @@ EditEventModal.propTypes = {
 }
 
 const mapStateToProps = (state, props) => {
+  
   return {
+    centers: state.centerListReducer.centers,
     initialValues: props.event,
     updateEvent: state.updateEventReducer,
     eventsByUserId: state.eventReducer,

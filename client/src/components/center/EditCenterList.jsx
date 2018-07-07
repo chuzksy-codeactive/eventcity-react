@@ -48,7 +48,7 @@ class EditCenterList extends Component {
               data-placement="left"
               title="edit"
             >
-              <Link to={`/centers/${value.id}`}>
+              <Link to={`/edit/center/${value.id}`}>
                 <i className="ion-edit ion-icon" />
               </Link>
             </div>
@@ -125,7 +125,7 @@ const mapStateToProps = state => ({
 EditCenterList.propTypes = {
   deleteCenter: PropTypes.func.isRequired,
   centerList: PropTypes.shape({
-    center: PropTypes.array.isRequired
+    center: PropTypes.array
   }),
   center: PropTypes.object.isRequired
 }

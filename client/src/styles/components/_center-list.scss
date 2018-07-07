@@ -23,23 +23,46 @@
 .btn-list {
   cursor: pointer;
   border: none;
-  color: white;
   padding: 2px 6px;
   font-size: 16px;
 }
+.btn-list-disabled {
+  color: grey !important;
+  border: none;
+  padding: 2px 6px;
+  font-size: 16px;
+}
+
+.ion-icon-disable {
+  color: #f2f2f2;
+}
+
 .btn-list:first-child {
   margin-left: auto;
   background: #528854;
   margin-right: 5px;
 }
+.btn-list-disabled:first-child{
+  margin-left: auto;
+  background: grey;
+  margin-right: 5px;
+}
+.btn-list-disable:last-child{
+  background: #ae4c5c; 
+}
 .btn-list:last-child {
   background: #ae4c5c;
 }
-.btn-list:first-child:hover {
+.btn-list-disabled:first-child:hover{
   background: #1a672f;
-  color: white;
+  color: #f2f2f2;
 }
-.btn-list:last-child:hover {
+.btn-list-disabled:first-child:hover {
+  background: grey;
+  color: white;
+  cursor: not-allowed;
+}
+.btn-list-disabled:last-child:hover {
   background: #983030;
   color: white;
 }
