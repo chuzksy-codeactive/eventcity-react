@@ -262,6 +262,9 @@ p {
   padding: 2px 6px;
   font-size: 16px; }
 
+.btn-list i {
+  color: white; }
+
 .btn-list-disabled {
   color: grey !important;
   border: none;
@@ -281,11 +284,16 @@ p {
   background: grey;
   margin-right: 5px; }
 
-.btn-list-disable:last-child {
+.btn-list-disable:nth-child(2) {
+  background: #ae4c5c; }
+
+.btn-list:nth-child(2) {
   background: #ae4c5c; }
 
 .btn-list:last-child {
-  background: #ae4c5c; }
+  margin-left: 5px;
+  background: #74624e;
+  color: white; }
 
 .btn-list-disabled:first-child:hover {
   background: #1a672f;
@@ -296,7 +304,7 @@ p {
   color: white;
   cursor: not-allowed; }
 
-.btn-list-disabled:last-child:hover {
+.btn-list-disabled:nth-child(2):hover {
   background: #983030;
   color: white; }
 
@@ -313,7 +321,7 @@ p {
 
 .event-item-details {
   margin-left: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column; }
 
@@ -325,7 +333,9 @@ p {
 
 .event-item-details h6 {
   text-align: center;
-  font-weight: 700; }
+  font-weight: 700;
+  margin: 0;
+  padding: 0; }
 
 .wrap-item-details {
   display: flex;
@@ -665,6 +675,7 @@ cite img {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+
 /* DayPicker styles */
 .DayPicker {
   display: inline-block; }
@@ -835,4 +846,3 @@ cite img {
   position: absolute;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); }
-

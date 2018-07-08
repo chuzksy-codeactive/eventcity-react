@@ -65,7 +65,7 @@ class Header extends Component {
             {/* <Link className="dropdown-item" to="/events">
               View Events
             </Link> */}
-            <Link className="dropdown-item" to={`/events/${this.getUserId()}`}>
+            <Link className="dropdown-item" to={'/events/list'}>
             View Events
             </Link>
           </div>

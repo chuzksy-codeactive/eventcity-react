@@ -130,7 +130,7 @@ class EditEventList extends Component {
       eventList = this.props.events.map((event, i) => {
         const editable = event.userId === 1 || event.userId === 2 || event.userId === this.props.userId;
 
-        const btnStyle = editable ? "btn-list" : "btn-list-disabled"
+        const btnStyle = editable ? "btn btn-success btn-list" : "btn btn-success btn-list-disabled"
         const EditButton = editable  // binding actions to edit icon
         ? (<i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />)
         : (<i className="ion-edit ion-icon" />); 
@@ -152,10 +152,10 @@ class EditEventList extends Component {
               <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit" >
                 {EditButton}
               </div>
-              <div className="btn-list ion-icon" data-toggle="tooltip" data-placement="right" title="delete">
+              <div className=" btn btn-danger btn-list ion-icon" data-toggle="tooltip" data-placement="right" title="delete">
                 <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
               </div>{' '}
-              <div className="{isCenterViewable}" data-toggle="tooltip" data-placement="right" title="view center details" >
+              <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details" >
                 <a data-toggle="collapse" href={`#${event.name}`} role="button" aria-expanded="false" aria-controls={event.name} >
                   <i className="ion-android-arrow-dropdown" />
                 </a>

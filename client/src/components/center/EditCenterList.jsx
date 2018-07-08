@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteCenter } from '../../actions/centerAction';
 import { connect } from 'react-redux';
@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 
 /**
  * This component is used to genarate center list items
- * where the user can either delete or edit an existing 
+ * where the user can either delete or edit an existing
  * center
- * 
+ *
  * @class EditCenterList
  * @extends {Component}
  * @returns {object} JSX DOM
- * 
+ *
  */
 class EditCenterList extends Component {
   state = {
-    id: null,
+    id: null
   };
   onDeleteCenter = (id) => {
     this.props.deleteCenter(id);
@@ -29,7 +29,7 @@ class EditCenterList extends Component {
   };
   onOpenModal = (id) => {
     this.setState({
-      id,
+      id
     });
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
@@ -37,38 +37,65 @@ class EditCenterList extends Component {
 
   render() {
     let centerLists = null;
+    let eventList = null;
     if (Array.isArray(this.props.centerList.centers)) {
       const centers = this.props.centerList.centers;
-      centerLists = centers.map((value, i) => (
-          <div key={value.id} className="list-item">
-            {`${i + 1}. ${value.name}`}{' '}
-            <div
-              className="btn-list btn btn-success"
-              data-toggle="tooltip"
-              data-placement="left"
-              title="edit"
-            >
-              <Link to={`/edit/center/${value.id}`}>
-                <i className="ion-edit ion-icon" />
-              </Link>
+      centerLists = centers.map((center, i) => {
+        const events = center.Events;
+        if (events.length > 0) {
+          eventList = events.map((event, i) => (
+            <div className="event-item-details" key={event.id}>
+              <h6>{event.name}</h6>
+              <div className="wrap-item-details">
+                <div className="events-item">
+                  <span>
+                    <strong>Event Name:</strong>&nbsp;&nbsp;{event.name}
+                  </span>
+                  <br />
+                  <span>
+                    <strong>Start Date: </strong>&nbsp;&nbsp;{event.startDate}&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>End Date: </strong>&nbsp;&nbsp;{event.endDate}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div
-              className="btn-list btn btn-danger"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="delete"
-            >
-              <i className="ion-trash-a" onClick={this.onOpenModal.bind(this, value.id)} />
-            </div>{' '}
+          ));
+        } else {
+          eventList = (
+            <div className="event-item-details" key={i}>
+              No event for this center
+            </div>
+          );
+        }
+        return (
+          <div key={center.id}>
+            <div className="list-item">
+              {`${i + 1}. ${center.name}`}{' '}
+              <div className="btn-list btn btn-success" data-toggle="tooltip" data-placement="left" title="edit">
+                <Link to={`/edit/center/${center.id}`}>
+                  <i className="ion-edit ion-icon" />
+                </Link>
+              </div>
+              <div className="btn-list btn btn-danger" data-toggle="tooltip" data-placement="right" title="delete">
+                <i className="ion-trash-a" onClick={this.onOpenModal.bind(this, center.id)} />
+              </div>{' '}
+              <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details">
+                <a data-toggle="collapse" href={`#${center.name}`} role="button" aria-expanded="false" aria-controls={center.name}>
+                  <i className="ion-android-arrow-dropdown" />
+                </a>
+              </div>{' '}
+            </div>
+            <div className="collapse" id={center.name} key={center.name}>
+              {eventList}
+            </div>
           </div>
-      ));
+        );
+      });
     }
 
     return (
       <div>
-        <div className="list-wrapper">
-          {centerLists}
-        </div>
+        <div className="list-wrapper">{centerLists}</div>
         <div
           className="modal-overlay"
           id="modal-overlay"
@@ -97,11 +124,7 @@ class EditCenterList extends Component {
             )}
             <p>Do you want to delete this center? </p>
             <div className="modal-footer">
-              <button
-                className="close-button btn btn-danger btn-sm"
-                id="close-button"
-                onClick={this.onDeleteCenter.bind(this, this.state.id)}
-              >
+              <button className="close-button btn btn-danger btn-sm" id="close-button" onClick={this.onDeleteCenter.bind(this, this.state.id)}>
                 delete
               </button>
               <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
@@ -115,11 +138,11 @@ class EditCenterList extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  deleteCenter: id => dispatch(deleteCenter(id)),
+  deleteCenter: id => dispatch(deleteCenter(id))
 });
 
 const mapStateToProps = state => ({
-  center: state.centerReducer,
+  center: state.centerReducer
 });
 
 EditCenterList.propTypes = {
@@ -128,6 +151,9 @@ EditCenterList.propTypes = {
     center: PropTypes.array
   }),
   center: PropTypes.object.isRequired
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditCenterList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditCenterList);

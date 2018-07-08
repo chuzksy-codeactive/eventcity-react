@@ -8,6 +8,7 @@ import Header from '../components/ui-components/Header';
 import CenterForm from '../components/center/CenterFormContainer';
 import EditCenterForm from '../components/center/EditCenterFormContainer';
 import requireAuth from '../components/auth/requireAuth';
+import requireAdmin from '../components/auth/requireAdmin';
 import EditCenter from '../components/center/EditCenter';
 import EventCenterContainer from '../components/event/EventCenterContainer';
 import createHistory from 'history/createBrowserHistory';
@@ -38,12 +39,12 @@ class AppRouter extends Component {
               <Route path="/" exact component={CoverPage} />
               <Route path="/login" component={SignInForm} />
               <Route exact path="/centers" component={requireAuth(ViewCenter)} />
-              <Route exact path="/centers/create" component={CenterForm} />
-              <Route exact path="/centers/list" component={requireAuth(EditCenter)} />
-              <Route exact path="/edit/center/:id" component={EditCenterForm} />
+              <Route exact path="/centers/create" component={requireAdmin(CenterForm)} />
+              <Route exact path="/centers/list" component={requireAdmin(EditCenter)} />
+              <Route exact path="/edit/center/:id" component={requireAdmin(EditCenterForm)} />
               <Route path="/book/center/:id" component={requireAuth(EventCenterContainer)} />
               {/* <Route exact path="/events" component={requireAuth(ViewEventsContainer)} /> */}
-              <Route exact path="/events/:userId" component={requireAuth(EditEvent)} />
+              <Route exact path="/events/list" component={requireAuth(EditEvent)} />
               <Route component={NotFound} />
               <Redirect to="/404" />
             </Switch>

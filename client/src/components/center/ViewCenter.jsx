@@ -24,7 +24,7 @@ class ViewCenter extends Component {
     return (
       <Fragment>
         <Carousel />
-        <SearchBar />
+        <SearchBar centers={this.props.centers}/>
         <CenterCardList centers={this.props.centers} />
         <Footer />
       </Fragment>
