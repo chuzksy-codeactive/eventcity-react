@@ -42,7 +42,7 @@ class EditCenterList extends Component {
       const centers = this.props.centerList.centers;
       centerLists = centers.map((center, i) => {
         const events = center.Events;
-        if (events.length > 0) {
+        if (Array.isArray(events) && events.length > 0) {
           eventList = events.map((event, i) => (
             <div className="event-item-details" key={event.id}>
               <h6>{event.name}</h6>

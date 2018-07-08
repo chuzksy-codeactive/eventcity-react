@@ -9,26 +9,20 @@ import React, { Component } from 'react';
  */
 
 class SearchBar extends Component {
-
   render() {
-    console.log(this.props.centers);
     return (
       <section className="section">
         <div className="container-fluid searchbar">
           <div className="row justify-content-center">
             <div className="col-6">
-              <form id="search" className="form-inline">
-                <input
-                  className="form-control"
-                  id="search-input"
-                  type="text"
-                  name="search"
-                  placeholder="Search centers by name, facilities or location"
-                />
-                <button className="btn btn-primary" form="search" value="Submit">
-                  Search
-                </button>
-              </form>
+              <input
+                className="form-control inner-addon left-addon"
+                id="search-input"
+                type="text"
+                name="search"
+                placeholder="Search centers by name, facilities or location"
+                onChange={this.props.onInputChange}
+              />
             </div>
           </div>
         </div>
