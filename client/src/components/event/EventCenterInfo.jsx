@@ -1,11 +1,12 @@
+import React, { Component } from 'react';
+import Helmet from 'react-helmet';
+import DayPicker, { DateUtils } from 'react-day-picker'
+import 'react-day-picker/lib/style.css';
 import PropTypes from 'prop-types';
 
-import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { resetEvent } from '../../actions/eventActions';
 
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 
 const moment = require('moment');
 
@@ -38,7 +39,7 @@ const LoadEventCenter = props => {
         {Events.length === 0 ? (
           <div style={{ margin: '10px 0 50px 20px', color: '#c0392b' }}>No event is scheduled for this center</div>
         ) : (
-          <ul className="event-date">{Events.map(event => <li key={event.id}>{moment(event.eventDate).format('dddd, MMMM, Do YYYY')}</li>)}</ul>
+          <ul className="event-date">{Events.map(event => <li key={event.id}>{moment(event.startDate).format('dddd, MMMM, Do YYYY')} -- {moment(event.endDate).format('dddd, MMMM, Do YYYY')} </li>)}</ul>
         )}
       </div>
       <div>
@@ -104,20 +105,31 @@ const validate = values => {
 };
 
 class EventCenterInfo extends Component {
+  static defaultProps = {
+    numberOfMonths: 1
+  }
   state = {
     selectedDay: undefined,
+    from: undefined,
+    to: undefined,
     message: null
   };
   handleDayClick = (day, { selected, disabled }) => {
-    if (disabled) {
-      return;
-    }
-    if (selected) {
-      this.setState({ selectedDay: undefined });
-      return;
-    }
-    this.setState({ selectedDay: day, message: null });
+    const range = DateUtils.addDayToRange(day, {to: this.state.to, from: this.state.from});
+    this.setState({
+      selectedDay: range.from,
+      from: range.from,
+      to: range.to
+    })
   };
+
+  handleResetClick = () => {
+    this.setState({
+      from: undefined,
+      to: undefined
+    })
+  }
+
   onCloseModal = () => {
     this.modal.classList.toggle('opened');
     this.modal_overlay.classList.toggle('opened');
@@ -133,9 +145,20 @@ class EventCenterInfo extends Component {
     this.props.reset();
   };
   onSubmitForm = values => {
-    if (this.state.selectedDay) {
-      const data = { ...values, userId: this.props.userId, centerId: this.props.centerId, eventDate: this.state.selectedDay.toLocaleDateString() };
+    if (this.state.from && this.state.to) {
+      const data = { ...values, 
+        userId: this.props.userId, 
+        centerId: this.props.centerId, 
+        eventDate: moment(this.state.selectedDay).format("YYYY-MM-DD"),
+        startDate: moment(this.state.from).format("YYYY-MM-DD"), 
+        endDate: moment(this.state.to).format("YYYY-MM-DD")
+      };
       this.props.createEvent(data);
+      this.setState({
+        message: null,
+        from: undefined,
+        to: undefined
+      })
     } else {
       this.setState({
         message: 'Please select a date'
@@ -144,8 +167,9 @@ class EventCenterInfo extends Component {
   };
 
   render() {
+    const modifiers = { start: from, end: to }
     const { loading } = this.props.eventCenter;
-    const { selectedDay } = this.state;
+    const { selectedDay, from, to } = this.state;
     const { handleSubmit, submitting, reset, pristine } = this.props;
     return (
       <section className="section-features">
@@ -187,7 +211,7 @@ class EventCenterInfo extends Component {
             </div>
             <div className="row">
               <div className="col-6">
-                <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: '#555' }}>{this.props.name}</div>
+                <div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', color: 'green' }}> Center Name:&nbsp;{this.props.name.toUpperCase()}</div>
                 <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
                   <Field name="name" type="text" component={renderField} label="Event Name" required />
                   <Field
@@ -216,12 +240,47 @@ class EventCenterInfo extends Component {
               </div>
               <div className="col-6">
                 <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>Select a day</div>
-                <DayPicker onDayClick={this.handleDayClick} selectedDays={this.state.selectedDay} disabledDays={{ before: new Date() }} />
-                {selectedDay ? (
-                  <div style={{ marginBottom: '10px', textAlign: 'center', color: '#78B0F6' }}>Date selected: {selectedDay.toLocaleDateString()}</div>
-                ) : (
-                  <div />
-                )}
+                <DayPicker 
+                  className="Selectable"
+                  numberOfMonths={this.props.numberOfMonths}
+                  modifiers={modifiers}
+                  onDayClick={this.handleDayClick} 
+                  selectedDays={this.state.selectedDay} 
+                  disabledDays={{ before: new Date() }} />
+                
+                {!from && !to && <p className="time">Please select the first day.</p>}
+                    {from && !to && <p className="time">Please select the last day.</p>}
+                    {from && to && <p className="time">Selected from <strong style={{color:"green"}}>{from.toLocaleDateString()}</strong> to <strong style={{color:"green"}}>{to.toLocaleDateString()}</strong></p>}
+                    {' '}
+                    {from &&
+                      to && (
+                        <button className=" btn btn-danger btn-sm link" onClick={this.handleResetClick}>
+                          Reset
+                        </button>
+                      )}
+                <Helmet>
+                    <style>{`
+                      .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+                        background-color: #f0f8ff !important;
+                        color: grey;
+                      }
+                      .Selectable .DayPicker-Day {
+                        border-radius: 0 !important;
+                      }
+                      .Selectable .DayPicker-Day--start {
+                        border-top-left-radius: 50% !important;
+                        border-bottom-left-radius: 50% !important;
+                      }
+                      .Selectable .DayPicker-Day--end {
+                        border-top-right-radius: 50% !important;
+                        border-bottom-right-radius: 50% !important;
+                      }
+                      .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover{
+                        background-color: red; !important
+                      }
+                    `}
+                    </style>
+                  </Helmet>
               </div>
             </div>
           </div>

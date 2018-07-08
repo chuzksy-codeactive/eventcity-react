@@ -20,26 +20,72 @@
   margin: 10px;
   border-bottom: solid 1px #a19e9e;
 }
+.list-item-deleted {
+  display: flex;
+  background: #ffbaba;
+  padding: 10px 10px;
+  margin: 0 10px 10px 10px;
+  border-bottom: solid 1px #ff5252;
+}
+.is-deleted{
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 10px;
+  color: #360000;
+}
 .btn-list {
   cursor: pointer;
   border: none;
-  color: white;
   padding: 2px 6px;
   font-size: 16px;
 }
+.btn-list i {
+  color: white;
+}
+.btn-list-disabled {
+  color: grey !important;
+  border: none;
+  padding: 2px 6px;
+  font-size: 16px;
+}
+
+.ion-icon-disable {
+  color: #f2f2f2;
+}
+
 .btn-list:first-child {
   margin-left: auto;
   background: #528854;
   margin-right: 5px;
 }
-.btn-list:last-child {
+.btn-list-disabled:first-child{
+  margin-left: auto;
+  background: grey;
+  margin-right: 5px;
+}
+.btn-list-disable:nth-child(2){
+  background: #ae4c5c; 
+}
+.btn-list:nth-child(2) {
   background: #ae4c5c;
 }
-.btn-list:first-child:hover {
-  background: #1a672f;
-  color: white;
+.btn-list:last-child {
+  margin-left: 5px;
+  background: #74624e;
+  color:white;
 }
-.btn-list:last-child:hover {
+.btn-list-disabled:first-child:hover{
+  background: #1a672f;
+  color: #f2f2f2;
+}
+.btn-list-disabled:first-child:hover {
+  background: grey;
+  color: white;
+  cursor: not-allowed;
+}
+.btn-list-disabled:nth-child(2):hover {
   background: #983030;
   color: white;
 }
@@ -50,4 +96,55 @@
   display: flex;
   justify-content: center;
   padding-right:100px;
+}
+.ion-android-arrow-dropdown {
+  font-size: 20px;
+}
+.event-item-details {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.show-available-center{
+  display: inline;
+}
+.hide-non-available{
+  display: none;
+}
+.event-item-details h6{
+  text-align: center;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+.wrap-item-details{
+  display: flex;
+  padding: 10px 20px;
+}
+.wrap-item-details img{
+  width: 124px;
+  text-align: center;
+}
+.aside-item{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: center;
+}
+.aside-item p{
+  color: black;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+.time{
+  font-size: 14px;
+  color: green;
+  text-align: left;
+  padding:0;
+  margin: 0;
+}
+.time span{
+  color: green;
 }

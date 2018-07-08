@@ -4,7 +4,7 @@ import EventCenterPage from './EventCenterPage';
 
 const mapStateToProps = state => ({
   eventCenter: state.eventCenterReducer,
-  userId: state.userReducer.user.data.id
+  userId: state.userReducer.user.data.id || null
 });
 
 const mapDispatchToProps = dispatch => ({

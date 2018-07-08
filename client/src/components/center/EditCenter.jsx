@@ -24,7 +24,7 @@ class EditCenterForm extends Component {
           <h1 className="header-section row-width">Center List</h1>
         </div>
           <div className="row">
-            <div className="col-md-5 offset-md-3 center-list">
+            <div className="col-md-7 offset-md-2 center-list">
               <EditCenterList centerList={this.props.centers} />
             </div>
           </div>

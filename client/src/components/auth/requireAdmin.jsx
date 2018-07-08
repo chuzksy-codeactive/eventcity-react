@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 export default ComposedComponent => {
-  class Authentication extends Component {
+  class Administrator extends Component {
 
-    auth = true;
+    isAdmin = true;
     
     componentWillMount() {
-      if (!this.props.auth.authenticated) {
-        this.auth = false;
+      if (!this.props.auth.isAdmin) {
+        this.isAdmin = false;
         this.props.history.push('/login');
         return;
       }
@@ -20,12 +20,12 @@ export default ComposedComponent => {
     }
 
     render() {
-      if (!this.auth) return null;
+      if (!this.isAdmin) return null;
       return <ComposedComponent {...this.props} />;
     }
   }
   const mapStateToProps = state => ({
     auth: state.authReducer
   });
-  return connect(mapStateToProps)(Authentication);
+  return connect(mapStateToProps)(Administrator);
 };

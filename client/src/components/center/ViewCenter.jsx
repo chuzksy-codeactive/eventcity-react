@@ -19,11 +19,12 @@ class ViewCenter extends Component {
   componentDidMount() {
     this.props.fetchCenter();
   }
+
   render() {
     return (
       <Fragment>
         <Carousel />
-        <SearchBar />
+        <SearchBar centers={this.props.centers}/>
         <CenterCardList centers={this.props.centers} />
         <Footer />
       </Fragment>
@@ -36,7 +37,10 @@ ViewCenter.propTypes = {
   fetchCenter: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({ centers: state.centerListReducer.centers });
+const mapStateToProps = state => 
+  { 
+    return { centers: state.centerListReducer.centers }
+  };
 
 const mapDispatchToProps = dispatch => ({
   fetchCenter: () => dispatch(fetchCenter()),
