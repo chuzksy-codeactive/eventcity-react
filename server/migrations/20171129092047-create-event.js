@@ -19,6 +19,12 @@ module.exports = {
       eventDate: {
         type: Sequelize.DATEONLY,
       },
+      startDate: {
+        type: Sequelize.DATEONLY,
+      },
+      endDate: {
+        type: Sequelize.DATEONLY,
+      },
       userId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',

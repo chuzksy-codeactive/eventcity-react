@@ -27,7 +27,7 @@ const CenterCard = props => {
       </div>
       <div className="center-feature">
         <i className="ion-cash icon-small" />
-        <span>{props.center.price}</span>
+        <span> 	&#x20A6;{props.center.price}</span>
       </div>
       <Link to={`/book/center/${props.center.id}`} className="btn btn-primary">
         More details

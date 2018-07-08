@@ -121,7 +121,7 @@ class Header extends Component {
                     {this.props.user.user.data.username}
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link className="dropdown-item" to="/" onClick={this.props.logout}>
+                    <Link className="dropdown-item" to="/login" onClick={this.props.logout}>
                       Sign Out
                     </Link>
                   </div>

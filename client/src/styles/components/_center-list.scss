@@ -20,6 +20,21 @@
   margin: 10px;
   border-bottom: solid 1px #a19e9e;
 }
+.list-item-deleted {
+  display: flex;
+  background: #ffbaba;
+  padding: 10px 10px;
+  margin: 0 10px 10px 10px;
+  border-bottom: solid 1px #ff5252;
+}
+.is-deleted{
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 10px;
+  color: #360000;
+}
 .btn-list {
   cursor: pointer;
   border: none;
@@ -73,4 +88,53 @@
   display: flex;
   justify-content: center;
   padding-right:100px;
+}
+.ion-android-arrow-dropdown {
+  font-size: 20px;
+}
+.event-item-details {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.show-available-center{
+  display: inline;
+}
+.hide-non-available{
+  display: none;
+}
+.event-item-details h6{
+  text-align: center;
+  font-weight: 700;
+}
+.wrap-item-details{
+  display: flex;
+  padding: 10px 20px;
+}
+.wrap-item-details img{
+  width: 124px;
+  text-align: center;
+}
+.aside-item{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: center;
+}
+.aside-item p{
+  color: black;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+.time{
+  font-size: 14px;
+  color: green;
+  text-align: left;
+  padding:0;
+  margin: 0;
+}
+.time span{
+  color: green;
 }

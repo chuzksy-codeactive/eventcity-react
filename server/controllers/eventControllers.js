@@ -1,4 +1,7 @@
+import Sequelize from 'sequelize';
 import models from '../models';
+
+const { Op } = Sequelize;
 
 const ADMIN_ACCTYPE = [1, 2];
 /**
@@ -16,6 +19,8 @@ const createEvent = (req, res) => {
   req.checkBody('eventDate', 'event date is required').notEmpty();
   req.checkBody('userId', 'user Id field must not be empty').notEmpty();
   req.checkBody('centerId', 'center Id field must not be empty').notEmpty();
+  req.checkBody('startDate', 'start date is required').notEmpty();
+  req.checkBody('endDate', 'end date is required').notEmpty();
 
   let errors = [];
   const event = {
@@ -24,7 +29,9 @@ const createEvent = (req, res) => {
     note: req.body.note,
     eventDate: req.body.eventDate,
     userId: req.body.userId,
-    centerId: req.body.centerId
+    centerId: req.body.centerId,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate
   };
 
   req.getValidationResult().then((result) => {
@@ -37,7 +44,18 @@ const createEvent = (req, res) => {
       return models.Event.findOne({
         where: {
           centerId: parseInt(req.body.centerId, 10),
-          eventDate: req.body.eventDate
+          [Op.and]: [
+            {
+              startDate: {
+                [Op.eq]: event.startDate
+              }
+            },
+            {
+              endDate: {
+                [Op.eq]: event.endDate
+              }
+            }
+          ]
         }
       }).then((e) => {
         if (e) {
@@ -79,9 +97,10 @@ const getEventsById = (req, res) => {
     });
   } else {
     events = models.Event.findAll({
-      where: {
-        userId
-      }
+      where: { userId },
+      include: [{
+        model: models.Center
+      }]
     });
   }
 
@@ -109,8 +128,6 @@ const getEventsById = (req, res) => {
  */
 const getAllEvents = (req, res) => {
   const userId = req.user.dataValues.id;
-  console.log(userId);
-
   return models.Event.findAll().then((event) => {
     if (event) {
       return res.status(200).json({
@@ -175,10 +192,13 @@ const updateEventById = (req, res) => {
   req.checkBody('name', 'event name is required').notEmpty();
   req.checkBody('purpose', 'purpose is required').notEmpty();
   req.checkBody('note', 'a short note is required').notEmpty();
-  req.checkBody('eventDate', 'event date is required').notEmpty();
+  req.checkBody('startDate', 'start date is required').notEmpty();
+  req.checkBody('endDate', 'end date is required').notEmpty();
   req.checkBody('userId', 'user id is required');
   req.checkBody('centerId', 'center id is required');
   req.checkParams('id', 'event id is required').notEmpty();
+
+  console.log(req.body);
 
   let errors = [];
   const event = {
@@ -186,10 +206,11 @@ const updateEventById = (req, res) => {
     purpose: req.body.purpose,
     note: req.body.note,
     eventDate: req.body.eventDate,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
     userId: req.body.userId,
     centerId: req.body.centerId
   };
-
   req.getValidationResult().then((result) => {
     if (!result.isEmpty()) {
       errors = result.array().map(e => e.msg);
@@ -206,12 +227,23 @@ const updateEventById = (req, res) => {
         return models.Event.findOne({
           where: {
             centerId: parseInt(req.body.centerId, 10),
-            eventDate: req.body.eventDate,
+            [Op.and]: [
+              {
+                startDate: {
+                  [Op.gte]: event.startDate
+                }
+              },
+              {
+                endDate: {
+                  [Op.lte]: event.endDate
+                }
+              }
+            ]
           }
         }).then((e) => {
           if (e && e.id != req.params.id) { // eslint-disable-line
             return res.status(400).json({
-              message: 'Not available, please choose another date'
+              message: 'Not available, please choose another date r'
             });
           }
           return models.Event.update(event, {
@@ -239,9 +271,24 @@ const updateEventById = (req, res) => {
  * @returns {object} (message)
  */
 const deleteEventById = (req, res) => {
+  const userId = req.user.dataValues.id;
+  const centerId = {
+    centerId: 0
+  };
   if (isNaN(req.params.id)) { // eslint-disable-line
     return res.status(400).json({
       message: 'Please supply the event ID'
+    });
+  }
+  if (ADMIN_ACCTYPE.indexOf(userId) > -1) {
+    return models.Event.update(centerId, {
+      where: {
+        id: req.params.id
+      }
+    }).then((updateCenterId) => {
+      res.status(200).json({
+        message: 'Center Id updated to 0'
+      });
     });
   }
   return models.Event.destroy({

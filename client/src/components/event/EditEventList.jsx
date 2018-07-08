@@ -86,6 +86,7 @@ class EditEventList extends Component {
     );
   }
   onDeleteEvent = (id) => {
+    console.log(id);
     this.props.deleteEventById(id);
     this.props.fetchEventById(this.props.userId);
     this.modal.classList.toggle('opened');
@@ -130,27 +131,59 @@ class EditEventList extends Component {
         const editable = event.userId === 1 || event.userId === 2 || event.userId === this.props.userId;
 
         const btnStyle = editable ? "btn-list" : "btn-list-disabled"
-        const EditButton = editable
+        const EditButton = editable  // binding actions to edit icon
         ? (<i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />)
         : (<i className="ion-edit ion-icon" />); 
+
+        // if event.centerId === 0, display a deleted styled div 
+        // if otherwise show the indented styled div for booked events
+        const isDeleted = event.centerId === 0;
+        const isCenterViewable = editable ? "show-available-center" : "hide-non-available"
+        const deletedStyle = isDeleted ? "list-item-deleted" : "list-item"
+
+        // to let the user know that the event has been deleted by the admin
         return (
-          <div key={event.id} className="list-item">
-            {`${i + 1}. ${event.name}`}
-            {'. '}
-            {moment(event.eventDate).format('MMMM, Do YYYY')}
-            <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit" >
-              {EditButton}
+          <Fragment key={i}>
+            {isDeleted && editable ? <div className="is-deleted">This center was deleted by the admin. Please book another event</div> : null}
+            <div key={event.id} className={deletedStyle}>
+              {`${i + 1}.`} &nbsp;&nbsp;&nbsp;{event.name.toUpperCase()}{'    '}
+              {moment(event.eventDate).format('MMMM, Do YYYY')} -- {moment(event.endDate).format('MMMM, Do YYYY')}
+              
+              <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit" >
+                {EditButton}
+              </div>
+              <div className="btn-list ion-icon" data-toggle="tooltip" data-placement="right" title="delete">
+                <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
+              </div>{' '}
+              <div className="{isCenterViewable}" data-toggle="tooltip" data-placement="right" title="view center details" >
+                <a data-toggle="collapse" href={`#${event.name}`} role="button" aria-expanded="false" aria-controls={event.name} >
+                  <i className="ion-android-arrow-dropdown" />
+                </a>
+              </div>{' '}
             </div>
-            <div className="btn-list ion-icon" data-toggle="tooltip" data-placement="right" title="delete">
-              <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
-            </div>{' '}
-          </div>
+            {!isDeleted && event.Center &&  <div className="collapse" id={event.name} key={event.name}>
+              <div className="event-item-details">
+                <h6>{event.Center.name}</h6>
+                <div className="wrap-item-details">
+                <div id="img"><img className="img-thumbnail" src={event.Center.imageUrl} alt={`${event.Center.name} image`}/></div>
+                  <div className="aside-item">
+                    <p><strong>Capacity:</strong>&nbsp;&nbsp;{event.Center.capacity}</p>
+                    <p><strong>Location: </strong>&nbsp;&nbsp;{event.Center.location}</p>
+                    <p><strong>Facilities: </strong>&nbsp;&nbsp;{event.Center.facilities}</p>
+                    <p><strong>Center Type: </strong>&nbsp;&nbsp;{event.Center.type}</p>
+                    <p><strong>Price: </strong>&nbsp;&nbsp;&#x20A6;{event.Center.price}</p>
+                  </div>
+                </div>
+              </div>
+            </div>}
+          </Fragment>
         );
       });
     }
     return (
       <Fragment>
         {eventList}
+        {/* This is because two modals are conflicting */}
         {this.state.setModal === 'edit' ? eventModal : deleteModal(this.onCloseModalDelete, this)}
       </Fragment>
     );
