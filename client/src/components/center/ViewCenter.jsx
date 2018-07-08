@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchCenter } from '../../actions/centerAction';
 import Carousel from '../ui-components/Carousel';
-import SearchBar from '../ui-components/SearchBar';
 import CenterCardList from './CenterCardList';
 import Footer from '../ui-components/Footer';
 import PropTypes from 'prop-types';
@@ -24,7 +23,6 @@ class ViewCenter extends Component {
     return (
       <Fragment>
         <Carousel />
-        <SearchBar centers={this.props.centers}/>
         <CenterCardList centers={this.props.centers} />
         <Footer />
       </Fragment>
