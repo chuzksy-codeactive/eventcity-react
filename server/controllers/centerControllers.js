@@ -142,7 +142,11 @@ const centerCreate = (req, res) => {
  * @return {object} (centers)
  */
 const getAllCenters = (req, res) => {
-  models.Center.findAll().then((centers) => {
+  models.Center.findAll({
+    include: [{
+      model: models.Event
+    }]
+  }).then((centers) => {
     if (centers) {
       return res.status(200).json({
         data: centers
