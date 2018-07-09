@@ -49,19 +49,19 @@ class SignInForm extends Component {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <div className="container content">
+      <div className="container content" id="sign-in-works">
         <div className="row">
           <div className="col-md-5 offset-md-3">
             <form onSubmit={handleSubmit(this.onSubmitForm)} id="signin" className="signin">
               {this.loading()}
               {this.errorMessage()}
-              <Field name="username" type="text" component={RenderField} label="Username or Email" required />
-              <Field name="password" type="password" component={RenderField} label="Password" />
+              <Field id="sigin-name" name="username" type="text" component={RenderField} label="Username or Email" required />
+              <Field id="sigin-password" name="password" type="password" component={RenderField} label="Password" />
               <button className="btn btn-success" type="submit" disabled={submitting} style={{ marginRight: '10px' }}>
                 Log In
               </button>
               <Link to="/">
-                <button type="button" className="btn btn-danger">
+                <button type="button" id="sigin-button" className="btn btn-danger">
                   Cancel
                 </button>
               </Link>
