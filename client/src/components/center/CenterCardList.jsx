@@ -3,6 +3,7 @@ import CenterCards from './CenterCards.jsx';
 import SearchBar from '../ui-components/SearchBar';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import Pagination from '../ui-components/Pagination';
 
 /**
  * This component is used to generate center list
@@ -15,18 +16,19 @@ import _ from 'lodash';
 class CenterCardList extends Component {
   state = {
     searchTerm: '',
-    currentlyDisplayed: this.props.centers || []
+    currentlyDisplayed: this.props.centers || [],
+    page: 1
   };
   onInputChange = (event) => {
     const value = event.target.value;
     let newlyDisplayed;
     if (!_.isEmpty(this.props.centers)) {
-     newlyDisplayed = _.filter(this.props.centers, center => {
-       const name = center.name.toLowerCase();
-       const facilities = center.facilities.toLowerCase();
-       const location = center.location.toLowerCase();
-       return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase())
-     })
+      newlyDisplayed = _.filter(this.props.centers, (center) => {
+        const name = center.name.toLowerCase();
+        const facilities = center.facilities.toLowerCase();
+        const location = center.location.toLowerCase();
+        return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase());
+      });
       this.setState({
         searchTerm: value,
         currentlyDisplayed: newlyDisplayed
@@ -41,15 +43,19 @@ class CenterCardList extends Component {
     } else if (Array.isArray(centers) && centers.length === 0) {
       centerCards = <div className="no-centers-found">No available center</div>;
     }
-    return centerCards
-  }
+    return centerCards;
+  };
+  
   render() {
-    
     return (
       <Fragment>
         <SearchBar centers={this.props.centers} onInputChange={this.onInputChange} />
         <div className="container">
           <div className="row cards">{this.renderCenter()}</div>
+        </div>
+        <div className="paginate">
+        <Pagination 
+          pages={this.props.pages} page={this.props.page} />
         </div>
       </Fragment>
     );
@@ -57,7 +63,7 @@ class CenterCardList extends Component {
 }
 
 CenterCardList.propType = {
-  centers: PropTypes.array.isRequired
+  centers: PropTypes.array
 };
 
 export default CenterCardList;

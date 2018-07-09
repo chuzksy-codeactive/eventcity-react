@@ -168,7 +168,7 @@ const getAllCenters = (req, res) => {
  */
 
 const getCenterPerPage = (req, res) => {
-  const limit = 5;
+  const limit = 2;
   let offset = 0;
   models.Center.findAndCountAll().then((data) => {
     let {
@@ -193,6 +193,7 @@ const getCenterPerPage = (req, res) => {
       res.status(200).json({
         data: centers,
         count: data.count,
+        limit,
         pages
       });
     });
