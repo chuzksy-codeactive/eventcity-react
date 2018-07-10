@@ -132,13 +132,16 @@ export const userSignIn = (data, history) =>
  */
 export const userSignUp = (data, history) => (dispatch) => {
   dispatch(signingInUser());
-  axios
+
+  return axios
     .post('/api/v1/users', data)
     .then((response) => {
+    
       let isAdmin = false;
       if (response.status === 201 && response.data) {
-        if (response.data.data) {
-          if (response.data.data.id === 1 || response.data.data.id === 2) {
+        const {data} = response.data;
+        if (data) {
+          if (data.id === 1 || data.id === 2) {
             isAdmin = true;
           }
           dispatch(authenticated(isAdmin));
@@ -149,6 +152,7 @@ export const userSignUp = (data, history) => (dispatch) => {
       }
     })
     .catch((error) => {
+      
       const { status } = error.response;
       const { message } = error.response.data;
       if (status === 409 || status === 400) {

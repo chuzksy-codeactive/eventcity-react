@@ -1,5 +1,5 @@
 {
-  "src_folders": ["./client/src/__test__/endToend"],
+  "src_folders": ["./client/endToend"],
   "output_folder": "reports",
   "selenium": {
     "start_process": true,
