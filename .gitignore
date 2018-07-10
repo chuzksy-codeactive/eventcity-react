@@ -10,3 +10,8 @@ server/uploads
 .env
  /uploads
 client/dist
+coverage/
+coverage
+reports
+selenium-debug.log
+package-lock.json

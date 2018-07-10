@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 class CoverInfo extends Component {
   render() {
     return (
-      <div className="info">
+      <div className="info" id="sign-info">
         <div>
           <h1>Welcome to EventCity!</h1>
         </div>
@@ -24,7 +24,7 @@ class CoverInfo extends Component {
         <div>
           <h3>Innovation, {`Performance`} and Delivery</h3>
         </div>
-        <Link to="/login">
+        <Link to="/login" id="login">
           <button type="button" className="btn btn-success btn-lg">
             Sign In here
           </button>
