@@ -20,8 +20,8 @@ const eventCenterReducer = (state = initialState, action) => {
       return { ...state, loading: false, message: action.payload };
     case types.CREATE_EVENT_SUCCESS:
       return { ...state, loading: false, message: action.payload };
-    case types.RESET_EVENT:
-      return { ...state, message: null };
+    case types.RESET_CENTER_EVENT:
+      return { ...state, message: null, loading: false };
     default:
       return state;
   }

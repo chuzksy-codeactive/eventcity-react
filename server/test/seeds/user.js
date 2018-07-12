@@ -6,6 +6,14 @@ const user = {
   password: 'password',
   confirmPassword: 'password'
 };
+const user2 = {
+  username: 'chikason',
+  firstname: 'chimpanzee',
+  lastname: 'gorilla',
+  email: 'chikason@yahoo.com',
+  password: 'password',
+  confirmPassword: 'password'
+};
 
 const userToUpdate = {
   username: 'chuzksy',
@@ -115,6 +123,7 @@ const passwordMissMatch = {
 
 const userSeeds = {
   user,
+  user2,
   userWithSameEmail,
   userWithShortUsername,
   validUser,

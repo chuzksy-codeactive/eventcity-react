@@ -328,24 +328,17 @@ const updateCenter = (req, res) => {
  *
  * @return {object} (message, center)
  */
-const getCenterById = (req, res) => {
-  if (req.params.id === undefined || isNaN(req.params.id)) { // eslint-disable-line
-    return res.status(400).json({
-      message: 'Please provie a center Id'
+const getCenterById = (req, res) => models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
+  if (center) {
+    return res.status(200).json({
+      message: 'Center found',
+      data: center
     });
   }
-  return models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
-    if (center) {
-      return res.status(200).json({
-        message: 'Center found',
-        data: center
-      });
-    }
-    return res.status(404).json({
-      message: 'Center not found in the database'
-    });
+  return res.status(404).json({
+    message: 'Center not found in the database'
   });
-};
+});
 
 /**
  * getCentersEvents - Gets events for a particular center

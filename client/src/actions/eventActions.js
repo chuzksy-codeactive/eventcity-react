@@ -98,7 +98,7 @@ export const createEventSuccess = payload => ({
  * @return {object}  action [RESET_EVENT]
  */
 export const resetEvent = () => {
-  return {type: types.RESET_EVENT}
+  return {type: types.RESET_CENTER_EVENT}
 };
 
 /**
@@ -125,6 +125,9 @@ export const createEvent = data => dispatch => {
     })
     .catch(() => {
       dispatch(createEventFailure('Unable to book event'));
+      setTimeout(() => {
+        dispatch(resetEvent());
+      }, 2000)
     });
 };
 

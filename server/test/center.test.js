@@ -213,7 +213,7 @@ describe('Test for Center', () => {
     });
     it('should return return a message if params is missing', (done) => {
       chai.request(server)
-        .put('/api/v1/centers/test/')
+        .put('/api/v1/centers/{}')
         .set('Authorization', `Bearer ${userToken}`)
         .send(centerSeeds.center)
         .end((err, res) => {
@@ -271,15 +271,6 @@ describe('Test for Center', () => {
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body).to.haveOwnProperty('message');
-          done();
-        });
-    });
-    it('should return 400 when param Id is not provied', (done) => {
-      chai.request(server)
-        .delete('/api/v1/centers/')
-        .set('Authorization', `Bearer ${userToken}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
           done();
         });
     });

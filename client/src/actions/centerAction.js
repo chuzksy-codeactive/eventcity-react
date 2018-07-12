@@ -246,3 +246,11 @@ export const deleteCenter = id => (dispatch) => {
     dispatch(centerDeleted(id));
   });
 };
+
+export const reset = () => ({
+  type: types.RESET_CENTER_EVENT
+})
+
+export const resetCenterEvent = () => dispatch => {
+  dispatch(reset());
+}

@@ -15,7 +15,6 @@ const centerListReducer = (state = initialState, action) => {
     case types.CENTER_DELETING:
       return { ...state, loading: true };
     case types.CENTER_DELETED:
-      console.log(action);
       return {
         ...state,
         centers: state.centers.filter(center => center.id !== action.id),

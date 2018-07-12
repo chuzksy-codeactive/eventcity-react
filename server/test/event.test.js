@@ -15,7 +15,9 @@ const {
 chai.use(chaiHttp);
 
 let userToken;
+let userToken2;
 let userId;
+let userId2;
 let centerId;
 let eventId;
 let createdEvent;
@@ -39,6 +41,19 @@ describe('Test for Events', () => {
           done();
         });
     });
+    it('should return 202 when the user logs in', (done) => {
+      chai.request(server)
+        .post('/api/v1/users/login')
+        .send({
+          username: 'chibumma',
+          password: 'password'
+        })
+        .end((err, res) => {
+          userId2 = res.body.data.id;
+          userToken2 = res.body.token;
+          done();
+        });
+    });
     it('should get center by Id', (done) => {
       chai.request(server)
         .get('/api/v1/centers/1')
@@ -54,6 +69,19 @@ describe('Test for Events', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           eventId = res.body.data.id;
+          done();
+        });
+    });
+    it('should return 201 if event is created', (done) => {
+      chai.request(server)
+        .post('/api/v1/events')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(eventSeeds.event)
+        .end((err, res) => {
+          createdEvent = res.body.data.id;
+          expect(res.status).to.equal(201);
+          expect(res.body).to.haveOwnProperty('message');
+          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
           done();
         });
     });
@@ -129,25 +157,12 @@ describe('Test for Events', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .send({
           ...eventSeeds.eventWithSameDate,
-          userId,
+          userId2,
           centerId
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
           expect(res.body).to.haveOwnProperty('message');
-          done();
-        });
-    });
-    it('should return 201 if event is created', (done) => {
-      chai.request(server)
-        .post('/api/v1/events')
-        .set('Authorization', `Bearer ${userToken}`)
-        .send(eventSeeds.event)
-        .end((err, res) => {
-          createdEvent = res.body.data.id;
-          expect(res.status).to.equal(201);
-          expect(res.body).to.haveOwnProperty('message');
-          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
           done();
         });
     });
@@ -165,8 +180,8 @@ describe('Test for Events', () => {
     });
     it('should return 404 for event not found', (done) => {
       chai.request(server)
-        .get('/api/v1/events/22')
-        .set('Authorization', `Bearer ${userToken}`)
+        .get('/api/v1/events/2')
+        .set('Authorization', `Bearer ${userToken2}`)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body).to.haveOwnProperty('message');
@@ -219,8 +234,8 @@ describe('Test for Events', () => {
     it('should return 400 for booked event with same dates', (done) => {
       chai.request(server)
         .put(`/api/v1/events/${createdEvent}`)
-        .set('Authorization', `Bearer ${userToken}`)
-        .send(eventSeeds.event)
+        .set('Authorization', `Bearer ${userToken2}`)
+        // .send({eventSeeds.eventWithSameDate, userId2, cenerId})
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message');
@@ -233,7 +248,7 @@ describe('Test for Events', () => {
         .set('Authorization', `Bearer ${userToken}`)
         .send({
           ...eventSeeds.eventToUpdate,
-          userId,
+          userId2,
           centerId
         })
         .end((err, res) => {

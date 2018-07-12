@@ -146,7 +146,6 @@ class EditEventModal extends Component {
         startDate,
         endDate
       };
-      console.log(data);
       this.props.updateEventById(data);
     } else {
       this.setState({
@@ -157,9 +156,6 @@ class EditEventModal extends Component {
 
   
   render() {
-    console.log("====", this.state.to);
-    console.log("====", this.state.from);
-
     const { handleSubmit, submitting, pristine } = this.props;
     const modifiers = { start: from, end: to };
     const { selectedDay, from, to } = this.state;

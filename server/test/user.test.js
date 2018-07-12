@@ -21,6 +21,15 @@ describe('Test for Users', () => {
           done();
         });
     });
+    it('should signup up a user', (done) => {
+      chai.request(server)
+        .post('/api/v1/users')
+        .send(userSeeds.user2)
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          done();
+        });
+    });
     it('should return 400 if username is not supplied', (done) => {
       chai.request(server)
         .post('/api/v1/users')
