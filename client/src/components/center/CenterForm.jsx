@@ -95,15 +95,6 @@ class CenterForm extends Component {
       files
     });
   };
-  isOpen = () => {
-    this.setState({
-      display: 'block'
-    });
-  };
-  isClose = () => {
-    this.setState({ display: 'none' });
-  };
-
   onSubmitForm = (values) => {
     const centers = { ...values, file: this.state.file };
     if (!this.props.match.params.id) {

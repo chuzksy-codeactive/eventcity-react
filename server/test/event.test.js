@@ -23,8 +23,8 @@ let eventId;
 let createdEvent;
 
 describe('Test for Events', () => {
-  describe('====== Create events test ======', () => {
-    it('should return 202 when the user logs in', (done) => {
+  describe('Create events test', () => {
+    before((done) => {
       chai.request(server)
         .post('/api/v1/users/login')
         .send({
@@ -34,27 +34,10 @@ describe('Test for Events', () => {
         .end((err, res) => {
           userId = res.body.data.id;
           userToken = res.body.token;
-          expect(res.status).to.equal(202);
-          expect(res.body).to.haveOwnProperty('token').not.to.be.a('null');
-          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
-          expect(res.body).to.haveOwnProperty('message').to.equal('Logged in successfully');
           done();
         });
     });
-    it('should return 202 when the user logs in', (done) => {
-      chai.request(server)
-        .post('/api/v1/users/login')
-        .send({
-          username: 'chibumma',
-          password: 'password'
-        })
-        .end((err, res) => {
-          userId2 = res.body.data.id;
-          userToken2 = res.body.token;
-          done();
-        });
-    });
-    it('should get center by Id', (done) => {
+    before((done) => {
       chai.request(server)
         .get('/api/v1/centers/1')
         .set('Authorization', `Bearer ${userToken}`)
@@ -63,12 +46,12 @@ describe('Test for Events', () => {
           done();
         });
     });
-    it('should get event by Id', (done) => {
+    before((done) => {
       chai.request(server)
         .get('/api/v1/events/1')
         .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
-          eventId = res.body.data.id;
+          eventId = res.body.data[0].id;
           done();
         });
     });
@@ -167,7 +150,7 @@ describe('Test for Events', () => {
         });
     });
   });
-  describe('====== Get events test ======', () => {
+  describe('Get events test', () => {
     it('should get all booked event and return 200', (done) => {
       chai.request(server)
         .get('/api/v1/events')
@@ -178,13 +161,13 @@ describe('Test for Events', () => {
           done();
         });
     });
-    it('should return 404 for event not found', (done) => {
+    it('should return 200 to fetch all event', (done) => {
       chai.request(server)
         .get('/api/v1/events/2')
-        .set('Authorization', `Bearer ${userToken2}`)
+        .set('Authorization', `Bearer ${userToken}`)
         .end((err, res) => {
-          expect(res.status).to.equal(404);
-          expect(res.body).to.haveOwnProperty('message');
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('data').to.be.an('array');
           done();
         });
     });
@@ -219,7 +202,7 @@ describe('Test for Events', () => {
         });
     });
   });
-  describe('====== Update event test ======', () => {
+  describe('Update event test', () => {
     it('should return 404 for unavailable events', (done) => {
       chai.request(server)
         .put('/api/v1/events/120')
@@ -234,8 +217,8 @@ describe('Test for Events', () => {
     it('should return 400 for booked event with same dates', (done) => {
       chai.request(server)
         .put(`/api/v1/events/${createdEvent}`)
-        .set('Authorization', `Bearer ${userToken2}`)
-        // .send({eventSeeds.eventWithSameDate, userId2, cenerId})
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ ...eventSeeds.eventWithSameDate, userId: 2 })
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message');
@@ -267,7 +250,7 @@ describe('Test for Events', () => {
         });
     });
   });
-  describe('====== Delete event test ======', () => {
+  describe('Delete event test', () => {
     it('should return 200 on event delete', (done) => {
       chai.request(server)
         .delete(`/api/v1/events/${createdEvent}`)

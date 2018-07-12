@@ -8,7 +8,7 @@ server/config.js
 .DS_Store
 server/uploads
 .env
- /uploads
+uploads/
 coverage/
 coverage
 reports

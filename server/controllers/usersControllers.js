@@ -13,7 +13,9 @@ const jwtSimple = require('jwt-simple');
 
 const Sequelize = require('sequelize');
 
-const { Op } = Sequelize;
+const {
+  Op
+} = Sequelize;
 
 const tokenFromUser = (user) => {
   const timeStamp = new Date().getTime();
@@ -33,9 +35,11 @@ const tokenFromUser = (user) => {
  */
 const getAllUsers = (req, res) => {
   models.User.findAll({
-    order: [[
-      'id', 'DESC'
-    ]]
+    order: [
+      [
+        'id', 'DESC'
+      ]
+    ]
   }).then((users) => {
     if (users.length === 0) {
       return res
@@ -65,7 +69,9 @@ const getUsersPerPage = (req, res) => {
   const limit = 5;
   let offset = 0;
   models.User.findAndCountAll().then((data) => {
-    let { page } = req.params;
+    let {
+      page
+    } = req.params;
     const isNum = isNaN(req.params.page); //eslint-disable-line 
     page = parseInt(page, 10);
     const pages = Math.ceil(data.count / limit);
@@ -76,7 +82,11 @@ const getUsersPerPage = (req, res) => {
     }
     offset = limit * (page - 1);
     models.User.findAll({
-      limit, offset, order: [['id', 'ASC']]
+      limit,
+      offset,
+      order: [
+        ['id', 'ASC']
+      ]
     }).then((users) => {
       res.status(200).json({
         data: users,
@@ -88,13 +98,13 @@ const getUsersPerPage = (req, res) => {
 };
 
 /**
-   * createUser - create a user in the app
-   *
-   * @param {object} req
-   * @param {object} res
-   *
-   * @return {object} data (user)
-   */
+ * createUser - create a user in the app
+ *
+ * @param {object} req
+ * @param {object} res
+ *
+ * @return {object} data (user)
+ */
 
 const createUser = (req, res) => {
   let imageName = null;
@@ -136,7 +146,11 @@ const createUser = (req, res) => {
     }
     models.User.findOne({
       where: {
-        [Op.or]: [{ username: req.body.username }, { email: req.body.email }]
+        [Op.or]: [{
+          username: req.body.username
+        }, {
+          email: req.body.email
+        }]
       }
     }).then((user) => {
       if (user) {
@@ -201,24 +215,22 @@ const userLogin = (req, res) => {
     } else {
       models.User.findOne({
         where: {
-          [Op.or]: [
-            { username: req.body.username },
-            { email: req.body.username }
+          [Op.or]: [{
+            username: req.body.username
+          },
+          {
+            email: req.body.username
+          }
           ]
         }
       }).then((loginUser) => {
         if (loginUser) {
           if (bcrypt.compareSync(user.password, loginUser.password)) {
             const token = tokenFromUser(loginUser);
-            if (token) {
-              return res.status(202).json({
-                message: 'Logged in successfully',
-                token,
-                data: loginUser
-              });
-            }
-            return res.status(401).json({
-              message: 'Error creating the user token'
+            return res.status(202).json({
+              message: 'Logged in successfully',
+              token,
+              data: loginUser
             });
           }
           return res.status(401).json({
