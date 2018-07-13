@@ -7,17 +7,22 @@ const models = require('../models');
 process.env.NODE_ENV = 'test';
 const server = require('../app');
 
-const { expect } = chai;
+const {
+  expect
+} = chai;
 chai.use(chaiHttp);
 
 describe('Test for Users', () => {
-  describe('====== Users signup test ======', () => {
-    it('should signup up a user', (done) => {
+  describe('Users signup test', () => {
+    it('should return 201 on user signup', (done) => {
       chai.request(server)
         .post('/api/v1/users')
         .send(userSeeds.user)
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          expect(res.body).to.haveOwnProperty('message').to.be.a('string');
+          expect(res.body).to.haveOwnProperty('data').to.be.an('object');
+          expect(res.body).to.haveOwnProperty('token').to.be.a('string');
           done();
         });
     });
@@ -102,7 +107,7 @@ describe('Test for Users', () => {
         });
     });
   });
-  describe('====== User signin test =======', () => {
+  describe('User signin test', () => {
     it('should return 202 when the user logs in', (done) => {
       chai.request(server)
         .post('/api/v1/users/login')
@@ -144,17 +149,21 @@ describe('Test for Users', () => {
           done();
         });
     });
-  });
-  describe('====== Gets all Users =======', () => {
-    it('should return 202 when the user logs in', (done) => {
+    it('should return 400 when no credentials', (done) => {
       chai.request(server)
-        .get('/api/v1/users')
+        .post('/api/v1/users/login')
+        .send({
+          username: userSeeds.noUsername.username,
+          password: userSeeds.noUsername.password
+        })
         .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body).to.haveOwnProperty('data').not.to.be.a('object');
+          expect(res.status).to.equal(400);
+          expect(res.body).to.haveOwnProperty('message').to.be.an('array');
           done();
         });
     });
+  });
+  describe('Test for pagination', () => {
     it('should return 200 when an integer parameter is passed for pagination', (done) => {
       chai.request(server)
         .get('/api/v1/users/1')
@@ -172,6 +181,17 @@ describe('Test for Users', () => {
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body).to.haveOwnProperty('message');
+          done();
+        });
+    });
+  });
+  describe('Test to fetch all users', () => {
+    it('should return 200 when users are fetched', (done) => {
+      chai.request(server)
+        .get('/api/v1/users')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body).to.haveOwnProperty('data');
           done();
         });
     });

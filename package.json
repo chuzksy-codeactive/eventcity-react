@@ -8,7 +8,7 @@
     "test": "npm run build && npm run testdb && NODE_ENV=test nyc mocha --exit  --timeout 40000 ./server/dist/test/index.test.js --recursive || true",
     "start": "node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
-    "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files && webpack --config ./client/config/webpack.prod.js -p",
+    "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
     "build-css": "node-sass-chokidar ./client/src/ -o ./client/src/",

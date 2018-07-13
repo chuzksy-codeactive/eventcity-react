@@ -44,7 +44,6 @@ class CenterCardList extends Component {
     return centerCards
   }
   render() {
-    
     return (
       <Fragment>
         <SearchBar centers={this.props.centers} onInputChange={this.onInputChange} />

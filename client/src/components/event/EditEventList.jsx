@@ -86,7 +86,6 @@ class EditEventList extends Component {
     );
   }
   onDeleteEvent = (id) => {
-    console.log(id);
     this.props.deleteEventById(id);
     this.props.fetchEventById(this.props.userId);
     this.modal.classList.toggle('opened');
@@ -156,12 +155,12 @@ class EditEventList extends Component {
                 <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
               </div>{' '}
               <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details" >
-                <a data-toggle="collapse" href={`#${event.name}`} role="button" aria-expanded="false" aria-controls={event.name} >
+                <a data-toggle="collapse" href={`#${event.id}`} role="button" aria-expanded="false" aria-controls={event.name} >
                   <i className="ion-android-arrow-dropdown" />
                 </a>
               </div>{' '}
             </div>
-            {!isDeleted && event.Center &&  <div className="collapse" id={event.name} key={event.name}>
+            {!isDeleted && event.Center &&  <div className="collapse" id={event.id} key={event.name}>
               <div className="event-item-details">
                 <h6>{event.Center.name}</h6>
                 <div className="wrap-item-details">

@@ -4,7 +4,19 @@ const user = {
   lastname: 'gorilla',
   email: 'gorilla@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
+};
+const user2 = {
+  username: 'chikason',
+  firstname: 'chimpanzee',
+  lastname: 'gorilla',
+  email: 'chikason@yahoo.com',
+  password: 'password',
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const userToUpdate = {
@@ -12,7 +24,9 @@ const userToUpdate = {
   firstname: 'Onuchukwu',
   lastname: 'ifeanyi',
   email: 'iffy2gen2@gmail.com',
-  password: 'password'
+  password: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const userWithSameEmail = {
@@ -21,7 +35,9 @@ const userWithSameEmail = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const userWithShortUsername = {
@@ -30,7 +46,9 @@ const userWithShortUsername = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const validUser = {
@@ -39,7 +57,9 @@ const validUser = {
   lastname: 'ibiam',
   email: 'ibiam.ebere@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const validUser2 = {
@@ -48,7 +68,9 @@ const validUser2 = {
   lastname: 'ibiam',
   email: 'mummy.ebere@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const invalidUser = {
@@ -57,7 +79,9 @@ const invalidUser = {
   lastname: 'ifeanyi',
   email: 'iffy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const noUsername = {
@@ -66,7 +90,9 @@ const noUsername = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const noFirstname = {
@@ -75,7 +101,9 @@ const noFirstname = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 const noLastname = {
   username: 'chuzksy',
@@ -83,7 +111,9 @@ const noLastname = {
   lastname: null,
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const noEmail = {
@@ -92,7 +122,9 @@ const noEmail = {
   lastname: 'onuchukwu',
   email: null,
   password: 'password',
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const noPassword = {
@@ -101,7 +133,9 @@ const noPassword = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: null,
-  confirmPassword: 'password'
+  confirmPassword: 'password',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const passwordMissMatch = {
@@ -110,11 +144,14 @@ const passwordMissMatch = {
   lastname: 'onuchukwu',
   email: 'chuzksy@yahoo.com',
   password: 'password',
-  confirmPassword: 'password2'
+  confirmPassword: 'password2',
+  imageUrl: 'no_image_url',
+  imageName: 'no_image.png'
 };
 
 const userSeeds = {
   user,
+  user2,
   userWithSameEmail,
   userWithShortUsername,
   validUser,
