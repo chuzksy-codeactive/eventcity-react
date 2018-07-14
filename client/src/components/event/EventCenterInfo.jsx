@@ -43,7 +43,7 @@ const LoadEventCenter = props => {
         )}
       </div>
       <div>
-        <button type="button" className="btn btn-primary" onClick={props.onOpenModal}>
+        <button id="book-now" type="button" className="btn btn-primary" onClick={props.onOpenModal}>
           Book Center Now!
         </button>
       </div>
@@ -236,7 +236,7 @@ class EventCenterInfo extends Component {
                       <span className={loading ? 'loader' : ''} />
                       submit
                     </button>
-                    <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+                    <button id="close-modal" type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
                       close
                     </button>
                   </div>

@@ -36,7 +36,7 @@ class SignInForm extends Component {
   };
   errorMessage = () => {
     if (this.props.user.error) {
-      return <div className="submitting error">{this.props.user.error}</div>;
+      return <div className="submitting error" id="submitting" style={{color: 'red'}}>{this.props.user.error}</div>;
     }
   };
 
@@ -57,7 +57,7 @@ class SignInForm extends Component {
               {this.errorMessage()}
               <Field id="sigin-name" name="username" type="text" component={RenderField} label="Username or Email" required />
               <Field id="sigin-password" name="password" type="password" component={RenderField} label="Password" />
-              <button className="btn btn-success" type="submit" disabled={submitting} style={{ marginRight: '10px' }}>
+              <button id="sigin-button" className="btn btn-success" type="submit" disabled={submitting} style={{ marginRight: '10px' }}>
                 Log In
               </button>
               <Link to="/">

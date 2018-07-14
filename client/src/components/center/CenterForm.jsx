@@ -24,7 +24,7 @@ const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) =
       <option value="">Select a type...</option>
       <option value="Theatre">Theatre</option>
       <option value="Banquest">Banquest</option>
-      <option value="Hall">Hall</option>
+      <option id="hall" value="Hall">Hall</option>
     </select>
     <div className="invalid-feedback">{error}</div>
   </div>
@@ -122,7 +122,7 @@ class CenterForm extends Component {
       handleSubmit, submitting, reset, pristine
     } = this.props;
     return (
-      <div>
+      <div id="center-form">
         <div className="container center-flex">
           <section className="section-features">
             {!this.props.match.params.id && (
@@ -135,7 +135,7 @@ class CenterForm extends Component {
                 <h1 className="header-section">Edit Center Info</h1>
               </div>
             )}
-            <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data">
+            <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data" id="form">
               <div class="row">
                 <div className="col-md-6 pad-it">
                   <Field name="name" type="text" component={RenderField} label="Center Name" required />
@@ -147,7 +147,7 @@ class CenterForm extends Component {
                   <Field name="facilities" component={renderFacilities} label="Facilities" />
                   <Field name="type" component={renderCenterType} label="Center Type" />
                   <div className="form-group">
-                    <Dropzone onDrop={this.onDrop} multiple={false}>
+                    <Dropzone id="file-image" onDrop={this.onDrop} multiple={false}>
                       <p>Try dropping some files here, or click to select files to upload.</p>
                     </Dropzone>
                     <aside>
@@ -171,7 +171,7 @@ class CenterForm extends Component {
                       </button>
                     )}
                     {this.props.match.params.id && (
-                      <button type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
+                      <button id="edit-center" type="submit" className="btn btn-primary" disabled={submitting || pristine} style={{ marginRight: 10 }}>
                         <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
                       </button>
                     )}

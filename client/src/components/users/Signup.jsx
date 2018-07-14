@@ -89,19 +89,19 @@ class Signup extends Component {
         <div className="form-inputs form">
           <form onSubmit={handleSubmit(this.onSubmitForm)}>
             {this.props.user.loading && <div className="submitting">submitting...</div>}
-            <Field name="username" type="text" component={renderField} label="Username" />
-            <Field name="email" type="email" component={renderField} label="Email addres here" />
-            <Field name="firstname" type="text" component={renderField} label="Firstname" />
-            <Field name="lastname" type="text" component={renderField} label="Lastname" />
-            <Field name="password" type="password" component={renderField} label="Password" />
-            <Field name="confirmPassword" type="password" component={renderField} label="Re-enter password" />
+            <Field id="username" name="username" type="text" component={renderField} label="Username" />
+            <Field id="email" name="email" type="email" component={renderField} label="Email addres here" />
+            <Field id="firstname" name="firstname" type="text" component={renderField} label="Firstname" />
+            <Field id="lastname" name="lastname" type="text" component={renderField} label="Lastname" />
+            <Field id="password" name="password" type="password" component={renderField} label="Password" />
+            <Field id="confirmPassword" name="confirmPassword" type="password" component={renderField} label="Re-enter password" />
             {this.props.user.error && (
-              <div className="submitting error form-control-sm" role="alert">
+              <div id="message" className="submitting error form-control-sm" role="alert">
                 {this.props.user.error}
               </div>
             )}
 
-            <button type="submit" disabled={submitting} className="btn btn-primary btn-sm">
+            <button type="submit" disabled={submitting} className="btn btn-primary btn-sm" id="btn-signup">
               Submit
             </button>
           </form>

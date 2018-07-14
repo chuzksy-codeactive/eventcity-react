@@ -1,4 +1,5 @@
 import * as types from '../actions/actionTypes';
+import _ from 'lodash';
 
 const initialState = {
   centers: [],
@@ -7,13 +8,21 @@ const initialState = {
 const centerListReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCHING_CENTER:
-      return { ...state, centers: [] };
+      return { ...state,
+        centers: []
+      };
     case types.FETCHING_CENTER_SUCCESS:
-      return { ...state, centers: action.payload };
+      return { ...state,
+        centers: action.payload
+      };
     case types.FETCHING_CENTER_ERROR:
-      return { ...state, centers: [] };
+      return { ...state,
+        centers: []
+      };
     case types.CENTER_DELETING:
-      return { ...state, loading: true };
+      return { ...state,
+        loading: true
+      };
     case types.CENTER_DELETED:
       return {
         ...state,

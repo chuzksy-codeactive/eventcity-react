@@ -8,13 +8,14 @@
     "test": "npm run build && npm run testdb && NODE_ENV=test nyc mocha --exit  --timeout 40000 ./server/dist/test/index.test.js --recursive || true",
     "start": "node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
-    "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files",
+    "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files && webpack --config ./client/config/webpack.prod.js -p",
     "test:coverage": "NODE_ENV=test npm test && nyc report --reporter=lcov --reporter=text --reporter=json || coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
     "build-css": "node-sass-chokidar ./client/src/ -o ./client/src/",
     "watch-css": "npm run build-css && node-sass-chokidar ./client/src/ -o ./client/src/ --watch --recursive",
     "start:client:dev": "webpack-dev-server --config=./client/config/webpack.dev.js",
-    "client:test": "jest client/__tests__ --coverage --watch --collectCoverageFrom=client/src/**/*.{js,jsx}"
+    "client:test": "jest client/__tests__ --coverage --watch --collectCoverageFrom=client/src/**/*.{js,jsx}",
+    "e2e:test": "nightwatch"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -44,6 +45,7 @@
     "express": "^4.15.2",
     "express-validator": "^4.3.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "faker": "^4.1.0",
     "history": "^4.7.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

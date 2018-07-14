@@ -7,60 +7,54 @@ import PropTypes from 'prop-types';
  * This component is use to view list of events
  *
  * @function deleteModal
- * @prop {onCloseModal, self} 
+ * @prop {onCloseModal, self}
  * @returns {object} JSX DOM
  */
 
-const deleteModal = (onCloseModal, self) => {
-  return (
+const deleteModal = (onCloseModal, self) => (
     <Fragment>
-       <div
-          className="modal-overlay"
-          id="modal-overlay"
-          ref={(el) => {
-            self.modal_overlay = el;
-          }}
-        />
-        <div
-          className="modal delete"
-          id="modal"
-          ref={(el) => {
-            self.modal = el;
-          }}
-        >
-          <div className="modal-guts">
-            <div className="modal-header">
-              <h5>Confirm Delete</h5>
-              <span className="close" onClick={onCloseModal}>
-                &times;
-              </span>
+      <div
+        className="modal-overlay"
+        id="modal-overlay"
+        ref={(el) => {
+          self.modal_overlay = el;
+        }}
+      />
+      <div
+        className="modal delete"
+        id="modal"
+        ref={(el) => {
+          self.modal = el;
+        }}
+      >
+        <div className="modal-guts">
+          <div className="modal-header">
+            <h5>Confirm Delete</h5>
+            <span className="close" onClick={onCloseModal}>
+              &times;
+            </span>
+          </div>
+          {self.props.eventsByUserId.loading && (
+            <div className="center-loader">
+              <span className={self.props.eventsByUserId.loading ? 'loader' : ''} />
             </div>
-            {self.props.eventsByUserId.loading && (
-              <div className="center-loader">
-                <span className={self.props.eventsByUserId.loading ? 'loader' : ''} />
-              </div>
-            )}
-            <p>Do you want to delete this event? </p>
-            <div className="modal-footer">
-              <button
-                className="close-button btn btn-danger btn-sm"
-                id="close-button"
-                onClick={self.onDeleteEvent.bind(self, self.state.id)}
-              >
-                delete
-              </button>
-              <button type="button" className="btn btn-default btn-sm" onClick={self.onCloseModalDelete}>
-                cancel
-              </button>
-            </div>
+          )}
+          <p>Do you want to delete this event? </p>
+          <div className="modal-footer">
+            <button className="close-button btn btn-danger btn-sm" id="close-button" onClick={self.onDeleteEvent.bind(self, self.state.id)}>
+              delete
+            </button>
+            <button type="button" className="btn btn-default btn-sm" onClick={self.onCloseModalDelete}>
+              cancel
+            </button>
           </div>
         </div>
+      </div>
     </Fragment>
-  )
-};
+);
 
 /**
- * This component is used to create a modal 
+ * This component is used to create a modal
  * for edit user's events
  *
  * @class EditEventList
@@ -69,7 +63,8 @@ const deleteModal = (onCloseModal, self) => {
  */
 class EditEventList extends Component {
   state = {
-    event: null, id: null,
+    event: null,
+    id: null,
     setModal: 'edit'
   };
   onEdit(event) {
@@ -102,13 +97,16 @@ class EditEventList extends Component {
     this.modal_overlay.classList.toggle('opened');
   };
   onOpenModalDelete = (id) => {
-    this.setState({
-      id,
-      setModal: 'delete'
-    }, () => {
-      this.modal.classList.toggle('opened');
-      this.modal_overlay.classList.toggle('opened');
-    });
+    this.setState(
+      {
+        id,
+        setModal: 'delete'
+      },
+      () => {
+        this.modal.classList.toggle('opened');
+        this.modal_overlay.classList.toggle('opened');
+      }
+    );
   };
 
   render() {
@@ -129,52 +127,69 @@ class EditEventList extends Component {
       eventList = this.props.events.map((event, i) => {
         const editable = event.userId === 1 || event.userId === 2 || event.userId === this.props.userId;
 
-        const btnStyle = editable ? "btn btn-success btn-list" : "btn btn-success btn-list-disabled"
-        const EditButton = editable  // binding actions to edit icon
-        ? (<i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />)
-        : (<i className="ion-edit ion-icon" />); 
+        const btnStyle = editable ? 'btn btn-success btn-list' : 'btn btn-success btn-list-disabled';
+        const EditButton = editable ? ( // binding actions to edit icon
+          <i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />
+        ) : (
+          <i className="ion-edit ion-icon" />
+        );
 
-        // if event.centerId === 0, display a deleted styled div 
+        // if event.centerId === 0, display a deleted styled div
         // if otherwise show the indented styled div for booked events
         const isDeleted = event.centerId === 0;
-        const isCenterViewable = editable ? "show-available-center" : "hide-non-available"
-        const deletedStyle = isDeleted ? "list-item-deleted" : "list-item"
+        const isCenterViewable = editable ? 'show-available-center' : 'hide-non-available';
+        const deletedStyle = isDeleted ? 'list-item-deleted' : 'list-item';
 
         // to let the user know that the event has been deleted by the admin
         return (
           <Fragment key={i}>
             {isDeleted && editable ? <div className="is-deleted">This center was deleted by the admin. Please book another event</div> : null}
-            <div key={event.id} className={deletedStyle}>
-              {`${i + 1}.`} &nbsp;&nbsp;&nbsp;{event.name.toUpperCase()}{'    '}
+            <div key={event.id} className={deletedStyle} id="event-list">
+              {`${i + 1}.`} &nbsp;&nbsp;&nbsp;{event.name.toUpperCase()}
+              {'    '}
               {moment(event.eventDate).format('MMMM, Do YYYY')} -- {moment(event.endDate).format('MMMM, Do YYYY')}
-              
-              <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit" >
+              <div className={btnStyle} data-toggle="tooltip" data-placement="left" title="edit">
                 {EditButton}
               </div>
               <div className=" btn btn-danger btn-list ion-icon" data-toggle="tooltip" data-placement="right" title="delete">
                 <i className="ion-trash-a" onClick={this.onOpenModalDelete.bind(this, event.id)} />
               </div>{' '}
-              <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details" >
-                <a data-toggle="collapse" href={`#${event.id}`} role="button" aria-expanded="false" aria-controls={event.name} >
+              <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details">
+                <a data-toggle="collapse" href={`#${event.id}`} role="button" aria-expanded="false" aria-controls={event.name}>
                   <i className="ion-android-arrow-dropdown" />
                 </a>
               </div>{' '}
             </div>
-            {!isDeleted && event.Center &&  <div className="collapse" id={event.id} key={event.name}>
-              <div className="event-item-details">
-                <h6>{event.Center.name}</h6>
-                <div className="wrap-item-details">
-                <div id="img"><img className="img-thumbnail" src={event.Center.imageUrl} alt={`${event.Center.name} image`}/></div>
-                  <div className="aside-item">
-                    <p><strong>Capacity:</strong>&nbsp;&nbsp;{event.Center.capacity}</p>
-                    <p><strong>Location: </strong>&nbsp;&nbsp;{event.Center.location}</p>
-                    <p><strong>Facilities: </strong>&nbsp;&nbsp;{event.Center.facilities}</p>
-                    <p><strong>Center Type: </strong>&nbsp;&nbsp;{event.Center.type}</p>
-                    <p><strong>Price: </strong>&nbsp;&nbsp;&#x20A6;{event.Center.price}</p>
+            {!isDeleted &&
+              event.Center && (
+                <div className="collapse" id={event.id} key={event.name}>
+                  <div className="event-item-details">
+                    <h6>{event.Center.name}</h6>
+                    <div className="wrap-item-details">
+                      <div id="img">
+                        <img className="img-thumbnail" src={event.Center.imageUrl} alt={`${event.Center.name} image`} />
+                      </div>
+                      <div className="aside-item">
+                        <p>
+                          <strong>Capacity:</strong>&nbsp;&nbsp;{event.Center.capacity}
+                        </p>
+                        <p>
+                          <strong>Location: </strong>&nbsp;&nbsp;{event.Center.location}
+                        </p>
+                        <p>
+                          <strong>Facilities: </strong>&nbsp;&nbsp;{event.Center.facilities}
+                        </p>
+                        <p>
+                          <strong>Center Type: </strong>&nbsp;&nbsp;{event.Center.type}
+                        </p>
+                        <p>
+                          <strong>Price: </strong>&nbsp;&nbsp;&#x20A6;{event.Center.price}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>}
+              )}
           </Fragment>
         );
       });
@@ -191,10 +206,10 @@ class EditEventList extends Component {
 
 EditEventList.propTypes = {
   loading: PropTypes.bool,
-  reset: PropTypes.func.isRequired, 
+  reset: PropTypes.func.isRequired,
   event: PropTypes.array,
   fetchEventById: PropTypes.func,
   deleteEventById: PropTypes.func
-}
+};
 
 export default EditEventList;
