@@ -121,6 +121,9 @@ export const createEvent = data => dispatch => {
       } else if (res.status === 201) {
         dispatch(createEventSuccess(res.data.message));
         dispatch(fetchEventCenter(data.centerId));
+        setTimeout(() => {
+          dispatch(resetEvent());
+        }, 2000)
       }
     })
     .catch(() => {

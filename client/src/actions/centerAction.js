@@ -58,13 +58,13 @@ export const fetchCenter = () => (dispatch) => {
   dispatch(fetchingCenter());
   axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('user')}`;
   axios({
-    url: '/api/v1/centers',
-    method: 'get'
-  })
-  .then((res) => {
-    dispatch(fectchCenterSuccess(res.data.data));
-  })
-  .catch((e) => {
+      url: '/api/v1/centers',
+      method: 'get'
+    })
+    .then((res) => {
+      dispatch(fectchCenterSuccess(res.data.data));
+    })
+    .catch((e) => {
       dispatch(fetchingCenterError());
     });
 };
@@ -121,10 +121,10 @@ export const createCenter = (values, route) => {
   return (dispatch) => {
     dispatch(creatingCenter());
     axios({
-      url: '/api/v1/centers',
-      method: 'post',
-      data
-    })
+        url: '/api/v1/centers',
+        method: 'post',
+        data
+      })
       .then((res) => {
         if (res.status === 201 && res.data) {
           dispatch(createCenterSuccess(res.data));
@@ -191,10 +191,10 @@ export const updateCenter = (values) => {
   return (dispatch) => {
     dispatch(updatingCenter());
     axios({
-      url: `/api/v1/centers/${values.id}`,
-      method: 'put',
-      data
-    })
+        url: `/api/v1/centers/${values.id}`,
+        method: 'put',
+        data
+      })
       .then((res) => {
         dispatch(updatingCenterSuccess(res.data));
         setTimeout(() => {

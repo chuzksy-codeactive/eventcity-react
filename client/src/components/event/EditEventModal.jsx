@@ -177,7 +177,7 @@ class EditEventModal extends Component {
                 <div className="col-6">
                   <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
                   {message && (
-                      <div style={{ margin: '10px 0', color: 'red' }}>{message}</div>
+                      <div style={{ margin: '10px 0', color: 'green' }}>{message}</div>
                     )}
 
                      <Field centers={this.props.centers || []} defaultCenter={this.props.initialValues.centerId} name="centerName" type="select" component={renderSelectCenter} label="Change Center" required change={this.onSelectCenter.bind(this)} />
@@ -202,7 +202,7 @@ class EditEventModal extends Component {
                       <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
                         submit
                       </button>
-                      <button type="button" className="btn btn-default btn-sm" onClick={this.props.onCloseModal}>
+                      <button type="button" id="cancel-btn" className="btn btn-default btn-sm" onClick={this.props.onCloseModal}>
                         cancel
                       </button>
                     </div>

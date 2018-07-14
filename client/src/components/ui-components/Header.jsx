@@ -13,10 +13,10 @@ import PropTypes from 'prop-types';
  * @returns {object} JSX DOM
  */
 class Header extends Component {
-  renderAdminLinks = isAdmin => {
+  renderAdminLinks = (isAdmin) => {
     if (isAdmin) {
       return (
-        <li className="nav-item dropdown">
+        <li className="nav-item dropdown" id="admin-link">
           <a
             className="nav-link dropdown-toggle"
             href="http://example.com"
@@ -29,9 +29,9 @@ class Header extends Component {
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <Link to="/centers/create" className="dropdown-item">
-              Add New Center
+              <span id="add-center">Add New Center</span>
             </Link>
-            <div className="dropdown-divider" />
+            <div id="modify-center" className="dropdown-divider" />
             <Link to="/centers/list" className="dropdown-item">
               Modify/Delete Center
             </Link>
@@ -47,10 +47,10 @@ class Header extends Component {
     }
     return userId;
   };
-  renderAuthLinks = auth => {
+  renderAuthLinks = (auth) => {
     if (auth) {
       return (
-        <li className="nav-item dropdown">
+        <li className="nav-item dropdown" id="event-link">
           <a
             className="nav-link dropdown-toggle"
             href="http://example.com"
@@ -59,15 +59,14 @@ class Header extends Component {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Event
+            Events
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            {/* <Link className="dropdown-item" to="/events">
-              View Events
-            </Link> */}
-            <Link className="dropdown-item" to={'/events/list'}>
-            View Events
-            </Link>
+            <span id="view-link">
+              <Link className="dropdown-item" to={'/events/list'}>
+                View Events
+              </Link>
+            </span>
           </div>
         </li>
       );
@@ -109,7 +108,7 @@ class Header extends Component {
                 </li>
               )}
               {this.props.user.user.data && (
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown" id="username_link">
                   <a
                     className="nav-link dropdown-toggle"
                     href="/"
@@ -120,7 +119,7 @@ class Header extends Component {
                   >
                     {this.props.user.user.data.username}
                   </a>
-                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="username_sign_out">
                     <Link className="dropdown-item" to="/login" onClick={this.props.logout}>
                       Sign Out
                     </Link>
@@ -147,7 +146,7 @@ Header.propTypes = {
     isAdmin: PropTypes.bool.isRequired,
     error: PropTypes.any.isRequired
   })
-}
+};
 
 const mapStateToProps = state => ({
   user: state.userReducer,
@@ -160,4 +159,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

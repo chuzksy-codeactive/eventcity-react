@@ -29,7 +29,7 @@ const CenterCard = props => (
         <span> &#x20A6;{props.center.price}</span>
       </div>
       <Link to={`/book/center/${props.center.id}`} className="btn btn-primary">
-        More details
+        <div><span id="more-details" href={`/book/center/${props.center.id}`}>More details</span></div>
       </Link>
     </div>
   </div>
