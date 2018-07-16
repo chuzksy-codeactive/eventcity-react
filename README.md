@@ -69,6 +69,12 @@ To run the automated test for the project. Run either of the commands below in y
 
 For backend test, run  `npm run test`  on the terminal. For frontend test run  `client:test`  on the terminal.
 
+To run the end-to-end test, run `npm run e2e`
+Note: Make sure the following are installed on your local machine
+- [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) is installed on your local machine [
+- Chrome WebDriver](http://chromedriver.chromium.org/downloads) is also installed. 
+- [Selenium](https://www.seleniumhq.org/download/) server standalone driver
+
 ## Limitations
 
 This is an open source project that is open to your contribution. Currently, the following limitation exist within the application:
