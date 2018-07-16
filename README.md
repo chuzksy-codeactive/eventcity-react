@@ -61,13 +61,13 @@ npm install -g seqeulize-cli
 9.  **To start the application for development, run**
 ```
 npm run start  -To start node application server.
-cd client && npm run start  -To Frontend development server.
+npm run start:client:dev  -To Frontend development server.
 ```
 ## Testing
 
 To run the automated test for the project. Run either of the commands below in your terminal for either backend test or frontend test.
 
-For backend test, run  `npm run test`  on the terminal. For frontend test run  `cd client && npm run test`  on the terminal.
+For backend test, run  `npm run test`  on the terminal. For frontend test run  `client:test`  on the terminal.
 
 ## Limitations
 
