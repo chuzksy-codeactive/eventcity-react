@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability)  [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=develop)](https://travis-ci.org/chuzksy-codeactive/eventcity-react) [![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/eventcity-react/badge.svg?branch=feature%2F159032001%2Fe2e-test)](https://coveralls.io/github/chuzksy-codeactive/eventcity-react?branch=feature%2F159032001%2Fe2e-test)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9c9a7e144dfdc43d16ec/maintainability)](https://codeclimate.com/github/chuzksy-codeactive/eventcity-react/maintainability)  [![Build Status](https://travis-ci.org/chuzksy-codeactive/eventcity-react.svg?branch=develop)](https://travis-ci.org/chuzksy-codeactive/eventcity-react) [![Coverage Status](https://coveralls.io/repos/github/chuzksy-codeactive/eventcity-react/badge.svg?branch=feature%2F159032001%2Fe2e-test)](https://coveralls.io/github/chuzksy-codeactive/eventcity-react?branch=feature%2F159032001%2Fe2e-test)  [![codecov](https://codecov.io/gh/chuzksy-codeactive/eventcity-react/branch/staging/graph/badge.svg)](https://codecov.io/gh/chuzksy-codeactive/eventcity-react)
 
 # EventCity
 EventCity is a comprehensive room scheduling software that is designed to facilitate the management of meetings and events. EventManager can be used as a solution for scheduling conference meetings and classrooms, coordinating events and room setup, assigning resources and services for an event.
@@ -61,13 +61,13 @@ npm install -g seqeulize-cli
 9.  **To start the application for development, run**
 ```
 npm run start  -To start node application server.
-cd client && npm run start  -To Frontend development server.
+npm run start:client:dev  -To Frontend development server.
 ```
 ## Testing
 
 To run the automated test for the project. Run either of the commands below in your terminal for either backend test or frontend test.
 
-For backend test, run  `npm run test`  on the terminal. For frontend test run  `cd client && npm run test`  on the terminal.
+For backend test, run  `npm run test`  on the terminal. For frontend test run  `client:test`  on the terminal.
 
 ## Limitations
 
