@@ -28,7 +28,6 @@ describe('Test for Center', () => {
           password: 'password'
         })
         .end((err, res) => {
-          console.log('res.body', res.boby);
           userId = res.body.data.id;
           userToken = res.body.token;
           done();

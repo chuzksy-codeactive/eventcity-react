@@ -57,7 +57,6 @@ module.exports = {
       .assert.elementPresent('#ion-edit')
       .getAttribute('#ion-edit', 'href', function (result) {
         urlPath = result.value;
-        console.log(urlPath)
         this.click('#ion-edit')
         this.pause(2000)
         this.waitForElementVisible('#form', 2000)

@@ -24,8 +24,9 @@ export const fetchingCenter = () => ({
  * @return {object}  action [FETCHING_CENTER_ERROR]
  */
 
-export const fetchingCenterError = () => ({
-  type: types.FETCHING_CENTER_ERROR
+export const fetchingCenterError = (payload) => ({
+  type: types.FETCHING_CENTER_ERROR,
+  payload
 });
 
 /**
@@ -57,15 +58,23 @@ export const fectchCenterSuccess = payload => ({
 export const fetchCenter = () => (dispatch) => {
   dispatch(fetchingCenter());
   axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('user')}`;
-  axios({
+  return axios({
       url: '/api/v1/centers',
       method: 'get'
     })
     .then((res) => {
       dispatch(fectchCenterSuccess(res.data.data));
     })
-    .catch((e) => {
-      dispatch(fetchingCenterError());
+    .catch((error) => {
+      const {
+        status
+      } = error.response;
+      const {
+        message
+      } = error.response.data;
+      if (status === 404) {
+        dispatch(fetchingCenterError(message));
+      }
     });
 };
 
@@ -120,7 +129,7 @@ export const createCenter = (values, route) => {
   data.append('file', values.file);
   return (dispatch) => {
     dispatch(creatingCenter());
-    axios({
+    return axios({
         url: '/api/v1/centers',
         method: 'post',
         data
@@ -131,8 +140,16 @@ export const createCenter = (values, route) => {
           route.push('/centers/list');
         }
       })
-      .catch((err) => {
-        dispatch(createCenterFailure(err));
+      .catch((error) => {
+        const {
+          status
+        } = error.response;
+        const {
+          message
+        } = error.response.data;
+        if (status === 409 || status === 400) {
+          dispatch(createCenterFailure(message));
+        }
       });
   };
 };
@@ -168,8 +185,9 @@ export const updatingCenterSuccess = payload => ({
  * @param {void} 
  * @return {object}  action [UPDATING_CENTER_FAILURE]
  */
-export const updatingCenterFailure = () => ({
-  type: types.UPDATING_CENTER_FAILURE
+export const updatingCenterFailure = (payload) => ({
+  type: types.UPDATING_CENTER_FAILURE,
+  payload
 });
 
 /**
@@ -190,7 +208,7 @@ export const updateCenter = (values) => {
   data.append('file', values.file);
   return (dispatch) => {
     dispatch(updatingCenter());
-    axios({
+    return axios({
         url: `/api/v1/centers/${values.id}`,
         method: 'put',
         data
@@ -201,8 +219,16 @@ export const updateCenter = (values) => {
           history.goBack();
         }, 2000);
       })
-      .catch(() => {
-        // dispatch(updatingCenterFailure());
+      .catch((error) => {
+        const {
+          status
+        } = error.response;
+        const {
+          message
+        } = error.response.data;
+        if (status === 404) {
+          dispatch(updatingCenterFailure(message));
+        }
       });
   };
 };
@@ -252,5 +278,5 @@ export const reset = () => ({
 })
 
 export const resetCenterEvent = () => dispatch => {
-  dispatch(reset());
+  return dispatch(reset());
 }

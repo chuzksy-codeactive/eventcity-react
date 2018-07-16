@@ -8,6 +8,7 @@ import eventCenterReducer from './eventCenterReducer';
 import loadCenter from './loadCenter';
 import updateEventReducer from './updateEventReducer';
 import eventReducer from './eventReducer';
+import centerPaginationReducer from './centerPaginationReducer';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   eventReducer,
   loadCenter,
   updateEventReducer,
+  centerPaginationReducer,
   form: formReducer
 });
 

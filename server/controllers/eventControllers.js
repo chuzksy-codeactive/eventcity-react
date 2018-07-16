@@ -109,8 +109,7 @@ const getEventsById = (req, res) => {
   events.then((event) => {
     if (event.length > 0) {
       return res.status(200).json({
-        data: event,
-        code: 200
+        data: event
       });
     }
     return res.status(404).json({
@@ -242,7 +241,7 @@ const updateEventById = (req, res) => {
         }).then((e) => {
           if (e && e.id != req.params.id) { // eslint-disable-line
             return res.status(400).json({
-              message: 'Not available, please choose another date r'
+              message: 'Not available, please choose another date'
             });
           }
           return models.Event.update(event, {

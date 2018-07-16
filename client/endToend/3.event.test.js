@@ -28,7 +28,6 @@ module.exports = {
       .assert.elementPresent('#more-details')
       .getAttribute("#more-details", 'href', function (result) {
         urlPath = result.value;
-        console.log(urlPath)
         this.click('#more-details')
         this.pause(2000)
         this.waitForElementVisible('#book-now', 2000)

@@ -4,12 +4,14 @@ import userInitialState from './userInitialState';
 const userReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case types.SIGNING_IN_USER:
+    
       return {
         ...state,
         user: {},
         error: null,
         loading: true
       };
+
     case types.SIGNIN_USER_FAILURE:
       return {
         ...state,

@@ -6,6 +6,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  
 script:
   - bundle exec rspec
   # Preferably you will run test-reporter on branch update events. But
@@ -24,6 +25,7 @@ services:
   - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter coveralls sequelize jest istanbul-combine
+  - npm install codecov -g
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - npm run build

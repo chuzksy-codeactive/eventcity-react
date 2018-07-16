@@ -134,6 +134,7 @@ const getCenterPerPage = (req, res) => {
       res.status(200).json({
         data: centers,
         count: data.count,
+        limit,
         pages
       });
     });
@@ -200,14 +201,14 @@ const updateCenter = (req, res) => {
       }).then((c) => {
         if (c[0] === 1) {
           return res.status(201).json({
-            message: `Center with ID ${req.params.id} is sucessfully updated`,
+            message: 'Center is sucessfully updated',
             data: c
           });
         }
         return res
           .status(404)
           .json({
-            message: `Center with Id: ${req.params.id} is not found`
+            message: 'Center is not found'
           });
       });
     }

@@ -858,3 +858,8 @@ cite img {
   position: absolute;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); }
+
+.paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center; }

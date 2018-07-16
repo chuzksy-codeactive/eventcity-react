@@ -136,7 +136,7 @@ class CenterForm extends Component {
               </div>
             )}
             <form onSubmit={handleSubmit(this.onSubmitForm)} className="control-forms" encType="multipart/form-data" id="form">
-              <div class="row">
+              <div className="row">
                 <div className="col-md-6 pad-it">
                   <Field name="name" type="text" component={RenderField} label="Center Name" required />
                   <Field name="capacity" type="number" component={RenderField} label="Capacity" required />

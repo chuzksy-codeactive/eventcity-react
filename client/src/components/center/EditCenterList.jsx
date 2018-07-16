@@ -142,7 +142,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  center: state.centerReducer
+  center: state.centerReducer,
+  centersPerPage: state.centerPaginationReducer
 });
 
 EditCenterList.propTypes = {
