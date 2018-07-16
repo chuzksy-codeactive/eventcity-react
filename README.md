@@ -72,7 +72,7 @@ For backend test, run  `npm run test`  on the terminal. For frontend test run  `
 To run the end-to-end test, run `npm run e2e`
 Note: Make sure the following are installed on your local machine
 - [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) is installed on your local machine [
-- Chrome WebDriver](http://chromedriver.chromium.org/downloads) is also installed. 
+- [Chrome WebDriver](http://chromedriver.chromium.org/downloads) is also installed. 
 - [Selenium](https://www.seleniumhq.org/download/) server standalone driver
 
 ## Limitations
