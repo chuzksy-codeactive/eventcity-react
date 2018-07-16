@@ -47,7 +47,7 @@ const createCenters = (req, res) => {
         if (!result.isEmpty()) {
           errors = result.array().map(e => e.msg);
           return res.status(400).json({
-            message: 'errors'
+            message: errors
           });
         }
         return models.Center.findOne({

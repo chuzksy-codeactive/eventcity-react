@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "npm run build",
     "testdb": "NODE_ENV=test sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:undo:all --env test && sequelize db:seed:all --env test",
-    "test": "npm run build && npm run testdb && NODE_ENV=test nyc mocha --exit  --timeout 40000 ./server/dist/test/index.test.js --recursive || true && client:test",
+    "test": "npm run build && npm run testdb && NODE_ENV=test nyc mocha --exit  --timeout 40000 ./server/dist/test/index.test.js --recursive || true && npm run client:test",
     "start": "node server/dist/bin/www",
     "server:dev": "nodemon --watch server --exec babel-node -- server/bin/www",
     "build": "rimraf ./server/dist/ && babel ./server --out-dir ./server/dist/ --copy-files && webpack --config ./client/config/webpack.prod.js -p",
@@ -14,7 +14,7 @@
     "build-css": "node-sass-chokidar ./client/src/ -o ./client/src/",
     "watch-css": "npm run build-css && node-sass-chokidar ./client/src/ -o ./client/src/ --watch --recursive",
     "start:client:dev": "webpack-dev-server --config=./client/config/webpack.dev.js",
-    "client:test": "jest client/__tests__ --coverage && codecov",
+    "client:test": "jest client/__tests__ --coverage --collectCoverageFrom=client/src/**/*.{js,jsx}  && codecov ",
     "e2e:test": "nightwatch"
   },
   "dependencies": {
