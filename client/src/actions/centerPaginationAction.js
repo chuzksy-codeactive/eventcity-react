@@ -29,7 +29,7 @@ export const searchCenterFailure = (payload) => ({
 
 export const searchCenterPerPage = (number) => (dispatch) => {
   dispatch(searchingCenter());
-  axios({
+  return axios({
     url: `/api/v1/centers/page/${number}`,
     method: 'get'
   }).then((res) => {

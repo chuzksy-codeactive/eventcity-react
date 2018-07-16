@@ -16,28 +16,28 @@ import Pagination from '../ui-components/Pagination';
 class CenterCardList extends Component {
   state = {
     searchTerm: '',
-    currentlyDisplayed: this.props.centers || [],
-    page: 1
+    currentlyDisplayed: this.props.centers
   };
+
   onInputChange = (event) => {
-    const value = event.target.value;
-    let newlyDisplayed;
-    if (!_.isEmpty(this.props.centers)) {
-      newlyDisplayed = _.filter(this.props.centers, (center) => {
-        const name = center.name.toLowerCase();
-        const facilities = center.facilities.toLowerCase();
-        const location = center.location.toLowerCase();
-        return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase());
-      });
-      this.setState({
-        searchTerm: value,
-        currentlyDisplayed: newlyDisplayed
-      });
-    }
+    this.setState({
+      searchTerm: event.target.value
+    });
   };
+  handlePageClick = (page) => {  
+    const selected = page.selected + 1;
+    this.props.searchCenterPerPage(selected);
+  };
+
   renderCenter = () => {
-    const centers = this.state.currentlyDisplayed;
     let centerCards = null;
+    const value = this.state.searchTerm;
+    const centers = _.filter(this.props.centersPerPage.centers.data, (center) => {
+      const name = center.name.toLowerCase();
+      const facilities = center.facilities.toLowerCase();
+      const location = center.location.toLowerCase();
+      return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase());
+    });
     if (Array.isArray(centers) && centers.length > 0) {
       centerCards = centers.map(center => <CenterCards key={center.id} center={center} />);
     } else if (Array.isArray(centers) && centers.length === 0) {
@@ -45,17 +45,17 @@ class CenterCardList extends Component {
     }
     return centerCards;
   };
-  
   render() {
     return (
       <Fragment>
-        <SearchBar centers={this.props.centers} onInputChange={this.onInputChange} />
+        <SearchBar onInputChange={this.onInputChange} />
         <div className="container">
-          <div className="row cards">{this.renderCenter()}</div>
+          <div id="cards" className="row cards">
+            {this.renderCenter()}
+          </div>
         </div>
         <div className="paginate">
-        <Pagination 
-          pages={this.props.pages} page={this.props.page} />
+          {this.props.centersPerPage.centers.data && <Pagination pages={this.props.pages} page={this.props.page} />} 
         </div>
       </Fragment>
     );

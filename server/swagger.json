@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "eventCity",
-    "description": "eventCity API provides resources for consuming the users, centers and events endpoints"
+    "title": "EventCity API and Documentation",
+    "description": "### EventCity API provides resources for consuming the users, centers and events endpoints\n- EventCity API can be used to programatically create and manage event centers. You will be able to:\n- Signup and Signin.\n- Create, edit and delete centers as and Admin.\n- Create, edit and delete events.\n- Cancel event as an Admin.\n- Update an events.\n- View bookings information and centers information.\n - Reschedule cancelled event"
   },
   "host": "eventcity.herokuapp.com",
   "basePath": "/api/v1",
@@ -27,10 +27,10 @@
   "paths": {
     "/users": {
       "get": {
-        "description": "This endpoint fetches all the users",
-        "summary": "users",
+        "description": "### This endpoint fetches all the users",
+        "summary": "Get Users",
         "tags": [
-          "Misc"
+          "Users"
         ],
         "operationId": "UsersGet",
         "produces": [
@@ -45,57 +45,53 @@
             },
             "examples": {
               "application/json": {
-                "data": [
-                  {
-                    "id": 1,
-                    "username": "chuzksy",
-                    "firstname": "chika",
-                    "lastname": "onu",
-                    "password": "$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO",
-                    "email": "chuzksy@yahoo.com",
-                    "role": "user",
-                    "imageName": "no_image.png",
-                    "imageUrl": "no_image_url",
-                    "createdAt": "2018-06-07T20:51:11.807Z",
-                    "updatedAt": "2018-06-07T20:51:11.807Z"
-                  }
-                ]
+                "data": [{
+                  "id": 1,
+                  "username": "chuzksy",
+                  "firstname": "chika",
+                  "lastname": "onu",
+                  "password": "$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO",
+                  "email": "chuzksy@yahoo.com",
+                  "role": "user",
+                  "imageName": "no_image.png",
+                  "imageUrl": "no_image_url",
+                  "createdAt": "2018-06-07T20:51:11.807Z",
+                  "updatedAt": "2018-06-07T20:51:11.807Z"
+                }]
               }
             }
           }
         },
         "security": [],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/users"
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/users"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "324",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 21:37:52 GMT",
+              "Etag": "W/\"144-ro9YIgClsxmHduEoE3TrSW0z4a0\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "324",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 21:37:52 GMT",
-                "Etag": "W/\"144-ro9YIgClsxmHduEoE3TrSW0z4a0\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"data\":[{\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"role\":\"user\",\"imageName\":\"no_image.png\",\"imageUrl\":\"no_image_url\",\"createdAt\":\"2018-06-07T20:51:11.807Z\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\"}]}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "users",
-            "x-testDescription": "This endpoint fetches all the users"
-          }
-        ],
+            "body": "{\"data\":[{\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"role\":\"user\",\"imageName\":\"no_image.png\",\"imageUrl\":\"no_image_url\",\"createdAt\":\"2018-06-07T20:51:11.807Z\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\"}]}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "users",
+          "x-testDescription": "This endpoint fetches all the users"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -104,10 +100,10 @@
         }
       },
       "post": {
-        "description": "This endpoint create a new user",
-        "summary": "users",
+        "description": "### This endpoint creates a new user",
+        "summary": "Creates a new User",
         "tags": [
-          "Misc"
+          "Users"
         ],
         "operationId": "UsersPost",
         "produces": [
@@ -116,8 +112,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "username",
             "in": "formData",
             "required": true,
@@ -155,7 +150,7 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "This is what gets returned on a successful signup",
             "schema": {
               "$ref": "#/definitions/Users4"
             },
@@ -206,41 +201,39 @@
           }
         },
         "security": [],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "POST",
-              "uri": "/users",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "username=chuzksy&firstname=chika&lastname=onu&email=chuzksy@yahoo.com&password=password"
+        "x-unitTests": [{
+          "request": {
+            "method": "POST",
+            "uri": "/users",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "504",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 20:51:11 GMT",
-                "Etag": "W/\"1f8-SXxdQht1k3rf6o3mlT7gGAZx7Ys\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"New user has been created successfully\",\"data\":{\"role\":\"user\",\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"imageUrl\":\"no_image_url\",\"imageName\":\"no_image.png\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\",\"createdAt\":\"2018-06-07T20:51:11.807Z\"},\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTUyODQwNDY3MTgyN30.QnumRZf4HrzsG_MqcDXBaUGLi9ZzGQEsMHCghSE5_rg\"}"
+            "body": "username=chuzksy&firstname=chika&lastname=onu&email=chuzksy@yahoo.com&password=password"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "504",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 20:51:11 GMT",
+              "Etag": "W/\"1f8-SXxdQht1k3rf6o3mlT7gGAZx7Ys\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "users1",
-            "x-testDescription": "This endpoint create a new user"
-          }
-        ],
+            "body": "{\"message\":\"New user has been created successfully\",\"data\":{\"role\":\"user\",\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"imageUrl\":\"no_image_url\",\"imageName\":\"no_image.png\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\",\"createdAt\":\"2018-06-07T20:51:11.807Z\"},\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTUyODQwNDY3MTgyN30.QnumRZf4HrzsG_MqcDXBaUGLi9ZzGQEsMHCghSE5_rg\"}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "users1",
+          "x-testDescription": "This endpoint create a new user"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -252,9 +245,9 @@
     "/users/login": {
       "post": {
         "description": "This endpoint logs in a user",
-        "summary": "users/login",
+        "summary": "User login",
         "tags": [
-          "Misc"
+          "Users"
         ],
         "operationId": "UsersLoginPost",
         "produces": [
@@ -263,8 +256,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "username",
             "in": "formData",
             "required": true,
@@ -281,7 +273,7 @@
         ],
         "responses": {
           "202": {
-            "description": "",
+            "description": "Server response on successful log in",
             "schema": {
               "$ref": "#/definitions/UserLogin"
             },
@@ -306,7 +298,7 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "Server response when user is not found",
             "schema": {
               "$ref": "#/definitions/UserLogin8"
             },
@@ -318,41 +310,39 @@
           }
         },
         "security": [],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "POST",
-              "uri": "/users/login",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "username=chuzksyes&password=password"
+        "x-unitTests": [{
+          "request": {
+            "method": "POST",
+            "uri": "/users/login",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "488",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 21:43:04 GMT",
-                "Etag": "W/\"1e8-DjhEhmX+M7rnCfpF2KGTUVYfL2g\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Logged in successfully\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTUyODQwNzc4NDExNX0._iHyRkZJljKUU3lLrEvasAFM33lO7fzqCMcmYcXqauE\",\"data\":{\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"role\":\"user\",\"imageName\":\"no_image.png\",\"imageUrl\":\"no_image_url\",\"createdAt\":\"2018-06-07T20:51:11.807Z\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\"}}"
+            "body": "username=chuzksyes&password=password"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "488",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 21:43:04 GMT",
+              "Etag": "W/\"1e8-DjhEhmX+M7rnCfpF2KGTUVYfL2g\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "users/login",
-            "x-testDescription": "This endpoint logs in a user"
-          }
-        ],
+            "body": "{\"message\":\"Logged in successfully\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTUyODQwNzc4NDExNX0._iHyRkZJljKUU3lLrEvasAFM33lO7fzqCMcmYcXqauE\",\"data\":{\"id\":1,\"username\":\"chuzksy\",\"firstname\":\"chika\",\"lastname\":\"onu\",\"password\":\"$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO\",\"email\":\"chuzksy@yahoo.com\",\"role\":\"user\",\"imageName\":\"no_image.png\",\"imageUrl\":\"no_image_url\",\"createdAt\":\"2018-06-07T20:51:11.807Z\",\"updatedAt\":\"2018-06-07T20:51:11.807Z\"}}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "users/login",
+          "x-testDescription": "This endpoint logs in a user"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -364,9 +354,9 @@
     "/centers": {
       "get": {
         "description": "This endpoint gets all the centers",
-        "summary": "centers",
+        "summary": "Gets all centers",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "CentersGet",
         "produces": [
@@ -375,14 +365,13 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Server response when all centers are fetched",
             "schema": {
               "$ref": "#/definitions/GetsAllCenters"
             },
             "examples": {
               "application/json": {
-                "data": [
-                  {
+                "data": [{
                     "id": 1,
                     "name": "St Kizitos Place",
                     "capacity": 2000,
@@ -413,46 +402,42 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/centers"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/centers"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "793",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 21:55:13 GMT",
+              "Etag": "W/\"319-dWKsEdsfN0QaaWhSAszbFNJL1pc\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "793",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 21:55:13 GMT",
-                "Etag": "W/\"319-dWKsEdsfN0QaaWhSAszbFNJL1pc\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"data\":[{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"},{\"id\":2,\"name\":\"Grailland Pent House\",\"capacity\":2000,\"location\":\"Iju Hills\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"58848b3bb3186fecbceba3b3f0c95502\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408473/ksepv10lz7dujfwcir5u.png\",\"createdAt\":\"2018-06-07T21:54:33.432Z\",\"updatedAt\":\"2018-06-07T21:54:33.432Z\"}]}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers",
-            "x-testDescription": "This endpoint gets all the centers"
-          }
-        ],
+            "body": "{\"data\":[{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"},{\"id\":2,\"name\":\"Grailland Pent House\",\"capacity\":2000,\"location\":\"Iju Hills\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"58848b3bb3186fecbceba3b3f0c95502\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408473/ksepv10lz7dujfwcir5u.png\",\"createdAt\":\"2018-06-07T21:54:33.432Z\",\"updatedAt\":\"2018-06-07T21:54:33.432Z\"}]}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers",
+          "x-testDescription": "This endpoint gets all the centers"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -462,9 +447,9 @@
       },
       "post": {
         "description": "This endpoint create a new center",
-        "summary": "centers",
+        "summary": "Creates a new center",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "CentersPost",
         "produces": [
@@ -473,8 +458,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
@@ -526,7 +510,7 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Response from the server when a center is created",
             "schema": {
               "$ref": "#/definitions/Centers"
             },
@@ -550,47 +534,43 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "POST",
-              "uri": "/centers",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=St Kizitos Place&capacity=2000&location=Ishage&facilities=Chairs, Air Conditions, Stages, Rest rooms&type=Classroom&price=300000&file="
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "POST",
+            "uri": "/centers",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Connection": "keep-alive",
-                "Content-Length": "448",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Tue, 05 Jun 2018 14:47:08 GMT",
-                "ETag": "W/\"1c0-OU2cBN5m7QjPNLAOlFzkr9+RlTE\"",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"New center has been created succefully\",\"data\":{\"id\":10,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"bd8ab057f1d7c6f3d40107244914744d\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528210028/tljcqnv5uve93pdsneiv.png\",\"updatedAt\":\"2018-06-05T14:47:08.65Z\",\"createdAt\":\"2018-06-05T14:47:08.65Z\"}}"
+            "body": "name=St Kizitos Place&capacity=2000&location=Ishage&facilities=Chairs, Air Conditions, Stages, Rest rooms&type=Classroom&price=300000&file="
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Connection": "keep-alive",
+              "Content-Length": "448",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Tue, 05 Jun 2018 14:47:08 GMT",
+              "ETag": "W/\"1c0-OU2cBN5m7QjPNLAOlFzkr9+RlTE\"",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers1",
-            "x-testDescription": "This endpoint create a new center"
-          }
-        ],
+            "body": "{\"message\":\"New center has been created succefully\",\"data\":{\"id\":10,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"bd8ab057f1d7c6f3d40107244914744d\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528210028/tljcqnv5uve93pdsneiv.png\",\"updatedAt\":\"2018-06-05T14:47:08.65Z\",\"createdAt\":\"2018-06-05T14:47:08.65Z\"}}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers1",
+          "x-testDescription": "This endpoint create a new center"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -599,28 +579,32 @@
         }
       }
     },
-    "/centers/3": {
+    "/centers/page/{number}": {
       "get": {
-        "description": "TODO: Add Description",
-        "summary": "centers/:page",
+        "description": "Fetches centers per page",
+        "summary": "Centers fetched per page number",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "Centers3Get",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [{
+          "name": "number",
+          "in": "path",
+          "required": true,
+          "description": "Page number to be fetched"
+        }],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response from the server when a page is fetched",
             "schema": {
               "$ref": "#/definitions/CentersPagination"
             },
             "examples": {
               "application/json": {
-                "data": [
-                  {
+                "data": [{
                     "id": 1,
                     "name": "St Kizitos Place",
                     "capacity": 2000,
@@ -651,46 +635,42 @@
             }
           }
         },
-        "security": [
-          {
-            "adminToken": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "adminToken": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/centers/3"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/centers/3"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "793",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 21:56:56 GMT",
+              "Etag": "W/\"319-dWKsEdsfN0QaaWhSAszbFNJL1pc\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "793",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 21:56:56 GMT",
-                "Etag": "W/\"319-dWKsEdsfN0QaaWhSAszbFNJL1pc\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"data\":[{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"},{\"id\":2,\"name\":\"Grailland Pent House\",\"capacity\":2000,\"location\":\"Iju Hills\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"58848b3bb3186fecbceba3b3f0c95502\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408473/ksepv10lz7dujfwcir5u.png\",\"createdAt\":\"2018-06-07T21:54:33.432Z\",\"updatedAt\":\"2018-06-07T21:54:33.432Z\"}]}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers/:page",
-            "x-testDescription": "TODO: Add Description"
-          }
-        ],
+            "body": "{\"data\":[{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"},{\"id\":2,\"name\":\"Grailland Pent House\",\"capacity\":2000,\"location\":\"Iju Hills\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"58848b3bb3186fecbceba3b3f0c95502\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408473/ksepv10lz7dujfwcir5u.png\",\"createdAt\":\"2018-06-07T21:54:33.432Z\",\"updatedAt\":\"2018-06-07T21:54:33.432Z\"}]}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers/:page",
+          "x-testDescription": "Fetches centers per page"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -699,21 +679,26 @@
         }
       }
     },
-    "/centers/1": {
+    "/centers/{centerId}": {
       "get": {
         "description": "This endpoint gets a center by Id",
-        "summary": "centers/:id",
+        "summary": "Gets a center by Id",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "Centers1Get",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [{
+          "name": "centerId",
+          "in": "path",
+          "required": true,
+          "description": "Id of center to be fetched"
+        }],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Server response when center is found",
             "schema": {
               "$ref": "#/definitions/GetCenterById"
             },
@@ -737,46 +722,42 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/centers/1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/centers/{centerId}"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "421",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 21:57:38 GMT",
+              "Etag": "W/\"1a5-q+XK8XKzetLuG2Kw6hCYk21s4iY\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "421",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 21:57:38 GMT",
-                "Etag": "W/\"1a5-q+XK8XKzetLuG2Kw6hCYk21s4iY\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Center found\",\"data\":{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"}}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers/:id",
-            "x-testDescription": "This endpoint gets a center by Id"
-          }
-        ],
+            "body": "{\"message\":\"Center found\",\"data\":{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\"}}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers/:id",
+          "x-testDescription": "This endpoint gets a center by Id"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -786,9 +767,9 @@
       },
       "put": {
         "description": "This endpoint updates a center by Id",
-        "summary": "centers/:id",
+        "summary": "Updates a center by Id",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "Centers1Put",
         "produces": [
@@ -797,48 +778,47 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Center's name"
           },
           {
             "name": "capacity",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Center's capacity"
           },
           {
             "name": "location",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Center's location"
           },
           {
             "name": "facilities",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Ceters facilities"
           },
           {
             "name": "type",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Centers types"
           },
           {
             "name": "price",
             "in": "formData",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Centers price"
           },
           {
             "name": "file",
@@ -864,50 +844,46 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "PUT",
-              "uri": "/centers/1",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=Kizitos Palace&capacity=2500&location=Ishaga&facilities=Chairs, Air Conditions, Stages, Rest rooms, Canapies&type=Hall&price=300000&file="
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "PUT",
+            "uri": "/centers/1",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "64",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:05:26 GMT",
-                "Etag": "W/\"40-3Uee84fCiPzGKra/FN0KFCiyKn4\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Center with ID 1 is sucessfully updated\",\"data\":[1]}"
+            "body": "name=Kizitos Palace&capacity=2500&location=Ishaga&facilities=Chairs, Air Conditions, Stages, Rest rooms, Canapies&type=Hall&price=300000&file="
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "64",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:05:26 GMT",
+              "Etag": "W/\"40-3Uee84fCiPzGKra/FN0KFCiyKn4\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers/:id2",
-            "x-testDescription": "This endpoint updates a center by Id"
-          }
-        ],
+            "body": "{\"message\":\"Center with ID 1 is sucessfully updated\",\"data\":[1]}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers/:id2",
+          "x-testDescription": "This endpoint updates a center by Id"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -916,21 +892,26 @@
         }
       }
     },
-    "/centers/event/1": {
+    "/centers/event/{centerId}": {
       "get": {
         "description": "This endpoint gets a list of event book for a particular center by Id",
-        "summary": "centers/event/:id",
+        "summary": "Gets all events for a center",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "CentersEvent1Get",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [{
+          "name": "centerId",
+          "in": "path",
+          "required": true,
+          "description": "Center's id to get all events"
+        }],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Server's response when a center is found",
             "schema": {
               "$ref": "#/definitions/Centers~1event~1:id"
             },
@@ -950,64 +931,58 @@
                   "imageUrl": "https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png",
                   "createdAt": "2018-06-07T21:53:59.415Z",
                   "updatedAt": "2018-06-07T21:53:59.415Z",
-                  "events": [
-                    {
-                      "id": 1,
-                      "name": "Sauce Code meeting",
-                      "purpose": "Teaching girls how to code",
-                      "note": "This is a meetup to teach young girls how to code",
-                      "eventDate": "2018-12-12",
-                      "createdAt": "2018-06-07T22:00:06.783Z",
-                      "updatedAt": "2018-06-07T22:00:06.783Z",
-                      "centerId": 1,
-                      "userId": 1
-                    }
-                  ]
+                  "events": [{
+                    "id": 1,
+                    "name": "Sauce Code meeting",
+                    "purpose": "Teaching girls how to code",
+                    "note": "This is a meetup to teach young girls how to code",
+                    "eventDate": "2018-12-12",
+                    "createdAt": "2018-06-07T22:00:06.783Z",
+                    "updatedAt": "2018-06-07T22:00:06.783Z",
+                    "centerId": 1,
+                    "userId": 1
+                  }]
                 }
               }
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/centers/event/1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/centers/event/{centerId}"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "723",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:03:51 GMT",
+              "Etag": "W/\"2d3-5ne6n/0L5BbC33EM+6quGxl6xXs\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "723",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:03:51 GMT",
-                "Etag": "W/\"2d3-5ne6n/0L5BbC33EM+6quGxl6xXs\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Successfully found a center\",\"error\":false,\"data\":{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\",\"events\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}]}}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers/event/:id",
-            "x-testDescription": "This endpoint gets a list of event book for a particular center by Id"
-          }
-        ],
+            "body": "{\"message\":\"Successfully found a center\",\"error\":false,\"data\":{\"id\":1,\"name\":\"St Kizitos Place\",\"capacity\":2000,\"location\":\"Ishage\",\"facilities\":\"Chairs, Air Conditions, Stages, Rest rooms\",\"type\":\"Classroom\",\"price\":300000,\"imageName\":\"ee0f07a4546dc7be0a4272e804f40330\",\"imageUrl\":\"https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png\",\"createdAt\":\"2018-06-07T21:53:59.415Z\",\"updatedAt\":\"2018-06-07T21:53:59.415Z\",\"events\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}]}}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers/event/:id",
+          "x-testDescription": "This endpoint gets a list of event book for a particular center by Id"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1016,12 +991,12 @@
         }
       }
     },
-    "/centers/9": {
+    "/centers/{Id}": {
       "delete": {
         "description": "This endpoint deletes a center by Id",
-        "summary": "centers/:id",
+        "summary": "Deletes a center by Id",
         "tags": [
-          "Misc"
+          "Centers"
         ],
         "operationId": "Centers9Delete",
         "produces": [
@@ -1030,8 +1005,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
@@ -1094,47 +1068,43 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "DELETE",
-              "uri": "/centers/9",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=St Kizitos Place&capacity=2000&location=Ishage&facilities=Chairs, Air Conditions, Stages, Rest rooms&type=Classroom&price=300000&file="
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "DELETE",
+            "uri": "/centers/9",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Connection": "keep-alive",
-                "Content-Length": "44",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Tue, 05 Jun 2018 14:26:44 GMT",
-                "ETag": "W/\"2c-5aa1f6Myz/CtDIYr1o2vp2lp07Q\"",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Center is successfully deleted\"}"
+            "body": "name=St Kizitos Place&capacity=2000&location=Ishage&facilities=Chairs, Air Conditions, Stages, Rest rooms&type=Classroom&price=300000&file="
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Connection": "keep-alive",
+              "Content-Length": "44",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Tue, 05 Jun 2018 14:26:44 GMT",
+              "ETag": "W/\"2c-5aa1f6Myz/CtDIYr1o2vp2lp07Q\"",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "centers/:id1",
-            "x-testDescription": "This endpoint deletes a center by Id"
-          }
-        ],
+            "body": "{\"message\":\"Center is successfully deleted\"}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "centers/:id1",
+          "x-testDescription": "This endpoint deletes a center by Id"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1146,9 +1116,9 @@
     "/events": {
       "get": {
         "description": "This endpoint gets all events",
-        "summary": "events",
+        "summary": "Gets all events",
         "tags": [
-          "Misc"
+          "Events"
         ],
         "operationId": "EventsGet",
         "produces": [
@@ -1157,69 +1127,63 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Server's response when all event are fetched",
             "schema": {
               "$ref": "#/definitions/Events"
             },
             "examples": {
               "application/json": {
-                "data": [
-                  {
-                    "id": 1,
-                    "name": "Sauce Code meeting",
-                    "purpose": "Teaching girls how to code",
-                    "note": "This is a meetup to teach young girls how to code",
-                    "eventDate": "2018-12-12",
-                    "createdAt": "2018-06-07T22:00:06.783Z",
-                    "updatedAt": "2018-06-07T22:00:06.783Z",
-                    "centerId": 1,
-                    "userId": 1
-                  }
-                ]
+                "data": [{
+                  "id": 1,
+                  "name": "Sauce Code meeting",
+                  "purpose": "Teaching girls how to code",
+                  "note": "This is a meetup to teach young girls how to code",
+                  "eventDate": "2018-12-12",
+                  "createdAt": "2018-06-07T22:00:06.783Z",
+                  "updatedAt": "2018-06-07T22:00:06.783Z",
+                  "centerId": 1,
+                  "userId": 1
+                }]
               }
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/events"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/events"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "272",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:00:40 GMT",
+              "Etag": "W/\"110-sCm+f4Cq/joleAmxW4TmEwGQaHA\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "272",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:00:40 GMT",
-                "Etag": "W/\"110-sCm+f4Cq/joleAmxW4TmEwGQaHA\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"data\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}]}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "events",
-            "x-testDescription": "This endpoint gets all events"
-          }
-        ],
+            "body": "{\"data\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}]}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "events",
+          "x-testDescription": "This endpoint gets all events"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1229,9 +1193,9 @@
       },
       "post": {
         "description": "This endpoint creates an events",
-        "summary": "events",
+        "summary": "Create an event",
         "tags": [
-          "Misc"
+          "Events"
         ],
         "operationId": "EventsPost",
         "produces": [
@@ -1240,8 +1204,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
@@ -1286,7 +1249,7 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Server's response when an event is created",
             "schema": {
               "$ref": "#/definitions/CreatesEvents"
             },
@@ -1305,50 +1268,46 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "POST",
-              "uri": "/events",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=Sauce Code meeting&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-12-2018&userId=1&centerId=1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "POST",
+            "uri": "/events",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "240",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:00:06 GMT",
-                "Etag": "W/\"f0-SgdQDM+6fTUmfaEVKPrCs5fUqZI\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Event is scheduled successfuly. Thanks\",\"data\":{\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"12-12-2018\",\"userId\":\"1\",\"centerId\":\"1\"}}"
+            "body": "name=Sauce Code meeting&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-12-2018&userId=1&centerId=1"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "240",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:00:06 GMT",
+              "Etag": "W/\"f0-SgdQDM+6fTUmfaEVKPrCs5fUqZI\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "events1",
-            "x-testDescription": "This endpoint creates an events"
-          }
-        ],
+            "body": "{\"message\":\"Event is scheduled successfuly. Thanks\",\"data\":{\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"12-12-2018\",\"userId\":\"1\",\"centerId\":\"1\"}}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "events1",
+          "x-testDescription": "This endpoint creates an events"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1357,18 +1316,23 @@
         }
       }
     },
-    "/events/1": {
+    "/events/{eventId}": {
       "get": {
         "description": "This endpoint get a single events by eventId",
-        "summary": "events/:id",
+        "summary": "Gets an event by Id",
         "tags": [
-          "Misc"
+          "Events"
         ],
         "operationId": "Events1Get2",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [{
+          "name": "eventId",
+          "in": "path",
+          "required": true,
+          "description": "Event's id to fetch"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1377,64 +1341,58 @@
             },
             "examples": {
               "application/json": {
-                "data": [
-                  {
-                    "id": 1,
-                    "name": "Sauce Code meeting",
-                    "purpose": "Teaching girls how to code",
-                    "note": "This is a meetup to teach young girls how to code",
-                    "eventDate": "2018-12-12",
-                    "createdAt": "2018-06-07T22:00:06.783Z",
-                    "updatedAt": "2018-06-07T22:00:06.783Z",
-                    "centerId": 1,
-                    "userId": 1
-                  }
-                ],
+                "data": [{
+                  "id": 1,
+                  "name": "Sauce Code meeting",
+                  "purpose": "Teaching girls how to code",
+                  "note": "This is a meetup to teach young girls how to code",
+                  "eventDate": "2018-12-12",
+                  "createdAt": "2018-06-07T22:00:06.783Z",
+                  "updatedAt": "2018-06-07T22:00:06.783Z",
+                  "centerId": 1,
+                  "userId": 1
+                }],
                 "code": 200
               }
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "GET",
-              "uri": "/events/1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "GET",
+            "uri": "/events/1"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "283",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:07:06 GMT",
+              "Etag": "W/\"11b-ANGjPJbiuQTN7GybVFBnzzdTlDU\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "283",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:07:06 GMT",
-                "Etag": "W/\"11b-ANGjPJbiuQTN7GybVFBnzzdTlDU\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"data\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}],\"code\":200}"
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "events/:id",
-            "x-testDescription": "This endpoint get a single events by eventId"
-          }
-        ],
+            "body": "{\"data\":[{\"id\":1,\"name\":\"Sauce Code meeting\",\"purpose\":\"Teaching girls how to code\",\"note\":\"This is a meetup to teach young girls how to code\",\"eventDate\":\"2018-12-12\",\"createdAt\":\"2018-06-07T22:00:06.783Z\",\"updatedAt\":\"2018-06-07T22:00:06.783Z\",\"centerId\":1,\"userId\":1}],\"code\":200}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "events/:id",
+          "x-testDescription": "This endpoint get a single events by eventId"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1444,9 +1402,9 @@
       },
       "put": {
         "description": "This endpoint updates a single events by eventId",
-        "summary": "events/:id",
+        "summary": "Updates an event by Id",
         "tags": [
-          "Misc"
+          "Events"
         ],
         "operationId": "Events1Put",
         "produces": [
@@ -1455,8 +1413,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
@@ -1501,7 +1458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Server's response when an event is created",
             "schema": {
               "$ref": "#/definitions/Events~1:id28"
             },
@@ -1512,50 +1469,46 @@
             }
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "PUT",
-              "uri": "/events/1",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=Sauce Code meetup&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-09-2018&userId=1&centerId=1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "PUT",
+            "uri": "/events/1",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "RAW",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Connection": "keep-alive",
-                "Content-Length": "50",
-                "Content-Type": "application/json; charset=utf-8",
-                "Date": "Thu, 07 Jun 2018 22:10:04 GMT",
-                "Etag": "W/\"32-B/upaH9DE/fVM6GBoIdfR2PA+j0\"",
-                "Server": "Cowboy",
-                "Via": "1.1 vegur",
-                "X-Powered-By": "Express"
-              },
-              "body": "{\"message\":\"Event with ID 1 successfully updated\"}"
+            "body": "name=Sauce Code meetup&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-09-2018&userId=1&centerId=1"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "RAW",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Connection": "keep-alive",
+              "Content-Length": "50",
+              "Content-Type": "application/json; charset=utf-8",
+              "Date": "Thu, 07 Jun 2018 22:10:04 GMT",
+              "Etag": "W/\"32-B/upaH9DE/fVM6GBoIdfR2PA+j0\"",
+              "Server": "Cowboy",
+              "Via": "1.1 vegur",
+              "X-Powered-By": "Express"
             },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "events/:id1",
-            "x-testDescription": "This endpoint updates a single events by eventId"
-          }
-        ],
+            "body": "{\"message\":\"Event with ID 1 successfully updated\"}"
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "events/:id1",
+          "x-testDescription": "This endpoint updates a single events by eventId"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1565,9 +1518,9 @@
       },
       "delete": {
         "description": "This endpoint deletes a single events by eventId",
-        "summary": "events/:id",
+        "summary": "Deletes an event by Id",
         "tags": [
-          "Misc"
+          "Events"
         ],
         "operationId": "Events1Delete",
         "produces": [
@@ -1576,8 +1529,7 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "name",
             "in": "formData",
             "required": true,
@@ -1632,39 +1584,35 @@
             "description": ""
           }
         },
-        "security": [
-          {
-            "auth": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "Authorization"
-            }
+        "security": [{
+          "auth": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
           }
-        ],
-        "x-unitTests": [
-          {
-            "request": {
-              "method": "DELETE",
-              "uri": "/events/1",
-              "headers": {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              "body": "name=Sauce Code meetup&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-09-2018&userId=1&centerId=1"
+        }],
+        "x-unitTests": [{
+          "request": {
+            "method": "DELETE",
+            "uri": "/events/1",
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
             },
-            "expectedResponse": {
-              "x-allowExtraHeaders": true,
-              "x-bodyMatchMode": "NONE",
-              "x-arrayOrderedMatching": false,
-              "x-arrayCheckCount": false,
-              "x-matchResponseSchema": true,
-              "headers": {}
-            },
-            "x-testShouldPass": true,
-            "x-testEnabled": true,
-            "x-testName": "events/:id2",
-            "x-testDescription": "This endpoint deletes a single events by eventId"
-          }
-        ],
+            "body": "name=Sauce Code meetup&purpose=Teaching girls how to code&note=This is a meetup to teach young girls how to code&eventDate=12-09-2018&userId=1&centerId=1"
+          },
+          "expectedResponse": {
+            "x-allowExtraHeaders": true,
+            "x-bodyMatchMode": "NONE",
+            "x-arrayOrderedMatching": false,
+            "x-arrayCheckCount": false,
+            "x-matchResponseSchema": true,
+            "headers": {}
+          },
+          "x-testShouldPass": true,
+          "x-testEnabled": true,
+          "x-testName": "events/:id2",
+          "x-testDescription": "This endpoint deletes a single events by eventId"
+        }],
         "x-operation-settings": {
           "CollectParameters": false,
           "AllowDynamicQueryParameters": false,
@@ -1678,8 +1626,25 @@
     "Users": {
       "title": "users",
       "example": {
-        "data": [
-          {
+        "data": [{
+          "id": 1,
+          "username": "chuzksy",
+          "firstname": "chika",
+          "lastname": "onu",
+          "password": "$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO",
+          "email": "chuzksy@yahoo.com",
+          "role": "user",
+          "imageName": "no_image.png",
+          "imageUrl": "no_image_url",
+          "createdAt": "2018-06-07T20:51:11.807Z",
+          "updatedAt": "2018-06-07T20:51:11.807Z"
+        }]
+      },
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "",
+          "example": [{
             "id": 1,
             "username": "chuzksy",
             "firstname": "chika",
@@ -1691,28 +1656,7 @@
             "imageUrl": "no_image_url",
             "createdAt": "2018-06-07T20:51:11.807Z",
             "updatedAt": "2018-06-07T20:51:11.807Z"
-          }
-        ]
-      },
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "",
-          "example": [
-            {
-              "id": 1,
-              "username": "chuzksy",
-              "firstname": "chika",
-              "lastname": "onu",
-              "password": "$2a$10$UNvuKp0r9uYDfHbK7PHrGuxWo13xe0tSEn01/XgoIy0mMbd/rxYxO",
-              "email": "chuzksy@yahoo.com",
-              "role": "user",
-              "imageName": "no_image.png",
-              "imageUrl": "no_image_url",
-              "createdAt": "2018-06-07T20:51:11.807Z",
-              "updatedAt": "2018-06-07T20:51:11.807Z"
-            }
-          ],
+          }],
           "type": "array",
           "items": {
             "$ref": "#/definitions/Datum"
@@ -2044,8 +1988,7 @@
     "GetsAllCenters": {
       "title": "gets all centers",
       "example": {
-        "data": [
-          {
+        "data": [{
             "id": 1,
             "name": "St Kizitos Place",
             "capacity": 2000,
@@ -2077,8 +2020,7 @@
       "properties": {
         "data": {
           "description": "",
-          "example": [
-            {
+          "example": [{
               "id": 1,
               "name": "St Kizitos Place",
               "capacity": 2000,
@@ -2208,8 +2150,7 @@
     "CentersPagination": {
       "title": "centers pagination",
       "example": {
-        "data": [
-          {
+        "data": [{
             "id": 1,
             "name": "St Kizitos Place",
             "capacity": 2000,
@@ -2241,8 +2182,7 @@
       "properties": {
         "data": {
           "description": "",
-          "example": [
-            {
+          "example": [{
               "id": 1,
               "name": "St Kizitos Place",
               "capacity": 2000,
@@ -2364,19 +2304,17 @@
           "imageUrl": "https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png",
           "createdAt": "2018-06-07T21:53:59.415Z",
           "updatedAt": "2018-06-07T21:53:59.415Z",
-          "events": [
-            {
-              "id": 1,
-              "name": "Sauce Code meeting",
-              "purpose": "Teaching girls how to code",
-              "note": "This is a meetup to teach young girls how to code",
-              "eventDate": "2018-12-12",
-              "createdAt": "2018-06-07T22:00:06.783Z",
-              "updatedAt": "2018-06-07T22:00:06.783Z",
-              "centerId": 1,
-              "userId": 1
-            }
-          ]
+          "events": [{
+            "id": 1,
+            "name": "Sauce Code meeting",
+            "purpose": "Teaching girls how to code",
+            "note": "This is a meetup to teach young girls how to code",
+            "eventDate": "2018-12-12",
+            "createdAt": "2018-06-07T22:00:06.783Z",
+            "updatedAt": "2018-06-07T22:00:06.783Z",
+            "centerId": 1,
+            "userId": 1
+          }]
         }
       },
       "type": "object",
@@ -2415,19 +2353,17 @@
         "imageUrl": "https://res.cloudinary.com/dcgwltbei/image/upload/v1528408439/jqgbxlbeeezu2maubbms.png",
         "createdAt": "2018-06-07T21:53:59.415Z",
         "updatedAt": "2018-06-07T21:53:59.415Z",
-        "events": [
-          {
-            "id": 1,
-            "name": "Sauce Code meeting",
-            "purpose": "Teaching girls how to code",
-            "note": "This is a meetup to teach young girls how to code",
-            "eventDate": "2018-12-12",
-            "createdAt": "2018-06-07T22:00:06.783Z",
-            "updatedAt": "2018-06-07T22:00:06.783Z",
-            "centerId": 1,
-            "userId": 1
-          }
-        ]
+        "events": [{
+          "id": 1,
+          "name": "Sauce Code meeting",
+          "purpose": "Teaching girls how to code",
+          "note": "This is a meetup to teach young girls how to code",
+          "eventDate": "2018-12-12",
+          "createdAt": "2018-06-07T22:00:06.783Z",
+          "updatedAt": "2018-06-07T22:00:06.783Z",
+          "centerId": 1,
+          "userId": 1
+        }]
       },
       "type": "object",
       "properties": {
@@ -2491,19 +2427,17 @@
         },
         "events": {
           "description": "",
-          "example": [
-            {
-              "id": 1,
-              "name": "Sauce Code meeting",
-              "purpose": "Teaching girls how to code",
-              "note": "This is a meetup to teach young girls how to code",
-              "eventDate": "2018-12-12",
-              "createdAt": "2018-06-07T22:00:06.783Z",
-              "updatedAt": "2018-06-07T22:00:06.783Z",
-              "centerId": 1,
-              "userId": 1
-            }
-          ],
+          "example": [{
+            "id": 1,
+            "name": "Sauce Code meeting",
+            "purpose": "Teaching girls how to code",
+            "note": "This is a meetup to teach young girls how to code",
+            "eventDate": "2018-12-12",
+            "createdAt": "2018-06-07T22:00:06.783Z",
+            "updatedAt": "2018-06-07T22:00:06.783Z",
+            "centerId": 1,
+            "userId": 1
+          }],
           "type": "array",
           "items": {
             "$ref": "#/definitions/Event"
@@ -2653,8 +2587,23 @@
     "Events": {
       "title": "events",
       "example": {
-        "data": [
-          {
+        "data": [{
+          "id": 1,
+          "name": "Sauce Code meeting",
+          "purpose": "Teaching girls how to code",
+          "note": "This is a meetup to teach young girls how to code",
+          "eventDate": "2018-12-12",
+          "createdAt": "2018-06-07T22:00:06.783Z",
+          "updatedAt": "2018-06-07T22:00:06.783Z",
+          "centerId": 1,
+          "userId": 1
+        }]
+      },
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "",
+          "example": [{
             "id": 1,
             "name": "Sauce Code meeting",
             "purpose": "Teaching girls how to code",
@@ -2664,26 +2613,7 @@
             "updatedAt": "2018-06-07T22:00:06.783Z",
             "centerId": 1,
             "userId": 1
-          }
-        ]
-      },
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "",
-          "example": [
-            {
-              "id": 1,
-              "name": "Sauce Code meeting",
-              "purpose": "Teaching girls how to code",
-              "note": "This is a meetup to teach young girls how to code",
-              "eventDate": "2018-12-12",
-              "createdAt": "2018-06-07T22:00:06.783Z",
-              "updatedAt": "2018-06-07T22:00:06.783Z",
-              "centerId": 1,
-              "userId": 1
-            }
-          ],
+          }],
           "type": "array",
           "items": {
             "$ref": "#/definitions/Data23"
@@ -2854,8 +2784,24 @@
     "Gets Event By Id": {
       "title": "get event by id",
       "example": {
-        "data": [
-          {
+        "data": [{
+          "id": 1,
+          "name": "Sauce Code meeting",
+          "purpose": "Teaching girls how to code",
+          "note": "This is a meetup to teach young girls how to code",
+          "eventDate": "2018-12-12",
+          "createdAt": "2018-06-07T22:00:06.783Z",
+          "updatedAt": "2018-06-07T22:00:06.783Z",
+          "centerId": 1,
+          "userId": 1
+        }],
+        "code": 200
+      },
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "",
+          "example": [{
             "id": 1,
             "name": "Sauce Code meeting",
             "purpose": "Teaching girls how to code",
@@ -2865,27 +2811,7 @@
             "updatedAt": "2018-06-07T22:00:06.783Z",
             "centerId": 1,
             "userId": 1
-          }
-        ],
-        "code": 200
-      },
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "",
-          "example": [
-            {
-              "id": 1,
-              "name": "Sauce Code meeting",
-              "purpose": "Teaching girls how to code",
-              "note": "This is a meetup to teach young girls how to code",
-              "eventDate": "2018-12-12",
-              "createdAt": "2018-06-07T22:00:06.783Z",
-              "updatedAt": "2018-06-07T22:00:06.783Z",
-              "centerId": 1,
-              "userId": 1
-            }
-          ],
+          }],
           "type": "array",
           "items": {
             "$ref": "#/definitions/Data23"

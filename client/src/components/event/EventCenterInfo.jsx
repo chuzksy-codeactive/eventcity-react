@@ -43,7 +43,7 @@ const LoadEventCenter = props => {
         )}
       </div>
       <div>
-        <button type="button" className="btn btn-primary" onClick={props.onOpenModal}>
+        <button id="book-now" type="button" className="btn btn-primary" onClick={props.onOpenModal}>
           Book Center Now!
         </button>
       </div>
@@ -154,6 +154,7 @@ class EventCenterInfo extends Component {
         endDate: moment(this.state.to).format("YYYY-MM-DD")
       };
       this.props.createEvent(data);
+      this.props.reset();
       this.setState({
         message: null,
         from: undefined,
@@ -223,7 +224,10 @@ class EventCenterInfo extends Component {
                     placeholder="e.g wedding, AGM, birthday, meetup"
                   />
                   <Field name="note" component={renderFacilities} label="Short note" />
-                  {this.props.eventCenter.message && (
+                  {this.props.eventCenter.message !== "Unable to book event" && (
+                    <div style={{ textAlign: 'center', margin: '10px 0', color: 'green' }}>{this.props.eventCenter.message}</div>
+                  )}
+                  {this.props.eventCenter.message === "Unable to book event" && (
                     <div style={{ textAlign: 'center', margin: '10px 0', color: 'red' }}>{this.props.eventCenter.message}</div>
                   )}
                   {this.state.message && <div style={{ textAlign: 'center', margin: '10px 0', color: 'red' }}>{this.state.message}</div>}
@@ -232,8 +236,8 @@ class EventCenterInfo extends Component {
                       <span className={loading ? 'loader' : ''} />
                       submit
                     </button>
-                    <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
-                      cancel
+                    <button id="close-modal" type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+                      close
                     </button>
                   </div>
                 </form>
@@ -304,5 +308,4 @@ EventCenterInfo.propTypes = {
   facilities: PropTypes.string
 }
 export default reduxForm({ form: 'eventCenter', validate })(EventCenterInfo);
-
 

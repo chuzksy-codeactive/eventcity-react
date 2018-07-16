@@ -68,20 +68,20 @@ class EditCenterList extends Component {
           );
         }
         return (
-          <div key={center.id}>
-            <div className="list-item">
+          <div key={center.id} >
+            <div className="list-item" id={center.id}>
               {`${i + 1}. ${center.name}`}{' '}
               <div className="btn-list btn btn-success" data-toggle="tooltip" data-placement="left" title="edit">
-                <Link to={`/edit/center/${center.id}`}>
-                  <i className="ion-edit ion-icon" />
+                <Link className="{`a-link${i+1}`}" to={`/edit/center/${center.id}`}>
+                  <span id="ion-edit" href={`/edit/center/${center.id}`}><i className="ion-edit ion-icon" /></span>
                 </Link>
               </div>
               <div className="btn-list btn btn-danger" data-toggle="tooltip" data-placement="right" title="delete">
-                <i className="ion-trash-a" onClick={this.onOpenModal.bind(this, center.id)} />
+                <span id="trash"><i className="ion-trash-a" onClick={this.onOpenModal.bind(this, center.id)} /></span>
               </div>{' '}
               <div className="btn btn-primary btn-list" data-toggle="tooltip" data-placement="right" title="view center details">
                 <a data-toggle="collapse" href={`#${center.name}`} role="button" aria-expanded="false" aria-controls={center.name}>
-                  <i className="ion-android-arrow-dropdown" />
+                  <span id="dropdown"><i className="ion-android-arrow-dropdown" /></span>
                 </a>
               </div>{' '}
             </div>
@@ -123,11 +123,11 @@ class EditCenterList extends Component {
               </div>
             )}
             <p>Do you want to delete this center? </p>
-            <div className="modal-footer">
-              <button className="close-button btn btn-danger btn-sm" id="close-button" onClick={this.onDeleteCenter.bind(this, this.state.id)}>
+            <div className="modal-footer" id="modal-footer">
+              <span id="del-button" ><button className="close-button btn btn-danger btn-sm" onClick={this.onDeleteCenter.bind(this, this.state.id)}>
                 delete
-              </button>
-              <button type="button" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
+              </button></span>
+              <button type="button" id="cancel" className="btn btn-default btn-sm" onClick={this.onCloseModal}>
                 cancel
               </button>
             </div>
@@ -142,7 +142,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  center: state.centerReducer
+  center: state.centerReducer,
+  centersPerPage: state.centerPaginationReducer
 });
 
 EditCenterList.propTypes = {

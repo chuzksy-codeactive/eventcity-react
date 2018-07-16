@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, StaticRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 /**
@@ -10,9 +10,8 @@ import PropTypes from 'prop-types';
  * @returns {object} JSX DOM
  */
 
-const CenterCard = props => {
-  return (
-    <div className="card center-cards">
+const CenterCard = props => (
+  <div className="card center-cards">
     <img className="card-img-top" src={props.center.imageUrl} alt="this is the card" />
     <div className="card-block">
       <h4 className="card-title">{props.center.name}</h4>
@@ -27,15 +26,14 @@ const CenterCard = props => {
       </div>
       <div className="center-feature">
         <i className="ion-cash icon-small" />
-        <span> 	&#x20A6;{props.center.price}</span>
+        <span> &#x20A6;{props.center.price}</span>
       </div>
       <Link to={`/book/center/${props.center.id}`} className="btn btn-primary">
-        More details
+        <div><span id="more-details" href={`/book/center/${props.center.id}`}>More details</span></div>
       </Link>
     </div>
   </div>
-  )
-}
+);
 
 CenterCard.propTypes = {
   center: PropTypes.shape({
@@ -46,6 +44,6 @@ CenterCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired
   })
-}
+};
 
 export default CenterCard;

@@ -23,16 +23,6 @@ export const signingInUser = () => ({
 });
 
 /**
- * Action Creator to indicate that there's a failure trying to 
- * signin a user
- * 
- * @return {object}  action [SIGNIN_USER_FAILURE]
- */
-export const signInUserFailure = () => ({
-  type: types.SIGNIN_USER_FAILURE
-});
-
-/**
  * Action Creator to indicate to user that there's an error
  * signin the user
  * 
@@ -42,15 +32,6 @@ export const signInUserFailure = () => ({
 export const signInError = payload => ({
   type: types.SIGN_IN_ERROR,
   payload
-});
-
-/**
- * Action Creator to reset the user state
- * 
- * @return {object}  action [SIGN_IN_RESET]
- */
-export const signInReset = () => ({
-  type: types.SIGN_IN_RESET
 });
 
 /**
@@ -77,16 +58,6 @@ export const unAuthenticated = () => {
 };
 
 /**
- * Action Creator to indicate that there's an error authenticating
- * the user
- * 
- * @return {object}  action [AUTHENTICATED_ERRROR]
- */
-export const authenticatedError = () => ({
-  type: types.AUTHENTICATED_ERROR
-});
-
-/**
  * Action to handle the signin by making a POST request to the backend
  * 
  * @param {object} data user's data to save
@@ -95,7 +66,7 @@ export const authenticatedError = () => ({
 export const userSignIn = (data, history) =>
   (dispatch) => {
     dispatch(signingInUser());
-    axios
+    return axios
       .post('/api/v1/users/login', data)
       .then((response) => {
         let isAdmin = false;
@@ -116,9 +87,6 @@ export const userSignIn = (data, history) =>
         if (status === 401 || status === 404) {
           dispatch(signInError(message));
           dispatch(unAuthenticated());
-        } else {
-          dispatch(signInUserFailure());
-          dispatch(authenticatedError());
         }
       });
   };
@@ -132,13 +100,16 @@ export const userSignIn = (data, history) =>
  */
 export const userSignUp = (data, history) => (dispatch) => {
   dispatch(signingInUser());
-  axios
+
+  return axios
     .post('/api/v1/users', data)
     .then((response) => {
+    
       let isAdmin = false;
       if (response.status === 201 && response.data) {
-        if (response.data.data) {
-          if (response.data.data.id === 1 || response.data.data.id === 2) {
+        const {data} = response.data;
+        if (data) {
+          if (data.id === 1 || data.id === 2) {
             isAdmin = true;
           }
           dispatch(authenticated(isAdmin));
@@ -149,14 +120,12 @@ export const userSignUp = (data, history) => (dispatch) => {
       }
     })
     .catch((error) => {
+      
       const { status } = error.response;
       const { message } = error.response.data;
       if (status === 409 || status === 400) {
         dispatch(signInError(message));
         dispatch(unAuthenticated());
-      } else {
-        dispatch(signInUserFailure());
-        dispatch(authenticatedError());
-      }
+      } 
     });
 };

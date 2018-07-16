@@ -6,6 +6,8 @@ import Carousel from '../ui-components/Carousel';
 import CenterCardList from './CenterCardList';
 import Footer from '../ui-components/Footer';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 
 /**
  * This component is used to wrap different component
@@ -30,9 +32,11 @@ class ViewCenter extends Component {
           <Carousel />
           <CenterCardList 
             centers={this.props.centers} 
+            centersPerPage={this.props.centersPerPage}
             pages={this.props.centersPerPage.centers.pages} 
             page={this.state.page} 
-            count={this.props.centersPerPage.count}/>
+            count={this.props.centersPerPage.centers.count}
+            searchCenterPerPage={this.props.searchCenterPerPage}/>
           <Footer />
         </Fragment>
       );

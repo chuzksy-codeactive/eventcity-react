@@ -29,7 +29,7 @@ const createCenters = (req, res) => {
 
   let errors = [];
   const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  cloudinary.uploader.upload(imagePath, (image) => {
+  return cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
     const imageUrl = image.secure_url || req.body.imageUrl;
     if (imageUrl) {
@@ -47,7 +47,7 @@ const createCenters = (req, res) => {
         if (!result.isEmpty()) {
           errors = result.array().map(e => e.msg);
           return res.status(400).json({
-            message: errors
+            message: 'errors'
           });
         }
         return models.Center.findOne({
@@ -73,65 +73,6 @@ const createCenters = (req, res) => {
     }
   });
 };
-
-/**
- * createCenters - crates a new center
- *
- * @param {object} req
- * @param {object} res
- *
- * @return {object} (message, center)
- */
-const centerCreate = (req, res) => {
-  req.checkBody('name', 'name is required').notEmpty();
-  req.checkBody('capacity', 'capacity is required').notEmpty();
-  req.checkBody('location', 'location is required').notEmpty();
-  req.checkBody('facilities', 'facilities is required').notEmpty();
-  req.checkBody('type', 'center type is required').notEmpty();
-  req.checkBody('price', 'price type is required').notEmpty();
-  req.sanitize('name').trim();
-  req.sanitize('facilities').trim();
-
-  let errors = [];
-  const center = {
-    name: req.body.name,
-    capacity: req.body.capacity,
-    location: req.body.location,
-    facilities: req.body.facilities,
-    type: req.body.type,
-    price: req.body.price,
-    imageName: req.body.imageName,
-    imageUrl: req.body.imageurl
-  };
-  req.getValidationResult().then((result) => {
-    if (!result.isEmpty()) {
-      errors = result.array().map(e => e.msg);
-      return res.status(400).json({
-        message: errors
-      });
-    }
-    return models.Center.findOne({
-      where: {
-        name: req.body.name
-      }
-    }).then((data) => {
-      if (data) {
-        return res.status(409).json({
-          message: 'Center name already exist'
-        });
-      }
-      return models.Center.create(center).then((c) => {
-        if (c) {
-          return res.status(201).json({
-            message: 'New center has been created succefully',
-            data: c,
-          });
-        }
-      });
-    });
-  });
-};
-
 
 /**
  * getAllCenters - Get all centers
@@ -168,7 +109,7 @@ const getAllCenters = (req, res) => {
  */
 
 const getCenterPerPage = (req, res) => {
-  const limit = 2;
+  const limit = 5;
   let offset = 0;
   models.Center.findAndCountAll().then((data) => {
     let {
@@ -223,53 +164,6 @@ const deleteCenter = (req, res) => models.Center.destroy({
   });
 });
 
-
-/**
- * updateCenter - Updates a particular center by centerId
- *
- * @param {object} req
- * @param {object} res
- *
- * @return {object} (message, center)
- */
-const centerUpdate = (req, res) => {
-  if (req.params.id === undefined) {
-    return res.json({
-      message: 'Please provide a center Id'
-    });
-  }
-  const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  const center = {
-    id: parseInt(req.params.id, 10),
-    name: req.body.name,
-    capacity: req.body.capacity,
-    location: req.body.location,
-    facilities: req.body.facilities,
-    type: req.body.type,
-    price: req.body.price,
-    imageName: req.body.imageName,
-    imageUrl: req.body.imageUrl
-  };
-
-  return models.Center.update(center, {
-    where: {
-      id: center.id
-    }
-  }).then((c) => {
-    if (c[0] === 1) {
-      return res.status(201).json({
-        message: `Center with ID ${req.params.id} is sucessfully updated`,
-        data: c
-      });
-    }
-    return res
-      .status(404)
-      .json({
-        message: `Center with Id: ${req.params.id} is not found`
-      });
-  });
-};
-
 /**
  * updateCenter - Updates a particular center by centerId
  *
@@ -285,7 +179,7 @@ const updateCenter = (req, res) => {
     });
   }
   const imagePath = req.file ? req.file.path : 'server/sample.jpg';
-  cloudinary.uploader.upload(imagePath, (image) => {
+  return cloudinary.uploader.upload(imagePath, (image) => {
     const imageName = image.original_filename;
     const imageUrl = image.secure_url || req.body.imageUrl;
     if (imageUrl) {
@@ -307,14 +201,14 @@ const updateCenter = (req, res) => {
       }).then((c) => {
         if (c[0] === 1) {
           return res.status(201).json({
-            message: `Center with ID ${req.params.id} is sucessfully updated`,
+            message: 'Center is sucessfully updated',
             data: c
           });
         }
         return res
           .status(404)
           .json({
-            message: `Center with Id: ${req.params.id} is not found`
+            message: 'Center is not found'
           });
       });
     }
@@ -329,24 +223,17 @@ const updateCenter = (req, res) => {
  *
  * @return {object} (message, center)
  */
-const getCenterById = (req, res) => {
-  if (req.params.id === undefined || isNaN(req.params.id)) { // eslint-disable-line
-    return res.status(400).json({
-      message: 'Please provie a center Id'
+const getCenterById = (req, res) => models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
+  if (center) {
+    return res.status(200).json({
+      message: 'Center found',
+      data: center
     });
   }
-  return models.Center.findById(parseInt(req.params.id, 10)).then((center) => {
-    if (center) {
-      return res.status(200).json({
-        message: 'Center found',
-        data: center
-      });
-    }
-    return res.status(404).json({
-      message: 'Center not found in the database'
-    });
+  return res.status(404).json({
+    message: 'Center not found in the database'
   });
-};
+});
 
 /**
  * getCentersEvents - Gets events for a particular center
@@ -382,9 +269,7 @@ const centersControllers = {
   updateCenter,
   getCenterById,
   getCentersEvents,
-  getCenterPerPage,
-  centerCreate,
-  centerUpdate
+  getCenterPerPage
 };
 
 export default centersControllers;

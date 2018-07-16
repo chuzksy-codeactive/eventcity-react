@@ -8,5 +8,9 @@ server/config.js
 .DS_Store
 server/uploads
 .env
- /uploads
-client/dist
+uploads/
+coverage/
+coverage
+reports
+selenium-debug.log
+package-lock.json

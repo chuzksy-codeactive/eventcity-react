@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize';
 import models from '../models';
 
-const { Op } = Sequelize;
+const {
+  Op
+} = Sequelize;
 
 const ADMIN_ACCTYPE = [1, 2];
 /**
@@ -44,17 +46,16 @@ const createEvent = (req, res) => {
       return models.Event.findOne({
         where: {
           centerId: parseInt(req.body.centerId, 10),
-          [Op.and]: [
-            {
-              startDate: {
-                [Op.eq]: event.startDate
-              }
-            },
-            {
-              endDate: {
-                [Op.eq]: event.endDate
-              }
+          [Op.and]: [{
+            startDate: {
+              [Op.eq]: event.startDate
             }
+          },
+          {
+            endDate: {
+              [Op.eq]: event.endDate
+            }
+          }
           ]
         }
       }).then((e) => {
@@ -86,7 +87,6 @@ const createEvent = (req, res) => {
  */
 const getEventsById = (req, res) => {
   const userId = req.user.dataValues.id;
-
   let events = null;
   if (ADMIN_ACCTYPE.indexOf(userId) > -1) {
     events = models.Event.findAll({
@@ -97,7 +97,9 @@ const getEventsById = (req, res) => {
     });
   } else {
     events = models.Event.findAll({
-      where: { userId },
+      where: {
+        userId
+      },
       include: [{
         model: models.Center
       }]
@@ -107,8 +109,7 @@ const getEventsById = (req, res) => {
   events.then((event) => {
     if (event.length > 0) {
       return res.status(200).json({
-        data: event,
-        code: 200
+        data: event
       });
     }
     return res.status(404).json({
@@ -198,8 +199,6 @@ const updateEventById = (req, res) => {
   req.checkBody('centerId', 'center id is required');
   req.checkParams('id', 'event id is required').notEmpty();
 
-  console.log(req.body);
-
   let errors = [];
   const event = {
     name: req.body.name,
@@ -227,23 +226,22 @@ const updateEventById = (req, res) => {
         return models.Event.findOne({
           where: {
             centerId: parseInt(req.body.centerId, 10),
-            [Op.and]: [
-              {
-                startDate: {
-                  [Op.gte]: event.startDate
-                }
-              },
-              {
-                endDate: {
-                  [Op.lte]: event.endDate
-                }
+            [Op.and]: [{
+              startDate: {
+                [Op.gte]: event.startDate
               }
+            },
+            {
+              endDate: {
+                [Op.lte]: event.endDate
+              }
+            }
             ]
           }
         }).then((e) => {
           if (e && e.id != req.params.id) { // eslint-disable-line
             return res.status(400).json({
-              message: 'Not available, please choose another date r'
+              message: 'Not available, please choose another date'
             });
           }
           return models.Event.update(event, {

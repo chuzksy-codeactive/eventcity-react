@@ -37,6 +37,7 @@ class EventCenterPage extends Component {
         <Fragment>
           <EventCenterCover />
           <EventCenterInfo
+            resetCenterEvent={this.props.resetCenterEvent}
             eventCenter={this.state.eventCenter}
             centerId={this.props.match.params.id}
             userId={userId}

@@ -46,15 +46,23 @@ export const fetchEventCenterSuccess = payload => ({
  */
 export const fetchEventCenter = id => dispatch => {
   dispatch(fetchingEventCenter());
-  axios({
-    url: `/api/v1/centers/event/${id}`,
-    method: 'get'
-  })
-  .then(res => {
-    dispatch(fetchEventCenterSuccess(res.data));
+  return axios({
+      url: `/api/v1/centers/event/${id}`,
+      method: 'get'
     })
-    .catch(() => {
-      dispatch(fetchEventCenterFailure('Can not load data'));
+    .then(res => {
+      dispatch(fetchEventCenterSuccess(res.data));
+    })
+    .catch((error) => {
+      const {
+        status
+      } = error.response;
+      const {
+        message
+      } = error.response.data;
+      if (status === 404) {
+        dispatch(fetchEventCenterFailure(message));
+      }
     });
 };
 
@@ -98,7 +106,9 @@ export const createEventSuccess = payload => ({
  * @return {object}  action [RESET_EVENT]
  */
 export const resetEvent = () => {
-  return {type: types.RESET_EVENT}
+  return {
+    type: types.RESET_CENTER_EVENT
+  }
 };
 
 /**
@@ -110,21 +120,38 @@ export const resetEvent = () => {
  */
 export const createEvent = data => dispatch => {
   dispatch(creatingEvent());
-  axios({
-    method: 'post',
-    url: '/api/v1/events',
-    data
-  })
+  return axios({
+      method: 'post',
+      url: '/api/v1/events',
+      data
+    })
     .then(res => {
-      if (res.status === 200) {
-        dispatch(createEventFailure(res.data.message));
-      } else if (res.status === 201) {
+      if (res.status === 201) {
         dispatch(createEventSuccess(res.data.message));
         dispatch(fetchEventCenter(data.centerId));
+        setTimeout(() => {
+          dispatch(resetEvent());
+        }, 2000)
       }
     })
-    .catch(() => {
-      dispatch(createEventFailure('Unable to book event'));
+    .catch((error) => {
+      const {
+        status
+      } = error.response;
+      const {
+        message
+      } = error.response.data;
+      if (status === 409) {
+        dispatch(createEventFailure('Unable to book event'));
+        setTimeout(() => {
+          dispatch(resetEvent());
+        }, 2000)
+      } else if (status === 400) {
+        dispatch(createEventFailure(message));
+        setTimeout(() => {
+          dispatch(resetEvent());
+        }, 2000)
+      }
     });
 };
 
@@ -169,19 +196,25 @@ export const fetchEventFailure = payload => ({
  */
 export const fetchEvent = () => dispatch => {
   dispatch(fetchingEvent());
-  axios({
-    url: '/api/v1/events',
-    method: 'get'
-  })
+  return axios({
+      url: '/api/v1/events',
+      method: 'get'
+    })
     .then(res => {
       if (res.status === 200) {
         dispatch(fetchEventSuccess(res.data.data));
-      } else if (res.status = 404) {
-        dispatch(fetchEventFailure(res.data.message));
       }
     })
-    .catch(() => {
-      dispatch(fetchEventFailure('Error loading data'));
+    .catch((error) => {
+      const {
+        status
+      } = error.response;
+      const {
+        message
+      } = error.response.data
+      if (status === 404) {
+        dispatch(fetchEventFailure(message));
+      }
     });
 };
 
@@ -228,18 +261,18 @@ export const fetchEventByIdFailure = payload => ({
  */
 export const fetchEventById = id => dispatch => {
   dispatch(fetchingEventById());
-  axios({
-    url: `/api/v1/events/${id}`,
-    method: 'get'
-  })
+  return axios({
+      url: `/api/v1/events/${id}`,
+      method: 'get'
+    })
     .then(res => {
       if (res.status === 200) {
         dispatch(fetchEventByIdSuccess(res.data.data));
-      } 
+      }
     })
     .catch((error) => {
       if (error.response) {
-        if (error.response.status === 404){
+        if (error.response.status === 404) {
           dispatch(fetchEventByIdFailure("You are yet to book an event"));
         }
       }
@@ -289,33 +322,31 @@ export const updateEventSuccess = payload => ({
  */
 export const updateEventById = data => dispatch => {
   dispatch(updatingEvent());
-  axios({
-    url: `/api/v1/events/${data.id}`,
-    method: 'put',
-    data: {
-      name: data.name,
-      purpose: data.purpose,
-      note: data.note,
-      eventDate: data.eventDate,
-      userId: data.userId,
-      centerId: data.centerId,
-      startDate: data.startDate,
-      endDate: data.endDate
-    }
-  })
+  return axios({
+      url: `/api/v1/events/${data.id}`,
+      method: 'put',
+      data: {
+        name: data.name,
+        purpose: data.purpose,
+        note: data.note,
+        eventDate: data.eventDate,
+        userId: data.userId,
+        centerId: data.centerId,
+        startDate: data.startDate,
+        endDate: data.endDate
+      }
+    })
     .then(res => {
       if (res.status === 200) {
         dispatch(updateEventSuccess(res.data.message));
       }
     })
     .catch((error) => {
-      if(error.response){
-        if(error.response.status === 400){
+      if (error.response) {
+        if (error.response.status === 400) {
           dispatch(updateEventSuccess('Event not available for this date.'));
-        } else if (error.response.status === 404){
-          dispatch(updateEventSuccess(`Event with ID ${data.id} not found`));
-        } else {
-          dispatch(updateEventFailure('Server error'));
+        } else if (error.response.status === 404) {
+          dispatch(updateEventSuccess('Event not found'));
         }
       }
     });
@@ -377,11 +408,11 @@ export const eventDeleted = id => {
  */
 export const deleteEventById = id => dispatch => {
   dispatch(deletingEvent());
-  axios({
+  return axios({
     url: `/api/v1/events/${id}`,
     method: 'delete',
   }).then(res => {
-    if (res.status === 200){
+    if (res.status === 200) {
       dispatch(eventDeleted(id));
     }
   }).catch(error => {
