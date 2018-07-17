@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { deleteCenter } from '../../actions/centerAction';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { deleteCenter } from "../../actions/centerAction";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 /**
  * This component is used to genarate center list items
@@ -14,25 +14,25 @@ import PropTypes from 'prop-types';
  * @returns {object} JSX DOM
  *
  */
-class EditCenterList extends Component {
+export class EditCenterList extends Component {
   state = {
     id: null
   };
-  onDeleteCenter = (id) => {
+  onDeleteCenter = id => {
     this.props.deleteCenter(id);
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
   };
   onCloseModal = () => {
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
   };
-  onOpenModal = (id) => {
+  onOpenModal = id => {
     this.setState({
       id
     });
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
   };
 
   render() {
@@ -83,7 +83,7 @@ class EditCenterList extends Component {
                 <a data-toggle="collapse" href={`#${center.name}`} role="button" aria-expanded="false" aria-controls={center.name}>
                   <span id="dropdown"><i className="ion-android-arrow-dropdown" /></span>
                 </a>
-              </div>{' '}
+              </div>{" "}
             </div>
             <div className="collapse" id={center.name} key={center.name}>
               {eventList}
@@ -99,14 +99,14 @@ class EditCenterList extends Component {
         <div
           className="modal-overlay"
           id="modal-overlay"
-          ref={(el) => {
+          ref={el => {
             this.modal_overlay = el;
           }}
         />
         <div
           className="modal delete"
           id="modal"
-          ref={(el) => {
+          ref={el => {
             this.modal = el;
           }}
         >
@@ -119,7 +119,9 @@ class EditCenterList extends Component {
             </div>
             {this.props.centerList.loading && (
               <div className="center-loader">
-                <span className={this.props.centerList.loading ? 'loader' : ''} />
+                <span
+                  className={this.props.centerList.loading ? "loader" : ""}
+                />
               </div>
             )}
             <p>Do you want to delete this center? </p>

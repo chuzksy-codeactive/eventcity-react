@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-const moment = require('moment');
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+const moment = require("moment");
 
 /**
  * This component is used to generete centers cards
@@ -19,10 +19,15 @@ class EventCards extends Component {
         <div>
           <div>{purpose}</div>
           <div>{location}</div>
-          <div style={{ marginBottom: '20px' }}>{moment(eventDate).format('MMMM, Do YYYY')}</div>
-          <Link to={`/centers/event/${centerId}`} className="more-details">
+          <div style={{ marginBottom: "20px" }}>
+            {moment(eventDate).format("MMMM, Do YYYY")}
+          </div>
+          <span
+            onClick={this.props.history.push(`/centers/event/${centerId}`)}
+            className="more-details"
+          >
             MORE DETAILS
-          </Link>
+          </span>
         </div>
       </div>
     );
@@ -37,6 +42,6 @@ EventCards.propTypes = {
     eventDate: PropTypes.string,
     centerId: PropTypes.number
   })
-}
+};
 
 export default EventCards;

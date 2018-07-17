@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Dropzone from 'react-dropzone';
-import PropTypes from 'prop-types';
-import createHistory from 'history/createBrowserHistory';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import Dropzone from "react-dropzone";
+import PropTypes from "prop-types";
+import createHistory from "history/createBrowserHistory";
 
 import RenderField from '../helper/RenderField';
 
@@ -15,12 +15,19 @@ const history = createHistory();
  * @returns {object} JSX DOM
  */
 
-const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) => (
-  <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+const renderCenterType = ({
+  label,
+  input,
+  meta: { touched, error, invalid }
+}) => (
+  <div className={`form-group ${touched && invalid ? "has-error" : ""}`}>
     <label htmlFor="type" className="control-label">
       {label}
     </label>
-    <select {...input} className={error && touched ? 'form-control is-invalid' : 'form-control'}>
+    <select
+      {...input}
+      className={error && touched ? "form-control is-invalid" : "form-control"}
+    >
       <option value="">Select a type...</option>
       <option value="Theatre">Theatre</option>
       <option value="Banquest">Banquest</option>
@@ -30,8 +37,12 @@ const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) => (
-  <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+const renderFacilities = ({
+  label,
+  input,
+  meta: { touched, error, invalid }
+}) => (
+  <div className={`form-group ${touched && invalid ? "has-error" : ""}`}>
     <label htmlFor="type" className="control-label">
       {label}
     </label>
@@ -41,38 +52,38 @@ const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const validate = (values) => {
+export const validate = values => {
   const errors = {};
   let hasErrors = false;
 
-  if (!values.name || values.name.trim() === '') {
-    errors.name = 'center name is required';
+  if (!values.name || values.name.trim() === "") {
+    errors.name = "center name is required";
     hasErrors = true;
   }
   if (!values.capacity) {
-    errors.capacity = 'Capacity is required';
+    errors.capacity = "Capacity is required";
     hasErrors = true;
   }
-  if (!values.location || values.location.trim() === '') {
-    errors.location = 'Center location is required';
+  if (!values.location || values.location.trim() === "") {
+    errors.location = "Center location is required";
     hasErrors = true;
   }
   if (!values.price) {
-    errors.price = 'Center amount is required';
+    errors.price = "Center amount is required";
     hasErrors = true;
   }
-  if (!values.type || values.type.trim() === '') {
-    errors.type = 'Select a center type';
+  if (!values.type || values.type.trim() === "") {
+    errors.type = "Select a center type";
     hasErrors = true;
   }
-  if (!values.facilities || values.facilities.trim() === '') {
-    errors.facilities = 'facilities are required';
+  if (!values.facilities || values.facilities.trim() === "") {
+    errors.facilities = "facilities are required";
     hasErrors = true;
   }
   return hasErrors && errors;
 };
 
-class CenterForm extends Component {
+export class CenterForm extends Component {
   initValues = {
     id: this.props.center ? this.props.center.id : '',
     name: this.props.center ? this.props.center.name : '',
@@ -88,7 +99,7 @@ class CenterForm extends Component {
     imageUrl: null,
     display: 'none'
   };
-  onDrop = (files) => {
+  onDrop = files => {
     const file = files[0];
     this.setState({
       file,

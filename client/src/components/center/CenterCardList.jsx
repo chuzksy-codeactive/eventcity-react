@@ -13,7 +13,7 @@ import Pagination from '../ui-components/Pagination';
  * @returns {object} JSX DOM
  */
 
-class CenterCardList extends Component {
+export class CenterCardList extends Component {
   state = {
     searchTerm: '',
     currentlyDisplayed: this.props.centers
@@ -39,7 +39,13 @@ class CenterCardList extends Component {
       return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase());
     });
     if (Array.isArray(centers) && centers.length > 0) {
-      centerCards = centers.map(center => <CenterCards key={center.id} center={center} />);
+      centerCards = centers.map(center => (
+        <CenterCards
+          key={center.id}
+          center={center}
+          history={this.props.history}
+        />
+      ));
     } else if (Array.isArray(centers) && centers.length === 0) {
       centerCards = <div className="no-centers-found">No available center</div>;
     }

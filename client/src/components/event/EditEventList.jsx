@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import moment from 'moment';
-import EditEventModal from './EditEventModal';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import moment from "moment";
+import EditEventModal from "./EditEventModal";
+import PropTypes from "prop-types";
 
 /**
  * This component is use to view list of events
@@ -16,14 +16,14 @@ const deleteModal = (onCloseModal, self) => (
       <div
         className="modal-overlay"
         id="modal-overlay"
-        ref={(el) => {
+        ref={el => {
           self.modal_overlay = el;
         }}
       />
       <div
         className="modal delete"
         id="modal"
-        ref={(el) => {
+        ref={el => {
           self.modal = el;
         }}
       >
@@ -36,15 +36,25 @@ const deleteModal = (onCloseModal, self) => (
           </div>
           {self.props.eventsByUserId.loading && (
             <div className="center-loader">
-              <span className={self.props.eventsByUserId.loading ? 'loader' : ''} />
+              <span
+                className={self.props.eventsByUserId.loading ? "loader" : ""}
+              />
             </div>
           )}
           <p>Do you want to delete this event? </p>
           <div className="modal-footer">
-            <button className="close-button btn btn-danger btn-sm" id="close-button" onClick={self.onDeleteEvent.bind(self, self.state.id)}>
+            <button
+              className="close-button btn btn-danger btn-sm"
+              id="close-button"
+              onClick={self.onDeleteEvent.bind(self, self.state.id)}
+            >
               delete
             </button>
-            <button type="button" className="btn btn-default btn-sm" onClick={self.onCloseModalDelete}>
+            <button
+              type="button"
+              className="btn btn-default btn-sm"
+              onClick={self.onCloseModalDelete}
+            >
               cancel
             </button>
           </div>
@@ -61,7 +71,7 @@ const deleteModal = (onCloseModal, self) => (
  * @extends {Component}
  * @returns {object} JSX DOM
  */
-class EditEventList extends Component {
+export class EditEventList extends Component {
   state = {
     event: null,
     id: null,
@@ -71,11 +81,11 @@ class EditEventList extends Component {
     this.setState(
       {
         event,
-        setModal: 'edit'
+        setModal: "edit"
       },
       () => {
-        this.modal.classList.toggle('opened');
-        this.modal_overlay.classList.toggle('opened');
+        this.modal.classList.toggle("opened");
+        this.modal_overlay.classList.toggle("opened");
         this.props.reset();
       }
     );
@@ -83,18 +93,18 @@ class EditEventList extends Component {
   onDeleteEvent = (id) => {
     this.props.deleteEventById(id);
     this.props.fetchEventById(this.props.userId);
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
   };
   onCloseModal = () => {
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
     this.props.fetchEventById(this.props.userId);
   };
   onCloseModalDelete = () => {
     this.props.fetchEventById(this.props.userId);
-    this.modal.classList.toggle('opened');
-    this.modal_overlay.classList.toggle('opened');
+    this.modal.classList.toggle("opened");
+    this.modal_overlay.classList.toggle("opened");
   };
   onOpenModalDelete = (id) => {
     this.setState(
@@ -111,6 +121,7 @@ class EditEventList extends Component {
 
   render() {
     let eventModal = null;
+
     if (this.state.event !== null) {
       eventModal = (
         <EditEventModal
@@ -125,11 +136,19 @@ class EditEventList extends Component {
     let eventList = null;
     if (Array.isArray(this.props.events)) {
       eventList = this.props.events.map((event, i) => {
-        const editable = event.userId === 1 || event.userId === 2 || event.userId === this.props.userId;
+        const editable =
+          event.userId === 1 ||
+          event.userId === 2 ||
+          event.userId === this.props.userId;
 
-        const btnStyle = editable ? 'btn btn-success btn-list' : 'btn btn-success btn-list-disabled';
+        const btnStyle = editable
+          ? "btn btn-success btn-list"
+          : "btn btn-success btn-list-disabled";
         const EditButton = editable ? ( // binding actions to edit icon
-          <i className="ion-edit ion-icon" onClick={this.onEdit.bind(this, event)} />
+          <i
+            className="ion-edit ion-icon"
+            onClick={this.onEdit.bind(this, event)}
+          />
         ) : (
           <i className="ion-edit ion-icon" />
         );
@@ -137,8 +156,10 @@ class EditEventList extends Component {
         // if event.centerId === 0, display a deleted styled div
         // if otherwise show the indented styled div for booked events
         const isDeleted = event.centerId === 0;
-        const isCenterViewable = editable ? 'show-available-center' : 'hide-non-available';
-        const deletedStyle = isDeleted ? 'list-item-deleted' : 'list-item';
+        const isCenterViewable = editable
+          ? "show-available-center"
+          : "hide-non-available";
+        const deletedStyle = isDeleted ? "list-item-deleted" : "list-item";
 
         // to let the user know that the event has been deleted by the admin
         return (
@@ -158,7 +179,7 @@ class EditEventList extends Component {
                 <a data-toggle="collapse" href={`#${event.id}`} role="button" aria-expanded="false" aria-controls={event.name}>
                   <i className="ion-android-arrow-dropdown" />
                 </a>
-              </div>{' '}
+              </div>{" "}
             </div>
             {!isDeleted &&
               event.Center && (
@@ -198,7 +219,9 @@ class EditEventList extends Component {
       <Fragment>
         {eventList}
         {/* This is because two modals are conflicting */}
-        {this.state.setModal === 'edit' ? eventModal : deleteModal(this.onCloseModalDelete, this)}
+        {this.state.setModal === "edit"
+          ? eventModal
+          : deleteModal(this.onCloseModalDelete, this)}
       </Fragment>
     );
   }

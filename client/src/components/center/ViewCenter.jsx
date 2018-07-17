@@ -36,7 +36,9 @@ class ViewCenter extends Component {
             pages={this.props.centersPerPage.centers.pages} 
             page={this.state.page} 
             count={this.props.centersPerPage.centers.count}
-            searchCenterPerPage={this.props.searchCenterPerPage}/>
+            searchCenterPerPage={this.props.searchCenterPerPage}
+            history={this.props.history}/>
+            
           <Footer />
         </Fragment>
       );

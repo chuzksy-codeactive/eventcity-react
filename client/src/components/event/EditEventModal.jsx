@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import DayPicker, { DateUtils } from 'react-day-picker'
+import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
@@ -19,7 +19,9 @@ const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const renderPurposeField = ({ input, label, type, meta: { touched, error, invalid } }) => (
+const renderPurposeField = ({
+  input, label, type, meta: { touched, error, invalid }
+}) => (
   <div>
     <div id="form-group" className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
       <label htmlFor="type" className="control-label">
@@ -36,7 +38,9 @@ const renderPurposeField = ({ input, label, type, meta: { touched, error, invali
   </div>
 );
 
-const renderField = ({ input, label, type, meta: { touched, error, invalid } }) => (
+const renderField = ({
+  input, label, type, meta: { touched, error, invalid }
+}) => (
   <div>
     <div id="form-group" className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
       <label htmlFor="type" className="control-label">
@@ -48,27 +52,30 @@ const renderField = ({ input, label, type, meta: { touched, error, invalid } }) 
   </div>
 );
 
-const renderSelectCenter = ({change, defaultCenter, centers, label, input, meta: { touched, error, invalid } }) => {
-  return (
-  <div>
-    <div id="form-group" className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
-      <label htmlFor="type" className="control-label">
-        {label}
-      </label>
-      <select className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} defaultValue={defaultCenter} onChange={change}>
-      {centers.map(center => {
-        return (<option key={center.id} value={center.id}>{center.name}</option>);
-      })}
-      </select>
-      <small className="invalid-feedback">{error}</small>
+const renderSelectCenter = ({
+  change, defaultCenter, centers, label, input, meta: { touched, error, invalid }
+}) => (
+    <div>
+      <div id="form-group" className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+        <label htmlFor="type" className="control-label">
+          {label}
+        </label>
+        <select className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} defaultValue={defaultCenter} onChange={change}>
+          {centers.map(center => (
+              <option key={center.id} value={center.id}>
+                {center.name}
+              </option>
+            ))}
+        </select>
+        <small className="invalid-feedback">{error}</small>
+      </div>
     </div>
-  </div>
-);}
+);
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
-  if(!values.centerName){
-    error.centerName = "Center name is required";
+  if (!values.centerName) {
+    error.centerName = 'Center name is required';
   }
   if (!values.name) {
     errors.name = 'Event name is required';
@@ -80,7 +87,7 @@ const validate = values => {
     errors.note = 'Please provide a short note';
   }
   return errors;
-}
+};
 
 /**
  * This component handle the editting of events
@@ -92,7 +99,7 @@ const validate = values => {
 class EditEventModal extends Component {
   static defaultProp = {
     numberOfMonths: 1
-  }
+  };
   state = {
     selectedDay: undefined,
     message: null,
@@ -101,20 +108,23 @@ class EditEventModal extends Component {
     to: undefined
   };
   handleDayClick = (day) => {
-    const range = DateUtils.addDayToRange(day, {to: this.state.to, from: this.state.from});
+    const range = DateUtils.addDayToRange(day, {
+      to: this.state.to,
+      from: this.state.from
+    });
     this.setState({
       selectedDay: range.from,
       from: range.from,
       to: range.to
     });
-  }
+  };
   handleResetClick = () => {
     this.setState({
       from: undefined,
       to: undefined
-    })
-  }
-  componentDidMount(){
+    });
+  };
+  componentDidMount() {
     this.state.message = null;
     this.props.reset();
   }
@@ -124,37 +134,36 @@ class EditEventModal extends Component {
       selectedDay: new Date(newProps.event.eventDate),
       from: new Date(newProps.event.startDate),
       to: new Date(newProps.event.endDate)
-    })
+    });
   }
 
   onSelectCenter = (e) => {
     e.preventDefault();
     this.setState({
       selectCenter: e.target.value
-    })
-  }
+    });
+  };
 
   onSubmitForm = (values) => {
     if (this.state.from && this.state.to) {
-      const startDate = moment(this.state.from).format("YYYY-MM-DD");
-      const selectedDay = moment(this.state.selectedDay).format("YYYY-MM-DD");
-      const endDate = moment(this.state.to).format("YYYY-MM-DD");
-      const data = { 
-        ...values, 
-        eventDate: selectedDay, 
-        centerId: this.state.selectCenter || this.props.initialValues.centerId ,
+      const startDate = moment(this.state.from).format('YYYY-MM-DD');
+      const selectedDay = moment(this.state.selectedDay).format('YYYY-MM-DD');
+      const endDate = moment(this.state.to).format('YYYY-MM-DD');
+      const data = {
+        ...values,
+        eventDate: selectedDay,
+        centerId: this.state.selectCenter || this.props.initialValues.centerId,
         startDate,
         endDate
       };
       this.props.updateEventById(data);
     } else {
       this.setState({
-        message: 'Please select another date range',
+        message: 'Please select another date range'
       });
     }
   };
 
-  
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
     const modifiers = { start: from, end: to };
@@ -176,11 +185,18 @@ class EditEventModal extends Component {
               <div className="row">
                 <div className="col-6">
                   <form style={{ padding: '0 20px', marginTop: '10px' }} id="event-center" onSubmit={handleSubmit(this.onSubmitForm)}>
-                  {message && (
-                      <div style={{ margin: '10px 0', color: 'green' }}>{message}</div>
-                    )}
+                    {message && <div style={{ margin: '10px 0', color: 'green' }}>{message}</div>}
 
-                     <Field centers={this.props.centers || []} defaultCenter={this.props.initialValues.centerId} name="centerName" type="select" component={renderSelectCenter} label="Change Center" required change={this.onSelectCenter.bind(this)} />
+                    <Field
+                      centers={this.props.centers || []}
+                      defaultCenter={this.props.initialValues.centerId}
+                      name="centerName"
+                      type="select"
+                      component={renderSelectCenter}
+                      label="Change Center"
+                      required
+                      change={this.onSelectCenter.bind(this)}
+                    />
 
                     <Field name="name" type="text" component={renderField} label="Event Name" required />
                     <Field
@@ -195,9 +211,7 @@ class EditEventModal extends Component {
                     {eventDate && (
                       <div style={{ margin: '10px 0', color: '#343A40' }}>{`Event date: ${moment(eventDate).format('MMMM Do YYYY')}`}</div>
                     )}
-                    {this.state.message && (
-                      <div style={{ margin: '10px 0', color: 'red' }}>{this.state.message}</div>
-                    )}
+                    {this.state.message && <div style={{ margin: '10px 0', color: 'red' }}>{this.state.message}</div>}
                     <div className="modal-footer">
                       <button className="close-button btn btn-danger btn-sm" id="close-button" type="submit">
                         submit
@@ -209,28 +223,42 @@ class EditEventModal extends Component {
                   </form>
                 </div>
                 <div className="col-6">
-                  <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>Change date</div>
+                  <div
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#555'
+                    }}
+                  >
+                    Change date
+                  </div>
                   <div className="RangeExample">
-                    <DayPicker 
+                    <DayPicker
                       className="Selectable"
                       numberOfMonths={this.props.numberOfMonths}
                       selectedDays={[from, { from, to }]}
                       modifiers={modifiers}
                       onDayClick={this.handleDayClick}
-                      disabledDays={{before: new Date()}} />
-                    
+                      disabledDays={{ before: new Date() }}
+                    />
                     {!from && !to && <p className="time">Please select the first day.</p>}
                     {from && !to && <p className="time">Please select the last day.</p>}
-                    {from && to && <p className="time">Selected from <strong style={{color:"green"}}>{from.toLocaleDateString()}</strong> to <strong style={{color:"green"}}>{to.toLocaleDateString()}</strong></p>}
-                    {' '}
+                    {from &&
+                      to && (
+                        <p className="time">
+                          Selected from <strong style={{ color: 'green' }}>{from.toLocaleDateString()}</strong> to{' '}
+                          <strong style={{ color: 'green' }}>{to.toLocaleDateString()}</strong>
+                        </p>
+                      )}{' '}
                     {from &&
                       to && (
                         <button className="link" onClick={this.handleResetClick}>
                           Reset
                         </button>
                       )}
-                      <Helmet>
-                        <style>{`
+                    <Helmet>
+                      <style>
+                        {`
                           .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
                             background-color: #f0f8ff !important;
                             color: grey;
@@ -250,8 +278,8 @@ class EditEventModal extends Component {
                             background-color: red; !important
                           }
                         `}
-                        </style>
-                      </Helmet>
+                      </style>
+                    </Helmet>
                   </div>
                 </div>
               </div>
@@ -272,29 +300,29 @@ EditEventModal.propTypes = {
   onCloseModal: PropTypes.func,
   userId: PropTypes.number,
   eventsByUserId: PropTypes.object
-}
-
-const mapStateToProps = (state, props) => {
-  
-  return {
-    centers: state.centerListReducer.centers,
-    initialValues: props.event,
-    updateEvent: state.updateEventReducer,
-    eventsByUserId: state.eventReducer,
-    userId: state.userReducer.user.data.id
-  };
 };
+
+const mapStateToProps = (state, props) => ({
+  centers: state.centerListReducer.centers,
+  initialValues: props.event,
+  updateEvent: state.updateEventReducer,
+  eventsByUserId: state.eventReducer,
+  userId: state.userReducer.user.data.id
+});
 
 const mapDispatchToProps = dispatch => ({
   load,
-  updateEventById: data => dispatch(updateEventById(data)),
+  updateEventById: data => dispatch(updateEventById(data))
 });
 
 EditEventModal = reduxForm({
   form: 'editEvent',
-  enableReinitialize: true,
+  enableReinitialize: true
 })(EditEventModal);
 
-EditEventModal = connect(mapStateToProps, mapDispatchToProps)(EditEventModal);
+EditEventModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditEventModal);
 
 export default EditEventModal;
