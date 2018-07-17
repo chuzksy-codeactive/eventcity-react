@@ -6,6 +6,7 @@ let urlPath;
 
 module.exports = {
   "before": function (browser, done) {
+    browser.setWindowPosition(0, 0);
     browser.maximizeWindow(done);
   },
   "User should be able to log in as Admin": browser => {
@@ -39,10 +40,15 @@ module.exports = {
       .assert.elementPresent('textarea[name=facilities]')
       .assert.elementPresent('option[value=Theatre]')
       .setValue('input[name=name]', faker.company.companyName())
+      .pause(1000)
       .setValue('input[name=capacity]', 2000)
+      .pause(1000)
       .setValue('input[name=location]', faker.address.streetName())
+      .pause(1000)
       .setValue('input[name=price]', 200000)
+      .pause(1000)
       .setValue('textarea[name=facilities]', faker.random.words())
+      .pause(1000)
       .click('#hall')
       .setValue('#file-image', path.resolve('/Users/andeladeveloper/Documents/andela_projects/eventcity/server/sample.jpg'))
       .pause(1000)
@@ -72,10 +78,14 @@ module.exports = {
         this.clearValue('input[name=price]')
         this.clearValue('textarea[name=facilities]')
         this.setValue('input[name=name]', faker.company.companyName())
+        this.pause(1000)
         this.setValue('input[name=capacity]', 2000)
+        this.pause(1000)
         this.setValue('input[name=location]', faker.address.streetName())
+        this.pause(1000)
         this.setValue('input[name=price]', 200000)
         this.setValue('textarea[name=facilities]', faker.random.words())
+        this.pause(1000)
         this.click('#hall')
         this.pause(1000)
         this.setValue('#file-image', path.resolve('/Users/andeladeveloper/Documents/andela_projects/eventcity/server/sample.jpg'))
@@ -87,15 +97,15 @@ module.exports = {
   },
   "Admin should be able to delete a center": browser => {
     browser
-      .waitForElementVisible('body', 2000)
-      .waitForElementVisible('.list-wrapper', 2000)
+      .waitForElementVisible('body', 10000)
+      .waitForElementVisible('.list-wrapper', 5000)
       .assert.urlEquals(`${APP_BASE_URL}/centers/list`)
       .pause(2000)
       .assert.elementPresent('.list-wrapper')
       .assert.elementPresent('#trash')
       .click('#trash')
       .waitForElementVisible('#modal-footer', 2000)
-      .pause(100)
+      .pause(4000)
       .assert.elementPresent('#cancel')
       .waitForElementVisible('#cancel',2000)
       .click('#cancel')

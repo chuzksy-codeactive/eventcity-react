@@ -1,0 +1,1701 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar Component test It should render the component without error 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Navbar />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="container"
+      >
+        <Link
+          className="navbar-brand"
+          replace={false}
+          to="/"
+        >
+          EventCity
+        </Link>
+        <button
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          className="navbar-toggler navbar-toggler-right"
+          data-target="#navbarCollapse"
+          data-toggle="collapse"
+          type="button"
+        >
+          <span
+            className="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          className="collapse navbar-collapse"
+          id="navbarCollapse"
+        >
+          <ul
+            className="navbar-nav ml-auto"
+          >
+            <li
+              className="nav-item active"
+            >
+              <Link
+                className="nav-link"
+                replace={false}
+                to="/centers"
+              >
+                Explore Our Centers
+              </Link>
+            </li>
+            <li
+              className="nav-item dropdown"
+            >
+              <a
+                aria-expanded="false"
+                aria-haspopup="true"
+                className="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                href="http://example.com"
+                id="navbarDropdownMenuLink"
+              >
+                Admin
+              </a>
+              <div
+                aria-labelledby="navbarDropdownMenuLink"
+                className="dropdown-menu"
+              >
+                <a
+                  className="dropdown-item"
+                  href="/"
+                >
+                  Add New Center
+                </a>
+                <div
+                  className="dropdown-divider"
+                />
+                <Link
+                  className="dropdown-item"
+                  replace={false}
+                  to="/centers"
+                >
+                  Modify/Delete Center
+                </Link>
+              </div>
+            </li>
+            <li
+              className="nav-item dropdown"
+            >
+              <a
+                aria-expanded="false"
+                aria-haspopup="true"
+                className="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                href="http://example.com"
+                id="navbarDropdownMenuLink"
+              >
+                Event
+              </a>
+              <div
+                aria-labelledby="navbarDropdownMenuLink"
+                className="dropdown-menu"
+              >
+                <a
+                  className="dropdown-item"
+                  href="/"
+                >
+                  Add New Event
+                </a>
+                <div
+                  className="dropdown-divider"
+                />
+                <a
+                  className="dropdown-item"
+                  href="/"
+                >
+                  Modify/Delete Event
+                </a>
+              </div>
+            </li>
+            <li
+              className="nav-item"
+            >
+              <a
+                className="nav-link disabled"
+                href="/"
+              >
+                Sign In
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>,
+      "className": "navbar navbar-expand-md navbar-dark fixed-top bg-dark",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Link
+            className="navbar-brand"
+            replace={false}
+            to="/"
+          >
+            EventCity
+          </Link>,
+          <button
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            className="navbar-toggler navbar-toggler-right"
+            data-target="#navbarCollapse"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>,
+          <div
+            className="collapse navbar-collapse"
+            id="navbarCollapse"
+          >
+            <ul
+              className="navbar-nav ml-auto"
+            >
+              <li
+                className="nav-item active"
+              >
+                <Link
+                  className="nav-link"
+                  replace={false}
+                  to="/centers"
+                >
+                  Explore Our Centers
+                </Link>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Admin
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Center
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <Link
+                    className="dropdown-item"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Modify/Delete Center
+                  </Link>
+                </div>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Event
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Event
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Modify/Delete Event
+                  </a>
+                </div>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <a
+                  className="nav-link disabled"
+                  href="/"
+                >
+                  Sign In
+                </a>
+              </li>
+            </ul>
+          </div>,
+        ],
+        "className": "container",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "EventCity",
+            "className": "navbar-brand",
+            "replace": false,
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": "EventCity",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "aria-controls": "navbarCollapse",
+            "aria-expanded": "false",
+            "aria-label": "Toggle navigation",
+            "children": <span
+              className="navbar-toggler-icon"
+            />,
+            "className": "navbar-toggler navbar-toggler-right",
+            "data-target": "#navbarCollapse",
+            "data-toggle": "collapse",
+            "type": "button",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "navbar-toggler-icon",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "span",
+          },
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <ul
+              className="navbar-nav ml-auto"
+            >
+              <li
+                className="nav-item active"
+              >
+                <Link
+                  className="nav-link"
+                  replace={false}
+                  to="/centers"
+                >
+                  Explore Our Centers
+                </Link>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Admin
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Center
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <Link
+                    className="dropdown-item"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Modify/Delete Center
+                  </Link>
+                </div>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Event
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Event
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Modify/Delete Event
+                  </a>
+                </div>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <a
+                  className="nav-link disabled"
+                  href="/"
+                >
+                  Sign In
+                </a>
+              </li>
+            </ul>,
+            "className": "collapse navbar-collapse",
+            "id": "navbarCollapse",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <li
+                  className="nav-item active"
+                >
+                  <Link
+                    className="nav-link"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Explore Our Centers
+                  </Link>
+                </li>,
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Admin
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Center
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <Link
+                      className="dropdown-item"
+                      replace={false}
+                      to="/centers"
+                    >
+                      Modify/Delete Center
+                    </Link>
+                  </div>
+                </li>,
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Event
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Event
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Modify/Delete Event
+                    </a>
+                  </div>
+                </li>,
+                <li
+                  className="nav-item"
+                >
+                  <a
+                    className="nav-link disabled"
+                    href="/"
+                  >
+                    Sign In
+                  </a>
+                </li>,
+              ],
+              "className": "navbar-nav ml-auto",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <Link
+                    className="nav-link"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Explore Our Centers
+                  </Link>,
+                  "className": "nav-item active",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "Explore Our Centers",
+                    "className": "nav-link",
+                    "replace": false,
+                    "to": "/centers",
+                  },
+                  "ref": null,
+                  "rendered": "Explore Our Centers",
+                  "type": [Function],
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <a
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      className="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="http://example.com"
+                      id="navbarDropdownMenuLink"
+                    >
+                      Admin
+                    </a>,
+                    <div
+                      aria-labelledby="navbarDropdownMenuLink"
+                      className="dropdown-menu"
+                    >
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Add New Center
+                      </a>
+                      <div
+                        className="dropdown-divider"
+                      />
+                      <Link
+                        className="dropdown-item"
+                        replace={false}
+                        to="/centers"
+                      >
+                        Modify/Delete Center
+                      </Link>
+                    </div>,
+                  ],
+                  "className": "nav-item dropdown",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "aria-expanded": "false",
+                      "aria-haspopup": "true",
+                      "children": "Admin",
+                      "className": "nav-link dropdown-toggle",
+                      "data-toggle": "dropdown",
+                      "href": "http://example.com",
+                      "id": "navbarDropdownMenuLink",
+                    },
+                    "ref": null,
+                    "rendered": "Admin",
+                    "type": "a",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "aria-labelledby": "navbarDropdownMenuLink",
+                      "children": Array [
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Add New Center
+                        </a>,
+                        <div
+                          className="dropdown-divider"
+                        />,
+                        <Link
+                          className="dropdown-item"
+                          replace={false}
+                          to="/centers"
+                        >
+                          Modify/Delete Center
+                        </Link>,
+                      ],
+                      "className": "dropdown-menu",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Add New Center",
+                          "className": "dropdown-item",
+                          "href": "/",
+                        },
+                        "ref": null,
+                        "rendered": "Add New Center",
+                        "type": "a",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "className": "dropdown-divider",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "div",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": "Modify/Delete Center",
+                          "className": "dropdown-item",
+                          "replace": false,
+                          "to": "/centers",
+                        },
+                        "ref": null,
+                        "rendered": "Modify/Delete Center",
+                        "type": [Function],
+                      },
+                    ],
+                    "type": "div",
+                  },
+                ],
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <a
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      className="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="http://example.com"
+                      id="navbarDropdownMenuLink"
+                    >
+                      Event
+                    </a>,
+                    <div
+                      aria-labelledby="navbarDropdownMenuLink"
+                      className="dropdown-menu"
+                    >
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Add New Event
+                      </a>
+                      <div
+                        className="dropdown-divider"
+                      />
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Modify/Delete Event
+                      </a>
+                    </div>,
+                  ],
+                  "className": "nav-item dropdown",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "aria-expanded": "false",
+                      "aria-haspopup": "true",
+                      "children": "Event",
+                      "className": "nav-link dropdown-toggle",
+                      "data-toggle": "dropdown",
+                      "href": "http://example.com",
+                      "id": "navbarDropdownMenuLink",
+                    },
+                    "ref": null,
+                    "rendered": "Event",
+                    "type": "a",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "aria-labelledby": "navbarDropdownMenuLink",
+                      "children": Array [
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Add New Event
+                        </a>,
+                        <div
+                          className="dropdown-divider"
+                        />,
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Modify/Delete Event
+                        </a>,
+                      ],
+                      "className": "dropdown-menu",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Add New Event",
+                          "className": "dropdown-item",
+                          "href": "/",
+                        },
+                        "ref": null,
+                        "rendered": "Add New Event",
+                        "type": "a",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "className": "dropdown-divider",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": "div",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Modify/Delete Event",
+                          "className": "dropdown-item",
+                          "href": "/",
+                        },
+                        "ref": null,
+                        "rendered": "Modify/Delete Event",
+                        "type": "a",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                ],
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <a
+                    className="nav-link disabled"
+                    href="/"
+                  >
+                    Sign In
+                  </a>,
+                  "className": "nav-item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Sign In",
+                    "className": "nav-link disabled",
+                    "href": "/",
+                  },
+                  "ref": null,
+                  "rendered": "Sign In",
+                  "type": "a",
+                },
+                "type": "li",
+              },
+            ],
+            "type": "ul",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "nav",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="container"
+        >
+          <Link
+            className="navbar-brand"
+            replace={false}
+            to="/"
+          >
+            EventCity
+          </Link>
+          <button
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            className="navbar-toggler navbar-toggler-right"
+            data-target="#navbarCollapse"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarCollapse"
+          >
+            <ul
+              className="navbar-nav ml-auto"
+            >
+              <li
+                className="nav-item active"
+              >
+                <Link
+                  className="nav-link"
+                  replace={false}
+                  to="/centers"
+                >
+                  Explore Our Centers
+                </Link>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Admin
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Center
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <Link
+                    className="dropdown-item"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Modify/Delete Center
+                  </Link>
+                </div>
+              </li>
+              <li
+                className="nav-item dropdown"
+              >
+                <a
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  className="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="http://example.com"
+                  id="navbarDropdownMenuLink"
+                >
+                  Event
+                </a>
+                <div
+                  aria-labelledby="navbarDropdownMenuLink"
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Add New Event
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                  />
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                  >
+                    Modify/Delete Event
+                  </a>
+                </div>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <a
+                  className="nav-link disabled"
+                  href="/"
+                >
+                  Sign In
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>,
+        "className": "navbar navbar-expand-md navbar-dark fixed-top bg-dark",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Link
+              className="navbar-brand"
+              replace={false}
+              to="/"
+            >
+              EventCity
+            </Link>,
+            <button
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              className="navbar-toggler navbar-toggler-right"
+              data-target="#navbarCollapse"
+              data-toggle="collapse"
+              type="button"
+            >
+              <span
+                className="navbar-toggler-icon"
+              />
+            </button>,
+            <div
+              className="collapse navbar-collapse"
+              id="navbarCollapse"
+            >
+              <ul
+                className="navbar-nav ml-auto"
+              >
+                <li
+                  className="nav-item active"
+                >
+                  <Link
+                    className="nav-link"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Explore Our Centers
+                  </Link>
+                </li>
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Admin
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Center
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <Link
+                      className="dropdown-item"
+                      replace={false}
+                      to="/centers"
+                    >
+                      Modify/Delete Center
+                    </Link>
+                  </div>
+                </li>
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Event
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Event
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Modify/Delete Event
+                    </a>
+                  </div>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <a
+                    className="nav-link disabled"
+                    href="/"
+                  >
+                    Sign In
+                  </a>
+                </li>
+              </ul>
+            </div>,
+          ],
+          "className": "container",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "EventCity",
+              "className": "navbar-brand",
+              "replace": false,
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "EventCity",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "aria-controls": "navbarCollapse",
+              "aria-expanded": "false",
+              "aria-label": "Toggle navigation",
+              "children": <span
+                className="navbar-toggler-icon"
+              />,
+              "className": "navbar-toggler navbar-toggler-right",
+              "data-target": "#navbarCollapse",
+              "data-toggle": "collapse",
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "navbar-toggler-icon",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "span",
+            },
+            "type": "button",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <ul
+                className="navbar-nav ml-auto"
+              >
+                <li
+                  className="nav-item active"
+                >
+                  <Link
+                    className="nav-link"
+                    replace={false}
+                    to="/centers"
+                  >
+                    Explore Our Centers
+                  </Link>
+                </li>
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Admin
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Center
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <Link
+                      className="dropdown-item"
+                      replace={false}
+                      to="/centers"
+                    >
+                      Modify/Delete Center
+                    </Link>
+                  </div>
+                </li>
+                <li
+                  className="nav-item dropdown"
+                >
+                  <a
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    href="http://example.com"
+                    id="navbarDropdownMenuLink"
+                  >
+                    Event
+                  </a>
+                  <div
+                    aria-labelledby="navbarDropdownMenuLink"
+                    className="dropdown-menu"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Add New Event
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                    />
+                    <a
+                      className="dropdown-item"
+                      href="/"
+                    >
+                      Modify/Delete Event
+                    </a>
+                  </div>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <a
+                    className="nav-link disabled"
+                    href="/"
+                  >
+                    Sign In
+                  </a>
+                </li>
+              </ul>,
+              "className": "collapse navbar-collapse",
+              "id": "navbarCollapse",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <li
+                    className="nav-item active"
+                  >
+                    <Link
+                      className="nav-link"
+                      replace={false}
+                      to="/centers"
+                    >
+                      Explore Our Centers
+                    </Link>
+                  </li>,
+                  <li
+                    className="nav-item dropdown"
+                  >
+                    <a
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      className="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="http://example.com"
+                      id="navbarDropdownMenuLink"
+                    >
+                      Admin
+                    </a>
+                    <div
+                      aria-labelledby="navbarDropdownMenuLink"
+                      className="dropdown-menu"
+                    >
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Add New Center
+                      </a>
+                      <div
+                        className="dropdown-divider"
+                      />
+                      <Link
+                        className="dropdown-item"
+                        replace={false}
+                        to="/centers"
+                      >
+                        Modify/Delete Center
+                      </Link>
+                    </div>
+                  </li>,
+                  <li
+                    className="nav-item dropdown"
+                  >
+                    <a
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      className="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      href="http://example.com"
+                      id="navbarDropdownMenuLink"
+                    >
+                      Event
+                    </a>
+                    <div
+                      aria-labelledby="navbarDropdownMenuLink"
+                      className="dropdown-menu"
+                    >
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Add New Event
+                      </a>
+                      <div
+                        className="dropdown-divider"
+                      />
+                      <a
+                        className="dropdown-item"
+                        href="/"
+                      >
+                        Modify/Delete Event
+                      </a>
+                    </div>
+                  </li>,
+                  <li
+                    className="nav-item"
+                  >
+                    <a
+                      className="nav-link disabled"
+                      href="/"
+                    >
+                      Sign In
+                    </a>
+                  </li>,
+                ],
+                "className": "navbar-nav ml-auto",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <Link
+                      className="nav-link"
+                      replace={false}
+                      to="/centers"
+                    >
+                      Explore Our Centers
+                    </Link>,
+                    "className": "nav-item active",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": "Explore Our Centers",
+                      "className": "nav-link",
+                      "replace": false,
+                      "to": "/centers",
+                    },
+                    "ref": null,
+                    "rendered": "Explore Our Centers",
+                    "type": [Function],
+                  },
+                  "type": "li",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <a
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        className="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="http://example.com"
+                        id="navbarDropdownMenuLink"
+                      >
+                        Admin
+                      </a>,
+                      <div
+                        aria-labelledby="navbarDropdownMenuLink"
+                        className="dropdown-menu"
+                      >
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Add New Center
+                        </a>
+                        <div
+                          className="dropdown-divider"
+                        />
+                        <Link
+                          className="dropdown-item"
+                          replace={false}
+                          to="/centers"
+                        >
+                          Modify/Delete Center
+                        </Link>
+                      </div>,
+                    ],
+                    "className": "nav-item dropdown",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "aria-expanded": "false",
+                        "aria-haspopup": "true",
+                        "children": "Admin",
+                        "className": "nav-link dropdown-toggle",
+                        "data-toggle": "dropdown",
+                        "href": "http://example.com",
+                        "id": "navbarDropdownMenuLink",
+                      },
+                      "ref": null,
+                      "rendered": "Admin",
+                      "type": "a",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "aria-labelledby": "navbarDropdownMenuLink",
+                        "children": Array [
+                          <a
+                            className="dropdown-item"
+                            href="/"
+                          >
+                            Add New Center
+                          </a>,
+                          <div
+                            className="dropdown-divider"
+                          />,
+                          <Link
+                            className="dropdown-item"
+                            replace={false}
+                            to="/centers"
+                          >
+                            Modify/Delete Center
+                          </Link>,
+                        ],
+                        "className": "dropdown-menu",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Add New Center",
+                            "className": "dropdown-item",
+                            "href": "/",
+                          },
+                          "ref": null,
+                          "rendered": "Add New Center",
+                          "type": "a",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "className": "dropdown-divider",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Modify/Delete Center",
+                            "className": "dropdown-item",
+                            "replace": false,
+                            "to": "/centers",
+                          },
+                          "ref": null,
+                          "rendered": "Modify/Delete Center",
+                          "type": [Function],
+                        },
+                      ],
+                      "type": "div",
+                    },
+                  ],
+                  "type": "li",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <a
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        className="nav-link dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="http://example.com"
+                        id="navbarDropdownMenuLink"
+                      >
+                        Event
+                      </a>,
+                      <div
+                        aria-labelledby="navbarDropdownMenuLink"
+                        className="dropdown-menu"
+                      >
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Add New Event
+                        </a>
+                        <div
+                          className="dropdown-divider"
+                        />
+                        <a
+                          className="dropdown-item"
+                          href="/"
+                        >
+                          Modify/Delete Event
+                        </a>
+                      </div>,
+                    ],
+                    "className": "nav-item dropdown",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "aria-expanded": "false",
+                        "aria-haspopup": "true",
+                        "children": "Event",
+                        "className": "nav-link dropdown-toggle",
+                        "data-toggle": "dropdown",
+                        "href": "http://example.com",
+                        "id": "navbarDropdownMenuLink",
+                      },
+                      "ref": null,
+                      "rendered": "Event",
+                      "type": "a",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "aria-labelledby": "navbarDropdownMenuLink",
+                        "children": Array [
+                          <a
+                            className="dropdown-item"
+                            href="/"
+                          >
+                            Add New Event
+                          </a>,
+                          <div
+                            className="dropdown-divider"
+                          />,
+                          <a
+                            className="dropdown-item"
+                            href="/"
+                          >
+                            Modify/Delete Event
+                          </a>,
+                        ],
+                        "className": "dropdown-menu",
+                      },
+                      "ref": null,
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Add New Event",
+                            "className": "dropdown-item",
+                            "href": "/",
+                          },
+                          "ref": null,
+                          "rendered": "Add New Event",
+                          "type": "a",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "className": "dropdown-divider",
+                          },
+                          "ref": null,
+                          "rendered": null,
+                          "type": "div",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Modify/Delete Event",
+                            "className": "dropdown-item",
+                            "href": "/",
+                          },
+                          "ref": null,
+                          "rendered": "Modify/Delete Event",
+                          "type": "a",
+                        },
+                      ],
+                      "type": "div",
+                    },
+                  ],
+                  "type": "li",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <a
+                      className="nav-link disabled"
+                      href="/"
+                    >
+                      Sign In
+                    </a>,
+                    "className": "nav-item",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Sign In",
+                      "className": "nav-link disabled",
+                      "href": "/",
+                    },
+                    "ref": null,
+                    "rendered": "Sign In",
+                    "type": "a",
+                  },
+                  "type": "li",
+                },
+              ],
+              "type": "ul",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "nav",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

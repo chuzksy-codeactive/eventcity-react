@@ -1,10 +1,15 @@
 import * as types from '../actions/actionTypes';
-import userInitialState from './userInitialState';
+
+const userInitialState = {
+  user: {},
+  error: '',
+  loading: false
+}
 
 const userReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case types.SIGNING_IN_USER:
-    
+
       return {
         ...state,
         user: {},

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Modal extends Component {
+export class Modal extends Component {
   render() {
     return (
       <div className="myModal" id="modal" ref={this.props.modal} onClick={this.onClose}>

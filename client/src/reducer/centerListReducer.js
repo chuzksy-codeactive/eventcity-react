@@ -17,7 +17,8 @@ const centerListReducer = (state = initialState, action) => {
       };
     case types.FETCHING_CENTER_ERROR:
       return { ...state,
-        centers: []
+        centers: [],
+        message: action.payload
       };
     case types.CENTER_DELETING:
       return { ...state,

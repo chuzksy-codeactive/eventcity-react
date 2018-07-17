@@ -16,7 +16,7 @@ describe('Users Test', () => {
   afterEach(() => moxios.uninstall());
 
   describe('Sign up user action', () => {
-    it('should sign up as admin', async (done) => {
+    it('should be abl to signup a user', async (done) => {
       moxios.stubRequest('/api/v1/users', {
         status: 201,
         response: {

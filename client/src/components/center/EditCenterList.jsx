@@ -95,7 +95,7 @@ class EditCenterList extends Component {
 
     return (
       <div>
-        <div className="list-wrapper">{centerLists}</div>
+        <div className="list-wrapper" id="list-wrapper">{centerLists}</div>
         <div
           className="modal-overlay"
           id="modal-overlay"

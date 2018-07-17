@@ -4,6 +4,7 @@ const APP_BASE_URL = "http://localhost:8090";
 
 module.exports = {
   "beforeEach": function (browser, done) {
+    browser.setWindowPosition(0, 0);
     browser.maximizeWindow(done);
   },
   "User signing up": browser => {
@@ -23,10 +24,15 @@ module.exports = {
       .assert.elementPresent('input[name=password]')
       .assert.elementPresent('input[name=confirmPassword]')
       .setValue('input[name=username]', faker.name.findName())
+      .pause(1000)
       .setValue('input[name=email]', faker.internet.email())
+      .pause(1000)
       .setValue('input[name=firstname]', faker.name.firstName())
+      .pause(1000)
       .setValue('input[name=lastname]', faker.name.lastName())
+      .pause(1000)
       .setValue('input[name=password]', 'password')
+      .pause(1000)
       .setValue('input[name=confirmPassword]', 'password')
       .pause(1000)
       .click('#btn-signup')
