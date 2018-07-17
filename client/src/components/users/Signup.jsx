@@ -1,44 +1,44 @@
-import React, { Component } from 'react';
-import { Field, reduxForm, values } from 'redux-form';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Field, reduxForm, values } from "redux-form";
+import axios from "axios";
+import PropTypes from "prop-types";
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   let hasErrors = false;
 
-  if (!values.username || values.username.trim() === '') {
-    errors.username = 'Enter username';
+  if (!values.username || values.username.trim() === "") {
+    errors.username = "Enter username";
     hasErrors = true;
   }
-  if (!values.firstname || values.firstname.trim() === '') {
-    errors.firstname = 'Enter Firstname';
+  if (!values.firstname || values.firstname.trim() === "") {
+    errors.firstname = "Enter Firstname";
     hasErrors = true;
   }
-  if (!values.lastname || values.lastname.trim() === '') {
-    errors.lastname = 'Enter Lastname';
+  if (!values.lastname || values.lastname.trim() === "") {
+    errors.lastname = "Enter Lastname";
     hasErrors = true;
   }
-  if (!values.email || values.email.trim() === '') {
-    errors.email = 'Enter email';
+  if (!values.email || values.email.trim() === "") {
+    errors.email = "Enter email";
     hasErrors = true;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = "Invalid email address";
   }
-  if (!values.password || values.password.trim() === '') {
-    errors.password = 'Enter password';
+  if (!values.password || values.password.trim() === "") {
+    errors.password = "Enter password";
     hasErrors = true;
   }
-  if (!values.confirmPassword || values.confirmPassword.trim() === '') {
-    errors.confirmPassword = 'Enter Confirm Password';
+  if (!values.confirmPassword || values.confirmPassword.trim() === "") {
+    errors.confirmPassword = "Enter Confirm Password";
     hasErrors = true;
   }
 
   if (
     values.confirmPassword &&
-    values.confirmPassword.trim() !== '' &&
+    values.confirmPassword.trim() !== "" &&
     values.password &&
-    values.password.trim() !== '' &&
+    values.password.trim() !== "" &&
     values.password !== values.confirmPassword
   ) {
     errors.password = "Password And Confirm Password don't match";
@@ -49,13 +49,21 @@ const validate = (values) => {
 };
 
 const renderField = ({
-  input, label, type, meta: {
-    touched, error, invalid, warning
-  }
+  input,
+  label,
+  type,
+  meta: { touched, error, invalid, warning }
 }) => (
   <div>
     <div className="form-group">
-      <input {...input} type={type} placeholder={label} className={`form-control form-control-sm ${error && touched ? 'is-invalid' : ''}`} />
+      <input
+        {...input}
+        type={type}
+        placeholder={label}
+        className={`form-control form-control-sm ${
+          error && touched ? "is-invalid" : ""
+        }`}
+      />
       <small className="invalid-feedback">{error}</small>
     </div>
   </div>
@@ -67,15 +75,15 @@ const renderField = ({
  *
  * @class Signup
  * @extends {Component}
- * @returns {object} 
+ * @returns {object}
  */
-class Signup extends Component {
+export class Signup extends Component {
   state = {
-    file: '',
-    imageUrl: ''
-  }
+    file: "",
+    imageUrl: ""
+  };
 
-  onSubmitForm = (values) => {
+  onSubmitForm = values => {
     this.props.userSignUp(values, this.props.history);
   };
 
@@ -88,20 +96,62 @@ class Signup extends Component {
         </div>
         <div className="form-inputs form">
           <form onSubmit={handleSubmit(this.onSubmitForm)}>
-            {this.props.user.loading && <div className="submitting">submitting...</div>}
-            <Field name="username" type="text" component={renderField} label="Username" />
-            <Field name="email" type="email" component={renderField} label="Email addres here" />
-            <Field name="firstname" type="text" component={renderField} label="Firstname" />
-            <Field name="lastname" type="text" component={renderField} label="Lastname" />
-            <Field name="password" type="password" component={renderField} label="Password" />
-            <Field name="confirmPassword" type="password" component={renderField} label="Re-enter password" />
+            {this.props.user.loading && (
+              <div className="submitting">submitting...</div>
+            )}
+            <Field
+              name="username"
+              type="text"
+              component={renderField}
+              label="Username"
+              id="username"
+            />
+            <Field
+              name="email"
+              type="email"
+              component={renderField}
+              label="Email addres here"
+              id="email"
+            />
+            <Field
+              name="firstname"
+              type="text"
+              component={renderField}
+              label="Firstname"
+              id="firstname"
+            />
+            <Field
+              name="lastname"
+              type="text"
+              component={renderField}
+              label="Lastname"
+              id="lastname"
+            />
+            <Field
+              name="password"
+              type="password"
+              component={renderField}
+              label="Password"
+              id="password"
+            />
+            <Field
+              name="confirmPassword"
+              type="password"
+              component={renderField}
+              label="Re-enter password"
+              id="confirm-password"
+            />
             {this.props.user.error && (
               <div className="submitting error form-control-sm" role="alert">
                 {this.props.user.error}
               </div>
             )}
 
-            <button type="submit" disabled={submitting} className="btn btn-primary btn-sm">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn btn-primary btn-sm"
+            >
               Submit
             </button>
           </form>
@@ -123,9 +173,9 @@ Signup.propTypes = {
     error: PropTypes.any.isRequired
   }),
   userSignUp: PropTypes.func.isRequired
-}
+};
 
 export default reduxForm({
-  form: 'signUpForm',
+  form: "signUpForm",
   validate
 })(Signup);

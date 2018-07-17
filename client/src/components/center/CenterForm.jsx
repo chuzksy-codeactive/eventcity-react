@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Dropzone from 'react-dropzone';
-import PropTypes from 'prop-types';
-import createHistory from 'history/createBrowserHistory';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import Dropzone from "react-dropzone";
+import PropTypes from "prop-types";
+import createHistory from "history/createBrowserHistory";
 
-import RenderField from '../helper/RenderField';
+import RenderField from "../helper/RenderField";
 const history = createHistory();
 /**
  * This component is used to register a center
@@ -14,12 +14,19 @@ const history = createHistory();
  * @returns {object} JSX DOM
  */
 
-const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) => (
-  <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+const renderCenterType = ({
+  label,
+  input,
+  meta: { touched, error, invalid }
+}) => (
+  <div className={`form-group ${touched && invalid ? "has-error" : ""}`}>
     <label htmlFor="type" className="control-label">
       {label}
     </label>
-    <select {...input} className={error && touched ? 'form-control is-invalid' : 'form-control'}>
+    <select
+      {...input}
+      className={error && touched ? "form-control is-invalid" : "form-control"}
+    >
       <option value="">Select a type...</option>
       <option value="Theatre">Theatre</option>
       <option value="Banquest">Banquest</option>
@@ -29,14 +36,18 @@ const renderCenterType = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) => (
-  <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
+const renderFacilities = ({
+  label,
+  input,
+  meta: { touched, error, invalid }
+}) => (
+  <div className={`form-group ${touched && invalid ? "has-error" : ""}`}>
     <label htmlFor="type" className="control-label">
       {label}
     </label>
     <textarea
       {...input}
-      className={error && touched ? 'form-control is-invalid' : 'form-control'}
+      className={error && touched ? "form-control is-invalid" : "form-control"}
       row="5"
     />
     <div className="invalid-feedback">{error}</div>
@@ -44,70 +55,62 @@ const renderFacilities = ({ label, input, meta: { touched, error, invalid } }) =
   </div>
 );
 
-const validate = (values) => {
+export const validate = values => {
   const errors = {};
   let hasErrors = false;
 
-  if (!values.name || values.name.trim() === '') {
-    errors.name = 'center name is required';
+  if (!values.name || values.name.trim() === "") {
+    errors.name = "center name is required";
     hasErrors = true;
   }
   if (!values.capacity) {
-    errors.capacity = 'Capacity is required';
+    errors.capacity = "Capacity is required";
     hasErrors = true;
   }
-  if (!values.location || values.location.trim() === '') {
-    errors.location = 'Center location is required';
+  if (!values.location || values.location.trim() === "") {
+    errors.location = "Center location is required";
     hasErrors = true;
   }
   if (!values.price) {
-    errors.price = 'Center amount is required';
+    errors.price = "Center amount is required";
     hasErrors = true;
   }
-  if (!values.type || values.type.trim() === '') {
-    errors.type = 'Select a center type';
+  if (!values.type || values.type.trim() === "") {
+    errors.type = "Select a center type";
     hasErrors = true;
   }
-  if (!values.facilities || values.facilities.trim() === '') {
-    errors.facilities = 'facilities are required';
+  if (!values.facilities || values.facilities.trim() === "") {
+    errors.facilities = "facilities are required";
     hasErrors = true;
   }
   return hasErrors && errors;
 };
 
-class CenterForm extends Component {
+export class CenterForm extends Component {
   initValues = {
-    id: this.props.center ? this.props.center.id : '',
-    name: this.props.center ? this.props.center.name : '',
-    capacity: this.props.center ? this.props.center.capacity : '',
-    location: this.props.center ? this.props.center.location : '',
-    price: this.props.center ? this.props.center.price : '',
-    facilities: this.props.center ? this.props.center.facilities : '',
-    type: this.props.center ? this.props.center.type : '',
+    id: this.props.center ? this.props.center.id : "",
+    name: this.props.center ? this.props.center.name : "",
+    capacity: this.props.center ? this.props.center.capacity : "",
+    location: this.props.center ? this.props.center.location : "",
+    price: this.props.center ? this.props.center.price : "",
+    facilities: this.props.center ? this.props.center.facilities : "",
+    type: this.props.center ? this.props.center.type : ""
   };
   state = {
     files: [],
     file: null,
     imageUrl: null,
-    display: 'none',
+    display: "none"
   };
-  onDrop = (files) => {
+  onDrop = files => {
     const file = files[0];
     this.setState({
       file,
-      files,
+      files
     });
-  };
-  isOpen = () => {
-    this.setState({
-      display: 'block',
-    });
-  };
-  isClose = () => {
-    this.setState({ display: 'none' });
   };
 
-  onSubmitForm = (values) => {
+  onSubmitForm = values => {
     const centers = { ...values, file: this.state.file };
     if (!this.props.match.params.id) {
       this.props.createCenter(centers, this.props.history);
@@ -119,24 +122,18 @@ class CenterForm extends Component {
 
   componentDidMount() {
     if (this.invalidRoute) this.props.history.push("/404");
-    
+
     if (this.props.match.params.id) {
       this.props.load(this.initValues);
     }
   }
 
   render() {
-    if (this.props.match.params.id && !this.props.center )
-    {
+    if (this.props.match.params.id && !this.props.center) {
       this.invalidRoute = true;
       return null;
     }
-    const {
-      handleSubmit,
-      submitting,
-      reset,
-      pristine,
-    } = this.props;
+    const { handleSubmit, submitting, reset, pristine } = this.props;
     return (
       <div>
         <div className="container center-flex">
@@ -145,7 +142,9 @@ class CenterForm extends Component {
               <section className="section-features">
                 {!this.props.match.params.id && (
                   <div>
-                    <h1 className="header-section row-width">Register a new Center</h1>
+                    <h1 className="header-section row-width">
+                      Register a new Center
+                    </h1>
                   </div>
                 )}
                 {this.props.match.params.id && (
@@ -160,6 +159,7 @@ class CenterForm extends Component {
                 >
                   <Field
                     name="name"
+                    id="name"
                     type="text"
                     component={RenderField}
                     label="Center Name"
@@ -167,6 +167,7 @@ class CenterForm extends Component {
                   />
                   <Field
                     name="capacity"
+                    id="capacity"
                     type="number"
                     component={RenderField}
                     label="Capacity"
@@ -174,6 +175,7 @@ class CenterForm extends Component {
                   />
                   <Field
                     name="location"
+                    id="location"
                     type="text"
                     component={RenderField}
                     label="Location"
@@ -181,16 +183,30 @@ class CenterForm extends Component {
                   />
                   <Field
                     name="price"
+                    id="price"
                     type="number"
                     component={RenderField}
                     label="Price"
                     required
                   />
-                  <Field name="facilities" component={renderFacilities} label="Facilities" />
-                  <Field name="type" component={renderCenterType} label="Center Type" />
+                  <Field
+                    name="facilities"
+                    id="facilities"
+                    component={renderFacilities}
+                    label="Facilities"
+                  />
+                  <Field
+                    name="type"
+                    id="type"
+                    component={renderCenterType}
+                    label="Center Type"
+                  />
                   <div className="form-group">
                     <Dropzone onDrop={this.onDrop} multiple={false}>
-                      <p>Try dropping some files here, or click to select files to upload.</p>
+                      <p>
+                        Try dropping some files here, or click to select files
+                        to upload.
+                      </p>
                     </Dropzone>
                     <aside>
                       <ul>
@@ -203,7 +219,9 @@ class CenterForm extends Component {
                     </aside>
                   </div>
                   <div className="spinner">
-                    {this.props.centers.message && <small>{this.props.centers.message}</small>}
+                    {this.props.centers.message && (
+                      <small>{this.props.centers.message}</small>
+                    )}
                   </div>
                   {!this.props.match.params.id && (
                     <button
@@ -212,12 +230,17 @@ class CenterForm extends Component {
                       disabled={submitting}
                       style={{ marginRight: 10 }}
                     >
-                      <span className={this.props.centers.loading ? 'loader' : ''} />Create New
-                      Center
+                      <span
+                        className={this.props.centers.loading ? "loader" : ""}
+                      />Create New Center
                     </button>
                   )}
                   {!this.props.match.params.id && (
-                    <button type="button" className="btn btn-danger" onClick={reset}>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={reset}
+                    >
                       Cancel
                     </button>
                   )}
@@ -228,7 +251,9 @@ class CenterForm extends Component {
                       disabled={submitting || pristine}
                       style={{ marginRight: 10 }}
                     >
-                      <span className={this.props.centers.loading ? 'loader' : ''} />Edit Center
+                      <span
+                        className={this.props.centers.loading ? "loader" : ""}
+                      />Edit Center
                     </button>
                   )}
                   {this.props.match.params.id && (
@@ -263,8 +288,8 @@ CenterForm.propType = {
   facilities: PropTypes.string,
   createCenter: PropTypes.func,
   updateCenter: PropTypes.func
-}
+};
 export default reduxForm({
-  form: 'centerForm',
-  validate,
+  form: "centerForm",
+  validate
 })(CenterForm);

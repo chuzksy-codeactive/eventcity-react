@@ -1,9 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { fetchEventById, resetEvent, deleteEventById } from '../../actions/eventActions';
-import EditEventList from './EditEventList';
-import PropTypes from 'prop-types';
-
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import {
+  fetchEventById,
+  resetEvent,
+  deleteEventById
+} from "../../actions/eventActions";
+import EditEventList from "./EditEventList";
+import PropTypes from "prop-types";
 
 /**
  * This component is use to view list of events
@@ -12,7 +15,7 @@ import PropTypes from 'prop-types';
  * @extends {Component}
  * @returns {object} JSX DOM
  */
-class EditEvent extends Component {
+export class EditEvent extends Component {
   componentDidMount() {
     this.props.fetchEventById(this.props.userId);
   }
@@ -21,17 +24,26 @@ class EditEvent extends Component {
     const { loading, message, events } = this.props.eventsByUserId;
     return (
       <Fragment>
-        <h1 className="header-section set-margin-top">List of events you have scheduled</h1>
+        <h1 className="header-section set-margin-top">
+          List of events you have scheduled
+        </h1>
         <div className="container">
-          <div style={{ margin: '30px 0' }} className="row">
+          <div style={{ margin: "30px 0" }} className="row">
             <div className="col-md-7 offset-md-2 center-list">
-              {loading ? <div className="loader-big" /> : message ? <div className="set-message-center">{message}</div> : <EditEventList 
-                events={events}   
-                reset={this.props.reset} 
-                fetchEventById={this.props.fetchEventById} 
-                userId={this.props.userId} 
-                deleteEventById={this.props.deleteEventById} 
-                eventsByUserId={this.props.eventsByUserId} />}
+              {loading ? (
+                <div className="loader-big" />
+              ) : message ? (
+                <div className="set-message-center">{message}</div>
+              ) : (
+                <EditEventList
+                  events={events}
+                  reset={this.props.reset}
+                  fetchEventById={this.props.fetchEventById}
+                  userId={this.props.userId}
+                  deleteEventById={this.props.deleteEventById}
+                  eventsByUserId={this.props.eventsByUserId}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -50,11 +62,11 @@ EditEvent.propTypes = {
     message: PropTypes.any,
     events: PropTypes.array
   })
-}
+};
 
 const mapStateToProps = state => ({
   eventsByUserId: state.eventReducer,
-  userId: state.userReducer.user.data.id,
+  userId: state.userReducer.user.data.id
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -63,4 +75,7 @@ const mapDispatchToProps = dispatch => ({
   reset: () => dispatch(resetEvent())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditEvent);

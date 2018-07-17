@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import CenterCards from './CenterCards.jsx';
-import SearchBar from '../ui-components/SearchBar';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
+import React, { Component, Fragment } from "react";
+import CenterCards from "./CenterCards.jsx";
+import SearchBar from "../ui-components/SearchBar";
+import PropTypes from "prop-types";
+import _ from "lodash";
 
 /**
  * This component is used to generate center list
@@ -12,21 +12,25 @@ import _ from 'lodash';
  * @returns {object} JSX DOM
  */
 
-class CenterCardList extends Component {
+export class CenterCardList extends Component {
   state = {
-    searchTerm: '',
+    searchTerm: "",
     currentlyDisplayed: this.props.centers || []
   };
-  onInputChange = (event) => {
+  onInputChange = event => {
     const value = event.target.value;
     let newlyDisplayed;
     if (!_.isEmpty(this.props.centers)) {
-     newlyDisplayed = _.filter(this.props.centers, center => {
-       const name = center.name.toLowerCase();
-       const facilities = center.facilities.toLowerCase();
-       const location = center.location.toLowerCase();
-       return name.includes(value.toLowerCase()) || facilities.includes(value.toLowerCase()) || location.includes(value.toLowerCase())
-     })
+      newlyDisplayed = _.filter(this.props.centers, center => {
+        const name = center.name.toLowerCase();
+        const facilities = center.facilities.toLowerCase();
+        const location = center.location.toLowerCase();
+        return (
+          name.includes(value.toLowerCase()) ||
+          facilities.includes(value.toLowerCase()) ||
+          location.includes(value.toLowerCase())
+        );
+      });
       this.setState({
         searchTerm: value,
         currentlyDisplayed: newlyDisplayed
@@ -37,17 +41,25 @@ class CenterCardList extends Component {
     const centers = this.state.currentlyDisplayed;
     let centerCards = null;
     if (Array.isArray(centers) && centers.length > 0) {
-      centerCards = centers.map(center => <CenterCards key={center.id} center={center} />);
+      centerCards = centers.map(center => (
+        <CenterCards
+          key={center.id}
+          center={center}
+          history={this.props.history}
+        />
+      ));
     } else if (Array.isArray(centers) && centers.length === 0) {
       centerCards = <div className="no-centers-found">No available center</div>;
     }
-    return centerCards
-  }
+    return centerCards;
+  };
   render() {
-    
     return (
       <Fragment>
-        <SearchBar centers={this.props.centers} onInputChange={this.onInputChange} />
+        <SearchBar
+          centers={this.props.centers}
+          onInputChange={this.onInputChange}
+        />
         <div className="container">
           <div className="row cards">{this.renderCenter()}</div>
         </div>

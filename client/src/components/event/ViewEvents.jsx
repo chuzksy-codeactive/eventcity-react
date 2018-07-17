@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import EventCenterCover from './EventCenterCover';
-import EventCardList from './EventCardList';
-import Testimonials from '../ui-components/Testimonials';
-import Footer from '../ui-components/Footer';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import EventCenterCover from "./EventCenterCover";
+import EventCardList from "./EventCardList";
+import Testimonials from "../ui-components/Testimonials";
+import Footer from "../ui-components/Footer";
+import PropTypes from "prop-types";
 
 /**
- * This component is used to create 
+ * This component is used to create
  * the event page
  *
  * @class ViewEvents
@@ -21,7 +21,10 @@ class ViewEvents extends Component {
     return (
       <div>
         <EventCenterCover />
-        <EventCardList events={this.props.events} />
+        <EventCardList
+          events={this.props.events}
+          history={this.props.history}
+        />
         <Testimonials />
         <Footer />
       </div>
@@ -32,6 +35,6 @@ class ViewEvents extends Component {
 ViewEvents.propTypes = {
   fetchEvent: PropTypes.func.isRequired,
   events: PropTypes.object.isRequired
-}
+};
 
 export default ViewEvents;

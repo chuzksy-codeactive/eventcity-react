@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
-import EventCards from './EventCards';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import EventCards from "./EventCards";
+import PropTypes from "prop-types";
 
 const Events = props => {
-  const { events } = props;
-  if(events.length > 0){
-    return <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>{events.map(e => <EventCards key={e.id} event={e} />)}</div>;
-  }
-  return <div className="no-events-found">No Event is scheduled yet</div>
-};
+  const { events, history } = props;
 
+  if (events.length > 0) {
+    return (
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {events.map(e => <EventCards history={history} key={e.id} event={e} />)}
+      </div>
+    );
+  }
+  return <div className="no-events-found">No Event is scheduled yet</div>;
+};
 
 /**
  * This component is used to generate event lists
@@ -24,8 +30,20 @@ class EventCardList extends Component {
     return (
       <div className="container">
         <h1 className="header-section row-width">Up Coming events</h1>
-        <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
-          {loading ? <div className="loader-big" /> : message ? <div className="no-centers-found">{message}</div> : <Events events={events} />}
+        <div
+          style={{
+            margin: "30px 0",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          {loading ? (
+            <div className="loader-big" />
+          ) : message ? (
+            <div className="no-centers-found">{message}</div>
+          ) : (
+            <Events events={events} history={this.props.history} />
+          )}
         </div>
       </div>
     );
@@ -38,5 +56,5 @@ EventCardList.propTypes = {
     message: PropTypes.any,
     events: PropTypes.array.isRequired
   })
-}
+};
 export default EventCardList;
