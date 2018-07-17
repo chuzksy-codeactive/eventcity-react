@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import moment from "moment";
 import EditEventModal from "./EditEventModal";
 import PropTypes from "prop-types";
+import 'react-day-picker/lib/style.css';
+
 
 /**
  * This component is use to view list of events

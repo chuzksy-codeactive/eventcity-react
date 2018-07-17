@@ -118,10 +118,6 @@ export class CenterForm extends Component {
 
   componentDidMount() {
     if (this.invalidRoute) this.props.history.push('/404');
-
-    if (this.props.match.params.id) {
-      this.props.load(this.initValues);
-    }
   }
 
   render() {

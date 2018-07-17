@@ -16,7 +16,7 @@ import _ from 'lodash';
  * @extends {Component}
  * @returns {object} JSX DOM
  */
-class ViewCenter extends Component {
+export class ViewCenter extends Component {
   state = {
     page: 1
   };

@@ -5,7 +5,6 @@ import 'react-day-picker/lib/style.css';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { load } from '../../reducer/loadCenter';
 import { updateEventById, resetEvent } from '../../actions/eventActions';
 import PropTypes from 'prop-types';
 
@@ -311,7 +310,6 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  load,
   updateEventById: data => dispatch(updateEventById(data))
 });
 

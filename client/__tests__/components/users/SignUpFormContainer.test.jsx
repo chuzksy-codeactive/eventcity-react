@@ -1,29 +1,17 @@
 import React from "react";
-import { mount } from "enzyme";
-import { Provider } from "react-redux";
-import SignUpFormContainer from "../../../src/components/users/SignUpFormContainer";
+import { shallow } from "enzyme";
+import SignUpForm from "../../../src/components/users/SignUpFormContainer";
 
-const props = {
-  match: { params: {} },
-  history: { push: () => {} },
-  user: {}
-};
-const wrapper = mount(
-  <Provider
-    store={{
-      subscribe: () => {},
-      dispatch: () => {},
-      getState: () => {
-        return { userReducer: {} };
-      }
-    }}
-  >
-    <SignUpFormContainer {...props} />
-  </Provider>
-);
 
-describe("Signup Form Container Component ", () => {
-  it("render component", () => {
-    expect(wrapper.exists()).toBe(true);
+describe('Connected Component', () => {
+  it('should render the connected component with all props', () => {
+
+    const store = mockStore({ 
+      userReducer: {},
+      authReducer: {},
+      userSignUp: jest.fn()
+     });
+    const wrapper = shallow(<SignUpForm store={store} />);
+    expect(wrapper.length).toEqual(1);
   });
 });

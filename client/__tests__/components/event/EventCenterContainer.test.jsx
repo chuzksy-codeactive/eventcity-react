@@ -1,39 +1,29 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 import { Provider } from "react-redux";
-import EventCenterContainer from "../../../src/components/event/EventCenterContainer";
+import EventCenterPage from "../../../src/components/event/EventCenterContainer";
 import events from "../../__mocks__/events";
 
 const props = {
   match: { params: {} },
   events
 };
-const wrapper = mount(
-  <Provider
-    store={{
-      subscribe: () => {},
-      dispatch: () => {},
-      getState: () => {
-        return {
-          userReducer: { user: { data: { id: 1 } } },
-          eventCenterReducer: {
-            eventCenter: {
-              data: {
-                name: "Garden Center",
-                Events: events
-              }
-            }
-          }
-        };
-      }
-    }}
-  >
-    <EventCenterContainer {...props} />
-  </Provider>
-);
 
-describe("Event Center Container Component ", () => {
-  it("render component", () => {
-    expect(wrapper.exists()).toBe(true);
+describe('Connected Component', () => {
+  it('should render the connected component with all props', () => {
+
+    const store = mockStore({ 
+      fetchEventCenter: jest.fn(),
+      createEvent: jest.fn(),
+      resetCenterEvent: jest.fn(),
+      userReducer: {
+        user: {
+          data: []
+        }
+      }
+     });
+    const wrapper = shallow(<EventCenterPage store={store} />);
+    expect(wrapper.length).toEqual(1);
   });
 });
+

@@ -24,8 +24,6 @@ describe("CenterForm Component ", () => {
     expect(wrapper.find("#firstname").exists()).toBe(true);
     expect(wrapper.find("#lastname").exists()).toBe(true);
     expect(wrapper.find("#password").exists()).toBe(true);
-    expect(wrapper.find("#confirm-password").exists()).toBe(true);
-
     wrapper.instance().onSubmitForm();
   });
 });

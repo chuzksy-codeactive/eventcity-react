@@ -23,13 +23,7 @@ const wrapper = shallow(<CenterForm {...props} />);
 
 describe("CenterForm Component ", () => {
   it("render component.", () => {
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find("#name").exists()).toBe(true);
-    expect(wrapper.find("#capacity").exists()).toBe(true);
-    expect(wrapper.find("#location").exists()).toBe(true);
-    expect(wrapper.find("#price").exists()).toBe(true);
-    expect(wrapper.find("#facilities").exists()).toBe(true);
-    expect(wrapper.find("#type").exists()).toBe(true);
+    expect(wrapper).toMatchSnapshot()
 
     wrapper
       .find(".btn")
