@@ -6,6 +6,7 @@ let urlPath;
 
 module.exports = {
   "before": function (browser, done) {
+    browser.setWindowPosition(0, 0);
     browser.maximizeWindow(done);
   },
   "User should be able to log in as Admin": browser => {

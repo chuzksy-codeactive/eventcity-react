@@ -16,7 +16,7 @@ import _ from 'lodash';
  * @extends {Component}
  * @returns {object} JSX DOM
  */
-class ViewCenter extends Component {
+export class ViewCenter extends Component {
   state = {
     page: 1
   };
@@ -36,7 +36,9 @@ class ViewCenter extends Component {
             pages={this.props.centersPerPage.centers.pages} 
             page={this.state.page} 
             count={this.props.centersPerPage.centers.count}
-            searchCenterPerPage={this.props.searchCenterPerPage}/>
+            searchCenterPerPage={this.props.searchCenterPerPage}
+            history={this.props.history}/>
+            
           <Footer />
         </Fragment>
       );

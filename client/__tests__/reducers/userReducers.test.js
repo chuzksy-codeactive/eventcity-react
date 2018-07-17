@@ -53,4 +53,31 @@ describe('center reducer', () => {
     });
   });
 
+  it('should handle types.SIGN_IN_ERROR:', () => {
+    expect(userReducer(initialState, {
+      type: types.SIGN_IN_ERROR,
+      payload: {
+        error: 'Error signin user'
+      }
+    })).toEqual({
+      ...initialState,
+      user: {},
+      error: {
+        error: 'Error signin user'
+      },
+      loading: false
+    });
+  });
+
+  it('should handle types.SIGN_IN_RESET:', () => {
+    expect(userReducer(initialState, {
+      type: types.SIGN_IN_RESET
+    })).toEqual({
+      ...initialState,
+      user: {},
+      error: null,
+      loading: false
+    });
+  });
+
 })

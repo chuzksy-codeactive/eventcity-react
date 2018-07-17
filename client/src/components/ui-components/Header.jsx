@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  * @extends {Component}
  * @returns {object} JSX DOM
  */
-class Header extends Component {
+export class Header extends Component {
   renderAdminLinks = (isAdmin) => {
     if (isAdmin) {
       return (
@@ -39,13 +39,6 @@ class Header extends Component {
         </li>
       );
     }
-  };
-  getUserId = () => {
-    let userId = null;
-    if (this.props.user.user.data !== undefined) {
-      userId = this.props.user.user.data.id;
-    }
-    return userId;
   };
   renderAuthLinks = (auth) => {
     if (auth) {

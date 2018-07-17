@@ -10,7 +10,7 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
  *
  * @returns {object} React JSX DOM
  */
-class Paginary extends Component {
+export class Paginary extends Component {
   state = {
     pages: this.props.pages,
     page: 1
